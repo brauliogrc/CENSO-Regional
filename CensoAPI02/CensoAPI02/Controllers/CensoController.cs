@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CENSO.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +14,27 @@ namespace CensoAPI02.Controllers
     [ApiController]
     public class CensoController : ControllerBase
     {
+        private readonly CDBContext _context;
+
+        //Creamos el controlador y le inyectamos las dependencias
+        public CensoController(CDBContext context)
+        {
+            _context = context;
+        }
+
         // GET: api/<CensoController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            try
+            {
+                var listUser = await _context.HR_Users.ToListAsync();
+                return Ok(listUser);
+            }
+            catch ( Exception ex )
+            {
+                return BadRequest();
+            }
         }
 
         // GET api/<CensoController>/5
