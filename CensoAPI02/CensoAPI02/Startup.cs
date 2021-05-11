@@ -51,9 +51,13 @@ namespace CensoAPI02
                     builder =>
                     {
                         //establecemos las opciones de que es lo que vamos a permitir
-                        builder.WithOrigins("http://localhost:4200");
+                        //builder.WithOrigins("http://localhost:4200");
                         /*establecemos que solo permitira peticiones provenientes de este origen (en caso de querer aceptar las peticiones de todos lados
                          solo ponemos un asterisco "*")*/
+
+                        builder.AllowAnyOrigin()
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
                     });
             });
         }

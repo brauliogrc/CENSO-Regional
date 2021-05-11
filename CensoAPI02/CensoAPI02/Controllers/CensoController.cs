@@ -26,14 +26,15 @@ namespace CensoAPI02.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
+            //Cambiar IEnumerable <> por un Task<ActionResult>
+            //return new string[] { "value1", "value2" };
             try
             {
-                var listUser = await _context.HR_Users.ToListAsync();
-                return Ok(listUser);
-            }
-            catch ( Exception ex )
+                var ListUsers = await _context.HR_Users.ToListAsync();
+                return Ok( ListUsers );
+            }catch ( Exception error)
             {
-                return BadRequest();
+                return BadRequest( error.Message );
             }
         }
 
