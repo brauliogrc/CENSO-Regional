@@ -16,12 +16,12 @@ namespace CENSO.Models
         public DateTime Theme_Creation_Date { get; set; }
 
         [MaxLength(50)]
-        public int      Theme_Creation_User { get; set; }
+        public int      Theme_Creation_User { get; set; }//Cambiar a int
 
         public DateTime Theme_Modification_date { get; set; }
 
         [MaxLength(50)]
-        public int      Theme_Modification_User { get; set; }
+        public int      Theme_Modification_User { get; set; }//Cambiar a int
 
         public bool     Theme_Status { get; set; }
 

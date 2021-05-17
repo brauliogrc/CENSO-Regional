@@ -34,12 +34,12 @@ namespace CENSO.Models
         public DateTime Request_Creation_Date { get; set; }
 
         [MaxLength(50)]
-        public string   Request_Creation_User { get; set; }
+        public string   Request_Creation_User { get; set; }//Cambiar a int
 
         public DateTime Request_Modification_Date { get; set; }
 
         [MaxLength(50)]
-        public string   Request_Modification_User { get; set; }
+        public string   Request_Modification_User { get; set; }//Cambiar a int
 
         //Relationship one-2-one entities Request and Qestion
         public int QuestionId { get; set; }

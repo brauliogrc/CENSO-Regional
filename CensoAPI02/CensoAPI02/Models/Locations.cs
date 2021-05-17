@@ -16,12 +16,12 @@ namespace CENSO.Models
         public DateTime Location_Creation_Date { get; set; }
 
         [MaxLength(50)]
-        public string   Location_Creation_User { get; set; }
+        public string   Location_Creation_User { get; set; }//Cambiar a int
 
         public DateTime Location_Modification_Date { get; set; }
 
         [MaxLength(50)]
-        public string   Location_Modification_User { get; set; }
+        public string   Location_Modification_User { get; set; }//Cambiar a int
 
         public bool     Location_Status { get; set; }
 
