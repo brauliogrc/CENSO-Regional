@@ -22,12 +22,12 @@ namespace CENSO.Models
         public DateTime User_Creeation_Date { get; set; }
 
         [MaxLength(50)]
-        public string   User_Creation_User { get; set; }
+        public string   User_Creation_User { get; set; } //Cambiar a int
 
         public DateTime User_Modification_Date{ get; set; }
 
         [MaxLength(50)]
-        public string   User_Modification_User { get; set; }
+        public string   User_Modification_User { get; set; }//cambiar a int
 
         public bool     User_Status { get; set; }
 
