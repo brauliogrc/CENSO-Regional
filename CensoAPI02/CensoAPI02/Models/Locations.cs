@@ -15,10 +15,12 @@ namespace CENSO.Models
 
         public DateTime Location_Creation_Date { get; set; }
 
+        [MaxLength(50)]
         public string   Location_Creation_User { get; set; }
 
         public DateTime Location_Modification_Date { get; set; }
 
+        [MaxLength(50)]
         public string   Location_Modification_User { get; set; }
 
         public bool     Location_Status { get; set; }

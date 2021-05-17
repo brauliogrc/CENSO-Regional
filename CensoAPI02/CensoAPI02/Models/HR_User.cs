@@ -18,7 +18,7 @@ namespace CENSO.Models
 
         [MaxLength(15)]
         public string   User_Rol { get; set; }
-
+        
         public DateTime User_Creeation_Date { get; set; }
 
         [MaxLength(50)]
