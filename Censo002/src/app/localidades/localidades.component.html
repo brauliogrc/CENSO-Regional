@@ -21,13 +21,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let location of locations" class="text-center">
+                        <td>{{ location.locationsId }}</td>
+                        <td>{{ location.location_Name }}</td>
+                        <td>{{ location.location_Status }}</td>
                         <td>
                             <button class="btn btn-warning">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
+                            <button class="btn btn-danger">Change status</button>
                         </td>
                     </tr>
                 </tbody>

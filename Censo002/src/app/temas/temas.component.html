@@ -16,21 +16,21 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Location</th>
+                        <th>Location</th>   
                         <th>User</th>
-                        <th>Question</th>
+                        <!-- <th>Question</th> -->
                         <th>Status</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let theme of themes" class="text-center">
+                        <td>{{ theme.themeId }}</td>
+                        <td>{{ theme.theme_Name }}</td>
+                        <td>{{ theme.location_Name }}</td>
+                        <td>{{ theme.user_Name }}</td>
+                        <!-- <td>{{ theme.theme_Status }}</td> -->
+                        <td>{{ theme.theme_Status }}</td>
                         <td>
                             <button class="btn btn-warning">Edit</button>
                             <button class="btn btn-danger">Delete</button>

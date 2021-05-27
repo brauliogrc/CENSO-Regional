@@ -11,6 +11,9 @@ import { PreguntasComponent } from './preguntas/preguntas.component';
 import { TiketsComponent } from './tikets/tikets.component';
 import { HomeComponent } from './home/home.component';
 
+// Importación del HttpClientModule para la conexión con la api y peticiones HTTP
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,8 @@ import { HomeComponent } from './home/home.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
