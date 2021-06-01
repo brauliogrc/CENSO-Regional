@@ -134,4 +134,373 @@
       margin-left: -18rem;
     }
   }
-  
+
+  /* Pagina Logueo */
+
+  body, html{
+    height: 100%;
+    overflow: auto;
+}
+.BodyLogin{
+    margin: 0;
+    padding: 0;
+
+    background-image: url(img/fondo1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-box{
+    width: 400px;
+    padding: 40px;
+    background: #ffffffb0;
+    border-radius: 1em;
+    text-align: center;
+}
+
+.form-title{
+
+    text-transform: uppercase;
+    font-weight: 300;
+}
+.form-img{
+    width: 200px;
+    border-radius: 100%;
+}
+.form-box input[type="text"],
+.form-box input[type="password"],
+.form-box button[type ="submit"]{
+
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    padding: 14px 10px;
+    text-align: center;
+    border: 1px solid #000000;
+    border-radius: 1.5em;
+    width: 250px;
+    outline: none;
+    color: black;
+
+    transition: 0.25s;
+}
+
+.form-box input[type="text"]:focus,
+.form-box input[type="password"]:focus{
+    width: 280px;
+    border-color: #e2ae3e;
+}
+
+.form-box button[type="submit"]{
+    border: 0;
+    background: #e2ae3e ;
+    border-radius: 0.5 ;
+    cursor: pointer;
+    width: 200px;
+
+}
+.form-box button[type="submit"]:hover{
+    background: #e2ae3e54;
+
+}
+
+
+/*      Pagina Index         */
+.BodyIndexC{
+    margin: 0;
+    padding: 0;
+
+    background-image: url(img/fondo2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.headerIndexC{
+    width: 100vw;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;;
+    background: #00000088;
+    
+}
+.h1CensoB{
+    color: #e2ae3e;
+    font-weight: 300;
+}
+.imgLogoIndexC{
+background-image: url(img/LogoConti.png);
+ width: 9.5%;
+}
+.headerIndexC button[type="submit"]:hover{
+    background: none;
+    border: 1px solid #000000;
+    border-color: #e2ae3e;
+
+}
+.btnIndexC{
+    border: 0;
+    background: #e2ae3e ;
+    border-radius: 0.5 ;
+    cursor: pointer;
+    border-radius: 2em;
+    width: 150px;
+    height: 40px;
+
+    transition: 0.25s;
+}
+.contenedorIndexC{
+
+    width: 90%;
+    margin: 40px auto;
+    padding-top: 40px;
+    background: #ffffffb0;
+    border-radius: 1em;
+    text-align: center;
+    align-items: center;
+
+}
+.imgBienestarC{
+
+    border-radius: 2em;
+
+}
+.footerIndexC{
+    width: 90%;
+    margin: 40px auto;
+    padding-top: 0px;
+    padding-bottom: 40px;
+    background: none;
+    border-radius: 1em;
+    text-align: center;
+    align-items: center;
+}
+
+.imgJaliscoC{
+    border-radius: 1.5em;
+}
+.contenedorIndexC1{
+
+    width: 90%;
+    margin: 40px auto;
+    padding-top: 40px;
+    background: #ffffffb0;
+    border-radius: 1em;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    align-items: center;
+
+}
+.btnIndexOPC{
+    border: 0;
+    margin-left: 50px;
+    background: #e2ae3e ;
+    border-radius: 0.5 ;
+    cursor: pointer;
+    border-radius: 2em;
+    width: 300px;
+    height: 50px;
+
+    transition: 0.25s;
+}
+.contenedorIndexC button[type="submit"]{
+    font-size: 20px;
+    color: black;
+
+}
+
+.contenedorIndexC button[type="submit"]:hover{
+    background: none;
+    border-color: #e2ae3e;
+    background: #e2ae3e8f;
+
+}
+
+.hr {
+    margin: 40px auto;
+    width: 90%;
+}
+
+.ContendorPageAngular{
+    background: none;
+    width: 90%;
+    margin: 40px auto;
+    padding: 15px;
+    border-radius: 1em;
+
+    font-size: 20px;
+    color: #cc9d38;
+
+}
+
+.ContendorPageAngular1{
+    background: rgba(255, 255, 255, 0.76);
+    border-radius: 3em;
+    width: 50%;
+    margin: 40px auto;
+    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+}
+
+.btnIndexC1{
+    border: 0;
+    background: #e2ae3e ;
+    border-radius: 0.5 ;
+    cursor: pointer;
+    border-radius: 2em;
+    width: 250px;
+    height: 40px;
+
+
+    transition: 0.25s;
+}
+
+.Content-btn-folio{
+    background: rgba(255, 255, 255, 0.76);
+    width: 50%;
+    margin: 40px auto;
+    padding: 15px;
+    border-radius: 1em;
+    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+    font-size: 20px;
+    font-weight: 400;
+    color: #cc9d38;
+
+}
+
+/*      FIN Pagina Index         */
+
+/*      FIN Pagina Buscar         */
+.ContendorPageBusqueda{
+    background: rgba(255, 255, 255, 0.76);
+    width: 80%;
+    margin: 40px auto;
+    margin-top: -400px;
+    padding: 15px;
+    padding-top: 1em;
+    border-radius: 1em;
+    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+    font-size: 20px;
+    font-weight: 400;
+    color: #cc9d38;
+
+}
+
+
+/*      FIN Pagina Buscar         */
+
+/*      Dashboard        */
+.Bodydashboard{
+    margin: 0;
+    padding: 0;
+
+    background-image: url(img/fondo5.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.headerDash{
+    background: rgba(0, 0, 0, 0.726);
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+
+}
+.imgLogoDash{
+    width: 10.1%;
+    height: 80px;
+
+}
+.leftDash{
+    background: rgba(131, 131, 131, 0.671);
+    width: 10%;
+    height: 108%;
+    margin-top: -33px;
+
+
+
+}
+.options{
+    padding-top: 10px;
+    margin-top: -10px;
+    align-items: center;
+}
+.options ul{
+    padding:0;
+    margin: 0;
+
+}
+.options ul li{
+    list-style: none;
+    
+}
+.options button[type="submit"]:hover{
+    background: #e2ae3e ;
+    border: 1px solid #000000;
+    border-color: #e2ae3e;
+
+}
+.btnDash{
+    background: none;
+    cursor: pointer;
+    border: 0;
+    margin-top: 1px;
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+    color: black;
+    font-size: 20px;
+    font-weight: 300;
+    text-align: start;
+    transition:  0.25s;
+
+}
+.NomUsuario{
+    width: 90%;
+    background: none;
+    border-radius: 0.8em;
+    margin: 10px auto;
+    text-align: center;
+}
+.contenedorFlex{
+    background: none;
+    width: 100%;
+    height: 85%;
+    display: flex;
+    
+}
+.Contenido{
+    background: rgba(223, 223, 223, 0.466);
+    margin: 30px auto;
+    margin-top: -10px;
+    border-radius: 1em;
+    width: 85%;
+    height: 100%;
+}
+
+
+/*      Dashboard        */

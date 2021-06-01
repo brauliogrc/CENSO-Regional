@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SquestionsService } from '../services/squestions.service';
-import { dataQuestion } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-preguntas',
@@ -9,20 +7,9 @@ import { dataQuestion } from '../interfaces/interfaces';
 })
 export class PreguntasComponent implements OnInit {
 
-  Questions : dataQuestion[] = [];
-
-  constructor( private _service:SquestionsService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getAllQuestions();
   }
 
-  getAllQuestions(){
-    this._service.getQuestions().subscribe(data =>{
-      console.log(data);
-      this.Questions = [... data];
-    }, error => {
-      console.error('Error getting data '+ error);
-    });
-  }
 }

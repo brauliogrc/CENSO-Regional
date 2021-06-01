@@ -10,9 +10,13 @@ import { AreasComponent } from './areas/areas.component';
 import { PreguntasComponent } from './preguntas/preguntas.component';
 import { TiketsComponent } from './tikets/tikets.component';
 import { HomeComponent } from './home/home.component';
-
-// Importación del HttpClientModule para la conexión con la api y peticiones HTTP
-import { HttpClientModule } from '@angular/common/http';
+import { FolioanonimoComponent } from './folioanonimo/folioanonimo.component';
+import { FvacioComponent } from './fvacio/fvacio.component';
+import { FolioanonimoindexComponent } from './folioanonimoindex/folioanonimoindex.component';
+import { LoginComponent } from './login/login.component';
+import { PanelusuarioComponent } from './panelusuario/panelusuario.component';
+import { PanelusuariobusqComponent } from './panelusuariobusq/panelusuariobusq.component';
+import { PaneladminComponent } from './paneladmin/paneladmin.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +27,18 @@ import { HttpClientModule } from '@angular/common/http';
     AreasComponent,
     PreguntasComponent,
     TiketsComponent,
-    HomeComponent
+    HomeComponent,
+    FolioanonimoComponent,
+    FvacioComponent,
+    FolioanonimoindexComponent,
+    LoginComponent,
+    PanelusuarioComponent,
+    PanelusuariobusqComponent,
+    PaneladminComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
