@@ -21,18 +21,20 @@ namespace CENSO.Models
         
         public DateTime User_Creeation_Date { get; set; }
 
-        [MaxLength(50)]
-        public string   User_Creation_User { get; set; } //Cambiar a int
+        public int      User_Creation_User { get; set; } //Cambiar a int
 
         public DateTime User_Modification_Date{ get; set; }
 
-        [MaxLength(50)]
-        public string   User_Modification_User { get; set; }//cambiar a int
+        public int      User_Modification_User { get; set; }//cambiar a int
 
         public bool     User_Status { get; set; }
 
         //Relationship many-2-many entities HR_User and Theme
         //public string User_Theme { get; set; } //Relacionada con la entidad Theme
-        public IList<HRU_Theme> hru_theme { get; set; }
+        //public IList<HRU_Theme> hru_theme { get; set; }
+        public List<Theme> Themes { get; set; }
+
+        //Relationship one-2-many entities HR_User and Location
+        public int LocationsId { get; set; }
     }
 }

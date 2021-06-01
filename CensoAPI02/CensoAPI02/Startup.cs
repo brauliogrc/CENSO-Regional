@@ -35,6 +35,9 @@ namespace CensoAPI02
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddControllers().AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

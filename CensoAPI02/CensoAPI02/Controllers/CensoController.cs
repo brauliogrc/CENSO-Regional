@@ -37,12 +37,34 @@ namespace CensoAPI02.Controllers
                 return BadRequest( error.Message );
             }
         }
+        
+        /*[HttpGet]
+        public async Task<ActionResult> GetLocations()
+        {
+            try
+            {
+                var locations = await _context.Locations.ToListAsync();
+                return Ok(locations);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }*/
 
         // GET api/<CensoController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            return "value";
+            try
+            {
+                var item = await _context.HR_Users.Where(s => s.HR_UserId == id).FirstAsync();
+                return Ok(item);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST api/<CensoController>

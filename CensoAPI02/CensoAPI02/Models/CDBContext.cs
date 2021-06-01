@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CensoAPI02.Models.UnionTables;
+using CensoAPI02.UnionTables;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,9 @@ namespace CENSO.Models
         public DbSet<Question> Questions { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Theme> Theme { get; set; }
+        public DbSet<LocationsTheme> LocationsThemes { get; set; }
+        public DbSet<HRUsersTheme> HRUsersThemes { get; set; }
+        public DbSet<QuestionsTheme> QuestionsThemes { get; set; }
 
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,24 +31,65 @@ namespace CENSO.Models
             //@"Server=GLL1330W\SQL_ET; DataBase=censo02; Trusted_Connection=true; ConnectRetryCount=0"
         }
 
-        protected override void OnModelCreating( ModelBuilder modelBuilder )
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Relationship one-2-one entities Question and Request
 
-            //Configuring primary key for joining table. Relationship many-2-many entities Locations and Theme
-            modelBuilder.Entity<Location_Theme>().HasKey( sc => new { sc.locationId, sc.themeId } );
+            // configuración para que la realacion M2M utilice la entidad LocationsTheme
+            modelBuilder.Entity<Locations>()
+                .HasMany(l => l.Themes) // Una Location tiene muchos temas
+                .WithMany(t => t.Locations) // Un theme peude estar en muchas locations
+                .UsingEntity<LocationsTheme>( // Decimos que utilice nuestra entidad
+                    lt => lt.HasOne(prop => prop.Theme) // Un registro individual se relaciona con una location y un theme
+                    .WithMany()
+                    .HasForeignKey(prop => prop.ThemeId), // Relacionamos la ForeignKey con la PK de la enttidad Theme
+                    lt => lt.HasOne(prop => prop.Locations)
+                    .WithMany()
+                    .HasForeignKey(prop => prop.LocationId),
+                    lt =>
+                    {
+                        lt.HasKey(prop => new { prop.ThemeId, prop.LocationId });
+                    }
+                );
 
-            //Configuring primary key for joining table. Relationship many-2-many entities HR_User and Theme
-            modelBuilder.Entity<HRU_Theme>().HasKey(sc => new { sc.hruserId, sc.themeId });
+            // configuración para que la realacion M2M utilice la entidad HRUsersTheme
+            modelBuilder.Entity<HR_User>()
+                .HasMany(u => u.Themes)
+                .WithMany(t => t.HR_Users)
+                .UsingEntity<HRUsersTheme>(
+                    hrth => hrth.HasOne(prop => prop.Theme)
+                    .WithMany()
+                    .HasForeignKey(prop => prop.ThemeId),
+                    hrth => hrth.HasOne(prop => prop.HR_User)
+                    .WithMany()
+                    .HasForeignKey(prop => prop.HRUId),
+                    hrth =>
+                    {
+                        hrth.HasKey(prop => new { prop.ThemeId, prop.HRUId });
+                    }
+                );
 
-            //Configuring primary key for joining table. Relationship many-2-many entities Question and Theme
-            modelBuilder.Entity<Question_Theme>().HasKey(sc => new { sc.questionId, sc.themeId });
-
+            // configuración para que la realacion M2M utilice la entidad QuestionsThemes
+            modelBuilder.Entity<Question>()
+                .HasMany(q => q.Themes)
+                .WithMany(t => t.Questions)
+                .UsingEntity<QuestionsTheme>(
+                    qt => qt.HasOne(prop => prop.Theme)
+                    .WithMany()
+                    .HasForeignKey(prop => prop.ThemeId),
+                    qt => qt.HasOne(prop => prop.Question)
+                    .WithMany()
+                    .HasForeignKey(prop => prop.QuestionId),
+                    qt =>
+                    {
+                        qt.HasKey(prop => new { prop.ThemeId, prop.QuestionId });
+                    }
+                );
         }
     }
 
+    /** REMOVE THE FOLLOWING CODE **/
     //Joining entity class for relationship many-2-many between entities Locations and Theme
-    public class Location_Theme
+    /*public class Location_Theme
     {
         //Foreing key properties and reference navigation properties of entity Locations
         public int locationId { get; set; }
@@ -76,5 +122,5 @@ namespace CENSO.Models
         //Foreing key properties and reference navigation properties of entity Theme
         public int themeId { get; set; }
         public Theme theme { get; set; }
-    }
+    }*/
 }

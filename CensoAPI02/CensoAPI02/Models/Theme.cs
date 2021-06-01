@@ -27,14 +27,17 @@ namespace CENSO.Models
 
         //Relationship many-2-many entities Locations and Theme
         //public int Theme_Location { get; set; } //Relacionada con la entidad Location
-        public IList<Location_Theme> locations_theme { get; set; }
+        //public IList<Location_Theme> locations_theme { get; set; }
+        public List<Locations> Locations { get; set; }
 
         //Relationship many-2-many entities HU_User and Theme
         //public int Theme_User { get; set; } //Relacionada con la entidad HR_User
-        public IList<HRU_Theme> hru_theme { get; set; }
+        //public IList<HRU_Theme> hru_theme { get; set; }
+        public List<HR_User> HR_Users { get; set; }
 
         //Relationship many-2-many entities Question and Theme
         //public int Theme_Question { get; set; } //Relacionada con la entidad Question
-        public IList<Question_Theme> question_theme { get; set; }
+        //public IList<Question_Theme> question_theme { get; set; }
+        public List<Question> Questions { get; set; }
     }
 }

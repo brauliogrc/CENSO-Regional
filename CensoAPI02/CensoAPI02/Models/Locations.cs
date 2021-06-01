@@ -15,17 +15,19 @@ namespace CENSO.Models
 
         public DateTime Location_Creation_Date { get; set; }
 
-        [MaxLength(50)]
-        public string   Location_Creation_User { get; set; }//Cambiar a int
+        public int      Location_Creation_User { get; set; }//Cambiar a int
 
         public DateTime Location_Modification_Date { get; set; }
 
-        [MaxLength(50)]
-        public string   Location_Modification_User { get; set; }//Cambiar a int
+        public int      Location_Modification_User { get; set; }//Cambiar a int
 
         public bool     Location_Status { get; set; }
 
         //Relationship many-2-many entities Locations and Theme
-        public IList<Location_Theme> locations_theme { get; set; }
+        //public IList<Location_Theme> locations_theme { get; set; }
+        public List<Theme> Themes { get; set; }
+
+        //Relationship many-2-many entities HR_User and location
+        public List<HR_User> HR_Users { get; set; }
     }
 }

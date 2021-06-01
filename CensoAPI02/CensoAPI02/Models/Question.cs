@@ -15,13 +15,11 @@ namespace CENSO.Models
 
         public DateTime Question_Creation_Date { get; set; }
 
-        [MaxLength(50)]
-        public string   Question_Creation_User { get; set; }//Cambiar a int
+        public int     Question_Creation_User { get; set; }//Cambiar a int
 
         public DateTime Question_Modification_Date { get; set; }
 
-        [MaxLength(50)]
-        public string   Question_Modification_User { get; set; }//Cambiar a int
+        public int     Question_Modification_User { get; set; }//Cambiar a int
 
         public bool     Question_Status { get; set; }
 
@@ -31,6 +29,7 @@ namespace CENSO.Models
 
         //Relationship many-2-many entities Question and Theme
         //public int Question_Theme { get; set; } //Relacionada con la entidad Theme
-        public IList<Question_Theme> question_theme { get; set; }
+        //public IList<Question_Theme> question_theme { get; set; }
+        public List<Theme> Themes { get; set; }
     }
 }
