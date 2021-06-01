@@ -41,9 +41,11 @@ namespace CensoAPI02.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("User_Creation_User")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("LocationsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_Creation_User")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("User_Creeation_Date")
                         .HasColumnType("datetime2");
@@ -55,9 +57,8 @@ namespace CensoAPI02.Migrations
                     b.Property<DateTime>("User_Modification_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("User_Modification_User")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("User_Modification_User")
+                        .HasColumnType("int");
 
                     b.Property<string>("User_Name")
                         .HasMaxLength(50)
@@ -72,27 +73,9 @@ namespace CensoAPI02.Migrations
 
                     b.HasKey("HR_UserId");
 
-                    b.ToTable("HR_Users");
-                });
-
-            modelBuilder.Entity("CENSO.Models.Location_Theme", b =>
-                {
-                    b.Property<int>("locationId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("themeId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("LocationsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("locationId", "themeId");
-
                     b.HasIndex("LocationsId");
 
-                    b.HasIndex("themeId");
-
-                    b.ToTable("Location_Theme");
+                    b.ToTable("HR_Users");
                 });
 
             modelBuilder.Entity("CENSO.Models.Locations", b =>
@@ -105,16 +88,14 @@ namespace CensoAPI02.Migrations
                     b.Property<DateTime>("Location_Creation_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Location_Creation_User")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Location_Creation_User")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Location_Modification_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Location_Modification_User")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Location_Modification_User")
+                        .HasColumnType("int");
 
                     b.Property<string>("Location_Name")
                         .HasMaxLength(50)
@@ -138,16 +119,14 @@ namespace CensoAPI02.Migrations
                     b.Property<DateTime>("Question_Creation_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Question_Creation_User")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Question_Creation_User")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Question_Modification_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Question_Modification_User")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Question_Modification_User")
+                        .HasColumnType("int");
 
                     b.Property<string>("Question_Name")
                         .HasMaxLength(70)
@@ -201,9 +180,8 @@ namespace CensoAPI02.Migrations
                     b.Property<DateTime>("Request_Creation_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Request_Creation_User")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Request_Creation_User")
+                        .HasColumnType("int");
 
                     b.Property<int>("Request_Employee_Leader")
                         .HasColumnType("int");
@@ -218,9 +196,8 @@ namespace CensoAPI02.Migrations
                     b.Property<DateTime>("Request_Modification_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Request_Modification_User")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Request_Modification_User")
+                        .HasColumnType("int");
 
                     b.Property<int>("Request_Theme")
                         .HasColumnType("int");
@@ -270,16 +247,61 @@ namespace CensoAPI02.Migrations
                     b.ToTable("Theme");
                 });
 
+            modelBuilder.Entity("HR_UserTheme", b =>
+                {
+                    b.Property<int>("HR_UsersHR_UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThemesThemeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("HR_UsersHR_UserId", "ThemesThemeId");
+
+                    b.HasIndex("ThemesThemeId");
+
+                    b.ToTable("HR_UserTheme");
+                });
+
+            modelBuilder.Entity("LocationsTheme", b =>
+                {
+                    b.Property<int>("LocationsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThemesThemeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LocationsId", "ThemesThemeId");
+
+                    b.HasIndex("ThemesThemeId");
+
+                    b.ToTable("LocationsTheme");
+                });
+
+            modelBuilder.Entity("QuestionTheme", b =>
+                {
+                    b.Property<int>("QuestionsQuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ThemesThemeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("QuestionsQuestionId", "ThemesThemeId");
+
+                    b.HasIndex("ThemesThemeId");
+
+                    b.ToTable("QuestionTheme");
+                });
+
             modelBuilder.Entity("CENSO.Models.HRU_Theme", b =>
                 {
                     b.HasOne("CENSO.Models.HR_User", "hrUser")
-                        .WithMany("hru_theme")
+                        .WithMany()
                         .HasForeignKey("hruserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CENSO.Models.Theme", "theme")
-                        .WithMany("hru_theme")
+                        .WithMany()
                         .HasForeignKey("themeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -289,33 +311,25 @@ namespace CensoAPI02.Migrations
                     b.Navigation("theme");
                 });
 
-            modelBuilder.Entity("CENSO.Models.Location_Theme", b =>
+            modelBuilder.Entity("CENSO.Models.HR_User", b =>
                 {
-                    b.HasOne("CENSO.Models.Locations", "locations")
-                        .WithMany("locations_theme")
-                        .HasForeignKey("LocationsId");
-
-                    b.HasOne("CENSO.Models.Theme", "theme")
-                        .WithMany("locations_theme")
-                        .HasForeignKey("themeId")
+                    b.HasOne("CENSO.Models.Locations", null)
+                        .WithMany("HR_Users")
+                        .HasForeignKey("LocationsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("locations");
-
-                    b.Navigation("theme");
                 });
 
             modelBuilder.Entity("CENSO.Models.Question_Theme", b =>
                 {
                     b.HasOne("CENSO.Models.Question", "question")
-                        .WithMany("question_theme")
+                        .WithMany()
                         .HasForeignKey("questionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CENSO.Models.Theme", "theme")
-                        .WithMany("question_theme")
+                        .WithMany()
                         .HasForeignKey("themeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -336,30 +350,59 @@ namespace CensoAPI02.Migrations
                     b.Navigation("question");
                 });
 
-            modelBuilder.Entity("CENSO.Models.HR_User", b =>
+            modelBuilder.Entity("HR_UserTheme", b =>
                 {
-                    b.Navigation("hru_theme");
+                    b.HasOne("CENSO.Models.HR_User", null)
+                        .WithMany()
+                        .HasForeignKey("HR_UsersHR_UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CENSO.Models.Theme", null)
+                        .WithMany()
+                        .HasForeignKey("ThemesThemeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LocationsTheme", b =>
+                {
+                    b.HasOne("CENSO.Models.Locations", null)
+                        .WithMany()
+                        .HasForeignKey("LocationsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CENSO.Models.Theme", null)
+                        .WithMany()
+                        .HasForeignKey("ThemesThemeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("QuestionTheme", b =>
+                {
+                    b.HasOne("CENSO.Models.Question", null)
+                        .WithMany()
+                        .HasForeignKey("QuestionsQuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CENSO.Models.Theme", null)
+                        .WithMany()
+                        .HasForeignKey("ThemesThemeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CENSO.Models.Locations", b =>
                 {
-                    b.Navigation("locations_theme");
+                    b.Navigation("HR_Users");
                 });
 
             modelBuilder.Entity("CENSO.Models.Question", b =>
                 {
-                    b.Navigation("question_theme");
-
                     b.Navigation("request");
-                });
-
-            modelBuilder.Entity("CENSO.Models.Theme", b =>
-                {
-                    b.Navigation("hru_theme");
-
-                    b.Navigation("locations_theme");
-
-                    b.Navigation("question_theme");
                 });
 #pragma warning restore 612, 618
         }

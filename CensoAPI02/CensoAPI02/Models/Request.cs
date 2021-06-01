@@ -10,18 +10,19 @@ namespace CENSO.Models
     {
         public int      RequestId { get; set; }
 
+        // Sujeto a posible eliminación
         public int      Request_Theme { get; set; } //Relacionada con la entidad Theme ++Sujeto a posible eleiminacion++
 
         [MaxLength(50)]
         public string   Request_User_Name { get; set; }
 
-        public int      Request_Employee_Type { get; set; }
+        public int      Request_Employee_Type { get; set; } // Corregir tipo?? 
 
         [MaxLength(500)]
         public string   Request_Issue { get; set; } //Varchar de 500 (es donde la gente escribe su necesidad)
 
         [MaxLength(50)]
-        public int      Request_Area { get; set; } //Varchar
+        public int      Request_Area { get; set; } //Varchar o int???
 
         public int      Request_Employee_Leader { get; set; } //Numerico (es el numero del empleado)
 
@@ -33,13 +34,11 @@ namespace CENSO.Models
 
         public DateTime Request_Creation_Date { get; set; }
 
-        [MaxLength(50)]
-        public string   Request_Creation_User { get; set; }//Cambiar a int
+        public int       Request_Creation_User { get; set; }//Cambiar a int
 
         public DateTime Request_Modification_Date { get; set; }
 
-        [MaxLength(50)]
-        public string   Request_Modification_User { get; set; }//Cambiar a int
+        public int      Request_Modification_User { get; set; }//Cambiar a int
 
         //Relationship one-2-one entities Request and Qestion
         public int QuestionId { get; set; }
