@@ -1,12 +1,12 @@
 <body class="BodyLogin">
 
-    <form action="#" class="form-box">
+    <form action="#" class="form-box" [formGroup]=form >
         <H1 class="form-title"></H1>
         <!--<img src="img/contiL.png" alt="Continental" class="form-img">-->
         <H1 class="form-title">Sing In CENSO</H1>
         <hr>
-        <input type="text" placeholder="User Number">
-        <input type="Password" placeholder="Password">
+        <input formControlName="userName" type="text" placeholder="User Number">
+        <input formControlName="password" type="Password" placeholder="Password">
         <Button type="submit">
             Login
         </Button>

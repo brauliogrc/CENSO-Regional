@@ -22,11 +22,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let question of questions" class="text-center">
+                        <td>{{ question.questionId }}</td>
+                        <td>{{ question.question_Name }}</td>
+                        <td>{{ question.theme_Name }}</td>
+                        <td>{{ question.question_Status }}</td>
                         <td>
                             <button class="btn btn-warning">Edit</button>
                             <button class="btn btn-danger">Delete</button>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SthemeService } from '../services/theme/stheme.service';
+import { dataTheme } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-temas',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TemasComponent implements OnInit {
 
-  constructor() { }
+  theme :dataTheme [] = [];
+
+  constructor( private _service:SthemeService ) { }
 
   ngOnInit(): void {
+    this.getAllTheme();
   }
 
+  getAllTheme(){
+    this._service.getTheme().subscribe(data => {
+      this.theme = [... data];
+    }, error => {{
+      console.error( 'Error getting data ' + error );
+    }
+  });
+  }
 }

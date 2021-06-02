@@ -24,13 +24,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let user of Users" class="text-center">
+                        <td>{{ user.hR_UserId }}</td>
+                        <td>{{ user.user_Name }}</td>
+                        <td>{{ user.user_Email }}</td>
+                        <td>{{ user.user_Rol }}</td>
+                        <td>{{ user.user_Status }}</td>
+                        <td>{{ user.location_Name }}</td>
                         <td>
                             <button class="btn btn-warning">Edit</button>
                             <button class="btn btn-danger">Delete</button>

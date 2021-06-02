@@ -1,4 +1,5 @@
 ﻿using CENSO.Models;
+using CensoAPI02.Intserfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,8 +27,8 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                insertData();
                 //insertData();
+                // +++++ELIMINAR COMENATARIOS++++++++++++++
                 //var users = await _context.HR_Users.Include(t => t.LocationsId).ToListAsync();
                 //var users = await _context.HR_Users.Select(HRU => new { HRU.HR_UserId, HRU.User_Name, HRU.User_Email, HRU.User_Rol, HRU.User_Status, HRU.LocationsId }).ToListAsync();
                 //var localidades = await _context.Locations.Where(x => x.LocationsId == 1).Include(x => x.HR_Users).ToListAsync();
@@ -59,8 +60,29 @@ namespace CensoAPI02.Controllers
 
         // POST api/<RH_UsersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] UserInterface newUser)
         {
+            try
+            {
+                var newUser2 = new HR_User()
+                {
+                    User_Name = newUser.Name,
+                    User_Email = newUser.Email,
+                    User_Rol = newUser.Rol,
+                    User_Status = newUser.Status,
+                    User_Creeation_Date = DateTime.UtcNow,
+                    User_Modification_Date = DateTime.UtcNow,
+                    LocationsId = newUser.LocationId
+                };
+
+                _context.HR_Users.Add(newUser2);
+                // Console.WriteLine( newUser. );
+                await _context.SaveChangesAsync();
+                return Ok(newUser2);
+            }catch( Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT api/<RH_UsersController>/5

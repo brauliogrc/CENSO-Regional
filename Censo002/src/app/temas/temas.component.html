@@ -18,19 +18,17 @@
                         <th>Name</th>
                         <th>Location</th>
                         <th>User</th>
-                        <th>Question</th>
                         <th>Status</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let th of theme" class="text-center">
+                        <td>{{ th.themeId }}</td>
+                        <td>{{ th.theme_Name }}</td>
+                        <td>{{ th.location_Name }}</td>
+                        <td>{{ th.user_Name }}</td>
+                        <td>{{ th.theme_Status }}</td>
                         <td>
                             <button class="btn btn-warning">Edit</button>
                             <button class="btn btn-danger">Delete</button>

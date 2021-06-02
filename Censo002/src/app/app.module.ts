@@ -18,6 +18,9 @@ import { PanelusuarioComponent } from './panelusuario/panelusuario.component';
 import { PanelusuariobusqComponent } from './panelusuariobusq/panelusuariobusq.component';
 import { PaneladminComponent } from './paneladmin/paneladmin.component';
 
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +41,9 @@ import { PaneladminComponent } from './paneladmin/paneladmin.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

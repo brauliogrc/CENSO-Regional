@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hzMkWb/jvXoyV1ilH0mUOcVLF1AV4n6ujZcOEIk0zGzOZcYYHTs5ElGccr9++SttiTWxV7t/beKlhATrEtL5KA==",
+  "dgSpecHash": "XcjCnTOPYZklLOFwm5Bt8tMmQgLw2Amy9t9aFwMm95+iKq6jexiIrPSFyVhGiH0TTETRnIFG8UnhiAISGi5k/Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\uib44927\\Desktop\\Programs\\CENSO01\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
+  "projectFilePath": "C:\\Users\\uib44927\\Desktop\\CensoApp\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\uib44927\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\uib44927\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\5.0.6\\microsoft.aspnetcore.jsonpatch.5.0.6.nupkg.sha512",
