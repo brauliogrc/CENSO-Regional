@@ -14,7 +14,7 @@
 <img src="img/LogoConti.png" alt="" class="imgLogoDash">
 <h1 class="h1CensoB">CENSO Panel</h1>
     <div>
-      <button class="btnIndexC" type="submit">Cerrar Sesion</button>
+      <button class="btnIndexC" type="submit">Cerrar Sesión</button>
     </div>
   </header>
   <div class="contenedorFlex">
@@ -28,12 +28,12 @@
         
         <ul>
           
-          <li><button type="submit" class="btnDash">Users</button></li>
-          <li><button type="submit" class="btnDash">Locations</button></li>
-          <li><button type="submit" class="btnDash">Topics</button></li>
+          <li><button type="submit" class="btnDash">Usuarios</button></li>
+          <li><button type="submit" class="btnDash">Ubicaciones</button></li>
+          <li><button type="submit" class="btnDash">Temas</button></li>
           <li><button type="submit" class="btnDash">Tikets</button></li>
-          <li><button type="submit" class="btnDash">Areas</button></li>
-          <li><button type="submit" class="btnDash">Questions</button></li>
+          <li><button type="submit" class="btnDash">Áreas</button></li>
+          <li><button type="submit" class="btnDash">Preguntas</button></li>
       </ul>
 
     </div>
@@ -42,33 +42,33 @@
     <!--poner contenido aqui-->
     <div class="contenido1">
       <div class="buscar">
-      <h1>Questions</h1>
-      <button class="btnIndexC" type="submit">Add Question</button>
+      <h1>Preguntas</h1>
+      <button class="btnIndexC" type="submit">Añadir Preguntas</button>
     </div>
     
     <hr>
     <form class="row g-3">
       
       <div class="col-md-6">
-        <label for="inputEmail4" class="form-label">Question</label>
+        <label for="inputEmail4" class="form-label">Pregunta</label>
         <input type="email" class="form-control" id="inputEmail4">
       </div>
       <div class="col-md-6">
-        <label for="inputState" class="form-label">Location</label>
+        <label for="inputState" class="form-label">Ubicación</label>
         <select id="inputState" class="form-select">
           <option selected>Tijera</option>
           <option>tijera</option>
         </select>
       </div>
       <div class="col-md-6">
-        <label for="inputState" class="form-label">Theme</label>
+        <label for="inputState" class="form-label">Tema</label>
         <select id="inputState" class="form-select">
           <option selected>Comun</option>
           <option>tijera</option>
         </select>
       </div>
       <div class="col-md-6">
-        <label for="inputState" class="form-label">Status</label>
+        <label for="inputState" class="form-label">Estatus</label>
         <select id="inputState" class="form-select">
           <option selected>Activo</option>
           <option>Inactivo</option>
@@ -77,22 +77,22 @@
       
       
       <div class="col-12">
-        <button class="btnIndexC" type="submit">Add</button>
+        <button class="btnIndexC" type="submit">Añadir</button>
       </div>
     </form>
       <hr>
         <form class="form-search">
-          <input class="Search1" type="Search User" placeholder="Search" aria-label="Search">
-          <button class="btnIndexC" type="submit">Search</button>
+          <input class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">
+          <button class="btnIndexC" type="submit">Buscar</button>
         </form>
         <hr>
         <table class="table table-dark table-sm">
           <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Theme</th>
-                <th>Status</th>
+                <th>Nombre</th>
+                <th>Tema</th>
+                <th>Estatus</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -103,7 +103,7 @@
                 <td>{{ question.theme_Name }}</td>
                 <td>{{ question.question_Status }}</td>
                 <td>
-                    <button class="btn btn-danger">Delete</button>
+                    <button class="btn btn-danger">Eliminar</button>
                 </td>
             </tr>
         </tbody>
