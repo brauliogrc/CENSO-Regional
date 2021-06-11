@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CensoAPI02.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,41 +9,45 @@ namespace CENSO.Models
 {
     public class Request
     {
-        public int      RequestId { get; set; }
+        [Key]
+        public int rId { get; set; } // Id y folio de la request
 
-        // Sujeto a posible eliminación
-        public int      Request_Theme { get; set; } //Relacionada con la entidad Theme ++Sujeto a posible eleiminacion++
-
-        [MaxLength(50)]
-        public string   Request_User_Name { get; set; }
-
-        public int      Request_Employee_Type { get; set; } // Corregir tipo?? 
+        [Required]
+        public int rUserId { get; set; } // Igual a creation User (Se obtendrá desde el login)
 
         [MaxLength(500)]
-        public string   Request_Issue { get; set; } //Varchar de 500 (es donde la gente escribe su necesidad)
-
-        [MaxLength(50)]
-        public int      Request_Area { get; set; } //Varchar o int???
-
-        public int      Request_Employee_Leader { get; set; } //Numerico (es el numero del empleado)
-
-        [MaxLength(50)]
-        public string   Request_Answer_Status { get; set; }
+        [Required]
+        public string rIssue { get; set; } // Contenido
 
         [MaxLength(200)]
-        public string   Request_Attachement { get; set; } //Ruta al elemento añadido (imagen)
+        [Required]
+        public string rAttachement { get; set; } // Ruta de archivo adjunto
 
-        public DateTime Request_Creation_Date { get; set; }
+        [Required]
+        public int rEmployeeType { get; set; } // Tipo de empleado -> implementar enumercion para este camo
 
-        public int       Request_Creation_User { get; set; }//Cambiar a int
+        //Posible eliminacion
+        [Required]
+        public int rShip { get; set; } // Foreing key de la tabla areas
 
-        public DateTime Request_Modification_Date { get; set; }
 
-        public int      Request_Modification_User { get; set; }//Cambiar a int
+        //Posible eliminacion
+        public int rEmployeeLeader { get; set; } // Lider del empleado
 
-        //Relationship one-2-one entities Request and Qestion
+        [Required]
+        public DateTime rCreationDate { get; set; } // Fecha de creación de la petición (Ingresada automáticamente)
+
+        public DateTime rModificationDate { get; set; } // Es el Id del usurio que realizó la Request
+
+        public int rModificationUser { get; set; } // Podria ser el usuario que realiza la respuesta
+
+        // Relationship one-2-one entities Request and Qestion
+        [Required]
         public int QuestionId { get; set; }
 
-        public Question question { get; set; } //Relacionada con la entidad Question
+        public Question question { get; set; } // Relacionada con la entidad Question (propiedad de navegación)
+
+        // Relationship one-2-one entities Request and AnswerStatus
+        public AnswerStatus answerStatus { get; set; }
     }
 }

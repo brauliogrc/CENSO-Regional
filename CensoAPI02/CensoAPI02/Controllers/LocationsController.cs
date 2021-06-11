@@ -28,7 +28,7 @@ namespace CensoAPI02.Controllers
             // Obtencion de todas las localidades
             try
             {
-                var locations = await _context.Locations.Select(l => new { l.LocationsId, l.Location_Name, l.Location_Status }).ToListAsync();
+                var locations = await _context.Locations.Select(l => new { l.lId, l.lName, l.lStatus }).ToListAsync();
                 return Ok(locations);
             }
             catch (Exception ex)
@@ -46,7 +46,7 @@ namespace CensoAPI02.Controllers
 
         // POST api/<LocationsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Locations value)
         {
         }
 

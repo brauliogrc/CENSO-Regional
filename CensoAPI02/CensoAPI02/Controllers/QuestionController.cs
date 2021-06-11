@@ -25,37 +25,17 @@ namespace CensoAPI02.Controllers
         [HttpGet]
         public async Task<ActionResult> Get()
         {
-
             try
             {
-                var questionList = await _context.Questions.Include(t => t.Themes).ToListAsync();
+                var prueba3 = await _context.Questions
+                    .Where(ques => ques.qStatus == true)
+                    .Select(ques => new
+                    {
+                        ques.qId,
+                        ques.qName
+                    }).ToListAsync();
 
-                var prueba1 = await _context.Questions.Join(_context.QuestionsThemes, q => q.QuestionId, qth => qth.QuestionId, (q, qth) => new
-                {
-                    q,
-                    qth
-                }).Join(_context.Theme, qth => qth.qth.ThemeId, th => th.ThemeId, (qth, th) => new
-                {
-                    qth.q.QuestionId,
-                    qth.q.Question_Name,
-                    qth.q.Question_Status,
-                    th.ThemeId,
-                    th.Theme_Name
-                }).ToListAsync();
-
-                /*var prueba2 = from question in _context.Questions
-                              join qt in _context.QuestionsThemes on question.QuestionId equals qt.QuestionId
-                              join theme in _context.Theme on qt.ThemeId equals theme.ThemeId
-                              select new
-                              {
-                                  question.Question_Name,
-                                  question.QuestionId,
-                                  theme.ThemeId,
-                                  theme.Theme_Name
-
-                              };*/
-
-                return Ok(prueba1);
+                return Ok(prueba3);
             }
             catch (Exception ex)
             {

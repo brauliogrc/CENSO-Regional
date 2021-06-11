@@ -3,27 +3,31 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using CensoAPI02.Models;
+
+// TABLE THEME
 
 namespace CENSO.Models
 {
     public class Theme
     {
-        public int      ThemeId { get; set; }
+        [Key]
+        public int      tId { get; set; }
 
         [MaxLength(50)]
-        public string   Theme_Name { get; set; }
+        public string   tName { get; set; }
 
-        public DateTime Theme_Creation_Date { get; set; }
-
-        [MaxLength(50)]
-        public int      Theme_Creation_User { get; set; }//Cambiar a int
-
-        public DateTime Theme_Modification_date { get; set; }
+        public DateTime tCreationDate { get; set; }
 
         [MaxLength(50)]
-        public int      Theme_Modification_User { get; set; }//Cambiar a int
+        public int      tCreationUser { get; set; }//Cambiar a int
 
-        public bool     Theme_Status { get; set; }
+        public DateTime tModificationDate { get; set; }
+
+        [MaxLength(50)]
+        public int      tModificationUser { get; set; }//Cambiar a int
+
+        public bool     tStatus { get; set; }
 
         //Relationship many-2-many entities Locations and Theme
         //public int Theme_Location { get; set; } //Relacionada con la entidad Location
@@ -33,7 +37,7 @@ namespace CENSO.Models
         //Relationship many-2-many entities HU_User and Theme
         //public int Theme_User { get; set; } //Relacionada con la entidad HR_User
         //public IList<HRU_Theme> hru_theme { get; set; }
-        public List<HR_User> HR_Users { get; set; }
+        public List<HRU> HRU { get; set; }
 
         //Relationship many-2-many entities Question and Theme
         //public int Theme_Question { get; set; } //Relacionada con la entidad Question

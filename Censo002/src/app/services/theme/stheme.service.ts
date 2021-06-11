@@ -10,8 +10,5 @@ export class SthemeService {
   private MyApiUrl : string = 'api/Theme';
 
   constructor( private _http:HttpClient) { }
-
-  getTheme() : Observable<any>{
-    return this._http.get( this.MyAppUrl + this.MyApiUrl );
-  }
+  
 }

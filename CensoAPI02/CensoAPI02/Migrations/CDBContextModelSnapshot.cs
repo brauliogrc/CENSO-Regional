@@ -16,148 +16,74 @@ namespace CensoAPI02.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.5")
+                .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CENSO.Models.HRU_Theme", b =>
-                {
-                    b.Property<int>("hruserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("themeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("hruserId", "themeId");
-
-                    b.HasIndex("themeId");
-
-                    b.ToTable("HRU_Theme");
-                });
-
-            modelBuilder.Entity("CENSO.Models.HR_User", b =>
-                {
-                    b.Property<int>("HR_UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("LocationsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("User_Creation_User")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("User_Creeation_Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("User_Email")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("User_Modification_Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("User_Modification_User")
-                        .HasColumnType("int");
-
-                    b.Property<string>("User_Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("User_Rol")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
-
-                    b.Property<bool>("User_Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("HR_UserId");
-
-                    b.HasIndex("LocationsId");
-
-                    b.ToTable("HR_Users");
-                });
 
             modelBuilder.Entity("CENSO.Models.Locations", b =>
                 {
-                    b.Property<int>("LocationsId")
+                    b.Property<int>("lId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Location_Creation_Date")
+                    b.Property<DateTime>("lCreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Location_Creation_User")
+                    b.Property<int>("lCreationuser")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Location_Modification_Date")
+                    b.Property<DateTime>("lModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Location_Modification_User")
+                    b.Property<int>("lModificationUser")
                         .HasColumnType("int");
 
-                    b.Property<string>("Location_Name")
+                    b.Property<string>("lName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("Location_Status")
+                    b.Property<bool>("lStatus")
                         .HasColumnType("bit");
 
-                    b.HasKey("LocationsId");
+                    b.HasKey("lId");
 
                     b.ToTable("Locations");
                 });
 
             modelBuilder.Entity("CENSO.Models.Question", b =>
                 {
-                    b.Property<int>("QuestionId")
+                    b.Property<int>("qId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Question_Creation_Date")
+                    b.Property<DateTime>("qCreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Question_Creation_User")
+                    b.Property<int>("qCreationUser")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Question_Modification_Date")
+                    b.Property<DateTime>("qModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Question_Modification_User")
+                    b.Property<int>("qModificationUser")
                         .HasColumnType("int");
 
-                    b.Property<string>("Question_Name")
+                    b.Property<string>("qName")
                         .HasMaxLength(70)
                         .HasColumnType("nvarchar(70)");
 
-                    b.Property<bool>("Question_Status")
+                    b.Property<bool>("qStatus")
                         .HasColumnType("bit");
 
-                    b.HasKey("QuestionId");
+                    b.HasKey("qId");
 
                     b.ToTable("Questions");
                 });
 
-            modelBuilder.Entity("CENSO.Models.Question_Theme", b =>
-                {
-                    b.Property<int>("questionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("themeId")
-                        .HasColumnType("int");
-
-                    b.HasKey("questionId", "themeId");
-
-                    b.HasIndex("themeId");
-
-                    b.ToTable("Question_Theme");
-                });
-
             modelBuilder.Entity("CENSO.Models.Request", b =>
                 {
-                    b.Property<int>("RequestId")
+                    b.Property<int>("rId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -165,244 +91,396 @@ namespace CensoAPI02.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Request_Answer_Status")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("Request_Area")
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
-
-                    b.Property<string>("Request_Attachement")
+                    b.Property<string>("rAttachement")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<DateTime>("Request_Creation_Date")
+                    b.Property<DateTime>("rCreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Request_Creation_User")
+                    b.Property<int>("rEmployeeLeader")
                         .HasColumnType("int");
 
-                    b.Property<int>("Request_Employee_Leader")
+                    b.Property<int>("rEmployeeType")
                         .HasColumnType("int");
 
-                    b.Property<int>("Request_Employee_Type")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Request_Issue")
+                    b.Property<string>("rIssue")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<DateTime>("Request_Modification_Date")
+                    b.Property<DateTime>("rModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Request_Modification_User")
+                    b.Property<int>("rModificationUser")
                         .HasColumnType("int");
 
-                    b.Property<int>("Request_Theme")
+                    b.Property<int>("rShip")
                         .HasColumnType("int");
 
-                    b.Property<string>("Request_User_Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("rUserId")
+                        .HasColumnType("int");
 
-                    b.HasKey("RequestId");
+                    b.HasKey("rId");
 
-                    b.HasIndex("QuestionId")
-                        .IsUnique();
+                    b.HasIndex("QuestionId");
 
                     b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("CENSO.Models.Theme", b =>
                 {
-                    b.Property<int>("ThemeId")
+                    b.Property<int>("tId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Theme_Creation_Date")
+                    b.Property<DateTime>("tCreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Theme_Creation_User")
+                    b.Property<int>("tCreationUser")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
-                    b.Property<int>("Theme_Modification_User")
+                    b.Property<DateTime>("tModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("tModificationUser")
                         .HasMaxLength(50)
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Theme_Modification_date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Theme_Name")
+                    b.Property<string>("tName")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool>("Theme_Status")
+                    b.Property<bool>("tStatus")
                         .HasColumnType("bit");
 
-                    b.HasKey("ThemeId");
+                    b.HasKey("tId");
 
                     b.ToTable("Theme");
                 });
 
-            modelBuilder.Entity("HR_UserTheme", b =>
+            modelBuilder.Entity("CensoAPI02.Models.AnonRequest", b =>
                 {
-                    b.Property<int>("HR_UsersHR_UserId")
+                    b.Property<int>("arId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ThemesThemeId")
+                    b.Property<string>("arAttachement")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("arCreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("arEmployeeType")
                         .HasColumnType("int");
 
-                    b.HasKey("HR_UsersHR_UserId", "ThemesThemeId");
+                    b.Property<string>("arIssue")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
-                    b.HasIndex("ThemesThemeId");
+                    b.Property<DateTime>("arModificationDate")
+                        .HasColumnType("datetime2");
 
-                    b.ToTable("HR_UserTheme");
+                    b.Property<int>("arMoficationUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("arShip")
+                        .HasColumnType("int");
+
+                    b.HasKey("arId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("AnonRequests");
                 });
 
-            modelBuilder.Entity("LocationsTheme", b =>
+            modelBuilder.Entity("CensoAPI02.Models.AnswerAnonStatus", b =>
                 {
-                    b.Property<int>("LocationsId")
+                    b.Property<int>("anId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("anAnswer")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("anCreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("anRequestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ThemesThemeId")
+                    b.Property<int>("anUserId")
                         .HasColumnType("int");
 
-                    b.HasKey("LocationsId", "ThemesThemeId");
+                    b.HasKey("anId");
 
-                    b.HasIndex("ThemesThemeId");
+                    b.HasIndex("anRequestId")
+                        .IsUnique();
 
-                    b.ToTable("LocationsTheme");
+                    b.ToTable("AnswerAnonStatus");
                 });
 
-            modelBuilder.Entity("QuestionTheme", b =>
+            modelBuilder.Entity("CensoAPI02.Models.AnswerStatus", b =>
                 {
-                    b.Property<int>("QuestionsQuestionId")
+                    b.Property<int>("asId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("RequestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ThemesThemeId")
+                    b.Property<string>("asAnswer")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime>("asCrestionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("asUserId")
                         .HasColumnType("int");
 
-                    b.HasKey("QuestionsQuestionId", "ThemesThemeId");
+                    b.HasKey("asId");
 
-                    b.HasIndex("ThemesThemeId");
+                    b.HasIndex("RequestId")
+                        .IsUnique();
 
-                    b.ToTable("QuestionTheme");
+                    b.ToTable("AnswerStatus");
                 });
 
-            modelBuilder.Entity("CENSO.Models.HRU_Theme", b =>
+            modelBuilder.Entity("CensoAPI02.Models.HRU", b =>
                 {
-                    b.HasOne("CENSO.Models.HR_User", "hrUser")
-                        .WithMany()
-                        .HasForeignKey("hruserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("uId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.HasOne("CENSO.Models.Theme", "theme")
-                        .WithMany()
-                        .HasForeignKey("themeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
 
-                    b.Navigation("hrUser");
+                    b.Property<int>("lModificationUser")
+                        .HasColumnType("int");
 
-                    b.Navigation("theme");
+                    b.Property<DateTime>("uCreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("uCreationUser")
+                        .HasColumnType("int");
+
+                    b.Property<string>("uEmail")
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<DateTime>("uModificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("uName")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("uRol")
+                        .HasMaxLength(6)
+                        .HasColumnType("nvarchar(6)");
+
+                    b.Property<bool>("uStatus")
+                        .HasColumnType("bit");
+
+                    b.HasKey("uId");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("HRU");
                 });
 
-            modelBuilder.Entity("CENSO.Models.HR_User", b =>
+            modelBuilder.Entity("CensoAPI02.Models.UnionTables.HRUsersTheme", b =>
                 {
-                    b.HasOne("CENSO.Models.Locations", null)
-                        .WithMany("HR_Users")
-                        .HasForeignKey("LocationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("ThemeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HRUId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ThemeId", "HRUId");
+
+                    b.HasIndex("HRUId");
+
+                    b.ToTable("HRUsersThemes");
                 });
 
-            modelBuilder.Entity("CENSO.Models.Question_Theme", b =>
+            modelBuilder.Entity("CensoAPI02.Models.UnionTables.QuestionsTheme", b =>
                 {
-                    b.HasOne("CENSO.Models.Question", "question")
-                        .WithMany()
-                        .HasForeignKey("questionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("ThemeId")
+                        .HasColumnType("int");
 
-                    b.HasOne("CENSO.Models.Theme", "theme")
-                        .WithMany()
-                        .HasForeignKey("themeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
 
-                    b.Navigation("question");
+                    b.HasKey("ThemeId", "QuestionId");
 
-                    b.Navigation("theme");
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("QuestionsThemes");
+                });
+
+            modelBuilder.Entity("CensoAPI02.UnionTables.LocationsTheme", b =>
+                {
+                    b.Property<int>("ThemeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ThemeId", "LocationId");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("LocationsThemes");
                 });
 
             modelBuilder.Entity("CENSO.Models.Request", b =>
                 {
                     b.HasOne("CENSO.Models.Question", "question")
-                        .WithOne("request")
-                        .HasForeignKey("CENSO.Models.Request", "QuestionId")
+                        .WithMany("request")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("question");
                 });
 
-            modelBuilder.Entity("HR_UserTheme", b =>
+            modelBuilder.Entity("CensoAPI02.Models.AnonRequest", b =>
                 {
-                    b.HasOne("CENSO.Models.HR_User", null)
-                        .WithMany()
-                        .HasForeignKey("HR_UsersHR_UserId")
+                    b.HasOne("CENSO.Models.Question", "question")
+                        .WithMany("anonRequest")
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CENSO.Models.Theme", null)
-                        .WithMany()
-                        .HasForeignKey("ThemesThemeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("question");
                 });
 
-            modelBuilder.Entity("LocationsTheme", b =>
+            modelBuilder.Entity("CensoAPI02.Models.AnswerAnonStatus", b =>
                 {
-                    b.HasOne("CENSO.Models.Locations", null)
-                        .WithMany()
-                        .HasForeignKey("LocationsId")
+                    b.HasOne("CensoAPI02.Models.AnonRequest", "anonRequest")
+                        .WithOne("answerAnonStatus")
+                        .HasForeignKey("CensoAPI02.Models.AnswerAnonStatus", "anRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CENSO.Models.Theme", null)
-                        .WithMany()
-                        .HasForeignKey("ThemesThemeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("anonRequest");
                 });
 
-            modelBuilder.Entity("QuestionTheme", b =>
+            modelBuilder.Entity("CensoAPI02.Models.AnswerStatus", b =>
                 {
-                    b.HasOne("CENSO.Models.Question", null)
-                        .WithMany()
-                        .HasForeignKey("QuestionsQuestionId")
+                    b.HasOne("CENSO.Models.Request", "request")
+                        .WithOne("answerStatus")
+                        .HasForeignKey("CensoAPI02.Models.AnswerStatus", "RequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CENSO.Models.Theme", null)
-                        .WithMany()
-                        .HasForeignKey("ThemesThemeId")
+                    b.Navigation("request");
+                });
+
+            modelBuilder.Entity("CensoAPI02.Models.HRU", b =>
+                {
+                    b.HasOne("CENSO.Models.Locations", "locations")
+                        .WithMany("HRU")
+                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("locations");
+                });
+
+            modelBuilder.Entity("CensoAPI02.Models.UnionTables.HRUsersTheme", b =>
+                {
+                    b.HasOne("CensoAPI02.Models.HRU", "HRU")
+                        .WithMany()
+                        .HasForeignKey("HRUId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CENSO.Models.Theme", "Theme")
+                        .WithMany()
+                        .HasForeignKey("ThemeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("HRU");
+
+                    b.Navigation("Theme");
+                });
+
+            modelBuilder.Entity("CensoAPI02.Models.UnionTables.QuestionsTheme", b =>
+                {
+                    b.HasOne("CENSO.Models.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CENSO.Models.Theme", "Theme")
+                        .WithMany()
+                        .HasForeignKey("ThemeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+
+                    b.Navigation("Theme");
+                });
+
+            modelBuilder.Entity("CensoAPI02.UnionTables.LocationsTheme", b =>
+                {
+                    b.HasOne("CENSO.Models.Locations", "Locations")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CENSO.Models.Theme", "Theme")
+                        .WithMany()
+                        .HasForeignKey("ThemeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Locations");
+
+                    b.Navigation("Theme");
                 });
 
             modelBuilder.Entity("CENSO.Models.Locations", b =>
                 {
-                    b.Navigation("HR_Users");
+                    b.Navigation("HRU");
                 });
 
             modelBuilder.Entity("CENSO.Models.Question", b =>
                 {
+                    b.Navigation("anonRequest");
+
                     b.Navigation("request");
+                });
+
+            modelBuilder.Entity("CENSO.Models.Request", b =>
+                {
+                    b.Navigation("answerStatus");
+                });
+
+            modelBuilder.Entity("CensoAPI02.Models.AnonRequest", b =>
+                {
+                    b.Navigation("answerAnonStatus");
                 });
 #pragma warning restore 612, 618
         }

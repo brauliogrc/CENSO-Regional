@@ -11,7 +11,5 @@ export class ShrUsersService {
 
   constructor( private _http:HttpClient ) { }
 
-  getUsers() : Observable<any>{
-    return this._http.get( this.MyAppUrl + this.MyApiUrl );
-  }
+  
 }

@@ -1,7 +1,9 @@
 ﻿using CENSO.Models;
 using CensoAPI02.Intserfaces;
+using CensoAPI02.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +23,13 @@ namespace CensoAPI02.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] string login)
+        public async Task<IActionResult> Post([FromBody] LoginInterface login)
         {
             try
             {
-                var user = _context.HR_Users.Where(log => log.User_Name == login).FirstOrDefault();
+                var user = await _context.HRU.Select(hru => new { hru.uName, hru.uId, hru.uEmail, hru.LocationId }).Where(hru => hru.uName == login.username && hru.uEmail == login.email).FirstOrDefaultAsync();
                 return Ok(user);
-            }catch( Exception ex)
+            }catch( Exception ex )
             {
                 return BadRequest( ex.Message);
             }

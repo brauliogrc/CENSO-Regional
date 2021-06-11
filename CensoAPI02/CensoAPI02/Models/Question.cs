@@ -1,31 +1,38 @@
-﻿using System;
+﻿using CensoAPI02.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+//TABLE QUESTIONs
+
 namespace CENSO.Models
 {
     public class Question
     {
-        public int      QuestionId { get; set; }
+        [Key]
+        public int      qId { get; set; } // Id de la question
 
         [MaxLength(70)]
-        public string   Question_Name { get; set; }
+        public string   qName { get; set; } // Nombre de la question
 
-        public DateTime Question_Creation_Date { get; set; }
+        public DateTime qCreationDate { get; set; } // Fecha de cración
 
-        public int     Question_Creation_User { get; set; }//Cambiar a int
+        public int     qCreationUser { get; set; } // Usuario creador
 
-        public DateTime Question_Modification_Date { get; set; }
+        public DateTime qModificationDate { get; set; } // Fecha de modificación
 
-        public int     Question_Modification_User { get; set; }//Cambiar a int
+        public int     qModificationUser { get; set; } // Usuario que realizó la modificación
 
-        public bool     Question_Status { get; set; }
+        public bool     qStatus { get; set; }
 
         //Relationship one-2-one entities Request and Qestion
         //public int RequestOfQuestion { get; set; }
-        public Request request { get; set; }
+        public List<Request> request { get; set; }
+
+        //Relationship one-2-one entities AnonRequest and Qestion
+        public List<AnonRequest> anonRequest { get; set; }
 
         //Relationship many-2-many entities Question and Theme
         //public int Question_Theme { get; set; } //Relacionada con la entidad Theme

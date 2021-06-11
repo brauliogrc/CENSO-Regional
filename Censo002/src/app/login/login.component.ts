@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SloginService } from '../services/login/slogin.service';
 
 @Component({
@@ -9,33 +10,45 @@ import { SloginService } from '../services/login/slogin.service';
 })
 export class LoginComponent implements OnInit {
 
-  form : FormGroup;
+  /* Definimos los campos del formulario y agregamos validaciones sobre su contenido
+   *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
+  */
+   loginForm = this._fb.group({
+    userName: ['', [Validators.required]],
+    password : ['', [Validators.required]]
+  });
 
-  constructor( private fb:FormBuilder, private _loginService:SloginService) {
-    this.form = this.fb.group({
-      userName: [''],
-      password : ['']
-    });
+  constructor(  private _fb:FormBuilder,
+                private _loginService:SloginService,
+                private router:Router) {
    }
 
   ngOnInit(): void {
       
   }
-
-  /*UserLogin(){
-    console.log(this.form);
-    
-    const user : any = {
-      userName: this.form.get('userName')?.value,
-      password: this.form.get('password')?.value
+  
+  userLogin(){
+    /**
+     * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
+     */
+    const dataLogin: any = {
+      username: this.loginForm.get('userName')?.value,
+      email: this.loginForm.get('password')?.value
     }
-    // console.log(user);
+    console.log(dataLogin);
 
-    this._loginService.Login(user).subscribe(data => {
+    // Nos suscribimos al método del service, enviandole el objeto con los datos para validar si el usuario existe en la base de datos
+    this._loginService.Login(dataLogin).subscribe(data => {
+      if(!data){
+        console.error('Usuario no encontrado en la base de datos');
+      }else{
+        this.loginForm.reset();
+        console.log('Binbenido ' + data.uName);
+        this.router.navigate(['/panelusuario']);
+      }
       console.log(data);
-    }, error =>{
-      console.error('Ha ocurrido un error en el logeo' + error);
-    })
-  }*/
-
+    }, error => {
+      console.error(error);
+    });
+  }
 }

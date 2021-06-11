@@ -39,7 +39,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "5.0.6",
           "Microsoft.Extensions.ApiDescription.Client": "5.0.6",
           "Microsoft.NETCore.App": "2.2.8",
-          "NSwag.ApiDescription.Client": "13.11.1",
+          "NSwag.ApiDescription.Client": "13.11.2",
           "Newtonsoft.Json": "13.0.1",
           "Swashbuckle.AspNetCore": "6.1.4",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
@@ -753,13 +753,13 @@
           "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {}
         }
       },
-      "NSwag.ApiDescription.Client/13.11.1": {
+      "NSwag.ApiDescription.Client/13.11.2": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Client": "5.0.6",
-          "NSwag.MSBuild": "13.11.1"
+          "NSwag.MSBuild": "13.11.2"
         }
       },
-      "NSwag.MSBuild/13.11.1": {},
+      "NSwag.MSBuild/13.11.2": {},
       "runtime.native.System/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -3370,19 +3370,19 @@
       "path": "newtonsoft.json.bson/1.0.2",
       "hashPath": "newtonsoft.json.bson.1.0.2.nupkg.sha512"
     },
-    "NSwag.ApiDescription.Client/13.11.1": {
+    "NSwag.ApiDescription.Client/13.11.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ICXE1a/AhZHt4fI9wIMJMGmAyhI+UrlnnBKLIwGFhqB8TvKdy1ci/KyBL0UAag8NaGCl4yJQ3rs6W9SR5Ta5YA==",
-      "path": "nswag.apidescription.client/13.11.1",
-      "hashPath": "nswag.apidescription.client.13.11.1.nupkg.sha512"
+      "sha512": "sha512-PmAxsPrIP6l0Sih7Fdd50x3A9F2iW+hO6nWqa2JLCJDXTWYZxKgGWT9j5cFcoUaTOXxPwXjGyBZTFc4JFVXmMA==",
+      "path": "nswag.apidescription.client/13.11.2",
+      "hashPath": "nswag.apidescription.client.13.11.2.nupkg.sha512"
     },
-    "NSwag.MSBuild/13.11.1": {
+    "NSwag.MSBuild/13.11.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Q7Auz330iubcACmoJ3ty2s7wwxTY5xRMX0HbU/TJD/eKzr8uFxBL0dG3bJU6fBb7Ul+0nEUAgNR/tk3Z1NBaGw==",
-      "path": "nswag.msbuild/13.11.1",
-      "hashPath": "nswag.msbuild.13.11.1.nupkg.sha512"
+      "sha512": "sha512-cCeMzKS2iPrJRqZZGwHX12oU9KeYMkwo49j2ls2foLgiGc1zFcJ54/OCxFtEqsiLjpi1NnLZLcpl4UQd8PfqYQ==",
+      "path": "nswag.msbuild/13.11.2",
+      "hashPath": "nswag.msbuild.13.11.2.nupkg.sha512"
     },
     "runtime.native.System/4.3.0": {
       "type": "package",

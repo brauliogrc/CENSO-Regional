@@ -1,87 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-  <title>Index conti</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-</head>
-<body class="Bodydashboard">
-  
-  <header class="headerDash">
-<img src="img/LogoConti.png" alt="" class="imgLogoDash">
-<h1 class="h1CensoB">CENSO Panel</h1>
-    <div>
-      <button class="btnIndexC" type="submit">Cerrar Sesión</button>
-    </div>
-  </header>
-  <div class="contenedorFlex">
-  <div class="leftDash">
-    <div class="NomUsuario">
-    <h3>Bienvenido</h3>
-    <p>Usuario</p>
-    <hr>
-  </div>
-      <div class="options">
-        
-        <ul>
-          
-          <li><button type="submit" class="btnDash">Usuarios</button></li>
-          <li><button type="submit" class="btnDash">Ubicaciones</button></li>
-          <li><button type="submit" class="btnDash">Temas</button></li>
-          <li><button type="submit" class="btnDash">Tikets</button></li>
-          <li><button type="submit" class="btnDash">Áreas</button></li>
-          <li><button type="submit" class="btnDash">Preguntas</button></li>
-      </ul>
+<style>
 
+
+</style>
+
+<div class="body2">
+
+<div class="container">
+    <div class="card">
+        <div class="car-header">
+            <h3>Tikets</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Theme</th>
+                        <th>Question</th>
+                        <th>User Name</th>
+                        <th>Issue</th>
+                        <th>Area</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-warning">Edit</button>
+                            <button class="btn btn-danger">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-  </div>
-  <div class="Contenido">
-    <!--poner contenido aqui-->
-    <div class="contenido1">
-      <div class="buscar">
-      <h1>Tikets</h1>
-      <button class="btnIndexC" type="submit">Añadir tiket</button>
-    </div>
-    
-    
-    <hr>
-        <form class="form-search">
-          <input class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">
-          <button class="btnIndexC" type="submit">Buscar</button>
-        </form>
-        <hr>
-        <table class="table table-dark table-sm">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Tema</th>
-                    <th>Pregunta</th>
-                    <th>Nombre usuario </th>
-                    <th>Asunto</th>
-                    <th>Área</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <button class="btn btn-danger">Eliminar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        
-  </div>
+
 </div>
-</div>  
-</body>
-</html>
+
+</div>

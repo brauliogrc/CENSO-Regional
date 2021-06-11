@@ -11,7 +11,5 @@ export class SlocationsService {
   
   constructor( private _http:HttpClient) { }
 
-  getLocations() : Observable<any>{
-    return this._http.get( this.MyAppUrl + this.MyApiUrl );
-  }
+  
 }

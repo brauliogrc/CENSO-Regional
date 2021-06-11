@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { dataUsers } from '../interfaces/interfaces';
-import { ShrUsersService } from '../services/hruser/shr-users.service';
+// import { ShrUsersService } from '../services/hruser/shr-users.service';
+import { DataTableService } from '../services/tables/data-table.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -10,14 +11,16 @@ import { ShrUsersService } from '../services/hruser/shr-users.service';
 export class UsuariosComponent implements OnInit {
   Users : dataUsers [] = [];
 
-  constructor( private _service:ShrUsersService ) { }
+  constructor( private _service:DataTableService ) { }
 
   ngOnInit(): void {
     this.getAllUsers();
   }
 
   getAllUsers(){
-    this._service.getUsers().subscribe(data => {
+    this._service.tableUsers().subscribe(data => {
+      console.log(data);
+      
       this.Users = [... data];
     }, error => {
       console.error( 'Error getting data ' + error );

@@ -30,7 +30,7 @@ namespace CensoAPI02.Controllers
             //return new string[] { "value1", "value2" };
             try
             {
-                var ListUsers = await _context.HR_Users.ToListAsync();
+                var ListUsers = await _context.HRU.ToListAsync();
                 return Ok( ListUsers );
             }catch ( Exception error)
             {
@@ -58,7 +58,7 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                var item = await _context.HR_Users.Where(s => s.HR_UserId == id).FirstAsync();
+                var item = await _context.HRU.Where(s => s.uId == id).FirstAsync();
                 return Ok(item);
             }
             catch (Exception ex)

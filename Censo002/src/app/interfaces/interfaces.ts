@@ -1,42 +1,63 @@
+/************** Interfaces para las tablas */
 export interface dataLocations{
-    locationsId     :   number;
-    location_Name   :   string;
-    location_Status :   boolean;
+    lId     :   number;
+    lName   :   string;
+    lStatus :   boolean;
 }
 
 export interface dataUsers{
-    hR_UserId   :   number;
-    user_Name   :   string;
-    user_Status :   string;
-    user_Rol    :   string;
-    user_Email  :   string;
-    location_Name   :   string;
+    uId     :   number;
+    lId     :   number;
+    uName   :   string;
+    uStatus :   string;
+    uRol    :   string;
+    uEmal   :   string;
+    lName   :   string;
 }
 
 export interface dataTheme{
-    themeId : number;
-    hR_UserId   :   number;
-    user_Name   :   string;
-    theme_Name  :   string;
-    locationId  :   number;
-    theme_Status    :   string;
-    location_Name   :   string;
+   lId  :   number;
+   uId  :   number
+   tId  :   number;
+   lName    :   string;
+   tName    :   string;
+   tStatus  :   string;
+   uName    :   string;
 }
 
 export interface dataQuestion{
-    themeId     :   number;
-    questionId  :   number;
-    theme_Name  :   string;
-    question_Name   :   string;
-    question_Status :   string;
+    tId :   number;
+    qId :   number;
+    tName   :   string;
+    qName   :   string;
+    qStatus :   string;
+}
+/************** Interfaces para las tablas */
+
+/************** Interfaes para registro de Request */
+export interface availableQues{
+    qId     :   number;
+    qName   :   string;
 }
 
-export interface UserDataLog{
-    username    :   string;
-    password    :   string;
+/************** Interfaes para datos devueltos por el Login */
+export interface saveDataLogin{
+    uId     :   number;
+    uName   :   string;
+    uEmail  :   string;
+    locationId  :   number;
 }
 
+// Interfaces dijetas a eliminación o modificación
 export interface UserResponse{
     userId  :   number;
     rol     :   string;
+}
+
+export interface DataAnonRequest{
+    employeeType    :   number;
+    requestType :   number;
+    shipId  :   number;
+    reuqestIssue    :   string;
+    reuqestAttachement  :   string;
 }

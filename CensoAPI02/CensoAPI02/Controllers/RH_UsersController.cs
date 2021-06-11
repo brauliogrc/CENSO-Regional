@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CensoAPI02.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,7 +28,7 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                //insertData();
+                insertData();
                 // +++++ELIMINAR COMENATARIOS++++++++++++++
                 //var users = await _context.HR_Users.Include(t => t.LocationsId).ToListAsync();
                 //var users = await _context.HR_Users.Select(HRU => new { HRU.HR_UserId, HRU.User_Name, HRU.User_Email, HRU.User_Rol, HRU.User_Status, HRU.LocationsId }).ToListAsync();
@@ -37,11 +38,11 @@ namespace CensoAPI02.Controllers
                 /* La funcion JOIN pordemos llamar a nuestras colecciones de datos, estableciendo campos de relación entre las colecciones de hr_users y locations
                  * es la forma de hacer un INNER JOIN linq
                 */
-                var users = await _context.HR_Users.Join(_context.Locations, hru => hru.LocationsId, location => location.LocationsId, (user, location) => new
+                var users = await _context.HRU.Join(_context.Locations, hru => hru.LocationId, location => location.lId, (user, location) => new
                 {
                     // Colocamos solo los datos que queremos que traiga nuestra consulta
-                    user.HR_UserId, user.User_Name, user.User_Email, user.User_Rol, user.User_Status,
-                    location.Location_Name
+                    user.uId, user.uName, user.uEmail, user.uRol, user.uStatus,
+                    location.lName
                 }).ToListAsync();
 
                 return Ok(users);
@@ -64,19 +65,18 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                var newUser2 = new HR_User()
+                var newUser2 = new HRU()
                 {
-                    User_Name = newUser.Name,
-                    User_Email = newUser.Email,
-                    User_Rol = newUser.Rol,
-                    User_Status = newUser.Status,
-                    User_Creeation_Date = DateTime.UtcNow,
-                    User_Modification_Date = DateTime.UtcNow,
-                    LocationsId = newUser.LocationId
+                    uName = newUser.Name,
+                    uEmail = newUser.Email,
+                    uRol = newUser.Rol,
+                    uStatus = newUser.Status,
+                    uCreationDate = DateTime.UtcNow,
+                    uModificationDate = DateTime.UtcNow,
+                    LocationId = newUser.LocationId
                 };
 
-                _context.HR_Users.Add(newUser2);
-                // Console.WriteLine( newUser. );
+                _context.HRU.Add(newUser2);
                 await _context.SaveChangesAsync();
                 return Ok(newUser2);
             }catch( Exception ex)
@@ -104,93 +104,93 @@ namespace CensoAPI02.Controllers
 
             var theme1 = new Theme()
             {
-                Theme_Name = "Tema 1 de prueba",
-                Theme_Status = true,
-                Theme_Creation_Date = DateTime.UtcNow,
-                Theme_Creation_User = 1,
-                Theme_Modification_date = DateTime.UtcNow,
-                Theme_Modification_User = 2,
+                tName = "Tema 1 de prueba",
+                tStatus = true,
+                tCreationDate = DateTime.UtcNow,
+                tCreationUser = 1,
+                tModificationDate = DateTime.UtcNow,
+                tModificationUser = 2,
             };
 
-            var user1 = new HR_User()
+            var user1 = new HRU()
             {
-                User_Name = "Braulio Grc",
-                User_Email = "Braulio Email",
-                User_Rol = "Admin",
-                User_Status = true,
-                User_Creation_User = 1,
-                User_Creeation_Date = DateTime.UtcNow,
-                User_Modification_Date = DateTime.UtcNow,
-                User_Modification_User = 2,
+                uName = "Braulio Grc",
+                uEmail = "Braulio Email",
+                uRol = "Admin",
+                uStatus = true,
+                uCreationUser = 1,
+                uCreationDate = DateTime.UtcNow,
+                uModificationDate = DateTime.UtcNow,
+                lModificationUser = 2,
                 Themes = new() { theme1 },
             };
 
             var location1 = new Locations()
             {
-                Location_Creation_Date = DateTime.UtcNow,
-                Location_Creation_User = 1,
-                Location_Modification_Date = DateTime.UtcNow,
-                Location_Modification_User = 2,
-                Location_Name = "Tijera",
-                Location_Status = true,
-                HR_Users = new() { user1 },
+                lCreationDate = DateTime.UtcNow,
+                lCreationuser = 1,
+                lModificationDate = DateTime.UtcNow,
+                lModificationUser = 2,
+                lName = "Tijera",
+                lStatus = true,
+                HRU = new() { user1 },
                 Themes = new() { theme1 }
             };
 
             var theme2 = new Theme
             {
-                Theme_Creation_Date = DateTime.UtcNow,
-                Theme_Creation_User = 2,
-                Theme_Modification_date = DateTime.UtcNow,
-                Theme_Modification_User = 2,
-                Theme_Name = "Psicopato",
-                Theme_Status = true,
+                tCreationDate = DateTime.UtcNow,
+                tCreationUser = 2,
+                tModificationDate = DateTime.UtcNow,
+                tModificationUser = 2,
+                tName = "Psicopato",
+                tStatus = true,
             };
 
-            var user2 = new HR_User()
+            var user2 = new HRU()
             {
-                User_Creation_User = 2,
-                User_Creeation_Date = DateTime.UtcNow,
-                User_Email = "Soledad Email",
-                User_Modification_Date = DateTime.UtcNow,
-                User_Modification_User = 2,
-                User_Rol = "hr",
-                User_Name = "Soledad",
-                User_Status = true,
+                uCreationUser = 2,
+                uCreationDate = DateTime.UtcNow,
+                uEmail = "Soledad Email",
+                uModificationDate = DateTime.UtcNow,
+                lModificationUser = 2,
+                uRol = "hr",
+                uName = "Soledad",
+                uStatus = true,
                 Themes = new() { theme2, theme1 }
             };
 
             var location2 = new Locations()
             {
-                Location_Creation_Date = DateTime.UtcNow,
-                Location_Creation_User = 2,
-                Location_Modification_Date = DateTime.UtcNow,
-                Location_Modification_User = 1,
-                Location_Name = "periferico",
-                Location_Status = true,
-                HR_Users = new() { user2 },
+                lCreationDate = DateTime.UtcNow,
+                lCreationuser = 2,
+                lModificationDate = DateTime.UtcNow,
+                lModificationUser = 1,
+                lName = "periferico",
+                lStatus = true,
+                HRU = new() { user2 },
                 Themes = new() { theme2 }
             };
 
             var question1 = new Question()
             {
-                Question_Creation_Date = DateTime.UtcNow,
-                Question_Creation_User = 1,
-                Question_Modification_Date = DateTime.UtcNow,
-                Question_Modification_User = 2,
-                Question_Name = "El cereal si es sopa?",
-                Question_Status = true,
+                qCreationDate = DateTime.UtcNow,
+                qCreationUser = 1,
+                qModificationDate = DateTime.UtcNow,
+                qModificationUser = 2,
+                qName = "El cereal si es sopa?",
+                qStatus = true,
                 Themes = new() { theme1 }
             };
 
             var question2 = new Question()
             {
-                Question_Creation_Date = DateTime.UtcNow,
-                Question_Creation_User = 2,
-                Question_Modification_Date = DateTime.UtcNow,
-                Question_Modification_User = 1,
-                Question_Name = "El agua está mojada?",
-                Question_Status = false,
+                qCreationDate = DateTime.UtcNow,
+                qCreationUser = 2,
+                qModificationDate = DateTime.UtcNow,
+                qModificationUser = 1,
+                qName = "El agua está mojada?",
+                qStatus = false,
                 Themes = new() { theme2 }
             };
 

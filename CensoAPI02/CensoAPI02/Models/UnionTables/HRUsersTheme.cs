@@ -12,7 +12,7 @@ namespace CensoAPI02.Models.UnionTables
 
         public int ThemeId { get; set; }
 
-        public HR_User HR_User { get; set; } // Propiedades de navegacion
+        public HRU HRU { get; set; } // Propiedades de navegacion
 
         public Theme Theme { get; set; } // Propiedades de navegacion
     }

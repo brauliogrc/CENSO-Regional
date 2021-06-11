@@ -79,7 +79,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[13.11.1, )"
+              "version": "[13.11.2, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

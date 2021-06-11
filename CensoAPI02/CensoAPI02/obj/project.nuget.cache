@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XcjCnTOPYZklLOFwm5Bt8tMmQgLw2Amy9t9aFwMm95+iKq6jexiIrPSFyVhGiH0TTETRnIFG8UnhiAISGi5k/Q==",
+  "dgSpecHash": "vtGk02BWPALS8UNpS+cecIU1d8rDYScBWSp63XYW5Su62bSdi4mMS2P2mgsCXa5hDThE7kgDE7cx7VD5NZoHFQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\uib44927\\Desktop\\CensoApp\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
   "expectedPackageFiles": [
@@ -46,8 +46,8 @@
     "C:\\Users\\uib44927\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\uib44927\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\uib44927\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
-    "C:\\Users\\uib44927\\.nuget\\packages\\nswag.apidescription.client\\13.11.1\\nswag.apidescription.client.13.11.1.nupkg.sha512",
-    "C:\\Users\\uib44927\\.nuget\\packages\\nswag.msbuild\\13.11.1\\nswag.msbuild.13.11.1.nupkg.sha512",
+    "C:\\Users\\uib44927\\.nuget\\packages\\nswag.apidescription.client\\13.11.2\\nswag.apidescription.client.13.11.2.nupkg.sha512",
+    "C:\\Users\\uib44927\\.nuget\\packages\\nswag.msbuild\\13.11.2\\nswag.msbuild.13.11.2.nupkg.sha512",
     "C:\\Users\\uib44927\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\uib44927\\.nuget\\packages\\swashbuckle.aspnetcore\\6.1.4\\swashbuckle.aspnetcore.6.1.4.nupkg.sha512",
     "C:\\Users\\uib44927\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.1.4\\swashbuckle.aspnetcore.swagger.6.1.4.nupkg.sha512",

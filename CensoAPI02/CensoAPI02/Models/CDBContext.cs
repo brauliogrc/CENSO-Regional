@@ -1,4 +1,5 @@
-﻿using CensoAPI02.Models.UnionTables;
+﻿using CensoAPI02.Models;
+using CensoAPI02.Models.UnionTables;
 using CensoAPI02.UnionTables;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,7 +17,7 @@ namespace CENSO.Models
 
         }
 
-        public DbSet<HR_User> HR_Users { get; set; }
+        public DbSet<HRU> HRU { get; set; }
         public DbSet<Locations> Locations { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Request> Requests { get; set; }
@@ -24,6 +25,7 @@ namespace CENSO.Models
         public DbSet<LocationsTheme> LocationsThemes { get; set; }
         public DbSet<HRUsersTheme> HRUsersThemes { get; set; }
         public DbSet<QuestionsTheme> QuestionsThemes { get; set; }
+        public DbSet<AnonRequest> AnonRequests { get; set; }
 
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder)
         {
@@ -52,14 +54,14 @@ namespace CENSO.Models
                 );
 
             // configuración para que la realacion M2M utilice la entidad HRUsersTheme
-            modelBuilder.Entity<HR_User>()
+            modelBuilder.Entity<HRU>()
                 .HasMany(u => u.Themes)
-                .WithMany(t => t.HR_Users)
+                .WithMany(t => t.HRU)
                 .UsingEntity<HRUsersTheme>(
                     hrth => hrth.HasOne(prop => prop.Theme)
                     .WithMany()
                     .HasForeignKey(prop => prop.ThemeId),
-                    hrth => hrth.HasOne(prop => prop.HR_User)
+                    hrth => hrth.HasOne(prop => prop.HRU)
                     .WithMany()
                     .HasForeignKey(prop => prop.HRUId),
                     hrth =>
@@ -84,6 +86,39 @@ namespace CENSO.Models
                         qt.HasKey(prop => new { prop.ThemeId, prop.QuestionId });
                     }
                 );
+
+            // configuración para relacion one-to-may HRU Locations
+            modelBuilder.Entity<HRU>()
+                .HasOne<Locations>(hru => hru.locations) // Utilizamos las propiedades de naegación
+                .WithMany(l => l.HRU) // Utilizamos las propiedades de naegación
+                .HasForeignKey(hru => hru.LocationId); // Definimos el la FOREIGN KEY
+
+            // configuración para relación one-tomany Questions and Request
+            modelBuilder.Entity<Request>()
+                .HasOne<Question>(req => req.question)
+                .WithMany(ques => ques.request)
+                .HasForeignKey(req => req.QuestionId);
+
+            // configuración para relación one-to-many Questions and AnonRequest
+            modelBuilder.Entity<AnonRequest>()
+                 .HasOne<Question>(ques => ques.question)
+                 .WithMany(anr => anr.anonRequest)
+                 .HasForeignKey(ques => ques.QuestionId);
+
+            // configuración para relación one-to-one anonymousRequest and AnswerAnonRequest
+            modelBuilder.Entity<AnonRequest>()
+                .HasOne<AnswerAnonStatus>(asa => asa.answerAnonStatus) // Utilizamos las propiedades de naegación
+                .WithOne(anon => anon.anonRequest) // Utilizamos las propiedades de naegación
+                .HasForeignKey<AnswerAnonStatus>(anon => anon.anRequestId); // Definimos el la FOREIGN KEY
+
+            // configuración para relación one-to-one Request and AnswerSatatus
+            modelBuilder.Entity<Request>()
+                .HasOne<AnswerStatus>(r => r.answerStatus) // Utilizamos las propiedades de naegación
+                .WithOne(ans => ans.request) // Utilizamos las propiedades de naegación
+                .HasForeignKey<AnswerStatus>(ansF => ansF.RequestId); // Definimos el la FOREIGN KEY
+
+
+
         }
     }
 

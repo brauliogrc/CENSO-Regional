@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CensoAPI02.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -45,19 +46,19 @@ namespace CensoAPI02.Controllers
                 }).ToListAsync();*/
 
                 var thems = from location in _context.Locations
-                                   join lt in _context.LocationsThemes on location.LocationsId equals lt.LocationId
-                                   join theme in _context.Theme on lt.ThemeId equals theme.ThemeId
-                                   join hrth in _context.HRUsersThemes on theme.ThemeId equals hrth.ThemeId
-                                   join user in _context.HR_Users on hrth.HRUId equals user.HR_UserId
+                                   join lt in _context.LocationsThemes on location.lId equals lt.LocationId
+                                   join theme in _context.Theme on lt.ThemeId equals theme.tId
+                                   join hrth in _context.HRUsersThemes on theme.tId equals hrth.ThemeId
+                                   join user in _context.HRU on hrth.HRUId equals user.uId
                                    select new
                                    {
-                                       location.LocationsId,
-                                       location.Location_Name,
-                                       theme.ThemeId,
-                                       theme.Theme_Name,
-                                       theme.Theme_Status,
-                                       user.User_Name,
-                                       user.HR_UserId
+                                       location.lId,
+                                       location.lName,
+                                       theme.tId,
+                                       theme.tName,
+                                       theme.tStatus,
+                                       user.uName,
+                                       user.uId
                                    };
 
                 // AUN NO FUNCIONA CON SINTAXIS DE METODO

@@ -699,18 +699,18 @@
           "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {}
         }
       },
-      "NSwag.ApiDescription.Client/13.11.1": {
+      "NSwag.ApiDescription.Client/13.11.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Client": "3.0.0",
-          "NSwag.MSBuild": "13.11.1"
+          "NSwag.MSBuild": "13.11.2"
         },
         "build": {
           "build/NSwag.ApiDescription.Client.props": {},
           "build/NSwag.ApiDescription.Client.targets": {}
         }
       },
-      "NSwag.MSBuild/13.11.1": {
+      "NSwag.MSBuild/13.11.2": {
         "type": "package",
         "build": {
           "build/NSwag.MSBuild.props": {}
@@ -3042,30 +3042,30 @@
         "newtonsoft.json.bson.nuspec"
       ]
     },
-    "NSwag.ApiDescription.Client/13.11.1": {
-      "sha512": "ICXE1a/AhZHt4fI9wIMJMGmAyhI+UrlnnBKLIwGFhqB8TvKdy1ci/KyBL0UAag8NaGCl4yJQ3rs6W9SR5Ta5YA==",
+    "NSwag.ApiDescription.Client/13.11.2": {
+      "sha512": "PmAxsPrIP6l0Sih7Fdd50x3A9F2iW+hO6nWqa2JLCJDXTWYZxKgGWT9j5cFcoUaTOXxPwXjGyBZTFc4JFVXmMA==",
       "type": "package",
-      "path": "nswag.apidescription.client/13.11.1",
+      "path": "nswag.apidescription.client/13.11.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "build/NSwag.ApiDescription.Client.props",
         "build/NSwag.ApiDescription.Client.targets",
-        "nswag.apidescription.client.13.11.1.nupkg.sha512",
+        "nswag.apidescription.client.13.11.2.nupkg.sha512",
         "nswag.apidescription.client.nuspec"
       ]
     },
-    "NSwag.MSBuild/13.11.1": {
-      "sha512": "Q7Auz330iubcACmoJ3ty2s7wwxTY5xRMX0HbU/TJD/eKzr8uFxBL0dG3bJU6fBb7Ul+0nEUAgNR/tk3Z1NBaGw==",
+    "NSwag.MSBuild/13.11.2": {
+      "sha512": "cCeMzKS2iPrJRqZZGwHX12oU9KeYMkwo49j2ls2foLgiGc1zFcJ54/OCxFtEqsiLjpi1NnLZLcpl4UQd8PfqYQ==",
       "type": "package",
-      "path": "nswag.msbuild/13.11.1",
+      "path": "nswag.msbuild/13.11.2",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "build/NSwag.MSBuild.props",
         "buildCrossTargeting/NSwag.MSBuild.props",
-        "nswag.msbuild.13.11.1.nupkg.sha512",
+        "nswag.msbuild.13.11.2.nupkg.sha512",
         "nswag.msbuild.nuspec",
         "tools/Net50/DotLiquid.dll",
         "tools/Net50/Microsoft.AspNetCore.JsonPatch.dll",
@@ -6856,7 +6856,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.6",
       "Microsoft.Extensions.ApiDescription.Client >= 5.0.6",
       "Microsoft.NETCore.App >= 2.2.8",
-      "NSwag.ApiDescription.Client >= 13.11.1",
+      "NSwag.ApiDescription.Client >= 13.11.2",
       "Newtonsoft.Json >= 13.0.1",
       "Swashbuckle.AspNetCore >= 6.1.4"
     ]
@@ -6942,7 +6942,7 @@
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
             "target": "Package",
-            "version": "[13.11.1, )"
+            "version": "[13.11.2, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",
