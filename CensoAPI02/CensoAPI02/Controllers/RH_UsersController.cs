@@ -28,13 +28,8 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                insertData();
-                // +++++ELIMINAR COMENATARIOS++++++++++++++
-                //var users = await _context.HR_Users.Include(t => t.LocationsId).ToListAsync();
-                //var users = await _context.HR_Users.Select(HRU => new { HRU.HR_UserId, HRU.User_Name, HRU.User_Email, HRU.User_Rol, HRU.User_Status, HRU.LocationsId }).ToListAsync();
-                //var localidades = await _context.Locations.Where(x => x.LocationsId == 1).Include(x => x.HR_Users).ToListAsync();
-                // var users = await _context.Locations.Include(hru => hru.HR_Users).ToListAsync();
-
+                //insertData();
+                // +++++ELIMINAR COMENATARIOS++++++++++
                 /* La funcion JOIN pordemos llamar a nuestras colecciones de datos, estableciendo campos de relación entre las colecciones de hr_users y locations
                  * es la forma de hacer un INNER JOIN linq
                 */
@@ -61,7 +56,7 @@ namespace CensoAPI02.Controllers
 
         // POST api/<RH_UsersController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] UserInterface newUser)
+        public async Task<IActionResult> Post([FromBody] AddUserInterface newUser)
         {
             try
             {

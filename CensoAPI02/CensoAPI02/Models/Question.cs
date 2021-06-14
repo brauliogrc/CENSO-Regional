@@ -27,16 +27,13 @@ namespace CENSO.Models
 
         public bool     qStatus { get; set; }
 
-        //Relationship one-2-one entities Request and Qestion
-        //public int RequestOfQuestion { get; set; }
+        //Relationship one-2-many entities Request and Qestion
         public List<Request> request { get; set; }
 
-        //Relationship one-2-one entities AnonRequest and Qestion
+        //Relationship one-2-many entities AnonRequest and Qestion
         public List<AnonRequest> anonRequest { get; set; }
 
         //Relationship many-2-many entities Question and Theme
-        //public int Question_Theme { get; set; } //Relacionada con la entidad Theme
-        //public IList<Question_Theme> question_theme { get; set; }
         public List<Theme> Themes { get; set; }
     }
 }

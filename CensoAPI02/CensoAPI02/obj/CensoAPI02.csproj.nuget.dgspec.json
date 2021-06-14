@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\uib44927\\Desktop\\CensoApp\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj": {}
+    "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj": {}
   },
   "projects": {
-    "C:\\Users\\uib44927\\Desktop\\CensoApp\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj": {
+    "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uib44927\\Desktop\\CensoApp\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
+        "projectUniqueName": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
         "projectName": "CensoAPI02",
-        "projectPath": "C:\\Users\\uib44927\\Desktop\\CensoApp\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
+        "projectPath": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
         "packagesPath": "C:\\Users\\uib44927\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uib44927\\Desktop\\CensoApp\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\obj\\",
+        "outputPath": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

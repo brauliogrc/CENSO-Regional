@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DataAnonRequest } from 'src/app/interfaces/interfaces';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 

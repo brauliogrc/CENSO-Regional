@@ -30,7 +30,7 @@
             <!-- Recorremos el arreglo questions para mostrar cada uno de sus elemetnos -->
             <select formControlName="QuestionId" class="form-select" id="validationCustom04" required>
               <option *ngFor="let question of questions" value="{{question.qId}}">{{question.qName}}</option>
-              <!-- <option value="2">Nominas</option> -->
+              <option value="2">Nominas</option>
             </select>
             <div class="invalid-feedback">
                 Selecciona una opcion.
@@ -40,7 +40,7 @@
           <div class="mb-3">
             <!-- ************ nave del trabajador ***************** -->
             <label for="validationCustom04" class="form-label">Nave en la que trabajas</label>
-            <select formControlName="arShip" class="form-select" id="validationCustom04" required>
+            <select formControlName="AreaId" class="form-select" id="validationCustom04" required>
               <option>1</option>
               <option>2</option>
               <option>3</option>

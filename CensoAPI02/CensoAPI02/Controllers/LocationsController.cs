@@ -1,4 +1,5 @@
 ﻿using CENSO.Models;
+using CensoAPI02.Intserfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -46,8 +47,25 @@ namespace CensoAPI02.Controllers
 
         // POST api/<LocationsController>
         [HttpPost]
-        public void Post([FromBody] Locations value)
+        public async Task<IActionResult> Post([FromBody] AddLocations value)
         {
+            try
+            {
+                var newLocation = new Locations()
+                {
+                    lName = value.lName,
+                    lStatus = value.lStatus,
+                    lCreationDate = DateTime.Now,
+                    //lCreationuser = 2
+                };
+                _context.Locations.Add(newLocation);
+                await _context.SaveChangesAsync();
+                return Ok(newLocation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT api/<LocationsController>/5

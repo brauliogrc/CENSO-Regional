@@ -26,6 +26,7 @@ namespace CENSO.Models
         public DbSet<HRUsersTheme> HRUsersThemes { get; set; }
         public DbSet<QuestionsTheme> QuestionsThemes { get; set; }
         public DbSet<AnonRequest> AnonRequests { get; set; }
+        public DbSet<Area> Areas { get; set; }
 
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder)
         {
@@ -88,19 +89,19 @@ namespace CENSO.Models
                 );
 
             // configuración para relacion one-to-may HRU Locations
-            modelBuilder.Entity<HRU>()
+            modelBuilder.Entity<HRU>() // Parte 1 de la relación
                 .HasOne<Locations>(hru => hru.locations) // Utilizamos las propiedades de naegación
                 .WithMany(l => l.HRU) // Utilizamos las propiedades de naegación
                 .HasForeignKey(hru => hru.LocationId); // Definimos el la FOREIGN KEY
 
             // configuración para relación one-tomany Questions and Request
-            modelBuilder.Entity<Request>()
+            modelBuilder.Entity<Request>() // Parte 1 de la relación
                 .HasOne<Question>(req => req.question)
                 .WithMany(ques => ques.request)
                 .HasForeignKey(req => req.QuestionId);
 
             // configuración para relación one-to-many Questions and AnonRequest
-            modelBuilder.Entity<AnonRequest>()
+            modelBuilder.Entity<AnonRequest>() // Parte 1 de la relación
                  .HasOne<Question>(ques => ques.question)
                  .WithMany(anr => anr.anonRequest)
                  .HasForeignKey(ques => ques.QuestionId);
@@ -117,45 +118,24 @@ namespace CENSO.Models
                 .WithOne(ans => ans.request) // Utilizamos las propiedades de naegación
                 .HasForeignKey<AnswerStatus>(ansF => ansF.RequestId); // Definimos el la FOREIGN KEY
 
+            // configuracions para relacón one-to-many Locations and Area
+            modelBuilder.Entity<Area>() // Parte 1 de la relación
+                .HasOne<Locations>(area => area.locations)
+                .WithMany(l => l.areas)
+                .HasForeignKey(area => area.locationId);
 
+            // configuracions para relacón one-to-many Area and Request
+            modelBuilder.Entity<Request>() // Parte 1 de la relación
+                .HasOne<Area>(req => req.area)
+                .WithMany(area => area.request)
+                .HasForeignKey(req => req.AreaId);
+
+            // configuracions para relacón one-to-many Area and AnonRequest
+            modelBuilder.Entity<AnonRequest>() // Parte 1 de la relación
+                .HasOne<Area>(areq => areq.area)
+                .WithMany(area => area.anonRequest)
+                .HasForeignKey(areq => areq.AreaId);
 
         }
     }
-
-    /** REMOVE THE FOLLOWING CODE **/
-    //Joining entity class for relationship many-2-many between entities Locations and Theme
-    /*public class Location_Theme
-    {
-        //Foreing key properties and reference navigation properties of entity Locations
-        public int locationId { get; set; }
-        public Locations locations { get; set; }
-
-        //Foreing key properties and reference navigation properties of entity Theme
-        public int themeId { get; set; }
-        public Theme theme { get; set; }
-    }
-
-    //Joining entity class for relationship many-2-many between entities Locations and Theme
-    public class HRU_Theme
-    {
-        //Foreing key properties and reference navigation properties of entity HR_User
-        public int hruserId { get; set; }
-        public HR_User hrUser { get; set; }
-
-        //Foreing key properties and reference navigation properties of entity Theme
-        public int themeId { get; set; }
-        public Theme theme { get; set; }
-    }
-
-    //Joining entity class for relationship many-2-many between entities Question and Theme
-    public class Question_Theme
-    {
-        //Foreing key properties and reference navigation properties of entity Question
-        public int questionId { get; set; }
-        public Question question { get; set; }
-
-        //Foreing key properties and reference navigation properties of entity Theme
-        public int themeId { get; set; }
-        public Theme theme { get; set; }
-    }*/
 }

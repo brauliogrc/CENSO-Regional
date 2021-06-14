@@ -17,8 +17,8 @@ namespace CensoAPI02.Models
         [Required]
         public int arEmployeeType { get; set; } // Tipo de empleado
 
-        [Required]
-        public int arShip { get; set; } // Foreing key de la tabla areas
+        /*[Required]
+        public int arShip { get; set; } // Foreing key de la tabla areas*/
 
         [MaxLength(500)]
         [Required]
@@ -43,5 +43,11 @@ namespace CensoAPI02.Models
 
         // Relationship one-2-one entities anonymousRequest and AnswerAnonStatus
         public AnswerAnonStatus answerAnonStatus { get; set; }
+
+        // Relationship one-2-may entities Area and AnonRequest
+        [Required]
+        public int AreaId { get; set; }
+
+        public Area area { get; set; }
     }
 }

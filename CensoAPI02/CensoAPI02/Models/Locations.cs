@@ -19,19 +19,21 @@ namespace CENSO.Models
 
         public DateTime lCreationDate { get; set; }
 
-        public int      lCreationuser { get; set; }//Cambiar a int
+        public int      lCreationuser { get; set; }
 
         public DateTime lModificationDate { get; set; }
 
-        public int      lModificationUser { get; set; }//Cambiar a int
+        public int      lModificationUser { get; set; }
 
         public bool     lStatus { get; set; }
 
         //Relationship many-2-many entities Locations and Theme
-        //public IList<Location_Theme> locations_theme { get; set; }
         public List<Theme> Themes { get; set; }
 
-        //Relationship many-2-many entities HR_User and location
+        //Relationship many-2-many entities HR_User and Location
         public List<HRU> HRU { get; set; }
+
+        //Relationship one-2-many entities Area and Location
+        public List<Area> areas { get; set; }
     }
 }

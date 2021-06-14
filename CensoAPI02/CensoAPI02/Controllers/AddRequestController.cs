@@ -36,7 +36,7 @@ namespace CensoAPI02.Controllers
 
         // POST api/<AddRequestController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] RequestInterface value)
+        public async Task<IActionResult> Post([FromBody] AddRequestInterface value)
         {
             try
             {
@@ -45,10 +45,10 @@ namespace CensoAPI02.Controllers
                     rUserId = value.rUserId,
                     rEmployeeType = value.rEmployeeType,
                     QuestionId = value.QuestionId,
-                    rShip = value.rShip,
                     rIssue = value.rIssue,
                     rAttachement = value.rAttachement,
-                    rCreationDate = DateTime.UtcNow
+                    rCreationDate = DateTime.UtcNow,
+                    AreaId = value.AreaId
                 };
                 _context.Requests.Add(newRequest);
                 await _context.SaveChangesAsync();

@@ -27,11 +27,6 @@ namespace CENSO.Models
         public int rEmployeeType { get; set; } // Tipo de empleado -> implementar enumercion para este camo
 
         //Posible eliminacion
-        [Required]
-        public int rShip { get; set; } // Foreing key de la tabla areas
-
-
-        //Posible eliminacion
         public int rEmployeeLeader { get; set; } // Lider del empleado
 
         [Required]
@@ -49,5 +44,11 @@ namespace CENSO.Models
 
         // Relationship one-2-one entities Request and AnswerStatus
         public AnswerStatus answerStatus { get; set; }
+
+        // Relationship one-2-may entities Area and Request
+        [Required]
+        public int AreaId { get; set; }
+
+        public Area area { get; set; }
     }
 }

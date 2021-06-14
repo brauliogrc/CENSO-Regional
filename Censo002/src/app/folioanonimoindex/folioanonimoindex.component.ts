@@ -20,7 +20,7 @@ export class FolioanonimoindexComponent implements OnInit {
   bodyRequest = this._fb.group({
     arEmployeeType:  ['', [Validators.required]],
     QuestionId: ['', [Validators.required]],
-    arShip : ['', [Validators.required]],
+    AreaId : ['', [Validators.required]],
     arIssue: ['', [Validators.required, Validators.maxLength(500)]],
     arAttachemen: ['', [Validators.maxLength(200)]],
   });
@@ -47,7 +47,7 @@ export class FolioanonimoindexComponent implements OnInit {
     const anonReq: any = { // Asignar a una interface
       arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
-      arShip: this.bodyRequest.get('arShip')?.value,
+      AreaId: this.bodyRequest.get('AreaId')?.value,
       arIssue: this.bodyRequest.get('arIssue')?.value,
       arAttachemen: this.bodyRequest.get('arAttachemen')?.value
     }

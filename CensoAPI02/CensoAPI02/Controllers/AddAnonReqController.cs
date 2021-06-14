@@ -1,6 +1,6 @@
 ﻿using CENSO.Models;
+using CensoAPI02.Intserfaces;
 using CensoAPI02.Models;
-using CensoAPI02.Models.prueba;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -37,20 +37,19 @@ namespace CensoAPI02.Controllers
 
         // POST api/<AddAnonReqController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] AnonRequestInterface newAnomReq)
+        public async Task<IActionResult> Post([FromBody] AddAnonRequestInterface newAnomReq)
         {
             try
             {
                 var newAnonRequest = new AnonRequest()
                 {
-                    arShip = newAnomReq.arShip,
+                    AreaId = newAnomReq.AreaId,
                     arEmployeeType = newAnomReq.arEmployeeType,
                     arIssue = newAnomReq.arIssue,
                     arAttachement = newAnomReq.arAttachemen,
                     arCreationDate = DateTime.UtcNow,
-                    arModificationDate = DateTime.UtcNow,
-                    //arMoficationUser = newAnomReq.arMoficationUser,
-                    QuestionId = newAnomReq.QuestionId
+                    // arModificationDate = DateTime.UtcNow,
+                    QuestionId = newAnomReq.QuestionId,
                 };
                 _context.AnonRequests.Add(newAnonRequest);
                 await _context.SaveChangesAsync();

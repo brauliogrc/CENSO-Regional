@@ -24,7 +24,7 @@ export class PanelusuarioComponent implements OnInit {
     //rUserId: ['', [Validators.required]],
     rEmployeeType: ['', [Validators.required]],
     QuestionId: ['',[Validators.required]],
-    rShip: ['', [Validators.required]],
+    AreaId: ['', [Validators.required]],
     rIssue: ['', [Validators.required, Validators.maxLength(500)]],
     rAttachement: ['', [Validators.maxLength(200)]]
   });
@@ -52,7 +52,7 @@ export class PanelusuarioComponent implements OnInit {
     const req : any = { // asignar a una interface
       rEmployeeType: this.bodyRequest.get('rEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
-      rShip: this.bodyRequest.get('rShip')?.value,
+      AreaId: this.bodyRequest.get('AreaId')?.value,
       rIssue: this.bodyRequest.get('rIssue')?.value,
       rAttachement: this.bodyRequest.get('rAttachement')?.value
     }

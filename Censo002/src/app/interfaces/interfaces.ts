@@ -47,17 +47,3 @@ export interface saveDataLogin{
     uEmail  :   string;
     locationId  :   number;
 }
-
-// Interfaces dijetas a eliminación o modificación
-export interface UserResponse{
-    userId  :   number;
-    rol     :   string;
-}
-
-export interface DataAnonRequest{
-    employeeType    :   number;
-    requestType :   number;
-    shipId  :   number;
-    reuqestIssue    :   string;
-    reuqestAttachement  :   string;
-}
