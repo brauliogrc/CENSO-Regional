@@ -4,14 +4,16 @@ using CENSO.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CensoAPI02.Migrations
 {
     [DbContext(typeof(CDBContext))]
-    partial class CDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210614193336_NullFieldModification")]
+    partial class NullFieldModification
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,7 +199,7 @@ namespace CensoAPI02.Migrations
                     b.Property<DateTime>("arModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("arModificationUser")
+                    b.Property<int>("arMoficationUser")
                         .HasColumnType("int");
 
                     b.HasKey("arId");
@@ -299,6 +301,9 @@ namespace CensoAPI02.Migrations
                     b.Property<int>("LocationId")
                         .HasColumnType("int");
 
+                    b.Property<int>("lModificationUser")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("uCreationDate")
                         .HasColumnType("datetime2");
 
@@ -312,9 +317,6 @@ namespace CensoAPI02.Migrations
 
                     b.Property<DateTime>("uModificationDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("uModificationUser")
-                        .HasColumnType("int");
 
                     b.Property<string>("uName")
                         .IsRequired()

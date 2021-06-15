@@ -1,5 +1,6 @@
 ﻿using CENSO.Models;
 using CensoAPI02.Intserfaces;
+using CensoAPI02.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,60 +13,56 @@ namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AddRequestController : ControllerBase
+    public class AreasController : ControllerBase
     {
         private readonly CDBContext _context;
 
-        public AddRequestController(CDBContext context)
+        public AreasController(CDBContext context)
         {
             _context = context;
         }
-        // GET: api/<AddRequestController>
-        [HttpGet]
+    
+        // GET: api/<AreasController>
+            [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<AddRequestController>/5
+        // GET api/<AreasController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<AddRequestController>
+        // POST api/<AreasController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] AddRequestInterface value)
+        public async Task<IActionResult> Post([FromBody] AddArea value)
         {
             try
             {
-                var newRequest = new Request()
+                var newArea = new Area()
                 {
-                    rUserId = value.rUserId,
-                    rEmployeeType = value.rEmployeeType,
-                    QuestionId = value.QuestionId,
-                    rIssue = value.rIssue,
-                    rAttachement = value.rAttachement,
-                    rCreationDate = DateTime.Now,
-                    AreaId = value.AreaId
+                    aName = value.aName,
+                    locationId = value.LocationId
                 };
-                _context.Requests.Add(newRequest);
+                _context.Areas.Add(newArea);
                 await _context.SaveChangesAsync();
-                return Ok(newRequest);
+                return Ok(newArea);
             }catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        // PUT api/<AddRequestController>/5
+        // PUT api/<AreasController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<AddRequestController>/5
+        // DELETE api/<AreasController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

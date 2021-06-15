@@ -13,6 +13,7 @@ namespace CensoAPI02.Models
         public int aId { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string aName { get; set; }
 
         // Relacion one-2-many con Locations

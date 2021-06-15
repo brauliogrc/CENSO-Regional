@@ -16,17 +16,15 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Theme</th>
-                        <th>Status</th>
+                        <th>Location</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let area of areas" class="text-center">
+                        <td>{{area.aId}}</td>
+                        <td>{{area.aName}}</td>
+                        <td>{{area.lName}}</td>
                         <td>
                             <button class="btn btn-warning">Edit</button>
                             <button class="btn btn-danger">Delete</button>

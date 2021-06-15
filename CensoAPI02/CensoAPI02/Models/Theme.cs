@@ -15,18 +15,22 @@ namespace CENSO.Models
         public int      tId { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string   tName { get; set; }
 
+        [Required]
         public DateTime tCreationDate { get; set; }
 
         [MaxLength(50)]
-        public int      tCreationUser { get; set; }//Cambiar a int
+        [Required]
+        public int      tCreationUser { get; set; }
 
         public DateTime tModificationDate { get; set; }
 
         [MaxLength(50)]
-        public int      tModificationUser { get; set; }//Cambiar a int
+        public int      tModificationUser { get; set; }
 
+        [Required]
         public bool     tStatus { get; set; }
 
         //Relationship many-2-many entities Locations and Theme

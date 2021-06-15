@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SquestionsService } from '../services/questions/squestions.service';
 import { SrequestService } from '../services/request/srequest.service';
-import { availableQues } from '../interfaces/interfaces';
+import { availableQues, newAnonRequest } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-folioanonimoindex',
@@ -44,7 +44,7 @@ export class FolioanonimoindexComponent implements OnInit {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const anonReq: any = { // Asignar a una interface
+    const anonReq: newAnonRequest = {
       arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
       AreaId: this.bodyRequest.get('AreaId')?.value,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SloginService } from '../services/login/slogin.service';
+import { dataLogin } from '../interfaces/interfaces';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const dataLogin: any = {
+    const dataLogin: dataLogin = {
       username: this.loginForm.get('userName')?.value,
       email: this.loginForm.get('password')?.value
     }

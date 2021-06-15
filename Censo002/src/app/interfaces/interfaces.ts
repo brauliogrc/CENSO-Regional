@@ -1,3 +1,4 @@
+
 /************** Interfaces para las tablas */
 export interface dataLocations{
     lId     :   number;
@@ -32,6 +33,13 @@ export interface dataQuestion{
     qName   :   string;
     qStatus :   string;
 }
+
+export interface dataArea{
+    aId :   number;
+    lId :   number;
+    aName   :   string;
+    lName   :   string;
+}
 /************** Interfaces para las tablas */
 
 /************** Interfaes para registro de Request */
@@ -46,4 +54,27 @@ export interface saveDataLogin{
     uName   :   string;
     uEmail  :   string;
     locationId  :   number;
+}
+
+/************** Interfae para datos enviados por el Login */
+export interface dataLogin{
+    username    :   string;
+    email   :   string;
+}
+
+/************** Interfaes para datos de registro de Request */
+export interface newRequest{ // Agregar el theme
+    AreaId  :   number;
+    rIssue  :   string;
+    QuestionId  :   number;
+    rAttachement    :   string;
+    rEmployeeType   :   number;
+}
+
+export interface newAnonRequest{ // Agrega el theme
+    AreaId  :   number;
+    arIssue :   string;
+    QuestionId  :   number;
+    arEmployeeType  :   number;
+    arAttachemen    :   string;
 }

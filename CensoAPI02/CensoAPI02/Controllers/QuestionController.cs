@@ -1,4 +1,6 @@
 ﻿using CENSO.Models;
+using CensoAPI02.Intserfaces;
+using CensoAPI02.Models.UnionTables;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -52,8 +54,40 @@ namespace CensoAPI02.Controllers
 
         // POST api/<QuestionController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] AddQuestion value)
         {
+            try
+            {
+                var newQuestion = new Question()
+                {
+                    qName = value.qName,
+                    qStatus = value.qStatus,
+                    qCreationDate = DateTime.Now,
+                    qCreationUser = 1 // Se obtiene automaticamente tras el logueo
+                };
+
+                _context.Questions.Add(newQuestion);
+                await _context.SaveChangesAsync();
+
+                var getQuestionId = await _context.Questions
+                    .Where(q => q.qName == value.qName && q.qCreationDate == newQuestion.qCreationDate)
+                    .Select(q => q.qId)
+                    .FirstOrDefaultAsync();
+
+                var newRelationship = new QuestionsTheme()
+                {
+                    QuestionId = getQuestionId,
+                    ThemeId = value.ThemeId
+                };
+
+                _context.QuestionsThemes.Add(newRelationship);
+                await _context.SaveChangesAsync();
+
+                return Ok(newRelationship);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT api/<QuestionController>/5

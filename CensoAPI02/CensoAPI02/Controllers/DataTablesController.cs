@@ -113,5 +113,41 @@ namespace CensoAPI02.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        // Obtener datos para la tabla de Areas
+        [HttpGet]
+        [Route("TableAreas")]
+        public async Task<ActionResult> GetAreas()
+        {
+            try
+            {
+                var query = await _context.Areas.Join(_context.Locations, a => a.aId, l => l.lId, (a, l) => new
+                {
+                    a.aName,
+                    a.aId,
+                    l.lId,
+                    l.lName
+                }).ToListAsync();
+
+                return Ok(query);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("TableTikets")]
+        public async Task<ActionResult> GerTikets()
+        {
+            try
+            {
+
+                return Ok();
+            }catch(Exception ex)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

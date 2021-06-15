@@ -49,7 +49,7 @@ namespace CensoAPI02.Intserfaces
         public string rAttachement { get; set; }
     }
 
-    // Registart una nueva AonRequest
+    // Registar una nueva AonRequest
     public class AddAnonRequestInterface
     {
         public int arEmployeeType { get; set; }
@@ -63,10 +63,39 @@ namespace CensoAPI02.Intserfaces
         public string arAttachemen { get; set; }
     }
 
+    // Registar una nueva Location
     public class AddLocations
     {
         public string lName { get; set; }
 
         public bool lStatus { get; set; }
+    }
+
+    // Registar una nueva Question
+    public class AddQuestion
+    {
+        public string qName { get; set; }
+
+        public bool qStatus { get; set; }
+
+        public int ThemeId { get; set; }
+    }
+
+    // Registar un nuevo Theme
+    public class AddTheme
+    {
+        public string tName { get; set; }
+
+        public bool tStatus { get; set; }
+
+        public int QuestionId { get; set; }
+    }
+
+    // Registar una nueva Area
+    public class AddArea
+    {
+        public string aName { get; set; }
+
+        public int LocationId { get; set; }
     }
 }

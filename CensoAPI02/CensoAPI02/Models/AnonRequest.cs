@@ -12,20 +12,17 @@ namespace CensoAPI02.Models
     public class AnonRequest
     {
         [Key]
-        [Required]public int arId { get; set; } // Id y folio de la request
+        [Required]
+        public int arId { get; set; } // Id y folio de la request
 
         [Required]
         public int arEmployeeType { get; set; } // Tipo de empleado
-
-        /*[Required]
-        public int arShip { get; set; } // Foreing key de la tabla areas*/
 
         [MaxLength(500)]
         [Required]
         public string arIssue { get; set; } // Contenido
 
         [MaxLength(200)]
-        [Required]
         public string arAttachement { get; set; } // Ruta de archivo adjunto
 
         [Required]
@@ -33,7 +30,7 @@ namespace CensoAPI02.Models
 
         public DateTime arModificationDate { get; set; }
 
-        public int arMoficationUser { get; set; } // Podria ser el usuario que realiza la respuesta
+        public int arModificationUser { get; set; } // Podria ser el usuario que realiza la respuesta
 
         // Relationship one-2-one entities anonymousRequest and Qestion
         [Required]

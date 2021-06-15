@@ -20,7 +20,6 @@ namespace CENSO.Models
         public string rIssue { get; set; } // Contenido
 
         [MaxLength(200)]
-        [Required]
         public string rAttachement { get; set; } // Ruta de archivo adjunto
 
         [Required]

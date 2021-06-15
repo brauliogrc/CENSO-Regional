@@ -17,19 +17,19 @@ import { FolioanonimoindexComponent } from "./folioanonimoindex/folioanonimoinde
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: 'folioanonimo', component: FolioanonimoComponent },
-  { path: 'usuarios', component: UsuariosComponent },
-  { path: 'localidades', component: LocalidadesComponent },
-  { path: 'temas', component: TemasComponent },
-  { path: 'areas', component: AreasComponent },
-  { path: 'preguntas', component: PreguntasComponent },
-  { path: 'tikets', component: TiketsComponent },
-  { path: 'folioanonimoindex', component: FolioanonimoindexComponent },
+  { path: 'home', component: HomeComponent }, // Pagina principal
+  { path: 'folioanonimo', component: FolioanonimoComponent }, // **TO DO** 
+  { path: 'usuarios', component: UsuariosComponent }, // Vista con una tabla que muestra a los usuarios y su informacion
+  { path: 'localidades', component: LocalidadesComponent }, // Vista con una tabla que muestra a las localidades y su informacion
+  { path: 'temas', component: TemasComponent }, // Vista con una tabla que muestra a los temas y su informacion
+  { path: 'areas', component: AreasComponent }, // Vista con una tabla que muestra a las areas y su informacion **TO DO**
+  { path: 'preguntas', component: PreguntasComponent }, // Vista con una tabla que muestra a las preguntas y su informacion
+  { path: 'tikets', component: TiketsComponent }, // **TO DO**
+  { path: 'folioanonimoindex', component: FolioanonimoindexComponent }, // Formulario de registro de peticion anonima
   { path: 'fvacio', component: FvacioComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent }, // Formulario de logueo
   { path: 'paneladmin', component: PaneladminComponent },
-  { path: 'panelusuario', component: PanelusuarioComponent },
+  { path: 'panelusuario', component: PanelusuarioComponent }, // Formulario de registro de peticion
   { path: 'panelusuariobusq', component: PanelusuariobusqComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 

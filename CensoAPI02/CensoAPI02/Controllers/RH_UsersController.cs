@@ -116,7 +116,7 @@ namespace CensoAPI02.Controllers
                 uCreationUser = 1,
                 uCreationDate = DateTime.UtcNow,
                 uModificationDate = DateTime.UtcNow,
-                lModificationUser = 2,
+                uModificationUser = 2,
                 Themes = new() { theme1 },
             };
 
@@ -148,7 +148,7 @@ namespace CensoAPI02.Controllers
                 uCreationDate = DateTime.UtcNow,
                 uEmail = "Soledad Email",
                 uModificationDate = DateTime.UtcNow,
-                lModificationUser = 2,
+                uModificationUser = 2,
                 uRol = "hr",
                 uName = "Soledad",
                 uStatus = true,

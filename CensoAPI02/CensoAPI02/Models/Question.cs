@@ -15,16 +15,20 @@ namespace CENSO.Models
         public int      qId { get; set; } // Id de la question
 
         [MaxLength(70)]
+        [Required]
         public string   qName { get; set; } // Nombre de la question
 
+        [Required]
         public DateTime qCreationDate { get; set; } // Fecha de cración
 
+        [Required]
         public int     qCreationUser { get; set; } // Usuario creador
 
         public DateTime qModificationDate { get; set; } // Fecha de modificación
 
         public int     qModificationUser { get; set; } // Usuario que realizó la modificación
 
+        [Required]
         public bool     qStatus { get; set; }
 
         //Relationship one-2-many entities Request and Qestion

@@ -60,6 +60,8 @@ namespace CensoAPI02.Controllers
                 };
                 _context.Locations.Add(newLocation);
                 await _context.SaveChangesAsync();
+
+                Console.WriteLine(newLocation.lId);
                 return Ok(newLocation);
             }
             catch (Exception ex)

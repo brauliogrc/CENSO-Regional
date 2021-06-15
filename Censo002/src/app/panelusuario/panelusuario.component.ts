@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SquestionsService } from '../services/questions/squestions.service';
 import { SrequestService } from '../services/request/srequest.service';
-import { availableQues, saveDataLogin } from '../interfaces/interfaces';
+import { availableQues, saveDataLogin, newRequest } from '../interfaces/interfaces';
 import { SloginService } from '../services/login/slogin.service';
 
 @Component({
@@ -49,7 +49,7 @@ export class PanelusuarioComponent implements OnInit {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const req : any = { // asignar a una interface
+    const req : newRequest = {
       rEmployeeType: this.bodyRequest.get('rEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
       AreaId: this.bodyRequest.get('AreaId')?.value,

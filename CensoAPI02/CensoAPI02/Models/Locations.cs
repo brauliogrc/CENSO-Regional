@@ -15,16 +15,20 @@ namespace CENSO.Models
         public int      lId { get; set; }
 
         [MaxLength(50)]
+        [Required]
         public string   lName { get; set; }
 
+        [Required]
         public DateTime lCreationDate { get; set; }
 
+        [Required]
         public int      lCreationuser { get; set; }
 
         public DateTime lModificationDate { get; set; }
 
         public int      lModificationUser { get; set; }
 
+        [Required]
         public bool     lStatus { get; set; }
 
         //Relationship many-2-many entities Locations and Theme

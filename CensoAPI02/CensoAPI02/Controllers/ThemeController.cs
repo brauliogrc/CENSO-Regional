@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CensoAPI02.Models;
+using CensoAPI02.Intserfaces;
+using CensoAPI02.Models.UnionTables;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -28,23 +30,6 @@ namespace CensoAPI02.Controllers
             try
             {
                 // Consulta LINQ para obtener el listao de temas junto con la location a la que pertenece y el usurio de RH que teine epermisos sobre dicho theme
-                // var theme = await _context.Theme.ToListAsync();
-                /*var theme2 = await _context.Theme.Include(hru => hru.HR_Users).Include(l => l.Locations).ToListAsync();*/
-                // var listadP = await _context.Theme.Select(t => new {t.Theme_Name, t.Theme_Status, t.ThemeId, t.Locations }).Include(l => l.Locations).Select( l => new Locations() { l.LocationsId, l.})
-                // var dataTheme = await _context.Locations.Join(_context.HR_Users, dir => dir.HR_Users, hru => hru.HR_UserId, (dir, hru) => new { dir, hru}
-
-                /*var prueba1 = _context.LocationsThemes.Join(_context.Locations, lt => lt.LocationId, l => l.LocationsId, (lt, l) => new
-                {
-                    lt,
-                    l
-                }).Join(_context.Theme, lt => lt.lt.ThemeId, t => t.ThemeId, (lt, t) => new
-                {
-                    lt.l.LocationsId,
-                    lt.l.Location_Name,
-                    t.ThemeId,
-                    t.Theme_Name
-                }).ToListAsync();*/
-
                 var thems = from location in _context.Locations
                                    join lt in _context.LocationsThemes on location.lId equals lt.LocationId
                                    join theme in _context.Theme on lt.ThemeId equals theme.tId
@@ -90,8 +75,38 @@ namespace CensoAPI02.Controllers
 
         // POST api/<ThemeController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] AddTheme value)
         {
+            try
+            {
+                var newTheme = new Theme()
+                {
+                    tName = value.tName,
+                    tStatus = value.tStatus,
+                    tCreationDate = DateTime.Now,
+                    tCreationUser = 1
+                };
+                _context.Theme.Add(newTheme);
+                await _context.SaveChangesAsync();
+
+                var getThemeId = await _context.Theme
+                    .Where(t => t.tName == value.tName && t.tCreationDate == newTheme.tCreationDate)
+                    .Select(t => t.tId)
+                    .FirstOrDefaultAsync();
+
+                var newRelationship = new QuestionsTheme()
+                {
+                    ThemeId = getThemeId,
+                    QuestionId = value.QuestionId
+                };
+                _context.QuestionsThemes.Add(newRelationship);
+                await _context.SaveChangesAsync();
+
+                return Ok(newRelationship);
+            }catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // PUT api/<ThemeController>/5

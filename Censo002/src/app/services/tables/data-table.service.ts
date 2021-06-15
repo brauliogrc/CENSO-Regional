@@ -30,4 +30,9 @@ export class DataTableService {
   tableQuestions(): Observable<any>{
     return this._http.get( this.MyAppurl + this.MyApiUrl + 'TableQuestions' );
   }
+
+  // Llamamos al controlador de la API en la ruta TableAreas para obtener los datos necesarios para la tabla del areas.component
+  tableAreas(): Observable<any> {
+    return this._http.get(this.MyAppurl + this.MyApiUrl + 'TableAreas');
+  }
 }
