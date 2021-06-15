@@ -139,7 +139,6 @@
 
   body, html{
     height: 100%;
-    overflow: auto;
 }
 .BodyLogin{
     margin: 0;
@@ -212,6 +211,10 @@
 
 }
 
+@media screen {
+    
+}
+
 
 /*      Pagina Index         */
 .BodyIndexC{
@@ -251,6 +254,14 @@ background-image: url(img/LogoConti.png);
     background: none;
     border: 1px solid #000000;
     border-color: #e2ae3e;
+    color: white;
+
+}
+.btnIndexC:hover{
+    background: none;
+    border: 1px solid #000000;
+    border-color: #e2ae3e;
+    color: white;
 
 }
 .btnIndexC{
@@ -269,7 +280,7 @@ background-image: url(img/LogoConti.png);
     width: 90%;
     margin: 40px auto;
     padding-top: 40px;
-    background: #ffffffb0;
+    background: rgba(255, 255, 255, 0.904);
     border-radius: 1em;
     text-align: center;
     align-items: center;
@@ -299,7 +310,7 @@ background-image: url(img/LogoConti.png);
     width: 90%;
     margin: 40px auto;
     padding-top: 40px;
-    background: #ffffffb0;
+    background: rgba(255, 255, 255, 0.904);
     border-radius: 1em;
     display: flex;
     justify-content: space-between;
@@ -309,7 +320,6 @@ background-image: url(img/LogoConti.png);
 }
 .btnIndexOPC{
     border: 0;
-    margin-left: 50px;
     background: #e2ae3e ;
     border-radius: 0.5 ;
     cursor: pointer;
@@ -350,7 +360,7 @@ background-image: url(img/LogoConti.png);
 }
 
 .ContendorPageAngular1{
-    background: rgba(255, 255, 255, 0.76);
+    background: rgba(255, 255, 255, 0.959);
     border-radius: 3em;
     width: 50%;
     margin: 40px auto;
@@ -369,9 +379,14 @@ background-image: url(img/LogoConti.png);
 
     transition: 0.25s;
 }
+.btnIndexC1:hover{
+    background: #e2ae3e8e ;
+    
+
+}
 
 .Content-btn-folio{
-    background: rgba(255, 255, 255, 0.76);
+    background: rgba(255, 255, 255, 0.904);
     width: 50%;
     margin: 40px auto;
     padding: 15px;
@@ -382,12 +397,47 @@ background-image: url(img/LogoConti.png);
     color: #cc9d38;
 
 }
+.Content-btn-folio2{
+    width: 100%;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: 400;
+    color: #cc9d38;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.content-titulo{
+    background: rgba(255, 255, 255, 0.904);
+    width: 35%;
+    margin: 40px auto;
+    padding: 15px;
+    border-radius: 1em;
+    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+    font-size: 20px;
+    font-weight: 400;
+    color: #cc9d38;
+
+}
+.content-titulo1{
+    width: 30%;
+    margin: 40px auto;
+    padding: 15px;
+    border-radius: 1em;
+    font-size: 70px;
+    font-weight: 400;
+    color: white;
+    justify-content: center;
+
+}
+
 
 /*      FIN Pagina Index         */
 
 /*      FIN Pagina Buscar         */
 .ContendorPageBusqueda{
-    background: rgba(255, 255, 255, 0.76);
+    background: rgba(255, 255, 255, 0.904);
     width: 80%;
     margin: 40px auto;
     margin-top: -400px;
@@ -398,6 +448,7 @@ background-image: url(img/LogoConti.png);
     font-size: 20px;
     font-weight: 400;
     color: #cc9d38;
+    overflow-y: scroll;
 
 }
 
@@ -436,7 +487,7 @@ background-image: url(img/LogoConti.png);
 
 }
 .leftDash{
-    background: rgba(131, 131, 131, 0.671);
+    background: rgba(223, 223, 223, 0.822);
     width: 10%;
     height: 108%;
     margin-top: -33px;
@@ -473,11 +524,19 @@ background-image: url(img/LogoConti.png);
     height: 40px;
     border-radius: 5px;
     color: black;
+    
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 500;
     text-align: start;
     transition:  0.25s;
 
+}
+
+.hr1{
+    width: 60%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 .NomUsuario{
     width: 90%;
@@ -494,13 +553,41 @@ background-image: url(img/LogoConti.png);
     
 }
 .Contenido{
-    background: rgba(223, 223, 223, 0.466);
+    background: rgba(223, 223, 223, 0.822);
     margin: 30px auto;
     margin-top: -10px;
     border-radius: 1em;
     width: 85%;
-    height: 100%;
+    height: 104%;
+    overflow-y: scroll;
 }
 
+.contenido1{
+    background: none;
+    width: 85%;
+    margin: 40px auto;
+    margin-top: 80px;
+
+}
+
+.buscar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.form-search{
+    width: 100%;
+    display: flex;
+    justify-content:right;
+
+}
+.Search1{
+    width: 20%;
+    border-color: none;
+    border: 0;
+    border-radius: 10px;
+}
 
 /*      Dashboard        */
