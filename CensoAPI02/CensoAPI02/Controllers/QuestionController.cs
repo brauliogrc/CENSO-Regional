@@ -58,7 +58,7 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                var newQuestion = new Question()
+                var newQuestion = new Question() // AGREGAR CREATIONUSER
                 {
                     qName = value.qName,
                     qStatus = value.qStatus,

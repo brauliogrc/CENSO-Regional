@@ -12,26 +12,26 @@ namespace CENSO.Models
     public class Theme
     {
         [Key]
-        public int      tId { get; set; }
+        public int tId { get; set; }
 
         [MaxLength(50)]
         [Required]
-        public string   tName { get; set; }
+        public string tName { get; set; }
 
         [Required]
         public DateTime tCreationDate { get; set; }
 
         [MaxLength(50)]
         [Required]
-        public int      tCreationUser { get; set; }
+        public int tCreationUser { get; set; }
 
         public DateTime tModificationDate { get; set; }
 
         [MaxLength(50)]
-        public int      tModificationUser { get; set; }
+        public int tModificationUser { get; set; }
 
         [Required]
-        public bool     tStatus { get; set; }
+        public bool tStatus { get; set; }
 
         //Relationship many-2-many entities Locations and Theme
         //public int Theme_Location { get; set; } //Relacionada con la entidad Location
@@ -47,5 +47,11 @@ namespace CENSO.Models
         //public int Theme_Question { get; set; } //Relacionada con la entidad Question
         //public IList<Question_Theme> question_theme { get; set; }
         public List<Question> Questions { get; set; }
+
+        //Relationship one-2-many entities Request and Theme
+        public List<Request> Requests{ get; set; }
+
+        //Relationship one-2-many entities AnonRequest and Theme
+        public List<AnonRequest> AnonRequests { get; set; }
     }
 }

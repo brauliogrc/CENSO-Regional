@@ -47,9 +47,9 @@ namespace CensoAPI02.Controllers
                     arEmployeeType = newAnomReq.arEmployeeType,
                     arIssue = newAnomReq.arIssue,
                     arAttachement = newAnomReq.arAttachemen,
-                    arCreationDate = DateTime.UtcNow,
-                    // arModificationDate = DateTime.UtcNow,
+                    arCreationDate = DateTime.Now,
                     QuestionId = newAnomReq.QuestionId,
+                    ThemeId = newAnomReq.ThemeId
                 };
                 _context.AnonRequests.Add(newAnonRequest);
                 await _context.SaveChangesAsync();

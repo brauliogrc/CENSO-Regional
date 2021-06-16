@@ -79,7 +79,7 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                var newTheme = new Theme()
+                var newTheme = new Theme() // AGREGAR CREATIONUSER
                 {
                     tName = value.tName,
                     tStatus = value.tStatus,

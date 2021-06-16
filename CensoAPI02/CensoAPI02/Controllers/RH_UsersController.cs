@@ -60,14 +60,13 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                var newUser2 = new HRU()
+                var newUser2 = new HRU() // AGREGAR CREATIONuSER
                 {
                     uName = newUser.Name,
                     uEmail = newUser.Email,
                     uRol = newUser.Rol,
                     uStatus = newUser.Status,
-                    uCreationDate = DateTime.UtcNow,
-                    uModificationDate = DateTime.UtcNow,
+                    uCreationDate = DateTime.Now,
                     LocationId = newUser.LocationId
                 };
 

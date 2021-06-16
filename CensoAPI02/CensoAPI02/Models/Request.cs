@@ -49,5 +49,11 @@ namespace CENSO.Models
         public int AreaId { get; set; }
 
         public Area area { get; set; }
+
+        //Relationship one-2-many entities Request and Theme
+        [Required]
+        public int ThemeId { get; set; }
+
+        public Theme theme { get; set; }
     }
 }

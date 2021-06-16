@@ -51,7 +51,7 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                var newLocation = new Locations()
+                var newLocation = new Locations() // AGREGAR CREATIONUSER
                 {
                     lName = value.lName,
                     lStatus = value.lStatus,

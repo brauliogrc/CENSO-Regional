@@ -136,6 +136,18 @@ namespace CENSO.Models
                 .WithMany(area => area.anonRequest)
                 .HasForeignKey(areq => areq.AreaId);
 
+            // configuracions para relacón one-to-many Theme and Request
+            modelBuilder.Entity<Request>()
+                .HasOne<Theme>(r => r.theme)
+                .WithMany(th => th.Requests)
+                .HasForeignKey(r => r.ThemeId);
+
+            // configuracions para relacón one-to-many Theme and AnonRequest
+            modelBuilder.Entity<AnonRequest>()
+                .HasOne<Theme>(ar => ar.theme)
+                .WithMany(th => th.AnonRequests)
+                .HasForeignKey(ar => ar.ThemeId);
+
         }
     }
 }
