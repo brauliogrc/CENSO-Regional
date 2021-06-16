@@ -48,7 +48,8 @@ namespace CensoAPI02.Controllers
                     rIssue = value.rIssue,
                     rAttachement = value.rAttachement,
                     rCreationDate = DateTime.Now,
-                    AreaId = value.AreaId
+                    AreaId = value.AreaId,
+                    ThemeId = value.ThemeId
                 };
                 _context.Requests.Add(newRequest);
                 await _context.SaveChangesAsync();

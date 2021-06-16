@@ -44,6 +44,8 @@ namespace CensoAPI02.Intserfaces
 
         public int AreaId { get; set; }
 
+        public int ThemeId { get; set; }
+
         public string rIssue { get; set; }
 
         public string rAttachement { get; set; }
@@ -57,6 +59,8 @@ namespace CensoAPI02.Intserfaces
         public int QuestionId { get; set; }
 
         public int AreaId { get; set; }
+
+        public int ThemeId { get; set; }
 
         public string arIssue { get; set; }
 

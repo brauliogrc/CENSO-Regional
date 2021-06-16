@@ -12,7 +12,7 @@ export interface dataUsers{
     uName   :   string;
     uStatus :   string;
     uRol    :   string;
-    uEmal   :   string;
+    uEmail   :   string;
     lName   :   string;
 }
 
