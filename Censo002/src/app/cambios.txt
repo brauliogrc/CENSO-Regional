@@ -1,0 +1,14 @@
+Empiezo actualizacion: 16/06/21
+
+Version 3.5.1
+que onda braulio puse este archivo para que vallamos anotadon la version que llevamos y los cambion que hagamos
+lo que hice en esta version fue:
+-en panel de ususario agregue el campo de tema
+-en los demas archivos corregi el tema de la imagen que no se veia del logo de conti 
+-actualice el panelusuariobusq
+-paneladmin solo la imagen que no se veia la corregi
+-folioanonimoindex agregue el tema y area 
+-folioanonimo yo reo que
+-fvacio agregue la busqueda de folios que son de el usuario anonimo.
+
+Fin actualizacion.
