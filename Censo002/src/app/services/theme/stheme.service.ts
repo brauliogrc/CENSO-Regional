@@ -11,4 +11,11 @@ export class SthemeService {
 
   constructor( private _http:HttpClient) { }
   
+  addNewTheme(dataTheme : any) : Observable<any> {
+    return this._http.post(this.MyAppUrl + this.MyApiUrl, dataTheme);
+  }
+
+  getSpecificsThems(locationId : any) : Observable<any> {
+    return this._http.get(this.MyAppUrl + this.MyApiUrl + '/availableThemes/' + locationId);
+  }
 }

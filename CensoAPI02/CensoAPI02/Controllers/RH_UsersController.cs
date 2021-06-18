@@ -24,15 +24,14 @@ namespace CensoAPI02.Controllers
         }
         // GET: api/<RH_UsersController>
         [HttpGet]
-        public async Task<ActionResult> Get()
+        public string Get()
         {
-            try
+            return "Usuarios";
+            /*try
             {
-                //insertData();
-                // +++++ELIMINAR COMENATARIOS++++++++++
                 /* La funcion JOIN pordemos llamar a nuestras colecciones de datos, estableciendo campos de relación entre las colecciones de hr_users y locations
                  * es la forma de hacer un INNER JOIN linq
-                */
+                
                 var users = await _context.HRU.Join(_context.Locations, hru => hru.LocationId, location => location.lId, (user, location) => new
                 {
                     // Colocamos solo los datos que queremos que traiga nuestra consulta
@@ -42,6 +41,23 @@ namespace CensoAPI02.Controllers
 
                 return Ok(users);
             }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }*/
+        }
+
+        [HttpGet][Route("GetRoles")]
+        public async Task<ActionResult> GetRoles()
+        {
+            try
+            {
+                var query = await _context.Roles.Select(rol => new
+                {
+                    rol.rolId,
+                    rol.rolName
+                }).ToListAsync();
+                return Ok(query);
+            }catch( Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -62,11 +78,13 @@ namespace CensoAPI02.Controllers
             {
                 var newUser2 = new HRU() // AGREGAR CREATIONuSER
                 {
-                    uName = newUser.Name,
-                    uEmail = newUser.Email,
-                    uRol = newUser.Rol,
-                    uStatus = newUser.Status,
+                    uName = newUser.uName,
+                    uEmail = newUser.uEmail,
+                    RoleId = newUser.RolId,
+                    uStatus = newUser.uStatus,
                     uCreationDate = DateTime.Now,
+                    uCreationUser = 1,
+                    //uModificationDate = DateTime.Now,
                     LocationId = newUser.LocationId
                 };
 
@@ -91,7 +109,7 @@ namespace CensoAPI02.Controllers
         {
         }
 
-        private void insertData()
+        /*private void insertData()
         {
             _context.Database.EnsureDeleted();
             _context.Database.EnsureCreated();
@@ -190,6 +208,6 @@ namespace CensoAPI02.Controllers
 
             _context.AddRange(theme1, user1, location1, theme2, user2, location2, question1, question2);
             _context.SaveChanges();
-        }
+        }*/
     }
 }

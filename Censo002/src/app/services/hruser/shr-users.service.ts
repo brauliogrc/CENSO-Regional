@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { dataNewUser } from '../../interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +12,13 @@ export class ShrUsersService {
 
   constructor( private _http:HttpClient ) { }
 
+  getRoles(): Observable<any>{
+    return this._http.get(this.MyAppUrl + this.MyApiUrl + '/GetRoles');
+  }
   
+  addNewUser(dataUser : any) : Observable<any> {
+    // console.log('desde el service');
+    // console.log(dataUser);
+    return this._http.post(this.MyAppUrl + this.MyApiUrl, dataUser);
+  }
 }

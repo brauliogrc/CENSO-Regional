@@ -27,7 +27,7 @@ namespace CensoAPI02.Controllers
         {
             try
             {
-                var query = await _context.Locations.Select(l => new { l.lId, l.lName, l.lStatus }).ToListAsync();
+                var query = await _context.Locations.Select(l => new { l.lId, l.lName, l.lStatus }).Where(l => l.lStatus == true).ToListAsync();
                 return Ok(query);
             }catch(Exception ex)
             {
@@ -44,14 +44,25 @@ namespace CensoAPI02.Controllers
             {
                 var query = await _context.HRU.Join(_context.Locations, hru => hru.LocationId, location => location.lId, (user, location) => new
                 {
-                    user.uId,
+                    /*user.uId,
                     user.uName,
                     user.uEmail,
-                    user.uRol,
                     user.uStatus,
                     location.lName,
-                    location.lId
-                }).ToListAsync();
+                    location.lId*/
+                    user,
+                    location
+                }).Join(_context.Roles, hru => hru.user.RoleId, rol => rol.rolId, (user, rol) => new
+                {
+                    user.user.uId,
+                    user.user.uName,
+                    user.user.uEmail,
+                    user.user.uStatus,
+                    user.location.lName,
+                    user.location.lId,
+                    rol.rolId,
+                    rol.rolName
+                }).Where(hru => hru.uStatus == true).ToListAsync();
                 return Ok(query);
             }catch(Exception ex)
             {
@@ -71,6 +82,7 @@ namespace CensoAPI02.Controllers
                             join theme in _context.Theme on lt.ThemeId equals theme.tId
                             join hrth in _context.HRUsersThemes on theme.tId equals hrth.ThemeId
                             join user in _context.HRU on hrth.HRUId equals user.uId
+                            where theme.tStatus == true
                             select new
                             {
                                 location.lId,
@@ -106,7 +118,7 @@ namespace CensoAPI02.Controllers
                     qth.q.qStatus,
                     th.tId,
                     th.tName
-                }).ToListAsync();
+                }).Where(q => q.qStatus == true).ToListAsync();
                 return Ok(query);
             }catch(Exception ex)
             {

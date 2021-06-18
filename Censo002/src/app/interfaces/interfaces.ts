@@ -9,11 +9,12 @@ export interface dataLocations{
 export interface dataUsers{
     uId     :   number;
     lId     :   number;
+    rolId   :   number;
     uName   :   string;
     uStatus :   string;
-    uRol    :   string;
-    uEmail   :   string;
+    uEmail  :   string;
     lName   :   string;
+    rolName    :   string;
 }
 
 export interface dataTheme{
@@ -40,12 +41,26 @@ export interface dataArea{
     aName   :   string;
     lName   :   string;
 }
-/************** Interfaces para las tablas */
 
 /************** Interfaes para registro de Request */
 export interface availableQues{
     qId     :   number;
     qName   :   string;
+}
+
+export interface availableLocations{
+    lId     :   number;
+    lName   :   string;
+}
+
+export interface availableRoles{
+    rolId   :   number;
+    rolName :   string;
+}
+
+export interface availableTheme {
+    tId     :   number;
+    tName   :   string;
 }
 
 /************** Interfaes para datos devueltos por el Login */
@@ -62,7 +77,7 @@ export interface dataLogin{
     email   :   string;
 }
 
-/************** Interfaes para datos de registro de Request */
+/************** Interfaes para datos de nuevos registros */
 export interface newRequest{ // Agregar el theme
     AreaId  :   number;
     rIssue  :   string;
@@ -77,4 +92,29 @@ export interface newAnonRequest{ // Agrega el theme
     QuestionId  :   number;
     arEmployeeType  :   number;
     arAttachemen    :   string;
+}
+
+export interface dataNewUser{
+    uName   :   string;
+    uEmail  :   string;
+    RolId   :   number;
+    uStatus :   number;
+    LocationId  :   number;
+}
+
+export interface dataNewLocation{
+    lName   :   string;
+    lStatus :   boolean;
+}
+
+export interface dataNewTheme{
+    tName   :   string;
+    tStatus :   boolean;
+    LocationId  :   number;
+}
+
+export interface dataNewQuestion {
+    qName   :   string;
+    qStatus :   boolean;
+    ThemeId :   number;
 }

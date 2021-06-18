@@ -1,36 +1,39 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\uib97447\\Desktop\\pruebas\\CENSO-Regional\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj": {}
+    "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj": {}
   },
   "projects": {
-    "C:\\Users\\uib97447\\Desktop\\pruebas\\CENSO-Regional\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj": {
+    "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\uib97447\\Desktop\\pruebas\\CENSO-Regional\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
+        "projectUniqueName": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
         "projectName": "CensoAPI02",
-        "projectPath": "C:\\Users\\uib97447\\Desktop\\pruebas\\CENSO-Regional\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
-        "packagesPath": "C:\\Users\\uib97447\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\uib97447\\Desktop\\pruebas\\CENSO-Regional\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\obj\\",
+        "projectPath": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
+        "packagesPath": "C:\\Users\\uib44927\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\uib97447\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\uib44927\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net50"
+          "net5.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net50": {
+          "net5.0": {
+            "targetAlias": "net5.0",
             "projectReferences": {}
           }
         },
@@ -41,7 +44,8 @@
         }
       },
       "frameworks": {
-        "net50": {
+        "net5.0": {
+          "targetAlias": "net5.0",
           "dependencies": {
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
@@ -86,12 +90,25 @@
               "version": "[6.1.4, )"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "win7-x86": {
-          "#import": []
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

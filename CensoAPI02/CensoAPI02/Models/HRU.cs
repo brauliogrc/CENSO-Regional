@@ -21,10 +21,6 @@ namespace CensoAPI02.Models
         [MaxLength(80)]
         [Required]
         public string uEmail { get; set; } // Eamil del usuario
-        
-        [MaxLength(6)]
-        [Required]
-        public string uRol { get; set; } // Rol -> pendientes a definir
 
         [Required]
         public DateTime uCreationDate { get; set; } // Fecha de cracion del usuario
@@ -46,5 +42,13 @@ namespace CensoAPI02.Models
         [Required]
         public int LocationId { get; set; }
         public Locations locations { get; set; }
+
+        // Relationship one-to-many wuith Roles
+        [Required]
+        public int RoleId { get; set; }
+
+        public Roles roles { get; set; }
+
+
     }
 }

@@ -5,45 +5,52 @@
     <button class="btnIndexC" type="submit">Añadir Usuario</button>
   </div>
   <hr>
+
   <!-- Inicio del Form -->
   <form [formGroup]="newUser" (ngSubmit)="addNewUser()" class="row g-3">
     <h1>Añadir Usuario</h1>
+    <!-- Sujeto a eliminación -->
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">ID</label>
       <input type="email" class="form-control" id="inputEmail4">
     </div>
+    <!--  -->
+
+    <!-- Name -->
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Nombre</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <input formControlName="uName" type="email" class="form-control" id="inputEmail4">
     </div>
+    <!-- Email -->
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Email</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <input formControlName="uEmail" type="email" class="form-control" id="inputEmail4">
     </div>
+    <!-- Rol -->
     <div class="col-md-6">
       <label for="inputState" class="form-label">Rol</label>
-      <select id="inputState" class="form-select">
-        <option selected>Activo</option>
-        <option>Inactivo</option>
+      <select formControlName="RolId" id="inputState" class="form-select">
+        <option *ngFor="let rol of Roles" value="{{rol.rolId}}">{{rol.rolName}}</option>
       </select>
     </div>
+    <!-- Estatus -->
     <div class="col-md-4">
       <label for="inputState" class="form-label">Estatus</label>
-      <select id="inputState" class="form-select">
-        <option selected>Activo</option>
-        <option>Inactivo</option>
+      <select formControlName="uStatus" id="inputState" class="form-select">
+        <option value=true >Activo</option>
+        <option value=false >Inactivo</option>
       </select>
     </div>
+    <!-- Location -->
     <div class="col-md-4">
-      <label for="inputState" class="form-label">Ubicación</label>
-      <select id="inputState" class="form-select">
-        <option selected>Tijera</option>
-        <option>tijera</option>
+      <label for="inputState" class="form-label">Localidad</label>
+      <select formControlName="LocationId" id="inputState" class="form-select">
+        <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
       </select>
     </div>
-    
+    <!-- Bonton registro -->
     <div class="col-12">
-      <button class="btnIndexC" type="submit">Añadir</button>
+      <button [disabled]="newUser.invalid" class="btnIndexC" type="submit">Añadir</button>
     </div>
     <!-- Fin del Form -->
   </form>
@@ -71,7 +78,7 @@
                 <td>{{ user.uId }}</td>
                 <td>{{ user.uName }}</td>
                 <td>{{ user.uEmail }}</td>
-                <td>{{ user.uRol }}</td>
+                <td>{{ user.rolName }}</td>
                 <td>{{ user.uStatus }}</td>
                 <td>{{ user.lName }}</td>
                   <td>

@@ -60,7 +60,6 @@ export class FolioanonimoindexComponent implements OnInit {
       console.log('Petición registrada con exito. N folio: ' + data.arId);
     }, error => {
       console.error(error);
-      
     })
   }
 

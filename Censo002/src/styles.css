@@ -592,3 +592,5 @@ background-image: url(img/LogoConti.png);
 }
 
 /*      Dashboard        */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

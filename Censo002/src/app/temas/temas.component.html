@@ -5,34 +5,37 @@
   </div>
   
   <hr>
-  <form class="row g-3">
+  <!-- Inicio Form -->
+  <form [formGroup]="newTheme" (ngSubmit)="addNewTheme()" class="row g-3">
     <h1>Añadir tema</h1>
-    
+    <!-- Name -->
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Nombre del tema</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <input formControlName="tName" type="email" class="form-control" id="inputEmail4">
     </div>
+    <!-- Location -->
     <div class="col-md-6">
       <label for="inputState" class="form-label">Ubicación</label>
-      <select id="inputState" class="form-select">
-        <option selected>Activo</option>
-        <option>Inactivo</option>
+      <select formControlName="LocationId" id="inputState" class="form-select">
+        <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
       </select>
     </div>
+    <!-- Estatus -->
     <div class="col-md-4">
       <label for="inputState" class="form-label">Estatus</label>
-      <select id="inputState" class="form-select">
-        <option selected>Activo</option>
-        <option>Inactivo</option>
+      <select formControlName="tStatus" id="inputState" class="form-select">
+        <option value=true selected>Activo</option>
+        <option value=false>Inactivo</option>
       </select>
     </div>
    
   
-    
+    <!-- Boton registro -->
     <div class="col-12">
-      <button class="btnIndexC" type="submit">Añadir</button>
+      <button [disabled]="newTheme.invalid" class="btnIndexC" type="submit">Añadir</button>
     </div>
   </form>
+  <!-- Fin Form -->
   <hr>
       <form class="form-search">
         <input class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">

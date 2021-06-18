@@ -83,7 +83,7 @@ namespace CensoAPI02.Controllers
                 _context.QuestionsThemes.Add(newRelationship);
                 await _context.SaveChangesAsync();
 
-                return Ok(newRelationship);
+                return Ok(newQuestion);
             }catch(Exception ex)
             {
                 return BadRequest(ex.Message);

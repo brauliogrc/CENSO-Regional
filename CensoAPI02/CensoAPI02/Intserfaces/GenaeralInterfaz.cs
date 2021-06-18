@@ -13,13 +13,13 @@ namespace CensoAPI02.Intserfaces
     // Registrar un nuevo usuario
     public class AddUserInterface
     {
-        public string Name { get; set; }
+        public string uName { get; set; }
 
-        public string Email { get; set; }
+        public string uEmail { get; set; }
 
-        public string Rol { get; set; }
+        public int RolId { get; set; }
 
-        public bool Status { get; set; }
+        public bool uStatus { get; set; } // Este valor se ingresa como numero 0=false y 1=true
 
         public int LocationId { get; set; }
     }
@@ -92,7 +92,7 @@ namespace CensoAPI02.Intserfaces
 
         public bool tStatus { get; set; }
 
-        public int QuestionId { get; set; }
+        public int LocationId { get; set; }
     }
 
     // Registar una nueva Area

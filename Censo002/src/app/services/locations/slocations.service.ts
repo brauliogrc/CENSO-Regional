@@ -11,5 +11,9 @@ export class SlocationsService {
   
   constructor( private _http:HttpClient) { }
 
-  
+  addNewLocation(dataLocation : any) : Observable<any> {
+    console.log('desde el service');
+    console.log(dataLocation);
+    return this._http.post(this.MyAppUrl + this.MyApiUrl, dataLocation);
+  }
 }

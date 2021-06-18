@@ -5,26 +5,29 @@
   </div>
   
   <hr>
-  <form class="row g-3">
+  
+  <!-- Inifio del Form -->
+  <form [formGroup]="newLocation" (ngSubmit)="addNewLocation()" class="row g-3">
     <h1>Añadir Ubicación</h1>
     
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Nombre</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <input formControlName="lName" type="email" class="form-control" id="inputEmail4">
     </div>
     <div class="col-md-6">
       <label for="inputState" class="form-label">Estatus</label>
-      <select id="inputState" class="form-select">
-        <option selected>Activo</option>
-        <option>Inactivo</option>
+      <select formControlName="lStatus" id="inputState" class="form-select">
+        <option value=true >Activo</option>
+        <option value=false >Inactivo</option>
       </select>
     </div>
     
     
     <div class="col-12">
-      <button class="btnIndexC" type="submit">Añadir</button>
+      <button [disabled]="newLocation.invalid" class="btnIndexC" type="submit">Añadir</button>
     </div>
   </form>
+  <!-- Fin del Form -->
     <hr>
     
       <form class="form-search">

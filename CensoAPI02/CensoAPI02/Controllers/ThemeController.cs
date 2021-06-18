@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using CensoAPI02.Models;
 using CensoAPI02.Intserfaces;
 using CensoAPI02.Models.UnionTables;
+using CensoAPI02.UnionTables;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -66,6 +67,29 @@ namespace CensoAPI02.Controllers
             }
         }
 
+        [HttpGet][Route("availableThemes/{id}")]
+        public async Task<ActionResult> GetAvailableThemes(int id)
+        {
+            try
+            {
+                var query = await _context.Theme.Join(_context.LocationsThemes, th => th.tId, lt => lt.ThemeId, (th, lt) => new
+                {
+                    th,
+                    lt
+                }).Join(_context.Locations, lt => lt.lt.LocationId, l => l.lId, (lt, l) => new
+                {
+                    lt.th.tName,
+                    lt.th.tId,
+                    lt.th.tStatus,
+                    l.lId
+                }).Where(condition => condition.lId == id && condition.tStatus == true).ToListAsync();
+                return Ok(query);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         // GET api/<ThemeController>/5
         [HttpGet("{id}")]
         public string Get(int id)
@@ -94,15 +118,15 @@ namespace CensoAPI02.Controllers
                     .Select(t => t.tId)
                     .FirstOrDefaultAsync();
 
-                var newRelationship = new QuestionsTheme()
+                var newRelationship = new LocationsTheme()
                 {
                     ThemeId = getThemeId,
-                    QuestionId = value.QuestionId
+                    LocationId = value.LocationId
                 };
-                _context.QuestionsThemes.Add(newRelationship);
+                _context.LocationsThemes.Add(newRelationship);
                 await _context.SaveChangesAsync();
 
-                return Ok(newRelationship);
+                return Ok(newTheme);
             }catch (Exception ex)
             {
                 return BadRequest(ex.Message);

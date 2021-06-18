@@ -15,4 +15,8 @@ export class SquestionsService {
   getQuestions() : Observable<any>{
     return this._http.get( this.MyAppUrl + this.MyApiUrl );
   }
+
+  addNewQuestion(dataQuestion : any) : Observable<any> {
+    return this._http.post(this.MyAppUrl + this.MyApiUrl, dataQuestion);
+  }
 }

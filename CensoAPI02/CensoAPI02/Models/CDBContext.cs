@@ -27,6 +27,7 @@ namespace CENSO.Models
         public DbSet<QuestionsTheme> QuestionsThemes { get; set; }
         public DbSet<AnonRequest> AnonRequests { get; set; }
         public DbSet<Area> Areas { get; set; }
+        public DbSet<Roles> Roles { get; set; }
 
         protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder)
         {
@@ -147,6 +148,12 @@ namespace CENSO.Models
                 .HasOne<Theme>(ar => ar.theme)
                 .WithMany(th => th.AnonRequests)
                 .HasForeignKey(ar => ar.ThemeId);
+
+            // configuracions para relacón one-to-many HRU and Roles
+            modelBuilder.Entity<HRU>()
+                .HasOne<Roles>(hru => hru.roles)
+                .WithMany(r => r.hru)
+                .HasForeignKey(hru => hru.RoleId);
 
         }
     }
