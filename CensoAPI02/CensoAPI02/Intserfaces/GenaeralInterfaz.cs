@@ -17,6 +17,8 @@ namespace CensoAPI02.Intserfaces
 
         public string Email { get; set; }
 
+        public int EmployeeNumber { get; set; }
+
         public string Rol { get; set; }
 
         public bool Status { get; set; }

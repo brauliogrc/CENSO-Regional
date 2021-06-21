@@ -21,7 +21,10 @@ namespace CensoAPI02.Models
         [MaxLength(80)]
         [Required]
         public string uEmail { get; set; } // Eamil del usuario
-        
+
+        [Required]
+        public int uEmployeeNumber { get; set; }
+
         [MaxLength(6)]
         [Required]
         public string uRol { get; set; } // Rol -> pendientes a definir
