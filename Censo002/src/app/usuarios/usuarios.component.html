@@ -11,8 +11,8 @@
     <h1>Añadir Usuario</h1>
     <!-- Sujeto a eliminación -->
     <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">ID</label>
-      <input type="email" class="form-control" id="inputEmail4">
+      <label for="inputEmail4" class="form-label">Numero de empleado</label>
+      <input formControlName="EmployeeNumber" type="email" class="form-control" id="inputEmail4">
     </div>
     <!--  -->
 
@@ -82,7 +82,7 @@
                 <td>{{ user.uStatus }}</td>
                 <td>{{ user.lName }}</td>
                   <td>
-                      <button class="btn btn-danger">Eliminar</button>
+                      <button (click)="deleteUser(user.lId)" class="btn btn-danger">Eliminar</button>
                   </td>
               </tr>
           </tbody>

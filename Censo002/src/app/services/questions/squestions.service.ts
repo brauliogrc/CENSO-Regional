@@ -19,4 +19,8 @@ export class SquestionsService {
   addNewQuestion(dataQuestion : any) : Observable<any> {
     return this._http.post(this.MyAppUrl + this.MyApiUrl, dataQuestion);
   }
+
+  deleteQuestion(id : number) : Observable<any> {
+    return this._http.delete(this.MyAppUrl + this.MyApiUrl + '/' + id);
+  }
 }

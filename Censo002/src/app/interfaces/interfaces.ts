@@ -19,12 +19,10 @@ export interface dataUsers{
 
 export interface dataTheme{
    lId  :   number;
-   uId  :   number
    tId  :   number;
    lName    :   string;
    tName    :   string;
    tStatus  :   string;
-   uName    :   string;
 }
 
 export interface dataQuestion{
@@ -100,6 +98,7 @@ export interface dataNewUser{
     RolId   :   number;
     uStatus :   number;
     LocationId  :   number;
+    EmployeeNumber  :   number;
 }
 
 export interface dataNewLocation{

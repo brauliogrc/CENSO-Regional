@@ -54,4 +54,14 @@ export class LocalidadesComponent implements OnInit {
       console.error(error);
     })
   }
+
+  deleteLocation(id : number){
+    this._locationService.deleteLocation(id).subscribe( data => {
+      console.log('Localidad eliminada');
+      alert(`Localidad "${data.lName}" eliminada`);
+      this.getAllLocations();
+    }, error => {
+      console.error(error);
+    })
+  }
 }

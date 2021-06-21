@@ -50,7 +50,7 @@
                       <td>{{ location.lName }}</td>
                       <td>{{ location.lStatus }}</td>
               <td>
-                  <button class="btn btn-danger">Eliminar</button>
+                  <button (click)="deleteLocation(location.lId)" class="btn btn-danger">Eliminar</button>
               </td>
           </tr>
       </tbody>

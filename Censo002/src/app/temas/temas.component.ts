@@ -64,4 +64,12 @@ export class TemasComponent implements OnInit {
       console.error(error);
     })
   }
+
+  deleteTheme(id : number){
+    this._themeService.deleteTheme(id).subscribe( data => {
+      console.log('Tema eliminado');
+      alert(`Tema "${data.tName}" eliminado`);
+      this.getAllTheme();
+    })
+  }
 }

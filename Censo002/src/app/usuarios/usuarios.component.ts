@@ -27,7 +27,8 @@ export class UsuariosComponent implements OnInit {
     uEmail: ['', [Validators.required, Validators.maxLength(80)]],
     RolId: ['', [Validators.required]],
     uStatus: ['', [Validators.required]],
-    LocationId: ['', [Validators.required]]
+    LocationId: ['', [Validators.required]],
+    EmployeeNumber: ['', [Validators.required]]
   });
 
   constructor(  private _service:DataTableService,
@@ -75,7 +76,8 @@ export class UsuariosComponent implements OnInit {
       uEmail: this.newUser.get('uEmail')?.value,
       RolId: this.newUser.get('RolId')?.value,
       uStatus: this.newUser.get('uStatus')?.value,
-      LocationId: this.newUser.get('LocationId')?.value
+      LocationId: this.newUser.get('LocationId')?.value,
+      EmployeeNumber: this.newUser.get('EmployeeNumber')?.value
     }
     console.log(dataNewUser);
     
@@ -83,10 +85,20 @@ export class UsuariosComponent implements OnInit {
     this._userSerice.addNewUser(dataNewUser).subscribe(data => {
       this.newUser.reset();
       console.log('Usuario registrados con el Id: ' + data.uId);
-      alert(`Se ha registrado a ${data.uName} con el id ${data.uId}.`);
+      alert(`Se ha registrado a "${data.uName}" con el id ${data.uId}.`);
       this.getAllUsers();
     }, error => {
       console.error(error);
+    })
+  }
+
+  deleteUser(id : number){
+    this._userSerice.deleteUser(id).subscribe( data => {
+      console.log('Usuario eliminado');
+      alert(`Usuario "${data.uName}" eliminado`);
+      this.getAllUsers();
+    }, error => {
+      console.error(error);      
     })
   }
 }

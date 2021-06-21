@@ -16,4 +16,9 @@ export class SlocationsService {
     console.log(dataLocation);
     return this._http.post(this.MyAppUrl + this.MyApiUrl, dataLocation);
   }
+
+  deleteLocation(id : number) : Observable<any> {
+    console.log('Se elimnara la localidad con el id ' + id);
+    return this._http.delete( this.MyAppUrl + this.MyApiUrl + '/' + id);
+  }
 }

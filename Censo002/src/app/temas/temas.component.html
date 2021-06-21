@@ -47,8 +47,7 @@
           <tr>
               <th>ID</th>
               <th>Nombre</th>
-              <th>Ubicación</th>
-              <th>Usuario</th>
+              <th>Localidad</th>
               <th>Estatus</th>
               <th>Acciones</th>
           </tr>
@@ -58,10 +57,9 @@
             <td>{{ th.tId }}</td>
                       <td>{{ th.tName }}</td>
                       <td>{{ th.lName }}</td>
-                      <td>{{ th.uName }}</td>
                       <td>{{ th.tStatus }}</td>
               <td>
-                  <button class="btn btn-danger">Eliminar</button>
+                  <button (click)="deleteTheme(th.tId)" class="btn btn-danger">Eliminar</button>
               </td>
           </tr>
       </tbody>

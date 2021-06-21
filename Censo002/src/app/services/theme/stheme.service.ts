@@ -18,4 +18,8 @@ export class SthemeService {
   getSpecificsThems(locationId : any) : Observable<any> {
     return this._http.get(this.MyAppUrl + this.MyApiUrl + '/availableThemes/' + locationId);
   }
+
+  deleteTheme(id : number) : Observable<any>{
+    return this._http.delete( this.MyAppUrl + this.MyApiUrl + '/' + id);
+  }
 }

@@ -21,4 +21,8 @@ export class ShrUsersService {
     // console.log(dataUser);
     return this._http.post(this.MyAppUrl + this.MyApiUrl, dataUser);
   }
+
+  deleteUser(id : number) : Observable<any> {
+    return this._http.delete( this.MyAppUrl + this.MyApiUrl + '/' + id);
+  }
 }

@@ -66,7 +66,7 @@
                       <td>{{ question.tName }}</td>
                       <td>{{ question.qStatus }}</td>
               <td>
-                  <button class="btn btn-danger">Eliminar</button>
+                  <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Eliminar</button>
               </td>
           </tr>
       </tbody>

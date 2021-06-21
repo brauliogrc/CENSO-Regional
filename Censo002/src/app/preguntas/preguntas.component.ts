@@ -79,4 +79,14 @@ export class PreguntasComponent implements OnInit {
       console.error(error);
     })
   }
+
+  deleteQuestion(id : number){
+    this._questionService.deleteQuestion(id).subscribe(data => {
+      console.log('Pregunta eliminada');
+      alert(`Pregunta "${data.qName}" eliminada`);
+      this.getAllQuestiosn();
+    }, error =>{
+      console.error(error);
+    })
+  }
 }
