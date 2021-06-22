@@ -19,6 +19,8 @@ namespace CensoAPI02.Intserfaces
 
         public int RolId { get; set; }
 
+        public int EmployeeNumber { get; set; }
+
         public bool uStatus { get; set; } // Este valor se ingresa como numero 0=false y 1=true
 
         public int LocationId { get; set; }

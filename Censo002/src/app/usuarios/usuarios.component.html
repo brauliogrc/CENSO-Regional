@@ -57,8 +57,8 @@
   <hr>
     
       <form class="form-search">
-        <input class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">
-        <button class="btnIndexC" type="submit">Buscar</button>
+        <input #userId class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">
+        <button (click)="search(userId.value)" class="btnIndexC" type="submit">Buscar</button>
       </form>
       <hr>
       <table class="table table-dark table-sm">

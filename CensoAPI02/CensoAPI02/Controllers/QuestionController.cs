@@ -98,8 +98,25 @@ namespace CensoAPI02.Controllers
 
         // DELETE api/<QuestionController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var query = await _context.Questions.FindAsync(id);
+
+                if(query == null)
+                {
+                    return NotFound();
+                }
+                query.qStatus = false;
+                _context.Questions.Update(query);
+                await _context.SaveChangesAsync();
+
+                return Ok(query);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

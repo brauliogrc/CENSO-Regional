@@ -14,6 +14,9 @@ export class LocalidadesComponent implements OnInit {
   // Array que contiene la informacion de las localidades disponibles para ser mostradas en la tabla
   locations : dataLocations[] = [];
 
+  // Toma los valores de la localidad buscada por medio del id
+  location : any;
+
   newLocation = this._fb.group({
     lName: ['', [Validators.required, Validators.maxLength(50)]],
     lStatus: ['', [Validators.required]]
@@ -55,6 +58,7 @@ export class LocalidadesComponent implements OnInit {
     })
   }
 
+
   deleteLocation(id : number){
     this._locationService.deleteLocation(id).subscribe( data => {
       console.log('Localidad eliminada');
@@ -62,6 +66,19 @@ export class LocalidadesComponent implements OnInit {
       this.getAllLocations();
     }, error => {
       console.error(error);
+    })
+  }
+
+  // Busca una localidad con base al id dado
+  search(idLocation : any){
+    this._locationService.getSpecificLocation(idLocation).subscribe(data => {
+      this.location = data;
+      this.locations = [];
+
+      console.log(this.location);
+      
+    }, error => {
+      alert(error.error.message);
     })
   }
 }

@@ -23,6 +23,9 @@ namespace CensoAPI02.Models
         public string uEmail { get; set; } // Eamil del usuario
 
         [Required]
+        public int uEmployeeNumber { get; set; }
+
+        [Required]
         public DateTime uCreationDate { get; set; } // Fecha de cracion del usuario
 
         [Required]

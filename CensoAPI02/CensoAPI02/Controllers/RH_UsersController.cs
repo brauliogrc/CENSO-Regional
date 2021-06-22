@@ -65,9 +65,36 @@ namespace CensoAPI02.Controllers
 
         // GET api/<RH_UsersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            return "value";
+            try
+            {
+                var query = await _context.HRU.Join(_context.Locations, hru => hru.LocationId, location => location.lId, (user, location) => new
+                {
+                    /*user.uId,
+                    user.uName,
+                    user.uEmail,
+                    user.uStatus,
+                    location.lName,
+                    location.lId*/
+                    user,
+                    location
+                }).Join(_context.Roles, hru => hru.user.RoleId, rol => rol.rolId, (user, rol) => new
+                {
+                    user.user.uId,
+                    user.user.uName,
+                    user.user.uEmail,
+                    user.user.uStatus,
+                    user.location.lName,
+                    user.location.lId,
+                    rol.rolId,
+                    rol.rolName
+                }).Where(hru => hru.uStatus == true && hru.lId == id).ToListAsync();
+                return Ok(query);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST api/<RH_UsersController>
@@ -84,6 +111,7 @@ namespace CensoAPI02.Controllers
                     uStatus = newUser.uStatus,
                     uCreationDate = DateTime.Now,
                     uCreationUser = 1,
+                    uEmployeeNumber = newUser.EmployeeNumber,
                     //uModificationDate = DateTime.Now,
                     LocationId = newUser.LocationId
                 };
@@ -105,8 +133,25 @@ namespace CensoAPI02.Controllers
 
         // DELETE api/<RH_UsersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var query = await _context.HRU.FindAsync(id);
+                if(query == null)
+                {
+                    return NotFound();
+                }
+
+                query.uStatus = false;
+                _context.HRU.Update(query);
+                await _context.SaveChangesAsync();
+
+                return Ok(query);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         /*private void insertData()

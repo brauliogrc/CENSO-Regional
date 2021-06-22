@@ -80,8 +80,6 @@ namespace CensoAPI02.Controllers
                 var query = from location in _context.Locations
                             join lt in _context.LocationsThemes on location.lId equals lt.LocationId
                             join theme in _context.Theme on lt.ThemeId equals theme.tId
-                            join hrth in _context.HRUsersThemes on theme.tId equals hrth.ThemeId
-                            join user in _context.HRU on hrth.HRUId equals user.uId
                             where theme.tStatus == true
                             select new
                             {
@@ -89,9 +87,7 @@ namespace CensoAPI02.Controllers
                                 location.lName,
                                 theme.tId,
                                 theme.tName,
-                                theme.tStatus,
-                                user.uName,
-                                user.uId
+                                theme.tStatus
                             };
                 return Ok(query);
             }catch(Exception ex)

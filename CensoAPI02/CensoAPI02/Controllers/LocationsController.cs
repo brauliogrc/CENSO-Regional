@@ -40,9 +40,20 @@ namespace CensoAPI02.Controllers
 
         // GET api/<LocationsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            return "value";
+            try
+            {
+                var query = await _context.Locations.Select(l => new { l.lId, l.lName, l.lStatus }).Where(l => l.lId == id && l.lStatus == true).FirstOrDefaultAsync();
+                if(query == null)
+                {
+                    return NotFound(new { message = "La localidad no existe en la base de datos" });
+                }
+                return Ok(query);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST api/<LocationsController>
@@ -78,8 +89,25 @@ namespace CensoAPI02.Controllers
 
         // DELETE api/<LocationsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var query = await _context.Locations.FindAsync(id);
+                if(query == null)
+                {
+                    return NotFound();
+                }
+
+                query.lStatus = false;
+                _context.Locations.Update(query);
+                await _context.SaveChangesAsync();
+
+                return Ok(query);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

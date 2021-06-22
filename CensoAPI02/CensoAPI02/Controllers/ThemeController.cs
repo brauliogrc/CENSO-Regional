@@ -141,8 +141,26 @@ namespace CensoAPI02.Controllers
 
         // DELETE api/<ThemeController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                var query = await _context.Theme.FindAsync(id);
+                if(query == null)
+                {
+                    return BadRequest();
+                }
+
+                query.tStatus = false;
+
+                _context.Theme.Update(query);
+                await _context.SaveChangesAsync();
+
+                return Ok(query);
+            }catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

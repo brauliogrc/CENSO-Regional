@@ -13,6 +13,8 @@ export class UsuariosComponent implements OnInit {
   // Array que contendra los datos de los usuarios de la base de datos para mostrar en la tabla
   Users : dataUsers [] = [];
 
+  user : any;
+
   // Array que contendra los datos de las locations de la base de datos para mostrar en la lista desplegable
   Locations : availableLocations [] = [];
 
@@ -100,5 +102,9 @@ export class UsuariosComponent implements OnInit {
     }, error => {
       console.error(error);      
     })
+  }
+
+  search(idUser : any){
+
   }
 }
