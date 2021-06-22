@@ -17,6 +17,8 @@ export class PreguntasComponent implements OnInit {
   // Array que contiene loa datos de las preguntas para ser mostrados en la tabla
   questions : dataQuestion [] = [];
 
+  question : any;
+
   // Arrar que contiene las locations disponibles para mostrar en la lista desplegable
   Locations : availableLocations [] = [];
   
@@ -87,6 +89,16 @@ export class PreguntasComponent implements OnInit {
       this.getAllQuestiosn();
     }, error =>{
       console.error(error);
+    })
+  }
+
+  search(idQuestion : any){
+    this._questionService.getSpecificQuestion(idQuestion).subscribe( data => {
+      this.question = data;
+      this.questions = [];
+      console.log(this.question);
+    }, error => {
+      alert(error.error.message);
     })
   }
 }

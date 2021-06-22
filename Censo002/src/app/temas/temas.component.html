@@ -28,7 +28,13 @@
         <option value=false>Inactivo</option>
       </select>
     </div>
-   
+    <!-- <div class="col-md-4">
+      <label for="inputState" class="form-label">Preguntas</label>
+      <select id="inputState" class="form-select">
+        <option selected>pregunta 1</option>
+        <option>pregunta 2</option>
+      </select>
+    </div> -->
   
     <!-- Boton registro -->
     <div class="col-12">
@@ -38,8 +44,8 @@
   <!-- Fin Form -->
   <hr>
       <form class="form-search">
-        <input class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">
-        <button class="btnIndexC" type="submit">Buscar</button>
+        <input #idTheme class="Search1" type="number" placeholder="Buscar" aria-label="Search">
+        <button (click)="search(idTheme.value)" class="btnIndexC" type="submit">Buscar</button>
       </form>
       <hr>
       <table class="table table-dark table-sm">
@@ -53,15 +59,29 @@
           </tr>
       </thead>
       <tbody>
+
+        <ng-container *ngIf="!th; else elseTemplate">
           <tr *ngFor="let th of theme">
             <td>{{ th.tId }}</td>
-                      <td>{{ th.tName }}</td>
-                      <td>{{ th.lName }}</td>
-                      <td>{{ th.tStatus }}</td>
+            <td>{{ th.tName }}</td>
+            <td>{{ th.lName }}</td>
+            <td>{{ th.tStatus }}</td>
               <td>
                   <button (click)="deleteTheme(th.tId)" class="btn btn-danger">Eliminar</button>
               </td>
           </tr>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <tr>
+            <td>{{ th.tId }}</td>
+            <td>{{ th.tName }}</td>
+            <td>{{ th.lName }}</td>
+            <td>{{ th.tStatus }}</td>
+              <td>
+                  <button (click)="deleteTheme(th.tId)" class="btn btn-danger">Eliminar</button>
+              </td>
+          </tr>
+        </ng-template>
       </tbody>
       </table>
 </div>

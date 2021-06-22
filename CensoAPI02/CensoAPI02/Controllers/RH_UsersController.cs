@@ -64,19 +64,13 @@ namespace CensoAPI02.Controllers
         }
 
         // GET api/<RH_UsersController>/5
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] // PENDIENTE
         public async Task<ActionResult> Get(int id)
         {
             try
             {
                 var query = await _context.HRU.Join(_context.Locations, hru => hru.LocationId, location => location.lId, (user, location) => new
                 {
-                    /*user.uId,
-                    user.uName,
-                    user.uEmail,
-                    user.uStatus,
-                    location.lName,
-                    location.lId*/
                     user,
                     location
                 }).Join(_context.Roles, hru => hru.user.RoleId, rol => rol.rolId, (user, rol) => new
@@ -89,7 +83,12 @@ namespace CensoAPI02.Controllers
                     user.location.lId,
                     rol.rolId,
                     rol.rolName
-                }).Where(hru => hru.uStatus == true && hru.lId == id).ToListAsync();
+                }).Where(hru => hru.uStatus == true && hru.uId == id).FirstOrDefaultAsync();
+
+                if(query == null)
+                {
+                    return NotFound(new { message = "El usuario no se encuentra en la base de datos" });
+                }
                 return Ok(query);
             }catch(Exception ex)
             {

@@ -45,8 +45,8 @@
   <!-- Fin Form -->
     <hr>
       <form class="form-search">
-        <input class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">
-        <button class="btnIndexC" type="submit">Buscar</button>
+        <input #idQuestion class="Search1" type="number" placeholder="Buscar" aria-label="Search">
+        <button (click)="search(idQuestion.value)" class="btnIndexC" type="submit">Buscar</button>
       </form>
       <hr>
       <table class="table table-dark table-sm">
@@ -60,15 +60,29 @@
           </tr>
       </thead>
       <tbody>
+
+        <ng-container *ngIf="!question; else elseTemplate">
           <tr *ngFor="let question of questions">
             <td>{{ question.qId }}</td>
-                      <td>{{ question.qName }}</td>
-                      <td>{{ question.tName }}</td>
-                      <td>{{ question.qStatus }}</td>
+            <td>{{ question.qName }}</td>
+            <td>{{ question.tName }}</td>
+            <td>{{ question.qStatus }}</td>
               <td>
                   <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Eliminar</button>
               </td>
           </tr>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <tr>
+            <td>{{ question.qId }}</td>
+            <td>{{ question.qName }}</td>
+            <td>{{ question.tName }}</td>
+            <td>{{ question.qStatus }}</td>
+              <td>
+                  <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Eliminar</button>
+              </td>
+          </tr>
+        </ng-template>
       </tbody>
       </table>
 </div>

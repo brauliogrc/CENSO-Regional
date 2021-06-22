@@ -92,9 +92,33 @@ namespace CensoAPI02.Controllers
 
         // GET api/<ThemeController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult> Get(int id)
         {
-            return "value";
+            try
+            {
+                var query = await _context.Theme.Join(_context.LocationsThemes, th => th.tId, lt => lt.ThemeId, (th, lt) => new
+                {
+                    th,
+                    lt
+                }).Join(_context.Locations, lt => lt.lt.LocationId, l => l.lId, (lt, l) => new
+                {
+                    l.lId,
+                    l.lName,
+                    lt.th.tId,
+                    lt.th.tName,
+                    lt.th.tStatus
+                }).Where(th => th.tStatus == true && th.tId == id).FirstOrDefaultAsync();
+
+                if(query == null)
+                {
+                    return NotFound(new { message = "Tema no encontrado en la base de datos." });
+                }
+
+                return Ok(query);
+            }catch( Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST api/<ThemeController>

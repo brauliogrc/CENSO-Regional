@@ -105,6 +105,12 @@ export class UsuariosComponent implements OnInit {
   }
 
   search(idUser : any){
-
+    this._userSerice.getSpecificUser(idUser).subscribe( data => {
+      this.user = data;
+      this.Users = [];
+      console.log(this.user);
+    }, error => {
+      alert(error.error.message);
+    })
   }
 }

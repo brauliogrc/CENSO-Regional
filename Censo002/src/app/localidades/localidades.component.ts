@@ -74,7 +74,6 @@ export class LocalidadesComponent implements OnInit {
     this._locationService.getSpecificLocation(idLocation).subscribe(data => {
       this.location = data;
       this.locations = [];
-
       console.log(this.location);
       
     }, error => {

@@ -12,7 +12,7 @@
     <!-- Sujeto a eliminación -->
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Numero de empleado</label>
-      <input formControlName="EmployeeNumber" type="email" class="form-control" id="inputEmail4">
+      <input formControlName="EmployeeNumber" type="number" class="form-control" id="inputEmail4">
     </div>
     <!--  -->
 
@@ -57,7 +57,7 @@
   <hr>
     
       <form class="form-search">
-        <input #userId class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">
+        <input #userId class="Search1" type="number" placeholder="Buscar" aria-label="Search">
         <button (click)="search(userId.value)" class="btnIndexC" type="submit">Buscar</button>
       </form>
       <hr>
@@ -74,6 +74,8 @@
               </tr>
           </thead>
           <tbody>
+
+            <ng-container *ngIf="!user; else elseTemplate">
               <tr *ngFor="let user of Users">
                 <td>{{ user.uId }}</td>
                 <td>{{ user.uName }}</td>
@@ -85,6 +87,20 @@
                       <button (click)="deleteUser(user.lId)" class="btn btn-danger">Eliminar</button>
                   </td>
               </tr>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <tr>
+                <td>{{ user.uId }}</td>
+                <td>{{ user.uName }}</td>
+                <td>{{ user.uEmail }}</td>
+                <td>{{ user.rolName }}</td>
+                <td>{{ user.uStatus }}</td>
+                <td>{{ user.lName }}</td>
+                <td>
+                    <button (click)="deleteUser(user.lId)" class="btn btn-danger">Eliminar</button>
+                </td>
+              </tr>
+            </ng-template>
           </tbody>
       </table>
   

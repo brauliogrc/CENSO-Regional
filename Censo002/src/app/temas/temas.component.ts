@@ -14,6 +14,8 @@ export class TemasComponent implements OnInit {
   // Array que conendrás los datos de los temas para mostrarlos en la tabla
   theme :dataTheme [] = [];
 
+  th : any;
+
   // Array con las localidades disponibles para la lista desplegable
   Locations : availableLocations [] = [];
 
@@ -70,6 +72,16 @@ export class TemasComponent implements OnInit {
       console.log('Tema eliminado');
       alert(`Tema "${data.tName}" eliminado`);
       this.getAllTheme();
+    })
+  }
+
+  search(idTheme : any){
+    this._themeService.getSpecificTheme(idTheme).subscribe( data => {
+      this.th = data;
+      this.theme = [];
+      console.log(this.th);
+    }, error => {
+      alert(error.error.message);
     })
   }
 }

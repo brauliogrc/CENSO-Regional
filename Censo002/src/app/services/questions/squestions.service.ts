@@ -23,4 +23,8 @@ export class SquestionsService {
   deleteQuestion(id : number) : Observable<any> {
     return this._http.delete(this.MyAppUrl + this.MyApiUrl + '/' + id);
   }
+
+  getSpecificQuestion(idQuestion : any) : Observable<any> {
+    return this._http.get( this.MyAppUrl + this.MyApiUrl + '/' + idQuestion);
+  }
 }

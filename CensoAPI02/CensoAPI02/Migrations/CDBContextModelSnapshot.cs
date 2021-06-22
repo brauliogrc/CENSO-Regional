@@ -323,8 +323,8 @@ namespace CensoAPI02.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<int>("uEmployeeNumber")
-                        .HasColumnType("int");
+                    b.Property<long>("uEmployeeNumber")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("uModificationDate")
                         .HasColumnType("datetime2");
