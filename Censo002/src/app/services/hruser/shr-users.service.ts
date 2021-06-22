@@ -26,7 +26,7 @@ export class ShrUsersService {
     return this._http.delete( this.MyAppUrl + this.MyApiUrl + '/' + id);
   }
 
-  getSpecificUser(idUser : any) : Observable<any> {
+  // getSpecificUser(idUser : any) : Observable<any> {
     
-  }
+  // }
 }
