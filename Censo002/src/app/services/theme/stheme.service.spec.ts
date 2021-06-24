@@ -1,4 +1,3 @@
-import { TestBed } from '@angular/core/testing';
 
 import { SthemeService } from './stheme.service';
 

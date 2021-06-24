@@ -61,7 +61,8 @@ export class FolioanonimoindexComponent implements OnInit {
       AreaId: this.bodyRequest.get('AreaId')?.value,
       arIssue: this.bodyRequest.get('arIssue')?.value,
       arAttachemen: this.bodyRequest.get('arAttachemen')?.value,
-      ThemeId: this.bodyRequest.get('ThemeId')?.value
+      ThemeId: this.bodyRequest.get('ThemeId')?.value,
+      LocationId:this.bodyRequest.get('ThemeId')?.value
     }
     console.log(anonReq);
     
@@ -75,17 +76,17 @@ export class FolioanonimoindexComponent implements OnInit {
     })
   }
 
-  getThemes(idLocation : any){
-    this._themService.getSpecificsThems(idLocation).subscribe( data => {
-      console.log(data);
-      this.Theme = [... data];
-    }, error => {
-      console.error(error);
-    })
-  }
+  // getThemes(idLocation : any){
+  //   this._themService.getSpecificsThems(idLocation).subscribe( data => {
+  //     console.log(data);
+  //     this.Theme = [... data];
+  //   }, error => {
+  //     console.error(error);
+  //   })
+  // }
 
   // Obtenemos las questions que se encuentran disponibles suscribiendonos al método del service
-  getQuestions(idTheme : any){
+  // getQuestions(idTheme : any){
     
-  }
+  // }
 }

@@ -61,6 +61,11 @@ export interface availableTheme {
     tName   :   string;
 }
 
+export interface availableAreas{
+    aId     :   number;
+    aName   :   string;
+}
+
 /************** Interfaes para datos devueltos por el Login */
 export interface saveDataLogin{
     uId     :   number;
@@ -84,11 +89,12 @@ export interface newRequest{ // Agregar el theme
     rEmployeeType   :   number;
 }
 
-export interface newAnonRequest{ // Agrega el theme
+export interface newAnonRequest{
     AreaId  :   number;
     arIssue :   string;
     QuestionId  :   number;
     ThemeId     :   number;
+    LocationId  :   number;
     arEmployeeType  :   number;
     arAttachemen    :   string;
 }

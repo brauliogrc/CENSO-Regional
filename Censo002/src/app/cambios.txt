@@ -37,3 +37,14 @@ version 3.5.3
 -Componente Localidades se agrego script para que el crud este oculto
 
 ======================================================================================================================
+
+fecha actualizacion: 24/06/2021
+
+version 3.5.4
+
+-CRUD de folio anonimo funcionando
+-Servicio de angular dedicado solo a la obtencion de los datos necesarios en los "select" de folio anonimo
+-Controlador en la api dedicado solo a la obtencion de los datos necesarios en los "select" de folio anonimo
+-Eliminación de metodos repetidos en la api
+
+======================================================================================================================

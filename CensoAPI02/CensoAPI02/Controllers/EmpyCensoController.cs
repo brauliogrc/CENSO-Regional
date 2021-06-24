@@ -28,8 +28,14 @@ namespace CensoAPI02.Controllers
             {
                 var query = await _context.Locations.Where(l => l.lStatus == true).Select(l => new { l.lId, l.lName }).ToListAsync();
 
+                if(query == null || query.Count == 0)
+                {
+                    return NotFound(new { message = "No hay localidades disponibles" });
+                }
+
                 return Ok(query);
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 return BadRequest();
             }
@@ -53,7 +59,7 @@ namespace CensoAPI02.Controllers
                     l.lId
                 }).Where(condition => condition.lId == id && condition.tStatus == true).ToListAsync();
 
-                if(query == null)
+                if(query == null || query.Count == 0)
                 {
                     return NotFound(new {message="Ningun tema encontrado en esta localidad" });
                 }
@@ -83,7 +89,7 @@ namespace CensoAPI02.Controllers
                     th.tId
                 }).Where(condition => condition.tId == id && condition.qStatus == true).ToListAsync();
 
-                if(query == null)
+                if(query == null || query.Count == 0)
                 {
                     return NotFound(new { message = "Nunguna pregunta encontrada en este tema" });
                 }
@@ -108,7 +114,7 @@ namespace CensoAPI02.Controllers
                     l.lId
                 }).Where(condition => condition.lId == id).ToListAsync();
 
-                if(query == null)
+                if(query == null || query.Count == 0)
                 {
                     return NotFound(new { message = "Ningun area encontrada en esta localidad" });
                 }

@@ -1,4 +1,4 @@
-<body class="BodyIndexC">
+<body class="BodyIndexC" style="overflow: auto;">
     <header>
         <div class="headerIndexC">
         <img src="../../assets/img/LogoConti.png" alt="Continental" class="imgLogoIndexC">
@@ -28,8 +28,9 @@
                     <!-- Inicio del FORM 
                     el form se enlaza con la variable bodyRequest del Component por medio de [formGroup]
                     se llama al método registerRequest por medio de la directiva (ngSubmit)-->
-                     <!--<form [formGroup]="bodyRequest" (ngSubmit)="registerAnonRequest()" class="row g-3 needs-validation" novalidate>-->
-                        <form class="row g-3 needs-validation" novalidate>
+                     <form [formGroup]="bodyRequest" (ngSubmit)="registerAnonRequest()" class="row g-3 needs-validation" novalidate>
+                    <!-- <form class="row g-3 needs-validation" novalidate> -->
+                      
                       <div class="md-3">
                         <!-- ******** tipo de empleado ********** -->
                         <!-- cada campo esta reacionado con una variable en el Component llamada igual que
@@ -43,12 +44,25 @@
                           Selecciona una opcion.
                         </div>
                       </div>
+
+                      <!-- Campo de localidad -->
+                      <div class="md-3">
+                        <label for="validationCustom04" class="form-label">Localidad</label>
+                        <select #locationId formControlName="LocationId" (change)="defineLocation(locationId.value)"
+                        class="form-select" id="validationCustom04" required>
+                          <option *ngFor="let location of Locations" value="{{location.lId}}" >{{location.lName}}</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Selecciona una opción.
+                        </div>
+                      </div>
+
                       <!--agregue este campo del tema-->
                       <div class="md-3">
                         <label for="validationCustom04" class="form-label">Tema</label>
-                        <select class="form-select" id="validationCustom04" required>
-                          <option>Administrativo</option>
-                          <option>Sindicalizado</option>
+                        <select #themeId formControlName="ThemeId" (change)="getQuestions(themeId.value)"
+                         class="form-select" id="validationCustom04" required>
+                          <option *ngFor="let th of Theme" value="{{th.tId}}" >{{th.tName}}</option>
                         </select>
                         <div class="invalid-feedback">
                           Selecciona una opción.
@@ -57,10 +71,10 @@
               
                       <div class="md-3">
                         <!-- *********** tipo de registro ************ -->
-                          <label for="validationCustom04" class="form-label">Tipo de registro</label>
+                          <label for="validationCustom04" class="form-label">Pregunta</label>
                           <!-- Recorremos el arreglo questions para mostrar cada uno de sus elemetnos -->
                           <select formControlName="QuestionId" class="form-select" id="validationCustom04" required>
-                            <!--<option *ngFor="let question of questions" value="{{question.qId}}">{{question.qName}}</option>-->
+                            <option *ngFor="let question of Questions" value="{{question.qId}}" >{{question.qName}}</option>
                           </select>
                           <div class="invalid-feedback">
                               Selecciona una opcion.
@@ -71,11 +85,7 @@
                           <!-- ************ nave del trabajador ***************** -->
                           <label for="validationCustom04" class="form-label">Area</label>
                           <select formControlName="AreaId" class="form-select" id="validationCustom04" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                            <option *ngFor="let area of Areas" value="{{area.aId}}">{{area.aName}}</option>
                             <option>Anónimo</option>
                           </select>
                           <div class="invalid-feedback">
@@ -86,7 +96,7 @@
                         <div class="mb-3">
                           <!-- ************* contenido de la solicitud ************** -->
                           <label for="exampleFormControlTextarea1" class="form-label">¿Qué necesitas decirnos?</label>
-                          <textarea formControlName="arIssue" maxlength="499" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                          <textarea formControlName="arIssue" maxlength="499" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
                         </div>
               
                         <div>
@@ -110,8 +120,8 @@
                       <!-- **************** botón de envio del formulario **************** -->
                       <div class="col-12">
                         <!-- validacion de contenido de formulario valido -->
-                        <!--<button [disabled]="bodyRequest.invalid"  class="btnIndexC1" type="submit">Crear folio de reporte</button>-->
-                        <button class="btnIndexC1" type="submit">Crear folio de reporte</button>
+                        <button [disabled]="bodyRequest.invalid" class="btnIndexC1" type="submit">Crear folio de reporte</button>
+                        <!-- <button class="btnIndexC1" type="submit">Crear folio de reporte</button> -->
                       </div>
                     </form>
                     <!-- fin del FORM -->
@@ -120,7 +130,8 @@
               </div>
 
               </div>
-
+<!-- ================================================================================================================================= -->
+<!-- Comienza panel de busqueda -->
               <div class="contenedorPageAngular01" id="buscar">
                 <div class="contenedorPageAngular02">
                   <div class="ContendorPageAngular">
