@@ -136,7 +136,6 @@
   }
 
   /* Pagina Logueo */
-
   body, html{
     height: 100%;
 }
@@ -229,7 +228,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    overflow-y: scroll;
 
 }
 
@@ -359,6 +357,31 @@ background-image: url(img/LogoConti.png);
     color: #cc9d38;
 
 }
+.ContendorPageAngular0{
+    display: none;
+}
+.ContendorPageAngular01{
+    display: none;
+    background: rgba(255, 255, 255, 0.959);
+    border-radius: 3em;
+    width: 80%;
+    margin: 40px auto;
+    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+
+}
+.contenedorPageAngular02{
+    background: rgba(255, 255, 255, 0.959);
+    border-radius: 3em;
+    width: 80%;
+    margin: 40px auto;
+    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+
+}
+.tabalaAnonima{
+    background: rgba(255, 255, 255, 0.959);
+    height: 600px;
+    overflow-y: scroll;
+}
 
 .ContendorPageAngular1{
     background: rgba(255, 255, 255, 0.959);
@@ -380,6 +403,7 @@ background-image: url(img/LogoConti.png);
 
     transition: 0.25s;
 }
+
 .btnIndexC1:hover{
     background: #e2ae3e8e ;
     
@@ -591,6 +615,9 @@ background-image: url(img/LogoConti.png);
     border-radius: 10px;
 }
 
+#contenido{
+    display: none;
+}
 /*      Dashboard        */
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

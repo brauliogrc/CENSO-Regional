@@ -1,10 +1,12 @@
 <div class="contenido1">
     <div class="buscar">
     <h1>Tema</h1>
-    <button class="btnIndexC" type="submit">Añadir tema</button>
+    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Añadir tema</button>
   </div>
   
   <hr>
+
+  <div id="contenido">
   <!-- Inicio Form -->
   <form [formGroup]="newTheme" (ngSubmit)="addNewTheme()" class="row g-3">
     <h1>Añadir tema</h1>
@@ -43,6 +45,7 @@
   </form>
   <!-- Fin Form -->
   <hr>
+</div>
       <form class="form-search">
         <input #idTheme class="Search1" type="number" placeholder="Buscar" aria-label="Search">
         <button (click)="search(idTheme.value)" class="btnIndexC" type="submit">Buscar</button>
