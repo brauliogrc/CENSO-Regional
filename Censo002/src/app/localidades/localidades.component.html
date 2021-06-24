@@ -1,11 +1,11 @@
 <div class="contenido1">
     <div class="buscar">
     <h1>Ubicación</h1>
-    <button class="btnIndexC" type="submit">Añadir Ubicación</button>
+    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Añadir Ubicación</button>
   </div>
   
   <hr>
-  
+  <div id="contenido">
   <!-- Inifio del Form -->
   <form [formGroup]="newLocation" (ngSubmit)="addNewLocation()" class="row g-3">
     <h1>Añadir Ubicación</h1>
@@ -29,7 +29,7 @@
   </form>
   <!-- Fin del Form -->
     <hr>
-    
+  </div>
       <form class="form-search">
         <input #locationId class="Search1" type="number" placeholder="Id location" aria-label="Search">
         <button (click)="search(locationId.value)" class="btnIndexC" type="submit">Buscar</button>

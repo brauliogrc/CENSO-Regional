@@ -2,12 +2,14 @@
 <div class="contenido1">
     <div class="buscar">
     <h1>Usuarios</h1>
-    <button class="btnIndexC" type="submit">Añadir Usuario</button>
+    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Añadir Usuario</button>
   </div>
   <hr>
 
+  <div id="contenido">
   <!-- Inicio del Form -->
   <form [formGroup]="newUser" (ngSubmit)="addNewUser()" class="row g-3">
+    
     <h1>Añadir Usuario</h1>
     <!-- Sujeto a eliminación -->
     <div class="col-md-6">
@@ -54,8 +56,9 @@
     </div>
     <!-- Fin del Form -->
   </form>
+
   <hr>
-    
+</div>
       <form class="form-search">
         <input #userId class="Search1" type="number" placeholder="Buscar" aria-label="Search">
         <button (click)="search(userId.value)" class="btnIndexC" type="submit">Buscar</button>
