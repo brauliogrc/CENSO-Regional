@@ -139,9 +139,9 @@
                       <div class="md-3">
                         <div class="input-group mb-3">
                           <div class="input-group-prepend">
-                            <button class="btn btn-outline-secondary" type="button">Buscar Folio</button>
+                            <button (click)="searchFolio(folioId.value)" class="btn btn-outline-secondary" type="button">Buscar Folio</button>
                           </div>
-                          <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                          <input #folioId type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
                         </div>
                       </div>
                     </form>
@@ -153,17 +153,28 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Tema</th>
-                                    <th>Estatus</th>
+                                    <!-- <th>Estatus</th> -->
                                 </tr>
                             </thead>
                             <tbody>
+
+                              <ng-container *ngIf="folio; else elseTemplate">
                                 <tr class="text-center">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-      
+                                  <td>{{ folio.arId }}</td>
+                                  <td>{{ folio.arIssue }}</td>
+                                  <td>{{ folio.tName }}</td>
+                                  <!-- <td>{{  }}</td> -->
                                 </tr>
+                              </ng-container>
+                              <ng-template #elseTemplate>
+                                <tr class="text-center">
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <!-- <td>{{  }}</td> -->
+                                </tr>
+                              </ng-template>
+                                
                             </tbody>
                         </table>
                     </div>

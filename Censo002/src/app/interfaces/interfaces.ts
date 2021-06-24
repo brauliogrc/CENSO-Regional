@@ -66,6 +66,14 @@ export interface availableAreas{
     aName   :   string;
 }
 
+export interface availableAreas {
+    arId    :   number;
+    tId     :   number;
+    arIssue :   string;
+    tName   :   string;
+    tStatus :   string;
+}
+
 /************** Interfaes para datos devueltos por el Login */
 export interface saveDataLogin{
     uId     :   number;

@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
 import { availableLocations, newAnonRequest, availableTheme, availableQues, availableAreas } from '../interfaces/interfaces';
 import { SrequestService } from '../services/request/srequest.service';
+import { SearchesService } from '../services/searches/searches.service';
 
 @Component({
   selector: 'app-home',
@@ -25,9 +26,10 @@ export class HomeComponent implements OnInit {
   Areas : availableAreas[] = [];
 
   constructor(
-    private _fb:FormBuilder,
-    private _fields:FieldsRequestService,
-    private _reqService:SrequestService
+    private _fb           : FormBuilder,
+    private _fields       : FieldsRequestService,
+    private _reqService   : SrequestService,
+    private _searchFolio  : SearchesService
   ) { }
 
   
@@ -113,6 +115,21 @@ export class HomeComponent implements OnInit {
       alert(`Peticion registrada con exito. N folio: ${data.arId}`);
     }, error => {
       console.error(error);
+    })
+  }
+
+  // ==================================================================================================================================================
+
+  // PANEL DE BUSQUEDA
+
+  folio : any;
+
+  searchFolio(folioId : any){
+    this._searchFolio.searchFolio(folioId).subscribe( data => {
+      this.folio = data;
+      console.log(this.folio);
+    }, error => {
+      console.error(error.error.message);
     })
   }
 }
