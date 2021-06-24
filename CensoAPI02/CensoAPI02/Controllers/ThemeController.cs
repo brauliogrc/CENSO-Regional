@@ -24,7 +24,9 @@ namespace CensoAPI02.Controllers
         {
             _context = context;
         }
+
         // GET: api/<ThemeController>
+        // Obtencion de temas para ser mostrados en la tabla del temas.component
         [HttpGet]
         public async Task<ActionResult> Get()
         {
@@ -67,30 +69,8 @@ namespace CensoAPI02.Controllers
             }
         }
 
-        [HttpGet][Route("availableThemes/{id}")]
-        public async Task<ActionResult> GetAvailableThemes(int id)
-        {
-            try
-            {
-                var query = await _context.Theme.Join(_context.LocationsThemes, th => th.tId, lt => lt.ThemeId, (th, lt) => new
-                {
-                    th,
-                    lt
-                }).Join(_context.Locations, lt => lt.lt.LocationId, l => l.lId, (lt, l) => new
-                {
-                    lt.th.tName,
-                    lt.th.tId,
-                    lt.th.tStatus,
-                    l.lId
-                }).Where(condition => condition.lId == id && condition.tStatus == true).ToListAsync();
-                return Ok(query);
-            }catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         // GET api/<ThemeController>/5
+        // Busqueda desde temas.component
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
@@ -122,6 +102,7 @@ namespace CensoAPI02.Controllers
         }
 
         // POST api/<ThemeController>
+        // Agregar un nuevo tema a la base de datos
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddTheme value)
         {
@@ -164,6 +145,7 @@ namespace CensoAPI02.Controllers
         }
 
         // DELETE api/<ThemeController>/5
+        // Eliminación lógica de un tema
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

@@ -23,12 +23,25 @@
             Selecciona una opcion.
           </div>
         </div>
+
+        <div class="md-3">
+          <label for="validationCustom04" class="form-label">Localidad</label>
+          <select #locationId formControlName="location"
+          class="form-select" id="validationCustom04" required
+          (change)="getThemes(locationId.value)">
+            <option *ngFor="let location of Locations" value="{{ location.lId }}">{{ location.lName }}</option>
+          </select>
+          <div class="invalid-feedback">
+            Selecciona una opción.
+          </div>
+        </div>
+
         <!--agregue este campo del tema-->
         <div class="md-3">
           <label for="validationCustom04" class="form-label">Tema</label>
-          <select class="form-select" id="validationCustom04" required>
-            <option>Administrativo</option>
-            <option>Sindicalizado</option>
+          <select #themeId formControlName="ThemeId"
+          class="form-select" id="validationCustom04" required>
+            <option *ngFor="let th of Theme" value="{{ th.tId }}">{{ th.tName }}</option>
           </select>
           <div class="invalid-feedback">
             Selecciona una opción.

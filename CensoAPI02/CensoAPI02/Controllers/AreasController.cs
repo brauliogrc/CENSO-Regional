@@ -23,7 +23,7 @@ namespace CensoAPI02.Controllers
         }
     
         // GET: api/<AreasController>
-            [HttpGet]
+        [HttpGet]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
@@ -37,6 +37,7 @@ namespace CensoAPI02.Controllers
         }
 
         // POST api/<AreasController>
+        // Agregar una nueva area a la base de datos
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddArea value)
         {

@@ -88,6 +88,7 @@ export interface newAnonRequest{ // Agrega el theme
     AreaId  :   number;
     arIssue :   string;
     QuestionId  :   number;
+    ThemeId     :   number;
     arEmployeeType  :   number;
     arAttachemen    :   string;
 }

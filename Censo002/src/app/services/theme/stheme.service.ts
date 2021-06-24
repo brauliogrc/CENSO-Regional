@@ -15,6 +15,7 @@ export class SthemeService {
     return this._http.post(this.MyAppUrl + this.MyApiUrl, dataTheme);
   }
 
+  // cambiar ruta a EmpyCensoController
   getSpecificsThems(locationId : any) : Observable<any> {
     return this._http.get(this.MyAppUrl + this.MyApiUrl + '/availableThemes/' + locationId);
   }

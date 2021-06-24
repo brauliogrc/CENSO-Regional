@@ -23,29 +23,9 @@ namespace CensoAPI02.Controllers
         {
             _context = context;
         }
-        // GET: api/<QuestionController>
-        [HttpGet]
-        public async Task<ActionResult> Get()
-        {
-            try
-            {
-                var prueba3 = await _context.Questions
-                    .Where(ques => ques.qStatus == true)
-                    .Select(ques => new
-                    {
-                        ques.qId,
-                        ques.qName
-                    }).ToListAsync();
-
-                return Ok(prueba3);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
         // GET api/<QuestionController>/5
+        // Busqueda desde preguntas.component
         [HttpGet("{id}")]
         public async Task<ActionResult> Get(int id)
         {
@@ -77,6 +57,7 @@ namespace CensoAPI02.Controllers
         }
 
         // POST api/<QuestionController>
+        // Agregar una nueva pregunta a la base de datos
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddQuestion value)
         {
@@ -121,6 +102,7 @@ namespace CensoAPI02.Controllers
         }
 
         // DELETE api/<QuestionController>/5
+        // Eliminación lógica de pregunta
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

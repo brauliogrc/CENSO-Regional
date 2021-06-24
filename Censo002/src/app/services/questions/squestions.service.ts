@@ -11,7 +11,7 @@ export class SquestionsService {
 
   constructor( private _http:HttpClient) { }
 
-  // Obtenemos las questions disponibles de base de datos
+  // Cambir ruta EmpyCensoController
   getQuestions() : Observable<any>{
     return this._http.get( this.MyAppUrl + this.MyApiUrl );
   }
