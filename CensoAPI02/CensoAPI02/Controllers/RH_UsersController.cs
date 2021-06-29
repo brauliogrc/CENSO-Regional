@@ -63,39 +63,6 @@ namespace CensoAPI02.Controllers
             }
         }
 
-        // GET api/<RH_UsersController>/5
-        [HttpGet("{id}")] // PENDIENTE
-        public async Task<ActionResult> Get(int id)
-        {
-            try
-            {
-                var query = await _context.HRU.Join(_context.Locations, hru => hru.LocationId, location => location.lId, (user, location) => new
-                {
-                    user,
-                    location
-                }).Join(_context.Roles, hru => hru.user.RoleId, rol => rol.rolId, (user, rol) => new
-                {
-                    user.user.uId,
-                    user.user.uName,
-                    user.user.uEmail,
-                    user.user.uStatus,
-                    user.location.lName,
-                    user.location.lId,
-                    rol.rolId,
-                    rol.rolName
-                }).Where(hru => hru.uStatus == true && hru.uId == id).FirstOrDefaultAsync();
-
-                if(query == null)
-                {
-                    return NotFound(new { message = "El usuario no se encuentra en la base de datos" });
-                }
-                return Ok(query);
-            }catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         // POST api/<RH_UsersController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddUserInterface newUser)

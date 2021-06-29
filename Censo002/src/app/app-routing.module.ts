@@ -25,8 +25,8 @@ const routes: Routes = [
   { path: 'areas', component: AreasComponent }, // Vista con una tabla que muestra a las areas y su informacion **TO DO**
   { path: 'preguntas', component: PreguntasComponent }, // Vista con una tabla que muestra a las preguntas y su informacion
   { path: 'tikets', component: TiketsComponent }, // **TO DO** 
-  { path: 'folioanonimoindex', component: FolioanonimoindexComponent }, // Formulario de registro de peticion anonima
-  { path: 'fvacio', component: FvacioComponent },
+  { path: 'folioanonimoindex', component: FolioanonimoindexComponent }, // Formulario de registro de peticion anonima ELIMINAR
+  { path: 'fvacio', component: FvacioComponent }, // ELIMINAR
   { path: 'login', component: LoginComponent }, // Formulario de logueo
   { path: 'paneladmin', component: PaneladminComponent },
   { path: 'panelusuario', component: PanelusuarioComponent }, // Formulario de registro de peticion

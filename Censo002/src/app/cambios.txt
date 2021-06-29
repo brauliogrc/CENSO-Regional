@@ -43,8 +43,8 @@ fecha actualizacion: 24/06/2021
 version 3.5.4
 
 -CRUD de folio anonimo funcionando
--Servicio de angular dedicado solo a la obtencion de los datos necesarios en los "select" de folio anonimo
--Controlador en la api dedicado solo a la obtencion de los datos necesarios en los "select" de folio anonimo
+-Servicio de angular dedicado solo a la obtencion de los datos necesarios en los "select" de folio
+-Controlador en la api dedicado solo a la obtencion de los datos necesarios en los "select" de folio
 -Eliminación de metodos repetidos en la api
 
 Version 3.5.4 plus
@@ -52,5 +52,17 @@ Version 3.5.4 plus
 -Panel de busueda en componente "home" funcionando
 -Servicio de angular dedicado a la busqueda de folio
 -Controlador de api dedicado a la busqueda de los folios
+
+======================================================================================================================
+
+fecha actualizacion: 28/06/2021
+
+version 3.5.6
+
+-CRUD de panel usuario funcionando
+-Login funcionando
+-Modificacion de interface de datos para el folio anonimo
+-Controlador de angular dedicado solo a las busquedas especificas por id de los component localidades, usuarios, temas, preguntas y tikets
+-Controlador en la api dedicado solo a la obtencion del elemento bucado en los component localidades, usuarios, temas, preguntas y tikets
 
 ======================================================================================================================

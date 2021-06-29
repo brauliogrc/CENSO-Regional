@@ -28,6 +28,22 @@ namespace CensoAPI02.Controllers
             try
             {
                 var user = await _context.HRU.Select(hru => new { hru.uName, hru.uId, hru.uEmail, hru.LocationId }).Where(hru => hru.uName == login.username && hru.uEmail == login.email).FirstOrDefaultAsync();
+                /*var user = await _context.HRU
+                    .Where(hru => hru.uStatus == true && hru.uName == login.username && hru.uEmail == login.email)
+                    .Select(hru => new
+                {
+                    hru.uName,
+                    hru.uEmployeeNumber,
+                    hru.uId,
+                    hru.uEmail,
+                    hru.LocationId
+                }).FirstOrDefaultAsync();*/
+
+                if(user == null)
+                {
+                    return NotFound(new { message = "Usuario no encontrado en la base de datos" });
+                }
+
                 return Ok(user);
             }catch( Exception ex )
             {

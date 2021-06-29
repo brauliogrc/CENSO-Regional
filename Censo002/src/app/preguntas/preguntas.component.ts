@@ -6,6 +6,7 @@ import { SquestionsService } from '../services/questions/squestions.service';
 import { DataTableService } from '../services/tables/data-table.service';
 // import { MatSelect } from '@angular/material/select';
 import { SthemeService } from '../services/theme/stheme.service';
+import { SearchesService } from '../services/searches/searches.service';
 
 @Component({
   selector: 'app-preguntas',
@@ -34,7 +35,8 @@ export class PreguntasComponent implements OnInit {
   constructor(  private _service:DataTableService,
                 private _fb:FormBuilder,
                 private _themService:SthemeService,
-                private _questionService:SquestionsService) { }
+                private _questionService:SquestionsService,
+                private _searches:SearchesService) { }
 
   ngOnInit(): void {
     this.getAllQuestiosn();
@@ -93,12 +95,12 @@ export class PreguntasComponent implements OnInit {
   }
 
   search(idQuestion : any){
-    this._questionService.getSpecificQuestion(idQuestion).subscribe( data => {
+    this._searches.getSpecificQuestion(idQuestion).subscribe( data => {
       this.question = data;
       this.questions = [];
       console.log(this.question);
     }, error => {
-      alert(error.error.message);
+      alert(error);
     })
   }
 }

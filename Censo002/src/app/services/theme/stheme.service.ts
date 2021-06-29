@@ -23,8 +23,4 @@ export class SthemeService {
   deleteTheme(id : number) : Observable<any>{
     return this._http.delete( this.MyAppUrl + this.MyApiUrl + '/' + id);
   }
-
-  getSpecificTheme(idTheme : any ) : Observable<any> { 
-    return this._http.get( this.MyAppUrl + this.MyApiUrl + '/' + idTheme);
-  }
 }

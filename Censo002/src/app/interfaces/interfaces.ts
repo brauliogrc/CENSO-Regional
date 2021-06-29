@@ -40,6 +40,16 @@ export interface dataArea{
     lName   :   string;
 }
 
+export interface dataTickets {
+    thId    :   number;
+    tName   :   string;
+    qId     :   number;
+    qName   :   string;
+    rId     :   number;
+    rIssue  :   string;
+    aId     :   number;
+    aName   :   string;
+}
 /************** Interfaes para registro de Request */
 export interface availableQues{
     qId     :   number;
@@ -66,14 +76,6 @@ export interface availableAreas{
     aName   :   string;
 }
 
-export interface availableAreas {
-    arId    :   number;
-    tId     :   number;
-    arIssue :   string;
-    tName   :   string;
-    tStatus :   string;
-}
-
 /************** Interfaes para datos devueltos por el Login */
 export interface saveDataLogin{
     uId     :   number;
@@ -90,6 +92,8 @@ export interface dataLogin{
 
 /************** Interfaes para datos de nuevos registros */
 export interface newRequest{ // Agregar el theme
+    rUserId :   number;
+    ThemeId :   number;
     AreaId  :   number;
     rIssue  :   string;
     QuestionId  :   number;
@@ -102,7 +106,7 @@ export interface newAnonRequest{
     arIssue :   string;
     QuestionId  :   number;
     ThemeId     :   number;
-    LocationId  :   number;
+    // LocationId  :   number;
     arEmployeeType  :   number;
     arAttachemen    :   string;
 }

@@ -35,4 +35,9 @@ export class DataTableService {
   tableAreas(): Observable<any> {
     return this._http.get(this.MyAppurl + this.MyApiUrl + 'TableAreas');
   }
+
+  // Llamamos al controlados de la API en la ruta TableTikets para obtener los datos necesarios para la tabla de tickets.component
+  tableTickets() : Observable<any> {
+    return this._http.get( this.MyAppurl + this.MyApiUrl + 'TableTikets' );
+  }
 }

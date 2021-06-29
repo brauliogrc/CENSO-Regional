@@ -1,4 +1,4 @@
-<body class="BodyIndexC">
+<body class="BodyIndexC" style="overflow: auto;">
   <header>
     <div class="headerIndexC">
     <img src="../../assets/img/LogoConti.png" alt="Continental" class="imgLogoIndexC">
@@ -9,12 +9,12 @@
 </div>
 </header>
     
-        <div class="ContendorPageAngular0">
+        <div class="ContendorPageAngular00">
             
           <div class="content-titulo1">
             <p>Bienvenido</p>
             
-            <h3>Usuario</h3>
+            <h3>{{getName()}}</h3>
             <hr>
           </div>
           <div class="content-titulo">
@@ -38,7 +38,7 @@
                      <!-- cada campo esta reacionado con una variable en el Componen llamada igual que
                       el contenido de formControlName -->
                       <label for="validationCustom04" class="form-label">Nombre Empleado</label>
-                      <input value="Nombre" class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled>
+                      <input value="{{getName()}}" class="form-control" type="text" placeholder="Disabled input" aria-label="Disabled input example" disabled>
 
                     <div class="md-3">
                       <!-- ******** tipo de empleado ********** -->
@@ -54,9 +54,9 @@
                   <!--Alexis cambio tema-->
                     <div class="md-3">
                       <label for="validationCustom04" class="form-label">Tema</label>
-                      <select class="form-select" id="validationCustom04" required>
-                        <option >Administrativo</option>
-                        <option>Sindicalizado</option>
+                      <select #themeId (change)="getQuetions(themeId.value)" formControlName="ThemeId"
+                      class="form-select" id="validationCustom04" required>
+                        <option *ngFor="let th of Theme" value="{{th.tId}}" >{{th.tName}}</option>
                       </select>
                       <div class="invalid-feedback">
                         Selecciona una opción.
@@ -67,7 +67,7 @@
                         <!-- *********** tipo de registro ************ -->
                         <label for="validationCustom04" class="form-label">Tipo de registro</label>
                         <select formControlName="QuestionId" class="form-select" id="validationCustom04" required>
-                          <option *ngFor="let question of questions" value="{{question.qId}}">{{question.qName}}</option>
+                          <option *ngFor="let question of Questions" value="{{question.qId}}">{{question.qName}}</option>
                         </select>
                         <div class="invalid-feedback">
                             Selecciona una opcion.
@@ -78,12 +78,7 @@
                         <!-- ************ nave del trabajador ***************** -->
                         <label for="validationCustom04" class="form-label">Area</label>
                         <select formControlName="AreaId" class="form-select" id="validationCustom04" required>
-                          <option selected disabled value="">1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
-                          <option>Anónimo</option>
+                          <option *ngFor="let area of Areas" value="{{area.aId}}">{{area.aName}}</option>
                         </select>
                         <div class="invalid-feedback">
                             Selecciona una opcion.

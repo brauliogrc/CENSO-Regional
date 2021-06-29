@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class FieldsRequestService {
 
   private MyAppUrl : string = 'https://localhost:44358/';
-  private MyApiUrl : string = 'api/EmpyCenso/';
+  private MyApiUrl : string = 'api/FieldsSearches/';
 
   constructor(
     private _http:HttpClient

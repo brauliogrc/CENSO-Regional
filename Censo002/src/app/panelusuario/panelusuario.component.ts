@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SquestionsService } from '../services/questions/squestions.service';
 import { SrequestService } from '../services/request/srequest.service';
-import { availableQues, saveDataLogin, newRequest } from '../interfaces/interfaces';
+import { availableQues, saveDataLogin, newRequest, availableTheme, availableAreas } from '../interfaces/interfaces';
 import { SloginService } from '../services/login/slogin.service';
+import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
+import { getLocaleEraNames } from '@angular/common';
 
 @Component({
   selector: 'app-panelusuario',
@@ -13,7 +15,20 @@ import { SloginService } from '../services/login/slogin.service';
 export class PanelusuarioComponent implements OnInit {
 
   // Array que recorreremos desde el html
-  questions: availableQues[] = [];
+  Questions: availableQues[] = [];
+
+  Theme : availableTheme[] = [];
+
+  Areas : availableAreas[] = [];
+
+  private location : number = 0;
+
+  private user : saveDataLogin = {
+    uId: 0,
+    uEmail: "",
+    uName: "",
+    locationId: 0
+  }
 
   // Array que almacenará los datos del usuario logeado
 
@@ -21,28 +36,65 @@ export class PanelusuarioComponent implements OnInit {
    *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
   */
   bodyRequest = this._fb.group({
-    //rUserId: ['', [Validators.required]],
     rEmployeeType: ['', [Validators.required]],
     QuestionId: ['',[Validators.required]],
     AreaId: ['', [Validators.required]],
     rIssue: ['', [Validators.required, Validators.maxLength(500)]],
-    rAttachement: ['', [Validators.maxLength(200)]]
+    rAttachement: ['', [Validators.maxLength(200)]],
+    ThemeId: ['', [Validators.required]]
   });
 
-  constructor(  private _fb:FormBuilder,
-                private _reqServise:SrequestService,
-                private _questionService:SquestionsService,
-                private _logService:SloginService
+  constructor(  private _fb         : FormBuilder,
+                private _reqServise : SrequestService,
+                private _logService : SloginService,
+                private _fields     : FieldsRequestService
                 ) { }
 
   ngOnInit(): void {
-    // Obtenemos las questions que se encuentran disponibles suscribiendonos al método del service
-    this._questionService.getQuestions().subscribe(data => {
-      console.log(data);
-      this.questions = [... data];
+
+    this.user = this._logService.getUser();
+    // console.log(this.user);
+
+    this.defineLocation();
+  }
+
+  defineLocation(){
+    this.location = this.user.locationId;
+    this.getTeme();
+    this.getAreas();
+  }
+
+  getName(){
+    return this.user.uName;
+  }
+
+  getTeme(){
+    this._fields.getTheme(this.location).subscribe( data => {
+      this.Theme = [... data];
+      console.log(this.Theme);
     }, error => {
-      console.error(error);
-    });
+      console.error(error.error.message);
+      this.Theme = [];
+    })
+  }
+
+  getQuetions(themeId : any){
+    this._fields.getQuestions(themeId).subscribe( data => {
+      this.Questions = [... data];
+      console.log(this.Questions);
+    }, error => {
+      console.error(error.error.message);
+      this.Questions = [];
+    })
+  }
+
+  getAreas(){
+    this._fields.getAreas(this.location).subscribe( data => {
+      this.Areas = [... data];
+      console.log(this.Areas);
+    }, error => {
+      console.error(error.error.message);
+    })
   }
 
   registerRequest(){
@@ -50,11 +102,13 @@ export class PanelusuarioComponent implements OnInit {
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
     const req : newRequest = {
+      rUserId: this.user.uId,
       rEmployeeType: this.bodyRequest.get('rEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
       AreaId: this.bodyRequest.get('AreaId')?.value,
       rIssue: this.bodyRequest.get('rIssue')?.value,
-      rAttachement: this.bodyRequest.get('rAttachement')?.value
+      rAttachement: this.bodyRequest.get('rAttachement')?.value,
+      ThemeId: this.bodyRequest.get('ThemeId')?.value
     }
     console.log(req);
     

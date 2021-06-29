@@ -35,9 +35,8 @@ export class FolioanonimoindexComponent implements OnInit {
 
   constructor(  private _fb:FormBuilder,
                 private _reqService:SrequestService,
-                private _questionService:SquestionsService,
                 private _dataTable:DataTableService,
-                private _themService:SthemeService) { 
+                ) { 
   }
 
   ngOnInit(): void {
@@ -55,7 +54,7 @@ export class FolioanonimoindexComponent implements OnInit {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const anonReq: newAnonRequest = {
+    const anonReq: any = {
       arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
       AreaId: this.bodyRequest.get('AreaId')?.value,

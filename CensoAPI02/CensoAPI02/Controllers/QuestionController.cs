@@ -24,38 +24,6 @@ namespace CensoAPI02.Controllers
             _context = context;
         }
 
-        // GET api/<QuestionController>/5
-        // Busqueda desde preguntas.component
-        [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
-        {
-            try
-            {
-                var query = await _context.Questions.Join(_context.QuestionsThemes, q => q.qId, qth => qth.QuestionId, (q, qth) => new
-                {
-                    q,
-                    qth
-                }).Join(_context.Theme, qth => qth.qth.ThemeId, th => th.tId, (qth, th) => new
-                {
-                    qth.q.qId,
-                    qth.q.qName,
-                    qth.q.qStatus,
-                    th.tId,
-                    th.tName
-                }).Where(q => q.qStatus == true && q.qId == id).FirstOrDefaultAsync();
-
-                if(query == null)
-                {
-                    return NotFound(new { message = "Pregunta no encontrada en la base de datos" });
-                }
-
-                return Ok(query);
-            }catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         // POST api/<QuestionController>
         // Agregar una nueva pregunta a la base de datos
         [HttpPost]

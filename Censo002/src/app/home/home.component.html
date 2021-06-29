@@ -48,7 +48,7 @@
                       <!-- Campo de localidad -->
                       <div class="md-3">
                         <label for="validationCustom04" class="form-label">Localidad</label>
-                        <select #locationId formControlName="LocationId" (change)="defineLocation(locationId.value)"
+                        <select #locationId (change)="defineLocation(locationId.value)"
                         class="form-select" id="validationCustom04" required>
                           <option *ngFor="let location of Locations" value="{{location.lId}}" >{{location.lName}}</option>
                         </select>
@@ -141,7 +141,7 @@
                           <div class="input-group-prepend">
                             <button (click)="searchFolio(folioId.value)" class="btn btn-outline-secondary" type="button">Buscar Folio</button>
                           </div>
-                          <input #folioId type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                          <input #folioId type="number" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
                         </div>
                       </div>
                     </form>
@@ -159,7 +159,7 @@
                             <tbody>
 
                               <ng-container *ngIf="folio; else elseTemplate">
-                                <tr class="text-center">
+                                <tr class="text-center" (click)="evento(folio.arId, folio.arIssue, folio.tName)">
                                   <td>{{ folio.arId }}</td>
                                   <td>{{ folio.arIssue }}</td>
                                   <td>{{ folio.tName }}</td>

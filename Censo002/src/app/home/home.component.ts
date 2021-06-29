@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
     AreaId : ['', [Validators.required]],
     arIssue: ['', [Validators.required, Validators.maxLength(500)]],
     arAttachemen: ['', [Validators.maxLength(200)]],
-    LocationId: ['', [Validators.required]],
+    // LocationId: ['', [Validators.required]],
     ThemeId: ['', [Validators.required]]
   });
 
@@ -80,6 +80,7 @@ export class HomeComponent implements OnInit {
       console.log(this.Questions);
     }, error => {
       console.error(error.error.message);
+      this.Questions = [];
     })
   }
 
@@ -103,7 +104,7 @@ export class HomeComponent implements OnInit {
       arIssue: this.bodyRequest.get('arIssue')?.value,
       arAttachemen: this.bodyRequest.get('arAttachemen')?.value,
       ThemeId: this.bodyRequest.get('ThemeId')?.value,
-      LocationId: this.bodyRequest.get('LocationId')?.value
+      // LocationId: this.bodyRequest.get('LocationId')?.value
     }
 
     console.log(anonReq);
@@ -124,6 +125,7 @@ export class HomeComponent implements OnInit {
 
   folio : any;
 
+  // Busqueda de folio en la base de datos con base en su id
   searchFolio(folioId : any){
     this._searchFolio.searchFolio(folioId).subscribe( data => {
       this.folio = data;
@@ -131,6 +133,11 @@ export class HomeComponent implements OnInit {
     }, error => {
       console.error(error.error.message);
     })
+  }
+
+  // Obtencion de los datos de la tabla al hacer click en una row
+  evento(id : any, issue : any, theme : any){
+    console.log('Prueb ce click ' + id + ' ' + issue + ' ' + theme);
   }
 }
 

@@ -23,7 +23,7 @@ namespace CensoAPI02.Controllers
         }
 
         // GET: api/<LocationsController>
-        [HttpGet]
+        /*[HttpGet]
         public async Task<ActionResult> Get()
         {
             // Obtencion de todas las localidades
@@ -36,25 +36,7 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        // GET api/<LocationsController>/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult> Get(int id)
-        {
-            try
-            {
-                var query = await _context.Locations.Select(l => new { l.lId, l.lName, l.lStatus }).Where(l => l.lId == id && l.lStatus == true).FirstOrDefaultAsync();
-                if(query == null)
-                {
-                    return NotFound(new { message = "La localidad no existe en la base de datos" });
-                }
-                return Ok(query);
-            }catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        }*/
 
         // POST api/<LocationsController>
         [HttpPost]

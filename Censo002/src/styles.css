@@ -360,6 +360,11 @@ background-image: url(img/LogoConti.png);
 .ContendorPageAngular0{
     display: none;
 }
+
+.ContendorPageAngular00{
+  display: block;
+}
+
 .ContendorPageAngular01{
     display: none;
     background: rgba(255, 255, 255, 0.959);

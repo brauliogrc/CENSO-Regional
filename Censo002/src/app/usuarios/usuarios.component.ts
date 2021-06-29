@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { dataUsers, dataNewUser, availableLocations, availableRoles } from '../interfaces/interfaces';
 import { ShrUsersService } from '../services/hruser/shr-users.service';
 import { DataTableService } from '../services/tables/data-table.service';
+import { SearchesService } from '../services/searches/searches.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -35,7 +36,8 @@ export class UsuariosComponent implements OnInit {
 
   constructor(  private _service:DataTableService,
                 private _fb:FormBuilder,
-                private _userSerice:ShrUsersService) { }
+                private _userSerice:ShrUsersService,
+                private _searches:SearchesService) { }
 
   ngOnInit(): void {
     this.getAllUsers();
@@ -105,7 +107,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   search(idUser : any){
-    this._userSerice.getSpecificUser(idUser).subscribe( data => {
+    this._searches.getSpecificUser(idUser).subscribe( data => {
       this.user = data;
       this.Users = [];
       console.log(this.user);
