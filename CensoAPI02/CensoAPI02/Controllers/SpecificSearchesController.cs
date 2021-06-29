@@ -40,7 +40,8 @@ namespace CensoAPI02.Controllers
                             join question in _context.Questions on qth.QuestionId equals question.qId
                             join request in _context.Requests on question.qId equals request.QuestionId
                             join area in _context.Areas on request.AreaId equals area.aId
-                            where theme.tStatus == true && question.qStatus == true && request.rId == id
+                            //where theme.tStatus == true && question.qStatus == true && request.rId == id
+                            where request.rId == id
                             select new
                             {
                                 theme.tId,
@@ -53,14 +54,50 @@ namespace CensoAPI02.Controllers
                                 area.aName
                             };
 
-                if (query == null)
+                if (query == null || query.Count() == 0)
                 {
-                    return NotFound(new { message = "ningun ticket encontrado en la base de atos" });
+                    return NotFound(new { message = "Ningun ticket encontrado en la base de atos" });
                 }
 
                 return Ok(query);
             }
             catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet][Route("folioAnonSearch/{id}")]
+        public async Task<ActionResult> GetFolioAnon(int id)
+        {
+            try
+            {
+                var query = from anonReq in _context.AnonRequests
+                            join question in _context.Questions on anonReq.QuestionId equals question.qId
+                            join theme in _context.Theme on anonReq.ThemeId equals theme.tId
+                            join area in _context.Areas on anonReq.AreaId equals area.aId
+                            where anonReq.arId == id
+                            select new
+                            {
+                                anonReq.arId,
+                                anonReq.arEmployeeType,
+                                anonReq.arIssue,
+                                anonReq.arAttachement,
+                                question.qId,
+                                question.qName,
+                                theme.tId,
+                                theme.tName,
+                                area.aId,
+                                area.aName
+                            };
+
+                if(query == null || query.Count() == 0)
+                {
+                    return NotFound(new { message = "Ningun ticket encontrado en la base de atos" });
+                }
+
+                return Ok(query);
+            }catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -179,4 +216,6 @@ namespace CensoAPI02.Controllers
             }
         }
     }
+
+    // ENUMERACION PARA EL TIPO DE EMPLEADO
 }

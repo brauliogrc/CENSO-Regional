@@ -1,185 +1,218 @@
-<body class="BodyIndexC" style="overflow: auto;">
+<body class="BodyIndexC" style="overflow: auto">
   <header>
     <div class="headerIndexC">
-      <img src="../../assets/img/LogoConti.png" alt="Continental" class="imgLogoIndexC">
+      <img
+        src="../../assets/img/LogoConti.png"
+        alt="Continental"
+        class="imgLogoIndexC"
+      />
       <h1 class="h1CensoB">CENSO Bienestar</h1>
       <button class="btnIndexC" type="submit">iniciar Sesion</button>
     </div>
   </header>
   <div class="contenedorIndexC">
-    <img src="../../assets/img/CensoBienestar.png" alt="" width="95%" class="imgBienestarC">
-    <hr class="hr">
+    <img
+      src="../../assets/img/CensoBienestar.png"
+      alt=""
+      width="95%"
+      class="imgBienestarC"
+    />
+    <hr class="hr" />
     <div class="ContainerIndexC1">
       <button class="btnIndexOPC" type="submit">Registro con datos</button>
-      <button class="btnIndexOPC" type="submit" onclick="mostrarRegistro()">Registro anónimo</button>
+      <button class="btnIndexOPC" type="submit" onclick="mostrarRegistro()">
+        Registro anónimo
+      </button>
       <!-- <a [routerLink]="['folioanonimoindex']">ruta</a> -->
 
-      <hr class="hr">
+      <hr class="hr" />
     </div>
     <div class="ContendorPageAngular0" id="registro">
       <div class="Content-btn-folio" id="consultarf">
         <h3>Puedes consultar tus folios dando clic aquí</h3>
-        <button class="btnIndexC1" type="submit" onclick="mostrarbuscar()">Consultar Folio</button>
+        <button class="btnIndexC1" type="submit" onclick="mostrarbuscar()">
+          Consultar Folio
+        </button>
       </div>
 
       <div class="ContendorPageAngular1">
         <div class="ContendorPageAngular" id="registro01">
-
           <!-- Inicio del FORM 
                     el form se enlaza con la variable bodyRequest del Component por medio de [formGroup]
                     se llama al método registerRequest por medio de la directiva (ngSubmit)-->
-          <form [formGroup]="bodyRequest" (ngSubmit)="registerAnonRequest()" class="row g-3 needs-validation"
-            novalidate>
+          <form
+            [formGroup]="bodyRequest"
+            (ngSubmit)="registerAnonRequest()"
+            class="row g-3 needs-validation"
+            novalidate
+          >
             <!-- <form class="row g-3 needs-validation" novalidate> -->
 
             <div class="md-3">
               <!-- ******** tipo de empleado ********** -->
               <!-- cada campo esta reacionado con una variable en el Component llamada igual que
                         el contenido de formControlName -->
-                        <label for="validationCustom04" class="form-label">Tipo de Empleado(a)</label>
-                        <select formControlName="arEmployeeType" class="form-select" id="validationCustom04" required>
-                          <option value="1">Administrativo</option>
-                          <option value="2">Sindicalizado</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          Selecciona una opcion.
-                        </div>
-                      </div>
+              <label for="validationCustom04" class="form-label"
+                >Tipo de Empleado(a)</label
+              >
+              <select
+                formControlName="arEmployeeType"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
+                <option value="1">Administrativo</option>
+                <option value="2">Sindicalizado</option>
+              </select>
+              <div class="invalid-feedback">Selecciona una opcion.</div>
+            </div>
 
-                      <!-- Campo de localidad -->
-                      <div class="md-3">
-                        <label for="validationCustom04" class="form-label">Localidad</label>
-                        <select #locationId (change)="defineLocation(locationId.value)"
-                        class="form-select" id="validationCustom04" required>
-                          <option *ngFor="let location of Locations" value="{{location.lId}}" >{{location.lName}}</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          Selecciona una opción.
-                        </div>
-                      </div>
+            <!-- Campo de localidad -->
+            <div class="md-3">
+              <label for="validationCustom04" class="form-label"
+                >Localidad</label
+              >
+              <select
+                #locationId
+                (change)="defineLocation(locationId.value)"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
+                <option
+                  *ngFor="let location of Locations"
+                  value="{{ location.lId }}"
+                >
+                  {{ location.lName }}
+                </option>
+              </select>
+              <div class="invalid-feedback">Selecciona una opción.</div>
+            </div>
 
-                      <!--agregue este campo del tema-->
-                      <div class="md-3">
-                        <label for="validationCustom04" class="form-label">Tema</label>
-                        <select #themeId formControlName="ThemeId" (change)="getQuestions(themeId.value)"
-                         class="form-select" id="validationCustom04" required>
-                          <option *ngFor="let th of Theme" value="{{th.tId}}" >{{th.tName}}</option>
-                        </select>
-                        <div class="invalid-feedback">
-                          Selecciona una opción.
-                        </div>
-                      </div>
-              
-                      <div class="md-3">
-                        <!-- *********** tipo de registro ************ -->
-                          <label for="validationCustom04" class="form-label">Pregunta</label>
-                          <!-- Recorremos el arreglo questions para mostrar cada uno de sus elemetnos -->
-                          <select formControlName="QuestionId" class="form-select" id="validationCustom04" required>
-                            <option *ngFor="let question of Questions" value="{{question.qId}}" >{{question.qName}}</option>
-                          </select>
-                          <div class="invalid-feedback">
-                              Selecciona una opcion.
-                          </div>
-                        </div>
-                      
-                        <div class="mb-3">
-                          <!-- ************ nave del trabajador ***************** -->
-                          <label for="validationCustom04" class="form-label">Area</label>
-                          <select formControlName="AreaId" class="form-select" id="validationCustom04" required>
-                            <option *ngFor="let area of Areas" value="{{area.aId}}">{{area.aName}}</option>
-                            <option>Anónimo</option>
-                          </select>
-                          <div class="invalid-feedback">
-                              Selecciona una opcion.
-                          </div>
-                        </div>
-              
-                        <div class="mb-3">
-                          <!-- ************* contenido de la solicitud ************** -->
-                          <label for="exampleFormControlTextarea1" class="form-label">¿Qué necesitas decirnos?</label>
-                          <textarea formControlName="arIssue" maxlength="499" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
-                        </div>
-              
-                        <div>
-                          <!-- ************ archivo de evidencia ************** -->
-                          <label for="formFileLg" class="form-label">Evidencia (Opcional)</label>
-                          <input formControlName="arAttachemen" class="form-control form-control-lg" id="formFileLg" type="file">
-                        </div>
-              
-                      <div class="col-12">
-                        <!-- ******************* terminos y condicionees ******************* -->
-                        <div class="form-check">
-                          <input  class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                          <label class="form-check-label" for="invalidCheck">
-                              He leido el presente <a href="http://glas822a:8001/media/uploads/aviso_privacidad.pdf">aviso de privacidad</a> y acepto el tratamiento de mis datos personales por Continental.
-                          </label>
-                          <div class="invalid-feedback">
-                            You must agree before submitting.
-                          </div>
-                        </div>
-                      </div>
-                      <!-- **************** botón de envio del formulario **************** -->
-                      <div class="col-12">
-                        <!-- validacion de contenido de formulario valido -->
-                        <button [disabled]="bodyRequest.invalid" class="btnIndexC1" type="submit">Crear folio de reporte</button>
-                        <!-- <button class="btnIndexC1" type="submit">Crear folio de reporte</button> -->
-                      </div>
-                    </form>
-                    <!-- fin del FORM -->
+            <!--agregue este campo del tema-->
+            <div class="md-3">
+              <label for="validationCustom04" class="form-label">Tema</label>
+              <select
+                #themeId
+                formControlName="ThemeId"
+                (change)="getQuestions(themeId.value)"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
+                <option *ngFor="let th of Theme" value="{{ th.tId }}">
+                  {{ th.tName }}
+                </option>
+              </select>
+              <div class="invalid-feedback">Selecciona una opción.</div>
+            </div>
+
+            <div class="md-3">
+              <!-- *********** tipo de registro ************ -->
+              <label for="validationCustom04" class="form-label"
+                >Pregunta</label
+              >
+              <!-- Recorremos el arreglo questions para mostrar cada uno de sus elemetnos -->
+              <select
+                formControlName="QuestionId"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
+                <option
+                  *ngFor="let question of Questions"
+                  value="{{ question.qId }}"
+                >
+                  {{ question.qName }}
+                </option>
+              </select>
+              <div class="invalid-feedback">Selecciona una opcion.</div>
+            </div>
+
+            <div class="mb-3">
+              <!-- ************ nave del trabajador ***************** -->
+              <label for="validationCustom04" class="form-label">Area</label>
+              <select
+                formControlName="AreaId"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
+                <option *ngFor="let area of Areas" value="{{ area.aId }}">
+                  {{ area.aName }}
+                </option>
+                <option>Anónimo</option>
+              </select>
+              <div class="invalid-feedback">Selecciona una opcion.</div>
+            </div>
+
+            <div class="mb-3">
+              <!-- ************* contenido de la solicitud ************** -->
+              <label for="exampleFormControlTextarea1" class="form-label"
+                >¿Qué necesitas decirnos?</label
+              >
+              <textarea
+                formControlName="arIssue"
+                maxlength="499"
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+
+            <div>
+              <!-- ************ archivo de evidencia ************** -->
+              <label for="formFileLg" class="form-label"
+                >Evidencia (Opcional)</label
+              >
+              <input
+                formControlName="arAttachemen"
+                class="form-control form-control-lg"
+                id="formFileLg"
+                type="file"
+              />
+            </div>
+
+            <div class="col-12">
+              <!-- ******************* terminos y condicionees ******************* -->
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="invalidCheck"
+                  required
+                />
+                <label class="form-check-label" for="invalidCheck">
+                  He leido el presente
+                  <a
+                    href="http://glas822a:8001/media/uploads/aviso_privacidad.pdf"
+                    >aviso de privacidad</a
+                  >
+                  y acepto el tratamiento de mis datos personales por
+                  Continental.
+                </label>
+                <div class="invalid-feedback">
+                  You must agree before submitting.
                 </div>
-      </div>
-
-<!-- ================================================================================================================================= -->
-<!-- Comienza panel de busqueda -->
-
-              <!-- <div class="contenedorPageAngular01" id="buscar">
-                <div class="contenedorPageAngular02">
-                  <div class="ContendorPageAngular">
-                    <form action="" class="">
-                      <div class="md-3">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <button (click)="searchFolio(folioId.value)" class="btn btn-outline-secondary" type="button">Buscar Folio</button>
-                          </div>
-                          <input #folioId type="number" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
-                        </div>
-                      </div>
-                    </form>
-                      <div class="tabalaAnonima">
-                        <div class="card-body">
-                          <table class="table table-hover">
-                              <thead>
-                                  <tr>
-                                      <th>ID</th>
-                                      <th>Nombre</th>
-                                      <th>Tema</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-
-                                <ng-container *ngIf="folio; else elseTemplate">
-                                  <tr class="text-center" (click)="evento(folio.arId, folio.arIssue, folio.tName)">
-                                    <td>{{ folio.arId }}</td>
-                                    <td>{{ folio.arIssue }}</td>
-                                    <td>{{ folio.tName }}</td>
-                                  </tr>
-                                </ng-container>
-                                <ng-template #elseTemplate>
-                                  <tr class="text-center">
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                  </tr>
-                                </ng-template>
-
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                </div>
-              </div> -->
-
+              </div>
+            </div>
+            <!-- **************** botón de envio del formulario **************** -->
+            <div class="col-12">
+              <!-- validacion de contenido de formulario valido -->
+              <button
+                [disabled]="bodyRequest.invalid"
+                class="btnIndexC1"
+                type="submit"
+              >
+                Crear folio de reporte
+              </button>
+              <!-- <button class="btnIndexC1" type="submit">Crear folio de reporte</button> -->
+            </div>
+          </form>
+          <!-- fin del FORM -->
+        </div>
       </div>
       <!-- ================================================================================================================================= -->
       <!-- Comienza panel de busqueda -->
@@ -190,68 +223,88 @@
               <div class="md-3">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <button (click)="searchFolio(folioId.value)" class="btn btn-outline-secondary" type="button">Buscar
-                      Folio</button>
+                    <button
+                      (click)="searchFolio(folioId.value)"
+                      class="btn btn-outline-secondary"
+                      type="button"
+                    >
+                      Buscar Folio
+                    </button>
                   </div>
-                  <input #folioId type="text" class="form-control" placeholder="" aria-label=""
-                    aria-describedby="basic-addon1">
+                  <input
+                    #folioId
+                    type="number"
+                    class="form-control"
+                    placeholder=""
+                    aria-label=""
+                    aria-describedby="basic-addon1"
+                  />
                 </div>
               </div>
             </form>
-            <div class="tabalaAnonima1">
+            <div class="tabalaAnonima">
+              <div class="card-body">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Tipo de empleado</th>
+                      <th>Tema</th>
+                      <!-- <th>Localidad</th> -->
+                      <th>Tipo de registro</th>
+                      <th>Area</th>
+                      <th>Caso</th>
+                      <th>Evidencia</th>
+                      <!-- <th>Estatus</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngIf="folio; else elseTemplate">
+                      <!-- <tr
+                        class="text-center"
+                        (click)="evento(folio.rId, folio.rIssue, folio.tName)"
+                      >
+                        <td>{{ folio.rId }}</td>
+                        <td>{{ folio.rIssue }}</td>
+                        <td>{{ folio.tName }}</td>
+                        <td>{{ folio.tId }}</td>
+                      </tr> -->
 
-              <div class="tablaBuscar">
-              <table>
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Tipo de empleado</th>
-                    <th>Tema</th>
-                    <th>Localidad</th>
-                    <th>Tipo de registro</th>
-                    <th>Area</th>
-                    <th>Caso</th>
-                    <th>Evidencia</th>
-                    <th>Estatus</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td data-label="ID :">1</td>
-                    <td data-label="Tipo Empleado :">Administrativo</td>
-                    <td data-label="Tema :">Pregunta</td>
-                    <td data-label="Localidad :">Tijera</td>
-                    <td data-label="Tipo registro :">Queja</td>
-                    <td data-label="Area :">1</td>
-                    <td data-label="Caso :" class="caso">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-                      blanditiis totam,
-                      nobis odio impedit est odit nam placeat, consequuntur, nesciunt quae perferendis itaque ullam?
-                      Vero ab
-                      consequuntur repellat necessitatibus asperiores.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Lorem ipsum
-                    </td>
-                    <td data-label="Estatus :">Activo</td>
-
-                  </tr>
-
-                </tbody>
-              </table>
-
+                      <tr>
+                        <td data-label="ID :">{{ folio.arId }}</td>
+                        <td data-label="Tipo Empleado :">Administrativo</td>
+                        <td data-label="Tema :">{{ folio.tName }}</td>
+                        <!-- <td data-label="Localidad :">Tijera</td> -->
+                        <td data-label="Tipo registro :">{{ folio.qName }}</td>
+                        <td data-label="Area :">{{ folio.aName }}</td>
+                        <td data-label="Caso :" class="caso">
+                          {{ folio.arIssue }}
+                        </td>
+                        <td data-label="Evidencia :">
+                          {{ folio.arAttachement }}
+                        </td>
+                        <!-- <td data-label="Estatus :">Activo</td> -->
+                      </tr>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                      <!-- <tr class="text-center">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr> -->
+                    </ng-template>
+                  </tbody>
+                </table>
+              </div>
             </div>
-
-            </div>
-
-            </div>
-
           </div>
         </div>
       </div>
 
       <!--<app-folioanonimoindex></app-folioanonimoindex>-->
-      
+    </div>
+  </div>
   <footer class="footerIndexC">
-    <img src="../../assets/img/imgJalisco.png" alt="" class="imgJaliscoC">
+    <img src="../../assets/img/imgJalisco.png" alt="" class="imgJaliscoC" />
   </footer>
-
 </body>

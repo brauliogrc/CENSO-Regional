@@ -61,13 +61,13 @@ Version 3.5.4 plus
 
 fecha actualizacion: 28/06/2021
 
-version 3.5.6
-
+version 3.5.7
 -CRUD de panel usuario funcionando
 -Login funcionando
 -Modificacion de interface de datos para el folio anonimo
 -Controlador de angular dedicado solo a las busquedas especificas por id de los component localidades, usuarios, temas, preguntas y tikets
 -Controlador en la api dedicado solo a la obtencion del elemento bucado en los component localidades, usuarios, temas, preguntas y tikets
+-Funcionalidad de panel de busqueda en componen home modificada
 
 ~Braulio~
 ======================================================================================================================

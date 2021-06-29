@@ -1,51 +1,57 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
-import { availableLocations, newAnonRequest, availableTheme, availableQues, availableAreas } from '../interfaces/interfaces';
+import {
+  availableLocations,
+  newAnonRequest,
+  availableTheme,
+  availableQues,
+  availableAreas,
+} from '../interfaces/interfaces';
 import { SrequestService } from '../services/request/srequest.service';
 import { SearchesService } from '../services/searches/searches.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-
-  locationId : number = 0;
+  locationId: number = 0;
   // Contenedor de los datos de las localidades
-  Locations : availableLocations[] = [];
+  Locations: availableLocations[] = [];
 
   // Contenedor de los datos de los temas
-  Theme : availableTheme[] = [];
+  Theme: availableTheme[] = [];
 
   // Contenedor de los datos de las preguntas
-  Questions : availableQues[] = [];
+  Questions: availableQues[] = [];
 
   // Contenedor de los datos de las areas
-  Areas : availableAreas[] = [];
+  Areas: availableAreas[] = [];
 
   constructor(
-    private _fb           : FormBuilder,
-    private _fields       : FieldsRequestService,
-    private _reqService   : SrequestService,
-    private _searchFolio  : SearchesService
-  ) { }
+    private _fb: FormBuilder,
+    private _fields: FieldsRequestService,
+    private _reqService: SrequestService,
+    private _searchFolio: SearchesService
+  ) {}
 
-  
   ngOnInit(): void {
-
     // Obtenemos las localidades disponibles
-    this._fields.getLocations().subscribe( data => {
-      this.Locations = [... data];
-      console.log(this.Locations);
-    }, error => {
-      console.error(error);
-    })
+    this._fields.getLocations().subscribe(
+      (data) => {
+        this.Locations = [...data];
+        console.log(this.Locations);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   // Establecemos el id de la localidad y llamamos a los métodos que dependen de él
-  defineLocation(location : any){
+  defineLocation(location: any) {
     this.locationId = location;
     this.getTheme();
     this.getAreas();
@@ -53,51 +59,60 @@ export class HomeComponent implements OnInit {
 
   /* Definimos los campos del formulario y agregamos validaciones sobre su contenido
    *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
-  */
+   */
   bodyRequest = this._fb.group({
-    arEmployeeType:  ['', [Validators.required]],
+    arEmployeeType: ['', [Validators.required]],
     QuestionId: ['', [Validators.required]],
-    AreaId : ['', [Validators.required]],
+    AreaId: ['', [Validators.required]],
     arIssue: ['', [Validators.required, Validators.maxLength(500)]],
     arAttachemen: ['', [Validators.maxLength(200)]],
     // LocationId: ['', [Validators.required]],
-    ThemeId: ['', [Validators.required]]
+    ThemeId: ['', [Validators.required]],
   });
 
-  getTheme(){
-    this._fields.getTheme(this.locationId).subscribe( data => {
-      this.Theme = [... data];
-      console.log(this.Theme);
-    }, error => {
-      console.error(error.error.message);
-      this.Theme =[];
-    })
+  getTheme() {
+    this._fields.getTheme(this.locationId).subscribe(
+      (data) => {
+        this.Theme = [...data];
+        console.log(this.Theme);
+      },
+      (error) => {
+        console.error(error.error.message);
+        this.Theme = [];
+      }
+    );
   }
 
-  getQuestions(themeId : any){
-    this._fields.getQuestions(themeId).subscribe( data => {
-      this.Questions = [... data];
-      console.log(this.Questions);
-    }, error => {
-      console.error(error.error.message);
-      this.Questions = [];
-    })
+  getQuestions(themeId: any) {
+    this._fields.getQuestions(themeId).subscribe(
+      (data) => {
+        this.Questions = [...data];
+        console.log(this.Questions);
+      },
+      (error) => {
+        console.error(error.error.message);
+        this.Questions = [];
+      }
+    );
   }
 
-  getAreas(){
-    this._fields.getAreas(this.locationId).subscribe( data => {
-      this.Areas = [... data];
-      console.log(this.Areas);
-    }, error => {
-      console.error(error.error.message);
-    })
+  getAreas() {
+    this._fields.getAreas(this.locationId).subscribe(
+      (data) => {
+        this.Areas = [...data];
+        console.log(this.Areas);
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
   }
 
-  registerAnonRequest(){
+  registerAnonRequest() {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-     const anonReq: newAnonRequest = {
+    const anonReq: newAnonRequest = {
       arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
       AreaId: this.bodyRequest.get('AreaId')?.value,
@@ -105,39 +120,44 @@ export class HomeComponent implements OnInit {
       arAttachemen: this.bodyRequest.get('arAttachemen')?.value,
       ThemeId: this.bodyRequest.get('ThemeId')?.value,
       // LocationId: this.bodyRequest.get('LocationId')?.value
-    }
+    };
 
     console.log(anonReq);
 
     // Nos suscribimos al método del service, enviandole el objeto con los datos a registrar en la base de datos
-    this._reqService.saveAnonRequest(anonReq).subscribe( data => {
-      this.bodyRequest.reset();
-      console.log(data);
-      alert(`Peticion registrada con exito. N folio: ${data.arId}`);
-    }, error => {
-      console.error(error);
-    })
+    this._reqService.saveAnonRequest(anonReq).subscribe(
+      (data) => {
+        this.bodyRequest.reset();
+        console.log(data);
+        alert(`Peticion registrada con exito. N folio: ${data.arId}`);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   // ==================================================================================================================================================
 
   // PANEL DE BUSQUEDA
 
-  folio : any;
+  folio: any;
 
   // Busqueda de folio en la base de datos con base en su id
-  searchFolio(folioId : any){
-    this._searchFolio.searchFolio(folioId).subscribe( data => {
-      this.folio = data;
-      console.log(this.folio);
-    }, error => {
-      console.error(error.error.message);
-    })
+  searchFolio(folioId: any) {
+    this._searchFolio.searchFolioAnon(folioId).subscribe(
+      (data) => {
+        this.folio = data[0];
+        console.log(this.folio);
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
   }
 
   // Obtencion de los datos de la tabla al hacer click en una row
-  evento(id : any, issue : any, theme : any){
+  evento(id: any, issue: any, theme: any) {
     console.log('Prueb ce click ' + id + ' ' + issue + ' ' + theme);
   }
 }
-
