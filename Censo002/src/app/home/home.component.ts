@@ -35,7 +35,8 @@ export class HomeComponent implements OnInit {
     private _fb: FormBuilder,
     private _fields: FieldsRequestService,
     private _reqService: SrequestService,
-    private _searchFolio: SearchesService
+    private _searchFolio: SearchesService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
