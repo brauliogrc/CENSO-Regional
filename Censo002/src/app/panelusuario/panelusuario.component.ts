@@ -54,7 +54,7 @@ export class PanelusuarioComponent implements OnInit {
     private _reqServise: SrequestService,
     private _logService: SloginService,
     private _fields: FieldsRequestService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.user = this._logService.getUser();

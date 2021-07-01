@@ -23,7 +23,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
-import { RespuestaTiketComponent } from './respuesta-tiket/respuesta-tiket.component';
 
 
 @NgModule({
@@ -42,8 +41,7 @@ import { RespuestaTiketComponent } from './respuesta-tiket/respuesta-tiket.compo
     LoginComponent,
     PanelusuarioComponent,
     PanelusuariobusqComponent,
-    PaneladminComponent,
-    RespuestaTiketComponent
+    PaneladminComponent
   ],
   imports: [
     BrowserModule,

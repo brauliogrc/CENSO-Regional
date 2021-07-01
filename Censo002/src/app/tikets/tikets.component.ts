@@ -16,7 +16,7 @@ export class TiketsComponent implements OnInit {
   constructor(
     private _ticketService: DataTableService,
     private _searchService: SearchesService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // Obtencion de los tickets registrados

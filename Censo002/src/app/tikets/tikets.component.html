@@ -1,56 +1,62 @@
 <div class="contenido1">
-    <div class="buscar">
-        <h1>Tikets</h1>
-        <button class="btnIndexC" type="submit">Añadir tiket</button>
-    </div>
+  <div class="buscar">
+    <h1>Tikets</h1>
+    <button class="btnIndexC" type="submit">Añadir tiket</button>
+  </div>
 
-    <hr />
-    <form class="form-search">
-        <input #tiketId class="Search1" type="number" placeholder="Buscar" aria-label="Search" />
-        <button (click)="search(tiketId.value)" class="btnIndexC" type="submit">
-            Buscar
-        </button>
-    </form>
-    <hr />
-    <table class="table table-dark table-sm">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Tema</th>
-                <th>Pregunta</th>
-                <th>Nombre usuario</th>
-                <th>Asunto</th>
-                <th>Área</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngIf="!tiket; else elseTemplate">
-                <tr *ngFor="let tiket of Tikets" (click)="onClick(tiket.rId)">
-                    <td>{{ tiket.rId }}</td>
-                    <td>{{ tiket.tName }}</td>
-                    <td>{{ tiket.qName }}</td>
-                    <td>{{ tiket.uName }}</td>
-                    <td>{{ tiket.rIssue }}</td>
-                    <td>{{ tiket.aName }}</td>
-                    <td>
-                        <button class="btn btn-danger">Eliminar</button>
-                    </td>
-                </tr>
-            </ng-container>
-            <ng-template #elseTemplate>
-                <tr>
-                    <td>{{ tiket.rId }}</td>
-                    <td>{{ tiket.tName }}</td>
-                    <td>{{ tiket.qName }}</td>
-                    <td>{{ tiket.uName }}</td>
-                    <td>{{ tiket.rIssue }}</td>
-                    <td>{{ tiket.aName }}</td>
-                    <td>
-                        <button class="btn btn-danger">Eliminar</button>
-                    </td>
-                </tr>
-            </ng-template>
-        </tbody>
-    </table>
+  <hr />
+  <form class="form-search">
+    <input
+      #tiketId
+      class="Search1"
+      type="number"
+      placeholder="Buscar"
+      aria-label="Search"
+    />
+    <button (click)="search(tiketId.value)" class="btnIndexC" type="submit">
+      Buscar
+    </button>
+  </form>
+  <hr />
+  <table class="table table-dark table-sm">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tema</th>
+        <th>Pregunta</th>
+        <th>Nombre usuario</th>
+        <th>Asunto</th>
+        <th>Área</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="!tiket; else elseTemplate">
+        <tr *ngFor="let tiket of Tikets" (click)="onClick(tiket.rId)">
+          <td>{{ tiket.rId }}</td>
+          <td>{{ tiket.tName }}</td>
+          <td>{{ tiket.qName }}</td>
+          <td>{{ tiket.uName }}</td>
+          <td>{{ tiket.rIssue }}</td>
+          <td>{{ tiket.aName }}</td>
+          <td>
+            <button class="btn btn-danger">Eliminar</button>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <tr>
+          <td>{{ tiket.rId }}</td>
+          <td>{{ tiket.tName }}</td>
+          <td>{{ tiket.qName }}</td>
+          <td>{{ tiket.uName }}</td>
+          <td>{{ tiket.rIssue }}</td>
+          <td>{{ tiket.aName }}</td>
+          <td>
+            <button class="btn btn-danger">Eliminar</button>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
 </div>
