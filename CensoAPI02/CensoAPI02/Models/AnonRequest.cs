@@ -52,5 +52,11 @@ namespace CensoAPI02.Models
         public int ThemeId { get; set; }
 
         public Theme theme { get; set; }
+
+        // Relationshio one-2-many entities Locations and AnonRequest
+        [Required]
+        public int LocationId { get; set; }
+
+        public Locations locations { get; set; }
     }
 }

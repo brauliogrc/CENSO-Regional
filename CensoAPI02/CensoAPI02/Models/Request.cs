@@ -55,5 +55,11 @@ namespace CENSO.Models
         public int ThemeId { get; set; }
 
         public Theme theme { get; set; }
+
+        // Relationshio one-2-many entities Locations and Request
+        [Required ]
+        public int LocationId { get; set; }
+
+        public Locations locations { get; set; }
     }
 }

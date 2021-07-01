@@ -3,6 +3,7 @@ import { dataTheme, dataNewTheme, availableLocations } from '../interfaces/inter
 import { DataTableService } from '../services/tables/data-table.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SthemeService } from '../services/theme/stheme.service';
+import { SearchesService } from '../services/searches/searches.service';
 
 @Component({
   selector: 'app-temas',
@@ -27,7 +28,8 @@ export class TemasComponent implements OnInit {
 
   constructor(  private _service:DataTableService,
                 private _fb:FormBuilder,
-                private _themeService:SthemeService) { }
+                private _themeService:SthemeService,
+                private _searches:SearchesService) { }
 
   ngOnInit(): void {
     this.getAllTheme();
@@ -76,7 +78,7 @@ export class TemasComponent implements OnInit {
   }
 
   search(idTheme : any){
-    this._themeService.getSpecificTheme(idTheme).subscribe( data => {
+    this._searches.getSpecificTheme(idTheme).subscribe( data => {
       this.th = data;
       this.theme = [];
       console.log(this.th);

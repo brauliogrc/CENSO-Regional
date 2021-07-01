@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SloginService } from '../services/login/slogin.service';
 import { dataLogin } from '../interfaces/interfaces';
@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
 
@@ -47,11 +46,14 @@ export class LoginComponent implements OnInit {
       } else {
         this.loginForm.reset();
         console.log('Binbenido ' + data.uName);
+        this._loginService.setData(data.locationId, data.uName, data.uId, data.uEmail);
         this.router.navigate(['/panelusuario']);
       }
-      console.log(data);
+      // console.log(data);
     }, error => {
-      console.error(error);
+      console.error(error.error);
     });
   }
+
+
 }

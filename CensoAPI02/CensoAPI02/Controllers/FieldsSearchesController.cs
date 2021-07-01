@@ -7,15 +7,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+/// <summary>
+/// 
+/// CONTROLADOR PARA OBTENER LAS OPCIONES QUE MOSTRARÁN LOS SEECT EN EL REGISTRO DE UNA PETICIÓN
+/// O UNA PETICIÓN ANONIMA
+/// 
+/// </summary>
+
 namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmpyCensoController : ControllerBase
+    public class FieldsSearchesController : ControllerBase
     {
         private readonly CDBContext _context;
 
-        public EmpyCensoController(CDBContext context)
+        public FieldsSearchesController(CDBContext context)
         {
             _context = context;
         }

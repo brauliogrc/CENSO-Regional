@@ -39,5 +39,12 @@ namespace CENSO.Models
 
         //Relationship one-2-many entities Area and Location
         public List<Area> areas { get; set; }
+
+        // Relationshio one-2-many entities Locations and Request
+        public List<Request> Request { get; set; }
+
+        // Relationshio one-2-many entities Locations and AnonRequest
+        public List<AnonRequest> anonRequest { get; set; }
+
     }
 }

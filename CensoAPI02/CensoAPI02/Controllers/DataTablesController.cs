@@ -144,14 +144,40 @@ namespace CensoAPI02.Controllers
             }
         }
 
+        // Obtener datos para la tabla de Tickets
         [HttpGet]
         [Route("TableTikets")]
         public async Task<ActionResult> GerTikets()
         {
             try
             {
+                var query = from theme in _context.Theme
+                            join qth in _context.QuestionsThemes on theme.tId equals qth.ThemeId
+                            join question in _context.Questions on qth.QuestionId equals question.qId
+                            join request in _context.Requests on question.qId equals request.QuestionId
+                            join area in _context.Areas on request.AreaId equals area.aId
+                            join user in _context.HRU on request.rUserId equals user.uId
+                            //where theme.tStatus == true && question.qStatus == true
+                            select new
+                            {
+                                theme.tId,
+                                theme.tName,
+                                question.qId,
+                                question.qName,
+                                request.rId,
+                                request.rIssue,
+                                area.aId,
+                                area.aName,
+                                user.uId,
+                                user.uName
+                            };
 
-                return Ok();
+                if(query == null)
+                {
+                    return NotFound(new { message = "ningun ticket encontrado en la base de atos" });
+                }
+
+                return Ok(query);
             }catch(Exception ex)
             {
                 return BadRequest();

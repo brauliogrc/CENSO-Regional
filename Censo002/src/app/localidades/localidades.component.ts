@@ -3,6 +3,7 @@ import { SlocationsService } from '../services/locations/slocations.service';
 import { dataLocations, dataNewLocation } from '../interfaces/interfaces';
 import { DataTableService } from '../services/tables/data-table.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SearchesService } from '../services/searches/searches.service';
 
 @Component({
   selector: 'app-localidades',
@@ -24,7 +25,8 @@ export class LocalidadesComponent implements OnInit {
 
   constructor(  private _service:DataTableService,
                 private _locationService:SlocationsService,
-                private _fb:FormBuilder) { }
+                private _fb:FormBuilder,
+                private _searches:SearchesService) { }
 
   ngOnInit(): void {
     this.getAllLocations();
@@ -71,7 +73,7 @@ export class LocalidadesComponent implements OnInit {
 
   // Busca una localidad con base al id dado
   search(idLocation : any){
-    this._locationService.getSpecificLocation(idLocation).subscribe(data => {
+    this._searches.getSpecificLocation(idLocation).subscribe(data => {
       this.location = data;
       this.locations = [];
       console.log(this.location);

@@ -1,4 +1,4 @@
-<body class="BodyIndexC">
+<body class="BodyIndexC" style="overflow: auto;">
   <header>
     <div class="headerIndexC">
       <img src="../../assets/img/LogoConti.png" alt="Continental" class="imgLogoIndexC">
@@ -14,12 +14,20 @@
     <div class="content-titulo1">
       <p>Bienvenido</p>
 
-      <h3>Usuario</h3>
+      <h3>{{getName()}}</h3>
       <hr>
     </div>
     <div class="content-titulo">
 
       <div class="Content-btn-folio2">
+
+        <button class="btnIndexC1" type="submit">Crear Folio</button>
+        <button class="btnIndexC1" type="submit">Consultar Folio</button>
+      </div>
+    </div>
+
+    <div class="ContendorPageAngular1">
+      <div class="ContendorPageAngular">
 
         <button class="btnIndexC1" (click)="crearfolio()" type="submit">Crear Folio</button>
         <button class="btnIndexC1" (click)="consultarfolio()" type="submit">Consultar Folio</button>
@@ -38,7 +46,7 @@
           <!-- cada campo esta reacionado con una variable en el Componen llamada igual que
                       el contenido de formControlName -->
           <label for="validationCustom04" class="form-label">Nombre Empleado</label>
-          <input value="Nombre" class="form-control" type="text" placeholder="Disabled input"
+          <input value="{{getName()}}" class="form-control" type="text" placeholder="Disabled input"
             aria-label="Disabled input example" disabled>
 
           <div class="md-3">
@@ -55,9 +63,9 @@
           <!--Alexis cambio tema-->
           <div class="md-3">
             <label for="validationCustom04" class="form-label">Tema</label>
-            <select class="form-select" id="validationCustom04" required>
-              <option>Administrativo</option>
-              <option>Sindicalizado</option>
+            <select #themeId (change)="getQuetions(themeId.value)" formControlName="ThemeId" class="form-select"
+              id="validationCustom04" required>
+              <option *ngFor="let th of Theme" value="{{th.tId}}">{{th.tName}}</option>
             </select>
             <div class="invalid-feedback">
               Selecciona una opción.
@@ -68,7 +76,7 @@
             <!-- *********** tipo de registro ************ -->
             <label for="validationCustom04" class="form-label">Tipo de registro</label>
             <select formControlName="QuestionId" class="form-select" id="validationCustom04" required>
-              <option *ngFor="let question of questions" value="{{question.qId}}">{{question.qName}}</option>
+              <option *ngFor="let question of Questions" value="{{question.qId}}">{{question.qName}}</option>
             </select>
             <div class="invalid-feedback">
               Selecciona una opcion.
@@ -79,12 +87,7 @@
             <!-- ************ nave del trabajador ***************** -->
             <label for="validationCustom04" class="form-label">Area</label>
             <select formControlName="AreaId" class="form-select" id="validationCustom04" required>
-              <option selected disabled value="">1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>Anónimo</option>
+              <option *ngFor="let area of Areas" value="{{area.aId}}">{{area.aName}}</option>
             </select>
             <div class="invalid-feedback">
               Selecciona una opcion.
@@ -127,6 +130,80 @@
 
       </div>
     </div>
+    <!--Alexis cambio tema-->
+    <div class="md-3">
+      <label for="validationCustom04" class="form-label">Tema</label>
+      <select class="form-select" id="validationCustom04" required>
+        <option>Administrativo</option>
+        <option>Sindicalizado</option>
+      </select>
+      <div class="invalid-feedback">
+        Selecciona una opción.
+      </div>
+    </div>
+
+    <div class="md-3">
+      <!-- *********** tipo de registro ************ -->
+      <label for="validationCustom04" class="form-label">Tipo de registro</label>
+      <select formControlName="QuestionId" class="form-select" id="validationCustom04" required>
+        <option *ngFor="let question of questions" value="{{question.qId}}">{{question.qName}}</option>
+      </select>
+      <div class="invalid-feedback">
+        Selecciona una opcion.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <!-- ************ nave del trabajador ***************** -->
+      <label for="validationCustom04" class="form-label">Area</label>
+      <select formControlName="AreaId" class="form-select" id="validationCustom04" required>
+        <option selected disabled value="">1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>Anónimo</option>
+      </select>
+      <div class="invalid-feedback">
+        Selecciona una opcion.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <!-- ************* contenido de la solicitud ************** -->
+      <label for="exampleFormControlTextarea1" class="form-label">¿Qué necesitas decirnos?</label>
+      <textarea formControlName="rIssue" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
+    <div>
+      <!-- ************ archivo de evidencia ************** -->
+      <label for="formFileLg" class="form-label">Evidencia (Opcional)</label>
+      <input formControlName="rAttachement" class="form-control form-control-lg" id="formFileLg" type="file">
+    </div>
+
+    <div class="col-12">
+
+      <div class="form-check">
+        <!-- ******************* terminos y condicionees ******************* -->
+        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+        <label class="form-check-label" for="invalidCheck">
+          He leido el presente aviso de privacidad y acepto el tratamiento de mis datos personales por
+          Continental.
+        </label>
+        <div class="invalid-feedback">
+          You must agree before submitting.
+        </div>
+      </div>
+    </div>
+    <!-- **************** botón de envio del formulario **************** -->
+    <div class="col-12">
+      <!-- validacion de contenido de formulario valido -->
+      <button [disabled]="bodyRequest.invalid" class="btnIndexC1" type="submit">Crear folio de reporte</button>
+    </div>
+    </form>
+
+  </div>
+  </div>
   </div>
   <footer class="footerIndexC">
 
