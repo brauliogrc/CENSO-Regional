@@ -156,7 +156,8 @@ namespace CensoAPI02.Controllers
                             join question in _context.Questions on qth.QuestionId equals question.qId
                             join request in _context.Requests on question.qId equals request.QuestionId
                             join area in _context.Areas on request.AreaId equals area.aId
-                            where theme.tStatus == true && question.qStatus == true
+                            join user in _context.HRU on request.rUserId equals user.uId
+                            //where theme.tStatus == true && question.qStatus == true
                             select new
                             {
                                 theme.tId,
@@ -166,7 +167,9 @@ namespace CensoAPI02.Controllers
                                 request.rId,
                                 request.rIssue,
                                 area.aId,
-                                area.aName
+                                area.aName,
+                                user.uId,
+                                user.uName
                             };
 
                 if(query == null)

@@ -74,6 +74,7 @@
               >
               <select
                 #locationId
+                formControlName="LocationId"
                 (change)="defineLocation(locationId.value)"
                 class="form-select"
                 id="validationCustom04"
@@ -250,7 +251,7 @@
                       <th>ID</th>
                       <th>Tipo de empleado</th>
                       <th>Tema</th>
-                      <!-- <th>Localidad</th> -->
+                      <th>Localidad</th>
                       <th>Tipo de registro</th>
                       <th>Area</th>
                       <th>Caso</th>
@@ -274,7 +275,7 @@
                         <td data-label="ID :">{{ folio.arId }}</td>
                         <td data-label="Tipo Empleado :">Administrativo</td>
                         <td data-label="Tema :">{{ folio.tName }}</td>
-                        <!-- <td data-label="Localidad :">Tijera</td> -->
+                        <td data-label="Localidad :">{{ folio.lName }}</td>
                         <td data-label="Tipo registro :">{{ folio.qName }}</td>
                         <td data-label="Area :">{{ folio.aName }}</td>
                         <td data-label="Caso :" class="caso">

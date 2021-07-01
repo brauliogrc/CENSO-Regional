@@ -40,6 +40,7 @@ namespace CensoAPI02.Controllers
                             join question in _context.Questions on qth.QuestionId equals question.qId
                             join request in _context.Requests on question.qId equals request.QuestionId
                             join area in _context.Areas on request.AreaId equals area.aId
+                            join user in _context.HRU on request.rUserId equals user.uId
                             //where theme.tStatus == true && question.qStatus == true && request.rId == id
                             where request.rId == id
                             select new
@@ -51,7 +52,9 @@ namespace CensoAPI02.Controllers
                                 request.rId,
                                 request.rIssue,
                                 area.aId,
-                                area.aName
+                                area.aName,
+                                user.uId,
+                                user.uName
                             };
 
                 if (query == null || query.Count() == 0)
@@ -76,6 +79,7 @@ namespace CensoAPI02.Controllers
                             join question in _context.Questions on anonReq.QuestionId equals question.qId
                             join theme in _context.Theme on anonReq.ThemeId equals theme.tId
                             join area in _context.Areas on anonReq.AreaId equals area.aId
+                            join location in _context.Locations on anonReq.LocationId equals location.lId
                             where anonReq.arId == id
                             select new
                             {
@@ -88,7 +92,9 @@ namespace CensoAPI02.Controllers
                                 theme.tId,
                                 theme.tName,
                                 area.aId,
-                                area.aName
+                                area.aName,
+                                location.lId,
+                                location.lName
                             };
 
                 if(query == null || query.Count() == 0)
@@ -215,7 +221,12 @@ namespace CensoAPI02.Controllers
                 return BadRequest(ex.Message);
             }
         }
-    }
 
-    // ENUMERACION PARA EL TIPO DE EMPLEADO
+        // ENUMERACION PARA EL EMPLOYEETYPE
+        enum EmployeeType
+        {
+            node = 0,
+
+        }
+    }
 }

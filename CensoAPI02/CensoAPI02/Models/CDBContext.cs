@@ -1,4 +1,4 @@
-﻿using CensoAPI02.Models;
+﻿using CensoAPI02.Models;    
 using CensoAPI02.Models.UnionTables;
 using CensoAPI02.UnionTables;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +29,7 @@ namespace CENSO.Models
         public DbSet<Area> Areas { get; set; }
         public DbSet<Roles> Roles { get; set; }
 
-        protected override void OnConfiguring( DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer(@"Server=GLL1330W\SQL_ET; DataBase=censo02; User ID=sa; Password=AccesoConti08; ConnectRetryCount=0");
             //@"Server=GLL1330W\SQL_ET; DataBase=censo02; Trusted_Connection=true; ConnectRetryCount=0"
@@ -155,6 +155,19 @@ namespace CENSO.Models
                 .WithMany(r => r.hru)
                 .HasForeignKey(hru => hru.RoleId);
 
+            // configuracions para relacón one-to-many Locations and Request
+            modelBuilder.Entity<Request>()
+                .HasOne<Locations>(r => r.locations)
+                .WithMany(l => l.Request)
+                .HasForeignKey(r => r.LocationId)
+                .OnDelete(DeleteBehavior.NoAction); // Deshabilitamos la eliminacion en cascada
+
+            // configuracions para relacón one-to-many Locations and AnonRequest
+            modelBuilder.Entity<AnonRequest>()
+                .HasOne<Locations>(ar => ar.locations)
+                .WithMany(l => l.anonRequest)
+                .HasForeignKey(ar => ar.LocationId)
+                .OnDelete(DeleteBehavior.NoAction); // Deshabilitamos la eliminacion en cascada
         }
     }
 }

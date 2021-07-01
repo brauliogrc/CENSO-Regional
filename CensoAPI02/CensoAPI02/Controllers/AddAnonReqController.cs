@@ -49,7 +49,9 @@ namespace CensoAPI02.Controllers
                     arAttachement = newAnomReq.arAttachemen,
                     arCreationDate = DateTime.Now,
                     QuestionId = newAnomReq.QuestionId,
-                    ThemeId = newAnomReq.ThemeId
+                    ThemeId = newAnomReq.ThemeId,
+                    LocationId = newAnomReq.LocationId
+                    
                 };
                 _context.AnonRequests.Add(newAnonRequest);
                 await _context.SaveChangesAsync();

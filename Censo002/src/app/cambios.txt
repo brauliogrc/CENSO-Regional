@@ -71,3 +71,15 @@ version 3.5.7
 
 ~Braulio~
 ======================================================================================================================
+
+fecha actualizacion: 30/06/2021
+
+version 3.5.8
+-Busqueda folio anoimo completado
+-Relacion one-to-may etre tablas Locations-Request y Locations-AnonRequest en la api
+-Modificacion del contexto de la base de datos
+-Componen tikets funcionando (solucionada la obtencnion de datos)
+
+
+~Braulio~
+======================================================================================================================
