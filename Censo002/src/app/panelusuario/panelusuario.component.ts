@@ -4,6 +4,7 @@ import { SquestionsService } from '../services/questions/squestions.service';
 import { SrequestService } from '../services/request/srequest.service';
 import { availableQues, saveDataLogin, newRequest } from '../interfaces/interfaces';
 import { SloginService } from '../services/login/slogin.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panelusuario',
@@ -23,33 +24,42 @@ export class PanelusuarioComponent implements OnInit {
   bodyRequest = this._fb.group({
     //rUserId: ['', [Validators.required]],
     rEmployeeType: ['', [Validators.required]],
-    QuestionId: ['',[Validators.required]],
+    QuestionId: ['', [Validators.required]],
     AreaId: ['', [Validators.required]],
     rIssue: ['', [Validators.required, Validators.maxLength(500)]],
     rAttachement: ['', [Validators.maxLength(200)]]
   });
 
-  constructor(  private _fb:FormBuilder,
-                private _reqServise:SrequestService,
-                private _questionService:SquestionsService,
-                private _logService:SloginService
-                ) { }
+  constructor(private _fb: FormBuilder,
+    private _reqServise: SrequestService,
+    private _questionService: SquestionsService,
+    private _logService: SloginService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     // Obtenemos las questions que se encuentran disponibles suscribiendonos al método del service
     this._questionService.getQuestions().subscribe(data => {
       console.log(data);
-      this.questions = [... data];
+      this.questions = [...data];
     }, error => {
       console.error(error);
     });
   }
 
-  registerRequest(){
+  consultarfolio() {
+    this.router.navigate(['/panelusuariobusq']);
+  }
+
+  crearfolio() {
+    this.router.navigate(['/panelusuario']);
+  }
+
+  registerRequest() {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const req : newRequest = {
+    const req: newRequest = {
       rEmployeeType: this.bodyRequest.get('rEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
       AreaId: this.bodyRequest.get('AreaId')?.value,
@@ -57,7 +67,7 @@ export class PanelusuarioComponent implements OnInit {
       rAttachement: this.bodyRequest.get('rAttachement')?.value
     }
     console.log(req);
-    
+
     // Nos suscribimos al método del service, enviandole el objeto con los datos a registrar en la base de datos
     this._reqServise.saveRequest(req).subscribe(data => {
       this.bodyRequest.reset();
@@ -65,7 +75,7 @@ export class PanelusuarioComponent implements OnInit {
       console.log('Petición registrada con exito. N folio: ' + data.rId);
     }, error => {
       console.error(error);
-      
+
     })
   }
 

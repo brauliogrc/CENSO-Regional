@@ -4,6 +4,7 @@ import { FieldsRequestService } from '../services/fieldsRequest/fields-request.s
 import { availableLocations, newAnonRequest, availableTheme, availableQues, availableAreas } from '../interfaces/interfaces';
 import { SrequestService } from '../services/request/srequest.service';
 import { SearchesService } from '../services/searches/searches.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,40 +13,47 @@ import { SearchesService } from '../services/searches/searches.service';
 })
 export class HomeComponent implements OnInit {
 
-  locationId : number = 0;
+  locationId: number = 0;
   // Contenedor de los datos de las localidades
-  Locations : availableLocations[] = [];
+  Locations: availableLocations[] = [];
 
   // Contenedor de los datos de los temas
-  Theme : availableTheme[] = [];
+  Theme: availableTheme[] = [];
 
   // Contenedor de los datos de las preguntas
-  Questions : availableQues[] = [];
+  Questions: availableQues[] = [];
 
   // Contenedor de los datos de las areas
-  Areas : availableAreas[] = [];
+  Areas: availableAreas[] = [];
 
   constructor(
-    private _fb           : FormBuilder,
-    private _fields       : FieldsRequestService,
-    private _reqService   : SrequestService,
-    private _searchFolio  : SearchesService
+    private _fb: FormBuilder,
+    private _fields: FieldsRequestService,
+    private _reqService: SrequestService,
+    private _searchFolio: SearchesService,
+    private router: Router
   ) { }
 
-  
+
   ngOnInit(): void {
 
     // Obtenemos las localidades disponibles
-    this._fields.getLocations().subscribe( data => {
-      this.Locations = [... data];
+    this._fields.getLocations().subscribe(data => {
+      this.Locations = [...data];
       console.log(this.Locations);
     }, error => {
       console.error(error);
     })
   }
 
+  ///rutas de logueo
+
+  navegarhaciaLogin() {
+    this.router.navigate(['/login']);
+  }
+
   // Establecemos el id de la localidad y llamamos a los métodos que dependen de él
-  defineLocation(location : any){
+  defineLocation(location: any) {
     this.locationId = location;
     this.getTheme();
     this.getAreas();
@@ -55,48 +63,48 @@ export class HomeComponent implements OnInit {
    *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
   */
   bodyRequest = this._fb.group({
-    arEmployeeType:  ['', [Validators.required]],
+    arEmployeeType: ['', [Validators.required]],
     QuestionId: ['', [Validators.required]],
-    AreaId : ['', [Validators.required]],
+    AreaId: ['', [Validators.required]],
     arIssue: ['', [Validators.required, Validators.maxLength(500)]],
     arAttachemen: ['', [Validators.maxLength(200)]],
     LocationId: ['', [Validators.required]],
     ThemeId: ['', [Validators.required]]
   });
 
-  getTheme(){
-    this._fields.getTheme(this.locationId).subscribe( data => {
-      this.Theme = [... data];
+  getTheme() {
+    this._fields.getTheme(this.locationId).subscribe(data => {
+      this.Theme = [...data];
       console.log(this.Theme);
     }, error => {
       console.error(error.error.message);
-      this.Theme =[];
+      this.Theme = [];
     })
   }
 
-  getQuestions(themeId : any){
-    this._fields.getQuestions(themeId).subscribe( data => {
-      this.Questions = [... data];
+  getQuestions(themeId: any) {
+    this._fields.getQuestions(themeId).subscribe(data => {
+      this.Questions = [...data];
       console.log(this.Questions);
     }, error => {
       console.error(error.error.message);
     })
   }
 
-  getAreas(){
-    this._fields.getAreas(this.locationId).subscribe( data => {
-      this.Areas = [... data];
+  getAreas() {
+    this._fields.getAreas(this.locationId).subscribe(data => {
+      this.Areas = [...data];
       console.log(this.Areas);
     }, error => {
       console.error(error.error.message);
     })
   }
 
-  registerAnonRequest(){
+  registerAnonRequest() {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-     const anonReq: newAnonRequest = {
+    const anonReq: newAnonRequest = {
       arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
       AreaId: this.bodyRequest.get('AreaId')?.value,
@@ -109,7 +117,7 @@ export class HomeComponent implements OnInit {
     console.log(anonReq);
 
     // Nos suscribimos al método del service, enviandole el objeto con los datos a registrar en la base de datos
-    this._reqService.saveAnonRequest(anonReq).subscribe( data => {
+    this._reqService.saveAnonRequest(anonReq).subscribe(data => {
       this.bodyRequest.reset();
       console.log(data);
       alert(`Peticion registrada con exito. N folio: ${data.arId}`);
@@ -122,10 +130,10 @@ export class HomeComponent implements OnInit {
 
   // PANEL DE BUSQUEDA
 
-  folio : any;
+  folio: any;
 
-  searchFolio(folioId : any){
-    this._searchFolio.searchFolio(folioId).subscribe( data => {
+  searchFolio(folioId: any) {
+    this._searchFolio.searchFolio(folioId).subscribe(data => {
       this.folio = data;
       console.log(this.folio);
     }, error => {

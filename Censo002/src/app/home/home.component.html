@@ -3,14 +3,14 @@
     <div class="headerIndexC">
       <img src="../../assets/img/LogoConti.png" alt="Continental" class="imgLogoIndexC">
       <h1 class="h1CensoB">CENSO Bienestar</h1>
-      <button class="btnIndexC" type="submit">iniciar Sesion</button>
+      <button class="btnIndexC" (click)="navegarhaciaLogin()" type="submit">iniciar Sesion</button>
     </div>
   </header>
   <div class="contenedorIndexC">
     <img src="../../assets/img/CensoBienestar.png" alt="" width="95%" class="imgBienestarC">
     <hr class="hr">
     <div class="ContainerIndexC1">
-      <button class="btnIndexOPC" type="submit">Registro con datos</button>
+      <button class="btnIndexOPC" (click)="navegarhaciaLogin()" type="submit">Registro con datos</button>
       <button class="btnIndexOPC" type="submit" onclick="mostrarRegistro()">Registro anónimo</button>
       <!-- <a [routerLink]="['folioanonimoindex']">ruta</a> -->
 
@@ -153,56 +153,57 @@
             <div class="tabalaAnonima1">
 
               <div class="tablaBuscar">
-              <table >
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Tipo de empleado</th>
-                    <th>Tema</th>
-                    <th>Localidad</th>
-                    <th>Tipo de registro</th>
-                    <th>Area</th>
-                    <th>Caso</th>
-                    <th>Evidencia</th>
-                    <th>Estatus</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td data-label="ID :">1</td>
-                    <td data-label="Tipo Empleado :">Administrativo</td>
-                    <td data-label="Tema :">Pregunta</td>
-                    <td data-label="Localidad :">Tijera</td>
-                    <td data-label="Tipo registro :">Queja</td>
-                    <td data-label="Area :">1</td>
-                    <td data-label="Caso :" class="caso">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-                      blanditiis totam,
-                      nobis odio impedit est odit nam placeat, consequuntur, nesciunt quae perferendis itaque ullam?
-                      Vero ab
-                      consequuntur repellat necessitatibus asperiores.
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Lorem ipsum
-                    </td>
-                    <td data-label="Estatus :">Activo</td>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Tipo de empleado</th>
+                      <th>Tema</th>
+                      <th>Localidad</th>
+                      <th>Tipo de registro</th>
+                      <th>Area</th>
+                      <th>Caso</th>
+                      <th>Evidencia</th>
+                      <th>Estatus</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td data-label="ID :">1</td>
+                      <td data-label="Tipo Empleado :">Administrativo</td>
+                      <td data-label="Tema :">Pregunta</td>
+                      <td data-label="Localidad :">Tijera</td>
+                      <td data-label="Tipo registro :">Queja</td>
+                      <td data-label="Area :">1</td>
+                      <td data-label="Caso :" class="caso">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Minima
+                        blanditiis totam,
+                        nobis odio impedit est odit nam placeat, consequuntur, nesciunt quae perferendis itaque ullam?
+                        Vero ab
+                        consequuntur repellat necessitatibus asperiores.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Lorem ipsum
+                      </td>
+                      <td data-label="Estatus :">Activo</td>
 
-                  </tr>
+                    </tr>
 
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
 
-            </div>
-
-            </div>
+              </div>
 
             </div>
 
           </div>
+
         </div>
       </div>
-
-      <!--<app-folioanonimoindex></app-folioanonimoindex>-->
     </div>
-  
+
+    <!--<app-folioanonimoindex></app-folioanonimoindex>-->
+  </div>
+
   <footer class="footerIndexC">
     <img src="../../assets/img/imgJalisco.png" alt="" class="imgJaliscoC">
   </footer>

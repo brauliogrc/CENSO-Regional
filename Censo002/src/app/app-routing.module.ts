@@ -1,7 +1,7 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from "./home/home.component"; 
-import { UsuariosComponent } from "./usuarios/usuarios.component" ;
+import { HomeComponent } from "./home/home.component";
+import { UsuariosComponent } from "./usuarios/usuarios.component";
 import { LocalidadesComponent } from "./localidades/localidades.component";
 import { TemasComponent } from "./temas/temas.component";
 import { AreasComponent } from "./areas/areas.component";
@@ -28,7 +28,17 @@ const routes: Routes = [
   { path: 'folioanonimoindex', component: FolioanonimoindexComponent }, // Formulario de registro de peticion anonima
   { path: 'fvacio', component: FvacioComponent },
   { path: 'login', component: LoginComponent }, // Formulario de logueo
-  { path: 'paneladmin', component: PaneladminComponent },
+  {
+    path: 'paneladmin', component: PaneladminComponent,
+    children: [
+      { path: 'usuarios', component: UsuariosComponent },
+      { path: 'localidades', component: LocalidadesComponent },
+      { path: 'temas', component: TemasComponent },
+      { path: 'areas', component: AreasComponent },
+      { path: 'preguntas', component: PreguntasComponent },
+      { path: 'tikets', component: TiketsComponent },
+    ]
+  },
   { path: 'panelusuario', component: PanelusuarioComponent }, // Formulario de registro de peticion
   { path: 'panelusuariobusq', component: PanelusuariobusqComponent },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }

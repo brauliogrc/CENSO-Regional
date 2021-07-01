@@ -1,22 +1,22 @@
 <body class="BodyLogin">
-    <!-- Inicio del FORM 
+  <!-- Inicio del FORM 
       el form se enlaza con la variable loginForm del Component por medio de [formGroup]
       se llama al método registerRequest por medio de la directiva (ngSubmit)-->
-    <form [formGroup]="loginForm" (ngSubmit)="userLogin()" action="#" class="form-box" >
-        <H1 class="form-title"></H1>
-        <!--<img src="img/contiL.png" alt="Continental" class="form-img">-->
-        <H1 class="form-title">Inicia CENSO</H1>
-        <hr>
-        <!-- ******** Usuario ********** -->
-        <!-- cada campo esta reacionado con una variable en el Component llamada igual que
+  <form [formGroup]="loginForm" (ngSubmit)="userLogin()" action="#" class="form-box">
+    <H1 class="form-title"></H1>
+    <!--<img src="img/contiL.png" alt="Continental" class="form-img">-->
+    <H1 class="form-title">Iniciar CENSO</H1>
+    <hr>
+    <!-- ******** Usuario ********** -->
+    <!-- cada campo esta reacionado con una variable en el Component llamada igual que
           el contenido de formControlName -->
-        <input formControlName="userName" type="text" placeholder="User Number" required>
-        <!-- ******** Password ********** -->
-        <input formControlName="password" type="Password" placeholder="Password" required>
-        <!-- ******** botón de envio del formulario ********** -->
-        <Button [disabled]="loginForm.invalid" type="submit">
-            Login
-        </Button>
-    </form>
-    <!-- {{loginForm.invalid}} -->
+    <input formControlName="userName" type="text" placeholder="Numero de usuario" required>
+    <!-- ******** Password ********** -->
+    <input formControlName="password" type="Password" placeholder="Contraseña" required>
+    <!-- ******** botón de envio del formulario ********** -->
+    <Button [disabled]="loginForm.invalid" type="submit">
+      Iniciar sesión
+    </Button>
+  </form>
+  <!-- {{loginForm.invalid}} -->
 </body>
