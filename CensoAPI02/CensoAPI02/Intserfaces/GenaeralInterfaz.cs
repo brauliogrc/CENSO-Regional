@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,9 +30,10 @@ namespace CensoAPI02.Intserfaces
     // Realizar el logueo de un usuario
     public class LoginInterface
     {
-
+        [Required(ErrorMessage = "El numero nombre de usuario es obligatorio.")]
         public string username { get; set; }
 
+        [Required(ErrorMessage = "La contraseña es obligatoria.")]
         public string email { get; set; }
     }
 
