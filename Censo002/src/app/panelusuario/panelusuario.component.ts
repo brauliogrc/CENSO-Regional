@@ -12,6 +12,7 @@ import {
 import { SloginService } from '../services/login/slogin.service';
 import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
 import { getLocaleEraNames } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panelusuario',
@@ -53,14 +54,19 @@ export class PanelusuarioComponent implements OnInit {
     private _fb: FormBuilder,
     private _reqServise: SrequestService,
     private _logService: SloginService,
-    private _fields: FieldsRequestService
-  ) {}
+    private _fields: FieldsRequestService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.user = this._logService.getUser();
     // console.log(this.user);
 
     this.defineLocation();
+  }
+
+  buscarUsuario() {
+    this.router.navigate(['fvacio'])
   }
 
   defineLocation() {
