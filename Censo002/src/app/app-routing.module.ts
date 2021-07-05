@@ -14,6 +14,7 @@ import { PaneladminComponent } from './paneladmin/paneladmin.component';
 import { PanelusuarioComponent } from './panelusuario/panelusuario.component';
 import { PanelusuariobusqComponent } from './panelusuariobusq/panelusuariobusq.component';
 import { FolioanonimoindexComponent } from './folioanonimoindex/folioanonimoindex.component';
+import { BienvenidoComponent } from './bienvenido/bienvenido.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },                           // uncionalidad de registro de folio y busquesa de folio anonimo (Flata estilo de la tabla)
@@ -27,7 +28,21 @@ const routes: Routes = [
   { path: 'folioanonimoindex', component: FolioanonimoindexComponent }, // ELIMINAR (Su contenido fue movido al componente home)
   { path: 'fvacio', component: FvacioComponent },                       // Eliminar
   { path: 'login', component: LoginComponent },                         // Funcionalidad parcialmente completa
-  { path: 'paneladmin', component: PaneladminComponent },               //
+  {
+    path: 'paneladmin', component: PaneladminComponent,
+    children: [
+
+      { path: 'bienvenido', component: BienvenidoComponent },
+      { path: 'usuarios', component: UsuariosComponent },
+      { path: 'localidades', component: LocalidadesComponent },
+      { path: 'temas', component: TemasComponent },
+      { path: 'areas', component: AreasComponent },
+      { path: 'preguntas', component: PreguntasComponent },
+      { path: 'tikets', component: TiketsComponent },
+      { path: '**', pathMatch: 'full', redirectTo: 'bienvenido' },
+
+    ]
+  },               //
   { path: 'panelusuario', component: PanelusuarioComponent },           // Funcionalidad completa
   { path: 'panelusuariobusq', component: PanelusuariobusqComponent },   //
   { path: '**', pathMatch: 'full', redirectTo: 'home' },
@@ -37,4 +52,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

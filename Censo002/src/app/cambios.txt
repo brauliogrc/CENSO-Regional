@@ -83,3 +83,22 @@ version 3.5.8
 
 ~Braulio~
 ======================================================================================================================
+
+fecha actualizacion: 01/07/2021
+
+version 3.5.9
+    -ruteo de ventanas de panel usuario para que nos lleve al panel de busqueda del folio
+    -ruteo de ventanas del panel admin para que nos lleve a las ventas siquentes desntro del mismo panel
+            -usuarios
+            -localidades
+            -temas
+            -tikets
+            -area
+            -preguntas
+
+    -ruteo de ventana home para que nos lleve al Login
+    -se agrego un componente bienvenido (en ese no se trabajar nada solo es para dar la bienvenida al usuario)
+    
+
+~Alexis~
+======================================================================================================================

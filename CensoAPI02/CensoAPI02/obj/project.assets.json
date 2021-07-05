@@ -6862,7 +6862,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\uib44927\\.nuget\\packages\\": {},
+    "C:\\Users\\uib97447\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
@@ -6870,11 +6870,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
+      "projectUniqueName": "C:\\Users\\uib97447\\Desktop\\pruebas\\CENSO-Regional\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
       "projectName": "CensoAPI02",
-      "projectPath": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
-      "packagesPath": "C:\\Users\\uib44927\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\obj\\",
+      "projectPath": "C:\\Users\\uib97447\\Desktop\\pruebas\\CENSO-Regional\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
+      "packagesPath": "C:\\Users\\uib97447\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\uib97447\\Desktop\\pruebas\\CENSO-Regional\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -6882,7 +6882,7 @@
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\uib44927\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\uib97447\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
