@@ -102,3 +102,18 @@ version 3.5.9
 
 ~Alexis~
 ======================================================================================================================
+
+fecha actualizacion: 07/07/2021
+
+version 3.6.0
+    -Generación de token JWT desde la api
+    -Validación del token en eL FrontEnd
+    -Validacion de usuarios por merido del token
+    -Vodulos disponibles dependiendo del rol del usuario
+    -Almacenamiento del token en el sessionStorage
+    -Modificación del valor devuelto desde la API al realizar logueo
+    -Funcionalidad de botón "cerrar sesión"
+
+
+~Braulio~
+======================================================================================================================

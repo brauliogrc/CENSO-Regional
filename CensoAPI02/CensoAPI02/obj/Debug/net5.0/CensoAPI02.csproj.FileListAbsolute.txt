@@ -196,3 +196,4 @@ C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Deb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.RazorTargetAssemblyInfo.cache
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.CopyComplete
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.genruntimeconfig.cache
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

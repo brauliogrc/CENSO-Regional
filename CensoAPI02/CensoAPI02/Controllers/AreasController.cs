@@ -1,6 +1,7 @@
 ﻿using CENSO.Models;
 using CensoAPI02.Intserfaces;
 using CensoAPI02.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AreasController : ControllerBase
     {
         private readonly CDBContext _context;
@@ -20,20 +22,6 @@ namespace CensoAPI02.Controllers
         public AreasController(CDBContext context)
         {
             _context = context;
-        }
-    
-        // GET: api/<AreasController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<AreasController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
         }
 
         // POST api/<AreasController>
@@ -55,18 +43,6 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        // PUT api/<AreasController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AreasController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

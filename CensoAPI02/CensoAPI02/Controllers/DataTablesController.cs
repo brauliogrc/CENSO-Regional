@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DataTablesController : ControllerBase
     {
         private readonly CDBContext _context;

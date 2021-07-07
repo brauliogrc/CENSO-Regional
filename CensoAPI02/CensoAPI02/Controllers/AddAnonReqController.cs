@@ -1,6 +1,7 @@
 ﻿using CENSO.Models;
 using CensoAPI02.Intserfaces;
 using CensoAPI02.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController][AllowAnonymous]
     public class AddAnonReqController : ControllerBase
     {
         private readonly CDBContext _context;
@@ -20,19 +21,6 @@ namespace CensoAPI02.Controllers
         public AddAnonReqController( CDBContext context )
         {
             _context = context;
-        }
-        // GET: api/<AddAnonReqController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<AddAnonReqController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
         }
 
         // POST api/<AddAnonReqController>
@@ -60,18 +48,6 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        // PUT api/<AddAnonReqController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AddAnonReqController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

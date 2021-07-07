@@ -1,5 +1,6 @@
 ﻿using CENSO.Models;
 using CensoAPI02.Intserfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController][Authorize]
     public class LocationsController : ControllerBase
     {
         private readonly CDBContext _context;
@@ -21,22 +22,6 @@ namespace CensoAPI02.Controllers
         {
             _context = context;
         }
-
-        // GET: api/<LocationsController>
-        /*[HttpGet]
-        public async Task<ActionResult> Get()
-        {
-            // Obtencion de todas las localidades
-            try
-            {
-                var locations = await _context.Locations.Select(l => new { l.lId, l.lName, l.lStatus }).ToListAsync();
-                return Ok(locations);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }*/
 
         // POST api/<LocationsController>
         [HttpPost]
@@ -63,13 +48,8 @@ namespace CensoAPI02.Controllers
             }
         }
 
-        // PUT api/<LocationsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
         // DELETE api/<LocationsController>/5
+        [AllowAnonymous]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

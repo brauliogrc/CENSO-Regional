@@ -80,6 +80,7 @@ export interface availableAreas {
 /************** Interfaes para datos devueltos por el Login */
 export interface saveDataLogin {
   uId: number;
+  roleId: number;
   uName: string;
   uEmail: string;
   locationId: number;
@@ -90,6 +91,8 @@ export interface dataLogin {
   username: string;
   email: string;
 }
+
+export interface resultLogin {}
 
 /************** Interfaes para datos de nuevos registros */
 export interface newRequest {

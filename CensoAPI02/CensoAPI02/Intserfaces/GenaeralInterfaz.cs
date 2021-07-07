@@ -37,6 +37,32 @@ namespace CensoAPI02.Intserfaces
         public string email { get; set; }
     }
 
+    // Valor retornado del logueo
+    public class UserResponse
+    {
+        public string uName { get; set; }
+
+        public string uEmail { get; set; }
+
+        public int uId { get; set; }
+
+        public int locationId { get; set; }
+
+        public int roleId { get; set; }
+
+        public string Token { get; set; }
+
+        public UserResponse(string Username, string Email, int Id, int LocationId, int RoleId, string Token)
+        {
+            this.uName = Username;
+            this.uEmail = Email;
+            this.uId = Id;
+            this.locationId = LocationId;
+            this.roleId = RoleId;
+            this.Token = Token;
+        }
+    }
+
     // Registrar una nueva Request
     public class AddRequestInterface
     {

@@ -1,4 +1,5 @@
 ﻿using CENSO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SpecificSearches : ControllerBase
     {
         private readonly CDBContext _context;
@@ -30,7 +32,7 @@ namespace CensoAPI02.Controllers
 
         // Busqueda de folios con base en el id
         // En el home.component
-        [HttpGet][Route("folioSearch/{id}")]
+        [HttpGet] [Route("folioSearch/{id}")] [Authorize(Policy = "StaffRH")]
         public async Task<ActionResult> GetFolio(int id)
         {
             try
@@ -70,7 +72,8 @@ namespace CensoAPI02.Controllers
             }
         }
 
-        [HttpGet][Route("folioAnonSearch/{id}")]
+        // Busqueda del folio anonimo desde home
+        [HttpGet][Route("folioAnonSearch/{id}")][AllowAnonymous]
         public async Task<ActionResult> GetFolioAnon(int id)
         {
             try

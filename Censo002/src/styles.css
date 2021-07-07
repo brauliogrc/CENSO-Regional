@@ -637,3 +637,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-align: center;
   }
 /* Bienvenido en el panel admin */
+.adm{
+  display: none;
+}

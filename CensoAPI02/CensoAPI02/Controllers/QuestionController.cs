@@ -1,6 +1,7 @@
 ﻿using CENSO.Models;
 using CensoAPI02.Intserfaces;
 using CensoAPI02.Models.UnionTables;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController][Authorize(Policy = "SURH")]
     public class QuestionController : ControllerBase
     {
 
@@ -61,12 +62,6 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        // PUT api/<QuestionController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
         }
 
         // DELETE api/<QuestionController>/5

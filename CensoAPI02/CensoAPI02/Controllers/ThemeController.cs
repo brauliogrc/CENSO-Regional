@@ -9,13 +9,14 @@ using CensoAPI02.Models;
 using CensoAPI02.Intserfaces;
 using CensoAPI02.Models.UnionTables;
 using CensoAPI02.UnionTables;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController][Authorize(Policy = "SURH")]
     public class ThemeController : ControllerBase
     {
         private readonly CDBContext _context;
@@ -104,12 +105,6 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        // PUT api/<ThemeController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
         }
 
         // DELETE api/<ThemeController>/5

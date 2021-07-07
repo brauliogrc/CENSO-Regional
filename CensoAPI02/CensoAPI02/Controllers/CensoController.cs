@@ -1,4 +1,5 @@
 ﻿using CENSO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController][Authorize]
     public class CensoController : ControllerBase
     {
         private readonly CDBContext _context;
@@ -37,20 +38,6 @@ namespace CensoAPI02.Controllers
                 return BadRequest( error.Message );
             }
         }
-        
-        /*[HttpGet]
-        public async Task<ActionResult> GetLocations()
-        {
-            try
-            {
-                var locations = await _context.Locations.ToListAsync();
-                return Ok(locations);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }*/
 
         // GET api/<CensoController>/5
         [HttpGet("{id}")]
@@ -65,24 +52,6 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        // POST api/<CensoController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<CensoController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<CensoController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

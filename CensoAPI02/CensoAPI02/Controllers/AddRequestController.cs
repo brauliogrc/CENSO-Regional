@@ -1,5 +1,6 @@
 ﻿using CENSO.Models;
 using CensoAPI02.Intserfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 namespace CensoAPI02.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController][Authorize]
     public class AddRequestController : ControllerBase
     {
         private readonly CDBContext _context;

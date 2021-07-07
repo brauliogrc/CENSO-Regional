@@ -13,6 +13,7 @@ import { SloginService } from '../services/login/slogin.service';
 import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
 import { getLocaleEraNames } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/Auth/auth.service';
 
 @Component({
   selector: 'app-panelusuario',
@@ -34,6 +35,7 @@ export class PanelusuarioComponent implements OnInit {
     uEmail: '',
     uName: '',
     locationId: 0,
+    roleId: 0,
   };
 
   // Array que almacenará los datos del usuario logeado
@@ -53,20 +55,20 @@ export class PanelusuarioComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _reqServise: SrequestService,
-    private _logService: SloginService,
+    private _authService: AuthService,
     private _fields: FieldsRequestService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.user = this._logService.getUser();
+    this.user = this._authService.getUser();
     // console.log(this.user);
 
     this.defineLocation();
   }
 
   buscarUsuario() {
-    this.router.navigate(['fvacio'])
+    this.router.navigate(['fvacio']);
   }
 
   defineLocation() {
