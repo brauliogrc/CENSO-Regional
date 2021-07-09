@@ -18,13 +18,17 @@
       <!-- ADMINISTRADOR -->
       <div *ngIf="getRole() == 1" class="options">
         <ul>
-          <li><button id="_1" type="submit" (click)="navegarUsuarios()" onclick="noMostrar()" class="btnDash">Users</button>
+          <li><button id="_1" type="submit" (click)="navegarUsuarios()" onclick="noMostrar()"
+              class="btnDash">Users</button>
           </li>
           <li><button id="_2" type="submit" (click)="navegarLocalidades()" onclick="noMostrar()"
               class="btnDash">Locations</button></li>
-          <li><button id="_3" type="submit" (click)="navegarTemas()" onclick="noMostrar()" class="btnDash">Topics</button></li>
-          <li><button id="_4" type="submit" (click)="navegarTikets()" onclick="noMostrar()" class="btnDash">Tikets</button></li>
-          <li><button id="_5" type="submit" (click)="navegarAreas()" onclick="noMostrar()" class="btnDash">Areas</button></li>
+          <li><button id="_3" type="submit" (click)="navegarTemas()" onclick="noMostrar()"
+              class="btnDash">Topics</button></li>
+          <li><button id="_4" type="submit" (click)="navegarTikets()" onclick="noMostrar()"
+              class="btnDash">Tikets</button></li>
+          <li><button id="_5" type="submit" (click)="navegarAreas()" onclick="noMostrar()"
+              class="btnDash">Areas</button></li>
           <li><button id="_6" type="submit" (click)="navegarPreguntas()" onclick="noMostrar()"
               class="btnDash">Questions</button></li>
         </ul>
@@ -33,11 +37,15 @@
       <!-- SURH -->
       <div *ngIf="getRole() == 2" class="options">
         <ul>
-          <li><button id="_1" type="submit" (click)="navegarUsuarios()" onclick="noMostrar()" class="btnDash">Users</button>
+          <li><button id="_1" type="submit" (click)="navegarUsuarios()" onclick="noMostrar()"
+              class="btnDash">Users</button>
           </li>
-          <li><button id="_3" type="submit" (click)="navegarTemas()" onclick="noMostrar()" class="btnDash">Topics</button></li>
-          <li><button id="_4" type="submit" (click)="navegarTikets()" onclick="noMostrar()" class="btnDash">Tikets</button></li>
-          <li><button id="_5" type="submit" (click)="navegarAreas()" onclick="noMostrar()" class="btnDash">Areas</button></li>
+          <li><button id="_3" type="submit" (click)="navegarTemas()" onclick="noMostrar()"
+              class="btnDash">Topics</button></li>
+          <li><button id="_4" type="submit" (click)="navegarTikets()" onclick="noMostrar()"
+              class="btnDash">Tikets</button></li>
+          <li><button id="_5" type="submit" (click)="navegarAreas()" onclick="noMostrar()"
+              class="btnDash">Areas</button></li>
           <li><button id="_6" type="submit" (click)="navegarPreguntas()" onclick="noMostrar()"
               class="btnDash">Questions</button></li>
         </ul>
@@ -46,7 +54,8 @@
       <!-- Staff RH -->
       <div *ngIf="getRole() == 3" class="options">
         <ul>
-          <li><button id="_4" type="submit" (click)="navegarTikets()" onclick="noMostrar()" class="btnDash">Tikets</button></li>
+          <li><button id="_4" type="submit" (click)="navegarTikets()" onclick="noMostrar()"
+              class="btnDash">Tikets</button></li>
         </ul>
       </div>
 

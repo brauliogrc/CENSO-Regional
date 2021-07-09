@@ -1,91 +1,91 @@
 <div class="contenido1">
-    <div class="buscar">
+  <div class="buscar">
     <h1>Preguntas</h1>
     <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Añadir Preguntas</button>
   </div>
-  
+
   <hr>
 
   <div id="contenido">
-  <!-- Inifio Form -->
-  <form [formGroup]="newQuestion" (ngSubmit)="addNewQuestion()" class="row g-3">
-    <!-- Name -->
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Pregunta</label>
-      <input formControlName="qName" type="email" class="form-control" id="inputEmail4">
-    </div>
-    <!-- Location -->
-    <div class="col-md-6">
-      <label for="inputState" class="form-label">Location</label>
-      <select formControlName="Locations" #locationId
-      id="inputState" class="form-select"
-      (change)="onSelect(locationId.value)">
-        <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
-      </select>
-    </div>
-    <!-- Tema -->
-    <div class="col-md-6">  
-      <label for="inputState" class="form-label">Tema</label>
-      <select formControlName="ThemeId" id="inputState" class="form-select">
-        <option *ngFor="let them of Theme" value="{{them.tId}}">{{them.tName}}</option>
-      </select>
-    </div>
-    <!-- Estatus -->
-    <div class="col-md-6">
-      <label for="inputState" class="form-label">Estatus</label>  
-      <select formControlName="qStatus" id="inputState" class="form-select">
-        <option value=true selected>Activo</option>
-        <option value=false>Inactivo</option>
-      </select>
-    </div>
-    
-    <!-- Boton registro -->
-    <div class="col-12">
-      <button [disabled]="newQuestion.invalid" class="btnIndexC" type="submit">Añadir</button>
-    </div>
-  </form>
-  <!-- Fin Form -->
-    <hr>
-      <form class="form-search">
-        <input #idQuestion class="Search1" type="number" placeholder="Buscar" aria-label="Search">
-        <button (click)="search(idQuestion.value)" class="btnIndexC" type="submit">Buscar</button>
-      </form>
-      <hr>
-  </div>
-      <table class="table table-dark table-sm">
-        <thead>
-          <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Tema</th>
-              <th>Estatus</th>
-              <th>Acciones</th>
-          </tr>
-      </thead>
-      <tbody>
+    <!-- Inifio Form -->
+    <form [formGroup]="newQuestion" (ngSubmit)="addNewQuestion()" class="row g-3">
+      <!-- Name -->
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Pregunta</label>
+        <input formControlName="qName" type="email" class="form-control" id="inputEmail4">
+      </div>
+      <!-- Location -->
+      <div class="col-md-6">
+        <label for="inputState" class="form-label">Location</label>
+        <select formControlName="Locations" #locationId id="inputState" class="form-select"
+          (change)="onSelect(locationId.value)">
+          <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
+        </select>
+      </div>
+      <!-- Tema -->
+      <div class="col-md-6">
+        <label for="inputState" class="form-label">Tema</label>
+        <select formControlName="ThemeId" id="inputState" class="form-select">
+          <option *ngFor="let them of Theme" value="{{them.tId}}">{{them.tName}}</option>
+        </select>
+      </div>
+      <!-- Estatus -->
+      <div class="col-md-6">
+        <label for="inputState" class="form-label">Estatus</label>
+        <select formControlName="qStatus" id="inputState" class="form-select">
+          <option value=true selected>Activo</option>
+          <option value=false>Inactivo</option>
+        </select>
+      </div>
 
-        <ng-container *ngIf="!question; else elseTemplate">
-          <tr *ngFor="let question of questions">
-            <td>{{ question.qId }}</td>
-            <td>{{ question.qName }}</td>
-            <td>{{ question.tName }}</td>
-            <td>{{ question.qStatus }}</td>
-              <td>
-                  <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Eliminar</button>
-              </td>
-          </tr>
-        </ng-container>
-        <ng-template #elseTemplate>
-          <tr>
-            <td>{{ question.qId }}</td>
-            <td>{{ question.qName }}</td>
-            <td>{{ question.tName }}</td>
-            <td>{{ question.qStatus }}</td>
-              <td>
-                  <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Eliminar</button>
-              </td>
-          </tr>
-        </ng-template>
-      </tbody>
-      </table>
+      <!-- Boton registro -->
+      <div class="col-12">
+        <button [disabled]="newQuestion.invalid" class="btnIndexC" type="submit">Añadir</button>
+      </div>
+    </form>
+    <!-- Fin Form -->
+    <hr>
+    <form class="form-search">
+      <input #idQuestion class="Search1" type="number" placeholder="Buscar" aria-label="Search">
+      <button (click)="search(idQuestion.value)" class="btnIndexC" type="submit">Buscar</button>
+    </form>
+    <hr>
+  </div>
+  <table class="table table-dark table-sm">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Tema</th>
+        <th>Estatus</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <ng-container *ngIf="!question; else elseTemplate">
+        <tr *ngFor="let question of questions">
+          <td>{{ question.qId }}</td>
+          <td>{{ question.qName }}</td>
+          <td>{{ question.tName }}</td>
+          <td>{{ question.qStatus }}</td>
+          <td>
+            <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Eliminar</button>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <tr>
+          <td>{{ question.qId }}</td>
+          <td>{{ question.qName }}</td>
+          <td>{{ question.tName }}</td>
+          <td>{{ question.qStatus }}</td>
+          <td>
+            <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Responder</button>
+            <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Eliminar</button>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
 </div>

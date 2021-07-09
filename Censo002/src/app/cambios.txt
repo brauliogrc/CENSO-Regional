@@ -117,3 +117,14 @@ version 3.6.0
 
 ~Braulio~
 ======================================================================================================================
+
+fecha actualizacion: 09/07/2021
+
+version 3.6.1
+    -Se agrego componente respuestafolio
+        -ahi se mostrara el folio creado del empleado 
+        -se mostrara una pequeña tabla para la respuesta al empleado
+    -Se agrego la version completa con estilos del modal del folio anonimo en el componente home
+    -Se agrego el boton de respuesta en el componente preguntas
+
+~Alexis~

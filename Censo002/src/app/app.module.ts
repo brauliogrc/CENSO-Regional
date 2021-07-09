@@ -24,6 +24,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { BienvenidoComponent } from './bienvenido/bienvenido.component';
+import { RespuestaFolioComponent } from './respuesta-folio/respuesta-folio.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { BienvenidoComponent } from './bienvenido/bienvenido.component';
     PanelusuarioComponent,
     PanelusuariobusqComponent,
     PaneladminComponent,
-    BienvenidoComponent
+    BienvenidoComponent,
+    RespuestaFolioComponent
   ],
   imports: [
     BrowserModule,
