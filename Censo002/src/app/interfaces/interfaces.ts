@@ -88,8 +88,8 @@ export interface saveDataLogin {
 
 /************** Interfae para datos enviados por el Login */
 export interface dataLogin {
-  username: string;
-  email: string;
+  usernumber: number;
+  pass: string;
 }
 
 export interface resultLogin {}

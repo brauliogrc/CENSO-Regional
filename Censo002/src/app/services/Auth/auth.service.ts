@@ -35,18 +35,24 @@ export class AuthService {
   }
 
   // Llamamos al controlador del login de la API, le enviamos los datos obtenidos en el formulario de login.component
-  Login(ahutData: any): Observable<any> {
-    return this._http.post(this.MyAppUrl + this.MyApiUrl, ahutData).pipe(
-      map((res: any) => {
-        this.saveId(res.uId);
-        this.saveName(res.uName);
-        this.saveRole(res.roleId);
-        this.saveToken(res.token);
-        this.loggedIn.next(true);
-        return res;
-      })
-    );
+  Login(authData: any): Observable<any> {
+    return this._http.post(this.MyAppUrl + this.MyApiUrl, authData);
   }
+
+  //////////////////////////////////////////////////////////
+  // Login(ahutData: any): Observable<any> {
+  //   return this._http.post(this.MyAppUrl + this.MyApiUrl, ahutData).pipe(
+  //     map((res: any) => {
+  //       this.saveId(res.uId);
+  //       this.saveName(res.uName);
+  //       this.saveRole(res.roleId);
+  //       this.saveToken(res.token);
+  //       this.loggedIn.next(true);
+  //       return res;
+  //     })
+  //   );
+  // }
+  //////////////////////////////////////////////////////////
 
   // Almacenamos los datos recuperados del usuario en una varibale para accederla más tarde
   setData(
@@ -54,7 +60,7 @@ export class AuthService {
     userName: any,
     userId: any,
     userEmail: any,
-    roleId: any
+    roleId: any = 0
   ) {
     this.user.locationId = locationId;
     this.user.uName = userName;
@@ -64,6 +70,8 @@ export class AuthService {
   }
 
   getUser() {
+    console.log(this.user);
+
     return this.user;
   }
 
@@ -71,11 +79,6 @@ export class AuthService {
   /** METODOS PARA LA AUTENTICACIÓN */
 
   logout(): void {
-    // sessionStorage.removeItem('token');
-    // sessionStorage.removeItem('userId');
-    // sessionStorage.removeItem('username');
-    // sessionStorage.removeItem('role');
-    // sessionStorage.removeItem('token');
     sessionStorage.clear();
     console.clear();
     this.loggedIn.next(false);
@@ -89,20 +92,24 @@ export class AuthService {
     isExpired ? this.logout() : this.loggedIn.next(true);
   }
 
-  private saveId(id: any): void {
+  saveId(id: any): void {
     sessionStorage.setItem('userId', id);
   }
 
-  private saveRole(role: any): void {
+  saveRole(role: any): void {
     sessionStorage.setItem('role', role);
   }
 
-  private saveName(name: string): void {
+  saveName(name: string): void {
     sessionStorage.setItem('username', name);
   }
 
-  private saveToken(token: string): void {
+  saveToken(token: string): void {
     // localStorage.setItem('token', token);
     sessionStorage.setItem('token', token);
+  }
+
+  saveEmployeeNumber(employeeNumber: any) {
+    sessionStorage.setItem('employeeNumber', employeeNumber);
   }
 }

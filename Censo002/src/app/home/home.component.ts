@@ -11,6 +11,7 @@ import {
 import { SrequestService } from '../services/request/srequest.service';
 import { SearchesService } from '../services/searches/searches.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/Auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -37,7 +38,7 @@ export class HomeComponent implements OnInit {
     private _reqService: SrequestService,
     private _searchFolio: SearchesService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // Obtenemos las localidades disponibles
@@ -53,9 +54,8 @@ export class HomeComponent implements OnInit {
   }
 
   navegarLogin() {
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
-
 
   // Establecemos el id de la localidad y llamamos a los métodos que dependen de él
   defineLocation(location: any) {

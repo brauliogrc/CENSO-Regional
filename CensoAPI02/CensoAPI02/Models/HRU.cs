@@ -25,6 +25,9 @@ namespace CensoAPI02.Models
         [Required]
         public long uEmployeeNumber { get; set; }
 
+        /*[Required]
+        public long supervisorNumber { get; set; }*/
+
         [Required]
         public DateTime uCreationDate { get; set; } // Fecha de cracion del usuario
 

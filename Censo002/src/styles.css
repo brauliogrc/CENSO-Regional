@@ -172,7 +172,7 @@
     width: 200px;
     border-radius: 100%;
 }
-.form-box input[type="text"],
+.form-box input[type="number"],
 .form-box input[type="password"],
 .form-box button[type ="submit"]{
 

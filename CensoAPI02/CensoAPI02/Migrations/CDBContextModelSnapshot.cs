@@ -16,7 +16,7 @@ namespace CensoAPI02.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.6")
+                .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("CENSO.Models.Locations", b =>
@@ -99,6 +99,9 @@ namespace CensoAPI02.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ThemeId")
                         .HasColumnType("int");
 
@@ -136,6 +139,8 @@ namespace CensoAPI02.Migrations
                     b.HasIndex("LocationId");
 
                     b.HasIndex("QuestionId");
+
+                    b.HasIndex("StatusId");
 
                     b.HasIndex("ThemeId");
 
@@ -192,6 +197,9 @@ namespace CensoAPI02.Migrations
                     b.Property<int>("QuestionId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ThemeId")
                         .HasColumnType("int");
 
@@ -223,6 +231,8 @@ namespace CensoAPI02.Migrations
                     b.HasIndex("LocationId");
 
                     b.HasIndex("QuestionId");
+
+                    b.HasIndex("StatusId");
 
                     b.HasIndex("ThemeId");
 
@@ -359,6 +369,23 @@ namespace CensoAPI02.Migrations
                     b.ToTable("HRU");
                 });
 
+            modelBuilder.Entity("CensoAPI02.Models.RequestStatus", b =>
+                {
+                    b.Property<int>("rsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("rsStatus")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("rsId");
+
+                    b.ToTable("RequestStatus");
+                });
+
             modelBuilder.Entity("CensoAPI02.Models.Roles", b =>
                 {
                     b.Property<int>("rolId")
@@ -441,6 +468,12 @@ namespace CensoAPI02.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CensoAPI02.Models.RequestStatus", "requestStatus")
+                        .WithMany("requests")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("CENSO.Models.Theme", "theme")
                         .WithMany("Requests")
                         .HasForeignKey("ThemeId")
@@ -452,6 +485,8 @@ namespace CensoAPI02.Migrations
                     b.Navigation("locations");
 
                     b.Navigation("question");
+
+                    b.Navigation("requestStatus");
 
                     b.Navigation("theme");
                 });
@@ -476,6 +511,12 @@ namespace CensoAPI02.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CensoAPI02.Models.RequestStatus", "requestStatus")
+                        .WithMany("anonRequests")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("CENSO.Models.Theme", "theme")
                         .WithMany("AnonRequests")
                         .HasForeignKey("ThemeId")
@@ -487,6 +528,8 @@ namespace CensoAPI02.Migrations
                     b.Navigation("locations");
 
                     b.Navigation("question");
+
+                    b.Navigation("requestStatus");
 
                     b.Navigation("theme");
                 });
@@ -640,6 +683,13 @@ namespace CensoAPI02.Migrations
                     b.Navigation("anonRequest");
 
                     b.Navigation("request");
+                });
+
+            modelBuilder.Entity("CensoAPI02.Models.RequestStatus", b =>
+                {
+                    b.Navigation("anonRequests");
+
+                    b.Navigation("requests");
                 });
 
             modelBuilder.Entity("CensoAPI02.Models.Roles", b =>

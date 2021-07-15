@@ -128,3 +128,16 @@ version 3.6.1
     -Se agrego el boton de respuesta en el componente preguntas
 
 ~Alexis~
+======================================================================================================================
+
+fecha actualizacion: 14/07/2021
+
+version 3.6.2
+    -Implementacion el Login
+        -Validacion de usuario en la base de datos de HRPortal
+        -Acceso por medio de numero de usuario y contraseña del HRPortal
+        -Generacion de token para los dos tipos de usuario
+    -Tabala RequestStatus añadido
+    -Campo Status añadido a la tabla AnonRequest y Request
+
+~Braulio~

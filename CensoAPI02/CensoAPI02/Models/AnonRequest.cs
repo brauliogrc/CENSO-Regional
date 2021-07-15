@@ -58,5 +58,11 @@ namespace CensoAPI02.Models
         public int LocationId { get; set; }
 
         public Locations locations { get; set; }
+
+        // Relationship one-to-many entities RequestStatus and AnonRequest
+        [Required]
+        public int StatusId { get; set; }
+
+        public RequestStatus requestStatus { get; set; }
     }
 }

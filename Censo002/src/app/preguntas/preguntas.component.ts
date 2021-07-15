@@ -14,6 +14,7 @@ import { SthemeService } from '../services/theme/stheme.service';
 import { SearchesService } from '../services/searches/searches.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
+import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
 
 @Component({
   selector: 'app-preguntas',
@@ -26,7 +27,7 @@ export class PreguntasComponent implements OnInit {
 
   question: any;
 
-  // Arrar que contiene las locations disponibles para mostrar en la lista desplegable
+  // Array que contiene las locations disponibles para mostrar en la lista desplegable
   Locations: availableLocations[] = [];
 
   Theme: availableTheme[] = [];
@@ -45,6 +46,7 @@ export class PreguntasComponent implements OnInit {
     private _questionService: SquestionsService,
     private _searches: SearchesService,
     private _authService: AuthService,
+    private _fields : FieldsRequestService,
     private router: Router
   ) {}
 
@@ -69,7 +71,7 @@ export class PreguntasComponent implements OnInit {
 
   getLocations() {
     // Obtenemos las Locations dispnibles
-    this._service.tableLocations().subscribe(
+    this._fields.getLocations().subscribe(
       (data) => {
         this.Locations = [...data];
       },
@@ -112,7 +114,7 @@ export class PreguntasComponent implements OnInit {
   }
 
   onSelect(id: any): void {
-    this._themService.getSpecificsThems(id).subscribe(
+    this._fields.getTheme(id).subscribe(
       (data) => {
         console.log(data);
         this.Theme = [...data];

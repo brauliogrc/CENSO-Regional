@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SloginService } from '../services/login/slogin.service';
 import { dataLogin } from '../interfaces/interfaces';
 import { AuthService } from '../services/Auth/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+const helper = new JwtHelperService();
 
 @Component({
   selector: 'app-login',
@@ -15,11 +17,12 @@ export class LoginComponent implements OnInit {
    *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
    */
   loginForm = this._fb.group({
-    userName: ['', [Validators.required]],
+    usernumber: ['', [Validators.required]],
     password: ['', [Validators.required]],
   });
 
   token: any;
+  dataToken: any;
 
   constructor(
     private _fb: FormBuilder,
@@ -34,30 +37,39 @@ export class LoginComponent implements OnInit {
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
     const dataLogin: dataLogin = {
-      username: this.loginForm.get('userName')?.value,
-      email: this.loginForm.get('password')?.value,
+      usernumber: this.loginForm.get('usernumber')?.value,
+      pass: this.loginForm.get('password')?.value,
     };
     console.log(dataLogin);
 
     // Nos suscribimos al método del service, enviandole el objeto con los datos para validar si el usuario existe en la base de datos
     this._authService.Login(dataLogin).subscribe(
-      (data) => {
+      (data: any) => {
         if (!data) {
           console.error('Usuario no encontrado en la base de datos');
         } else {
+          this.dataToken = helper.decodeToken(data.token);
+          console.log(this.dataToken);
+
           this.loginForm.reset();
 
-          alert('Binbenido ' + data.uName);
+          alert('Binbenido ' + this.dataToken.Username);
           this._authService.setData(
-            data.locationId,
-            data.uName,
-            data.uId,
-            data.uEmail,
-            data.roleId
+            this.dataToken.Location,
+            this.dataToken.Username,
+            this.dataToken.nameid,
+            this.dataToken.Email,
+            this.dataToken.Role
           );
+          this._authService.saveId(this.dataToken.nameid);
+          this._authService.saveName(this.dataToken.Username);
+          this._authService.saveRole(this.dataToken.Role);
+          this._authService.saveEmployeeNumber(this.dataToken.EmployeeNumber);
+          this._authService.saveToken(data.token);
+          this.dataToken = null;
           this.redirect();
         }
-        console.log(dataLogin);
+        // console.log(dataLogin);
       },
       (error) => {
         console.error(error.error);

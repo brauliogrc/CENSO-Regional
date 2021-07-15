@@ -41,6 +41,9 @@ namespace CensoAPI02.Controllers
                     LocationId = newAnomReq.LocationId
                     
                 };
+
+                newAnonRequest.StatusId = 1;
+
                 _context.AnonRequests.Add(newAnonRequest);
                 await _context.SaveChangesAsync();
                 return Ok(newAnonRequest);

@@ -57,6 +57,7 @@ export class PanelusuarioComponent implements OnInit {
     private _reqServise: SrequestService,
     private _authService: AuthService,
     private _fields: FieldsRequestService,
+    private _auth: AuthService,
     private router: Router
   ) {}
 

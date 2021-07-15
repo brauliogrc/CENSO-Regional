@@ -17,17 +17,21 @@ namespace CENSO.Models
 
         }
 
+        // Tables
         public DbSet<HRU> HRU { get; set; }
         public DbSet<Locations> Locations { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Theme> Theme { get; set; }
-        public DbSet<LocationsTheme> LocationsThemes { get; set; }
-        public DbSet<HRUsersTheme> HRUsersThemes { get; set; }
-        public DbSet<QuestionsTheme> QuestionsThemes { get; set; }
         public DbSet<AnonRequest> AnonRequests { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Roles> Roles { get; set; }
+        public DbSet<RequestStatus> RequestStatus { get; set; }
+
+        // UnionTables
+        public DbSet<LocationsTheme> LocationsThemes { get; set; }
+        public DbSet<HRUsersTheme> HRUsersThemes { get; set; }
+        public DbSet<QuestionsTheme> QuestionsThemes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -168,6 +172,20 @@ namespace CENSO.Models
                 .WithMany(l => l.anonRequest)
                 .HasForeignKey(ar => ar.LocationId)
                 .OnDelete(DeleteBehavior.NoAction); // Deshabilitamos la eliminacion en cascada
+
+            // configuracions para relacón one-to-many RequestStatus and Request
+            modelBuilder.Entity<Request>()
+                .HasOne<RequestStatus>(r => r.requestStatus)
+                .WithMany(rs => rs.requests)
+                .HasForeignKey(r => r.StatusId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            // configuracions para relacón one-to-many RequestStatusand AnonRequest
+            modelBuilder.Entity<AnonRequest>()
+                .HasOne<RequestStatus>(ar => ar.requestStatus)
+                .WithMany(rs => rs.anonRequests)
+                .HasForeignKey(ar => ar.StatusId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

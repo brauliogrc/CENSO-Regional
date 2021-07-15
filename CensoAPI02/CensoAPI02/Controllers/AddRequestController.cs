@@ -51,7 +51,8 @@ namespace CensoAPI02.Controllers
                     rCreationDate = DateTime.Now,
                     AreaId = value.AreaId,
                     ThemeId = value.ThemeId,
-                    LocationId = value.LocationId
+                    LocationId = value.LocationId,
+                    StatusId = 1
                 };
                 _context.Requests.Add(newRequest);
                 await _context.SaveChangesAsync();

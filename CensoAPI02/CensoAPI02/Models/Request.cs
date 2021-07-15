@@ -25,7 +25,7 @@ namespace CENSO.Models
         [Required]
         public int rEmployeeType { get; set; } // Tipo de empleado -> implementar enumercion para este camo
 
-        //Posible eliminacion
+        // Posible eliminacion
         public int rEmployeeLeader { get; set; } // Lider del empleado
 
         [Required]
@@ -61,5 +61,11 @@ namespace CENSO.Models
         public int LocationId { get; set; }
 
         public Locations locations { get; set; }
+
+        // Relationship one-to-many entities RequestStatus and Request
+        [Required]
+        public int StatusId { get; set; }
+
+        public RequestStatus requestStatus { get; set; }
     }
 }

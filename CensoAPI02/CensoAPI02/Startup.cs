@@ -75,7 +75,7 @@ namespace CensoAPI02
             });
 
             services.AddDbContext<CDBContext>(options =>
-            options.UseSqlServer("Server=GLL1330W\\SQL_ET; DataBase=censo04; Trusted_Connection=true; ConnectRetryCount=0"));
+            options.UseSqlServer(Configuration.GetConnectionString("Censo")));
 
             //Configuración del Cors
             services.AddCors(options => {
