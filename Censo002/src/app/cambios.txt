@@ -140,4 +140,8 @@ version 3.6.2
     -Tabala RequestStatus añadido
     -Campo Status añadido a la tabla AnonRequest y Request
 
+varsion 3.6.2 plus
+    -Validacion de locaciones al infresar al panel usuario
+    -36 Localidades ingresadas en la base de datos
+
 ~Braulio~

@@ -38,11 +38,10 @@ namespace CensoAPI02.Controllers
                     arCreationDate = DateTime.Now,
                     QuestionId = newAnomReq.QuestionId,
                     ThemeId = newAnomReq.ThemeId,
-                    LocationId = newAnomReq.LocationId
+                    LocationId = newAnomReq.LocationId,
+                    StatusId = 1
                     
                 };
-
-                newAnonRequest.StatusId = 1;
 
                 _context.AnonRequests.Add(newAnonRequest);
                 await _context.SaveChangesAsync();

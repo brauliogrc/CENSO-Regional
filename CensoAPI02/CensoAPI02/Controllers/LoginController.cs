@@ -88,7 +88,7 @@ namespace CensoAPI02.Controllers
                         }
                         conn.Close();
                         token = generateUserToken(userAuthData);
-                        userAuthData.setToken(token);
+                        userAuthData = null;
                         return Ok(new { token });
                     }
                 }
@@ -102,8 +102,7 @@ namespace CensoAPI02.Controllers
                 administrator.setAdminEmail(user.uEmail);
 
                 token = generateAdministratorToken(administrator);
-                administrator.setToken(token);
-
+                administrator = null;
                 return Ok(new { token });
             }
             catch( Exception ex )

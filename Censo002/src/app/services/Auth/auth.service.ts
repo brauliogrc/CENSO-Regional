@@ -112,4 +112,8 @@ export class AuthService {
   saveEmployeeNumber(employeeNumber: any) {
     sessionStorage.setItem('employeeNumber', employeeNumber);
   }
+
+  saveLocation(location: any) {
+    sessionStorage.setItem('location', location);
+  }
 }

@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
           this._authService.saveName(this.dataToken.Username);
           this._authService.saveRole(this.dataToken.Role);
           this._authService.saveEmployeeNumber(this.dataToken.EmployeeNumber);
+          this._authService.saveLocation(this.dataToken.Location);
           this._authService.saveToken(data.token);
           this.dataToken = null;
           this.redirect();

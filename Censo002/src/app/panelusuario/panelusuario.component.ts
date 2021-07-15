@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SquestionsService } from '../services/questions/squestions.service';
 import { SrequestService } from '../services/request/srequest.service';
 import {
   availableQues,
@@ -9,11 +8,10 @@ import {
   availableTheme,
   availableAreas,
 } from '../interfaces/interfaces';
-import { SloginService } from '../services/login/slogin.service';
 import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
-import { getLocaleEraNames } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
+import { LocationValidate } from '../services/validations';
 
 @Component({
   selector: 'app-panelusuario',
@@ -74,6 +72,18 @@ export class PanelusuarioComponent implements OnInit {
 
   defineLocation() {
     this.location = this.user.locationId;
+
+    const tokenValue: string | null = sessionStorage.getItem('location');
+    const locationValidate = new LocationValidate();
+    const locationValue = locationValidate.localityValidation(tokenValue);
+
+    if (locationValue == null){
+      this.location = this.user.locationId;
+    }
+    else{
+      this.location = locationValue;
+    }
+
     this.getTeme();
     this.getAreas();
   }
