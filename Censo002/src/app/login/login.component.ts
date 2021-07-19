@@ -5,7 +5,7 @@ import { dataLogin } from '../interfaces/interfaces';
 import { AuthService } from '../services/Auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-const helper = new JwtHelperService();
+//const helper = new JwtHelperService();
 
 @Component({
   selector: 'app-login',
@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
     private _fb: FormBuilder,
     private _authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   userLogin() {
     /**
