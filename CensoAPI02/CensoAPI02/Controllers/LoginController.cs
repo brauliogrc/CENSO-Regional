@@ -28,16 +28,19 @@ namespace CensoAPI02.Controllers
     //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class LoginController : ControllerBase
     {
+        // Variables globales
         private readonly CDBContext _context;
         private readonly IConfiguration _config;
         private bool authenticated;
         private string token;
 
+        // Constructores
         public LoginController(CDBContext context, IConfiguration configuration)
         {
             _context = context;
             _config = configuration;
         }
+
 
         [HttpPost][AllowAnonymous]
         public async Task<IActionResult> Post([FromBody] LoginInterface dataLogin)
@@ -59,12 +62,23 @@ namespace CensoAPI02.Controllers
                         hru.uEmail,
                         hru.LocationId,
                         hru.RoleId,
-                        hru.uEmployeeNumber
+                        hru.uEmployeeNumber,
+                        hru.uSupervisorNumber,
+                        hru.uStatus
                     }).FirstOrDefaultAsync();
 
+                if (user != null)
+                {
+                    if (user.uStatus == false)
+                    {
+                        return Unauthorized(new { message = $"Acceso no autorizado" });
+                    }
+                }
+                
                 if (user == null)
                 {
-                    string query = "SELECT [EmployeeNumber], [Plant], [FullName], [SupervisorNumber] FROM [p_HRPortal].[dbo].[VW_EmployeeData] where EmployeeNumber=" + dataLogin.userNumber;
+                    // Busqueda del usuario en la base de datos de HRPortal
+                    string query = "SELECT [EmployeeNumber], [Plant], [FullName], [SupervisorNumber], [EMail] FROM [p_HRPortal].[dbo].[VW_EmployeeData] where EmployeeNumber=" + dataLogin.userNumber;
                     using (SqlConnection conn = new SqlConnection(_config.GetConnectionString("HRPortal")))
                     {
                         UserAuthData userAuthData = new UserAuthData();
@@ -74,16 +88,17 @@ namespace CensoAPI02.Controllers
                         SqlDataReader reader = command.ExecuteReader();
                         if (reader.HasRows)
                         {
-                            int i = 0;
-                            while (reader.Read() && i == 0)
+                            int flag = 0;
+                            while (reader.Read() && flag == 0)
                             {
-                                Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)} - {reader.GetString(2)} - {reader.GetInt32(3)}");
+                                Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)} - {reader.GetString(2)} - {reader.GetInt32(3)} - {reader.GetString(4)}");
                                 userAuthData.setUserEmployeeNumer(reader.GetInt32(0));
                                 userAuthData.setUserLocation(reader.GetString(1));
                                 userAuthData.setUsername(reader.GetString(2));
                                 userAuthData.setSupervisorNumber(reader.GetInt32(3));
+                                userAuthData.setUserEmail(reader.GetString(4));
 
-                                i++;
+                                flag++;
                             }
                         }
                         conn.Close();
@@ -112,7 +127,7 @@ namespace CensoAPI02.Controllers
         }
 
         // Obtencion de datos del claim
-        [HttpGet]
+        /*[HttpGet]
         [Authorize(Policy = "Administrador")]
         public IActionResult Get()
         {
@@ -125,11 +140,11 @@ namespace CensoAPI02.Controllers
             }
 
             return Ok(new { message = "Valor en el claim: " + username.Value });
-        }
+        }*/
 
-        // Comprobacion de existencia del usuario en HRPotal
-        [HttpPost][AllowAnonymous][Route("Procedure")]
-        public bool verifyHRPortal([FromBody] LoginInterface data)
+        // Verifica la existencia del usuario en la base de datos HRPortal
+        [HttpGet][Authorize]
+        private bool verifyHRPortal(LoginInterface data)
         {
             SqlConnection connectionString = new SqlConnection(_config.GetConnectionString("HRPortal"));
 
@@ -155,20 +170,21 @@ namespace CensoAPI02.Controllers
                 return authenticated;
             };
         }
-        
-        // Genera el token del administrador
-        [HttpGet][Route("generateAdminToken")][AllowAnonymous]
-        public string generateAdministratorToken(AdministratorAuthData adminData)
+
+        // Generador de token de Administrador
+        [HttpGet][Authorize]
+        private string generateAdministratorToken(AdministratorAuthData adminData)
         {
             var secretKey = _config.GetValue<string>("SecretKey"); // Leemos la llave secreta
             var key = Encoding.ASCII.GetBytes(secretKey);
 
             var claims = new ClaimsIdentity(); // Creamos los claims para poder iniciar sesion
-            claims.AddClaim(new Claim( ClaimTypes.NameIdentifier, adminData.getAdminId().ToString() )); // Creación de un claim con el nombre del usuario
-            claims.AddClaim(new Claim( "Username", adminData.getAdminName().ToString() ));
-            claims.AddClaim(new Claim( "Location", adminData.getAdminLocation().ToString() ));
-            claims.AddClaim(new Claim( "Role", adminData.getAdminRole().ToString() ));
-            claims.AddClaim(new Claim("EmployeeNumber", adminData.getAdminEmployeeNumber().ToString()));
+            claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, adminData.getAdminEmployeeNumber().ToString())); // Creación de un claim con el nombre del usuario
+            claims.AddClaim(new Claim("userId", adminData.getAdminId().ToString()));
+            claims.AddClaim(new Claim("Username", adminData.getAdminName().ToString()));
+            claims.AddClaim(new Claim("SupervisorNumber", adminData.getSupervisorNumber().ToString()));
+            claims.AddClaim(new Claim("Location", adminData.getAdminLocation().ToString()));
+            claims.AddClaim(new Claim("Role", adminData.getAdminRole().ToString()));
             claims.AddClaim(new Claim("Email", adminData.getAdminEmail().ToString()));
 
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -186,9 +202,9 @@ namespace CensoAPI02.Controllers
             return bearer_token;
         }
 
-        // Genera token del usuario
-        [HttpGet][Route("generateUserToken")][AllowAnonymous]
-        public string generateUserToken(UserAuthData userData)
+        // Generador de token de usuario
+        [HttpGet]
+        private string generateUserToken(UserAuthData userData)
         {
             var secretKey = _config.GetValue<string>("SecretKey"); // Leemos la llave secreta
             var key = Encoding.ASCII.GetBytes(secretKey);
@@ -198,6 +214,7 @@ namespace CensoAPI02.Controllers
             claims.AddClaim(new Claim("Location", userData.getUserLocation().ToString()));
             claims.AddClaim(new Claim("Username", userData.getUsername().ToString()));
             claims.AddClaim(new Claim("SupervisorNumber", userData.getSupervisorNumber().ToString()));
+            claims.AddClaim(new Claim("Email", userData.getUserEmail().ToString()));
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

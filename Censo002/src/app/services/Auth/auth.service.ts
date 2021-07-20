@@ -92,28 +92,36 @@ export class AuthService {
     isExpired ? this.logout() : this.loggedIn.next(true);
   }
 
-  saveId(id: any): void {
+  // Guardado de datos en el sessionSorage
+  saveEmployeenumber(employeeNumber: any): void {
+    sessionStorage.setItem('employeeNumber', employeeNumber);
+  }
+
+  saveUserId(id: any): void {
     sessionStorage.setItem('userId', id);
+  }
+
+  saveUsername(username: string): void {
+    sessionStorage.setItem('username', username);
+  }
+
+  saveSupervisorNumber(supervisorNumber: any): void {
+    sessionStorage.setItem('supervisorNumber', supervisorNumber);
+  }
+
+  saveLocation(location: any): void {
+    sessionStorage.setItem('location', location);
   }
 
   saveRole(role: any): void {
     sessionStorage.setItem('role', role);
   }
 
-  saveName(name: string): void {
-    sessionStorage.setItem('username', name);
+  saveEmail(email: string): void {
+    sessionStorage.setItem('email', email);
   }
 
   saveToken(token: string): void {
-    // localStorage.setItem('token', token);
     sessionStorage.setItem('token', token);
-  }
-
-  saveEmployeeNumber(employeeNumber: any) {
-    sessionStorage.setItem('employeeNumber', employeeNumber);
-  }
-
-  saveLocation(location: any) {
-    sessionStorage.setItem('location', location);
   }
 }

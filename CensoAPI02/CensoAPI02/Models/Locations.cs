@@ -22,7 +22,7 @@ namespace CENSO.Models
         public DateTime lCreationDate { get; set; }
 
         [Required]
-        public int      lCreationuser { get; set; }
+        public int      lCreationUser { get; set; }
 
         public DateTime lModificationDate { get; set; }
 

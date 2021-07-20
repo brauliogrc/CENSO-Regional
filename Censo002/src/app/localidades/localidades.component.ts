@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SlocationsService } from '../services/locations/slocations.service';
 import { dataLocations, dataNewLocation } from '../interfaces/interfaces';
 import { DataTableService } from '../services/tables/data-table.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { SearchesService } from '../services/searches/searches.service';
 import { AuthService } from '../services/Auth/auth.service';
 import { Router } from '@angular/router';
@@ -37,6 +37,7 @@ export class LocalidadesComponent implements OnInit {
     this.validRole();
   }
 
+  // Validación del rol
   validRole(): void {
     if (Number(sessionStorage.getItem('role')) != 1) {
       console.error('Sección no accesible');

@@ -4,7 +4,9 @@ import { Router } from '@angular/router';
 import { dataLogin } from '../interfaces/interfaces';
 import { AuthService } from '../services/Auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Token } from '../interfaces/newInterfaces';
 
+//
 const helper = new JwtHelperService();
 
 @Component({
@@ -44,31 +46,32 @@ export class LoginComponent implements OnInit {
 
     // Nos suscribimos al método del service, enviandole el objeto con los datos para validar si el usuario existe en la base de datos
     this._authService.Login(dataLogin).subscribe(
-      (data: any) => {
+      (data: Token) => {
         if (!data) {
           console.error('Usuario no encontrado en la base de datos');
         } else {
           this.dataToken = helper.decodeToken(data.token);
           console.log(this.dataToken);
 
-          this.loginForm.reset();
+          // this.loginForm.reset();
 
-          alert('Binbenido ' + this.dataToken.Username);
-          this._authService.setData(
-            this.dataToken.Location,
-            this.dataToken.Username,
-            this.dataToken.nameid,
-            this.dataToken.Email,
-            this.dataToken.Role
+          // Llamadas a los métodos de guardado del sessionStorage
+          this._authService.saveEmployeenumber(this.dataToken.nameid);
+          this._authService.saveUserId(this.dataToken.userId);
+          this._authService.saveUsername(this.dataToken.Username);
+          this._authService.saveSupervisorNumber(
+            this.dataToken.SupervisorNumber
           );
-          this._authService.saveId(this.dataToken.nameid);
-          this._authService.saveName(this.dataToken.Username);
-          this._authService.saveRole(this.dataToken.Role);
-          this._authService.saveEmployeeNumber(this.dataToken.EmployeeNumber);
           this._authService.saveLocation(this.dataToken.Location);
+          this._authService.saveRole(this.dataToken.Role);
+          this._authService.saveEmail(this.dataToken.Email);
           this._authService.saveToken(data.token);
+
+          data.token = '';
           this.dataToken = null;
           this.redirect();
+
+          // alert('Binbenido ' + this.dataToken.Username);
         }
         // console.log(dataLogin);
       },
@@ -79,8 +82,8 @@ export class LoginComponent implements OnInit {
   }
 
   redirect() {
-    const user = this._authService.getUser();
-    if (user.roleId != 0 && this._authService.isLogged) {
+    const role: number = Number(sessionStorage.getItem('role'));
+    if (role != 0 && this._authService.isLogged) {
       this.router.navigate(['/paneladmin']);
     } else if (this._authService.isLogged) {
       this.router.navigate(['/panelusuario']);

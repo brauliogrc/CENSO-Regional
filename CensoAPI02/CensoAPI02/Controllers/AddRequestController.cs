@@ -21,19 +21,6 @@ namespace CensoAPI02.Controllers
         {
             _context = context;
         }
-        // GET: api/<AddRequestController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<AddRequestController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/<AddRequestController>
         [HttpPost]
@@ -44,6 +31,7 @@ namespace CensoAPI02.Controllers
                 var newRequest = new Request()
                 {
                     rUserId = value.rUserId,
+                    rUserName = value.rUserName,
                     rEmployeeType = value.rEmployeeType,
                     QuestionId = value.QuestionId,
                     rIssue = value.rIssue,
@@ -54,6 +42,7 @@ namespace CensoAPI02.Controllers
                     LocationId = value.LocationId,
                     StatusId = 1
                 };
+
                 _context.Requests.Add(newRequest);
                 await _context.SaveChangesAsync();
                 return Ok(newRequest);
@@ -61,18 +50,6 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        // PUT api/<AddRequestController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AddRequestController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }

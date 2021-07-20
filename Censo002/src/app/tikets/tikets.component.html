@@ -27,18 +27,34 @@
         <th>Nombre usuario</th>
         <th>Asunto</th>
         <th>Área</th>
+        <th>Status</th>
         <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <ng-container *ngIf="!tiket; else elseTemplate">
+        <!-- Tikets con datos -->
         <tr *ngFor="let tiket of Tikets" (click)="onClick(tiket.rId)">
           <td>{{ tiket.rId }}</td>
           <td>{{ tiket.tName }}</td>
           <td>{{ tiket.qName }}</td>
-          <td>{{ tiket.uName }}</td>
+          <td>{{ tiket.rUserName }}</td>
           <td>{{ tiket.rIssue }}</td>
           <td>{{ tiket.aName }}</td>
+          <td>{{ tiket.rsStatus }}</td>
+          <td>
+            <button class="btn btn-danger">Eliminar</button>
+          </td>
+        </tr>
+        <!-- Tikets anonimos -->
+        <tr *ngFor="let anonTiket of AnonTikets" (click)="onClick(tiket.rId)">
+          <td>{{ anonTiket.arId }}</td>
+          <td>{{ anonTiket.tName }}</td>
+          <td>{{ anonTiket.qName }}</td>
+          <td></td>
+          <td>{{ anonTiket.arIssue }}</td>
+          <td>{{ anonTiket.aName }}</td>
+          <td>{{ anonTiket.rsStatus }}</td>
           <td>
             <button class="btn btn-danger">Eliminar</button>
           </td>
@@ -51,6 +67,7 @@
           <td>{{ tiket.qName }}</td>
           <td>{{ tiket.uName }}</td>
           <td>{{ tiket.rIssue }}</td>
+          <td></td>
           <td>{{ tiket.aName }}</td>
           <td>
             <button class="btn btn-danger">Eliminar</button>

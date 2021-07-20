@@ -62,12 +62,15 @@ export class DataTableService {
   }
 
   // Llamamos al controlados de la API en la ruta TableTikets para obtener los datos necesarios para la tabla de tickets.component
-  tableTickets(): Observable<any> {
+  tableTickets(locationId: number): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${sessionStorage.getItem('token')}`,
     });
-    return this._http.get(this.MyAppurl + this.MyApiUrl + 'TableTikets', {
-      headers: headers,
-    });
+    return this._http.get(
+      this.MyAppurl + this.MyApiUrl + 'TableTikets/' + locationId,
+      {
+        headers: headers,
+      }
+    );
   }
 }

@@ -25,14 +25,13 @@ namespace CensoAPI02.Controllers
 
         // POST api/<LocationsController>
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] AddLocations value)
+        public async Task<IActionResult> Post([FromBody] AddLocationsInterface value)
         {
             try
             {
                 var newLocation = new Locations() // AGREGAR CREATIONUSER
                 {
                     lName = value.lName,
-                    lStatus = value.lStatus,
                     lCreationDate = DateTime.Now,
                     //lCreationuser = 2
                 };

@@ -10,22 +10,24 @@ namespace CensoAPI02.Models
     public class AnswerStatus
     {
         [Key]
-        public int asId { get; set; } // Id de la respuesta
-
-        [Required]
-        public int asUserId { get; set; } // Id del usurio que responde
+        public int asId { get; set; }
 
         [MaxLength(500)]
         [Required]
-        public string asAnswer { get; set; } // Contenido de la repuesta
+        public string asAnswer { get; set; }
 
         [Required]
-        public DateTime asCrestionDate { get; set; } // Fecha de creacion de la respuesata -> podria estar ligada la arModificationDate de anonymousRequest
+        public DateTime asCrestionDate { get; set; }
 
         // Relationship one-2-one entities Request and AnswerStatus
         [Required]
         public int RequestId { get; set; }
-
         public Request request { get; set; }
+
+
+        // Relationship one-to-many entities HRU and AnswerSatus
+        [Required]
+        public int UserId { get; set; }
+        public HRU hru { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataTableService } from '../services/tables/data-table.service';
-import { dataTickets } from '../interfaces/interfaces';
+import { dataTickets, dataAnonTikets } from '../interfaces/interfaces';
 import { SearchesService } from '../services/searches/searches.service';
+import { AuthService } from '../services/Auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tikets',
@@ -10,39 +12,54 @@ import { SearchesService } from '../services/searches/searches.service';
 })
 export class TiketsComponent implements OnInit {
   Tikets: dataTickets[] = [];
+  AnonTikets: dataAnonTikets[] = [];
 
   tiket: any;
 
   constructor(
-    private _ticketService: DataTableService,
-    private _searchService: SearchesService
+    private _dataTable: DataTableService,
+    private _searchService: SearchesService,
+    private _auth: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Obtencion de los tickets registrados
-    this._ticketService.tableTickets().subscribe(
-      (data) => {
-        this.Tikets = [...data];
-        console.log(this.Tikets);
-      },
-      (error) => {
-        console.error(error.error.message);
-      }
-    );
+    this.validRole();
   }
 
-  search(tiketId: any) {
-    this._searchService.searchFolio(tiketId).subscribe(
-      (data) => {
-        this.tiket = data[0];
-        this.Tikets = [];
-        console.log(data[0]);
-      },
-      (error) => {
-        console.log(error.error.message);
-      }
-    );
+  validRole(): void {
+    if (
+      Number(sessionStorage.getItem('role')) != 1 &&
+      Number(sessionStorage.getItem('role')) != 2 &&
+      Number(sessionStorage.getItem('role')) != 3
+    ) {
+      console.error('Sección no accesible');
+      sessionStorage.clear();
+      this.router.navigate(['/login']);
+      console.clear();
+      return;
+    }
+    this.getTiketsList();
   }
+
+  // Obtencion de listado de tikets (tanto anonimos como con datos)
+  getTiketsList() {
+    this._dataTable
+      .tableTickets(Number(sessionStorage.getItem('location')))
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.Tikets = [...data.tikets];
+          this.AnonTikets = [...data.anonTikets];
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }
+
+  // Busqueda de un tiket mediante su id
+  search(tiketId: any) {}
 
   // Obtencion de los datos de la tabla al hacer click en una row
   onClick(requestiId: any) {

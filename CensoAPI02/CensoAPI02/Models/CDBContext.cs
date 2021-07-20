@@ -27,6 +27,7 @@ namespace CENSO.Models
         public DbSet<Area> Areas { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<RequestStatus> RequestStatus { get; set; }
+        public DbSet<AnswerStatus> Answer { get; set; }
 
         // UnionTables
         public DbSet<LocationsTheme> LocationsThemes { get; set; }
@@ -59,6 +60,7 @@ namespace CENSO.Models
                     }
                 );
 
+
             // configuración para que la realacion M2M utilice la entidad HRUsersTheme
             modelBuilder.Entity<HRU>()
                 .HasMany(u => u.Themes)
@@ -75,6 +77,7 @@ namespace CENSO.Models
                         hrth.HasKey(prop => new { prop.ThemeId, prop.HRUId });
                     }
                 );
+
 
             // configuración para que la realacion M2M utilice la entidad QuestionsThemes
             modelBuilder.Entity<Question>()
@@ -93,11 +96,13 @@ namespace CENSO.Models
                     }
                 );
 
+
             // configuración para relacion one-to-may HRU Locations
             modelBuilder.Entity<HRU>() // Parte 1 de la relación
                 .HasOne<Locations>(hru => hru.locations) // Utilizamos las propiedades de naegación
                 .WithMany(l => l.HRU) // Utilizamos las propiedades de naegación
                 .HasForeignKey(hru => hru.LocationId); // Definimos el la FOREIGN KEY
+
 
             // configuración para relación one-tomany Questions and Request
             modelBuilder.Entity<Request>() // Parte 1 de la relación
@@ -105,11 +110,13 @@ namespace CENSO.Models
                 .WithMany(ques => ques.request)
                 .HasForeignKey(req => req.QuestionId);
 
+
             // configuración para relación one-to-many Questions and AnonRequest
             modelBuilder.Entity<AnonRequest>() // Parte 1 de la relación
                  .HasOne<Question>(ques => ques.question)
                  .WithMany(anr => anr.anonRequest)
                  .HasForeignKey(ques => ques.QuestionId);
+
 
             // configuración para relación one-to-one anonymousRequest and AnswerAnonRequest
             modelBuilder.Entity<AnonRequest>()
@@ -117,11 +124,13 @@ namespace CENSO.Models
                 .WithOne(anon => anon.anonRequest) // Utilizamos las propiedades de naegación
                 .HasForeignKey<AnswerAnonStatus>(anon => anon.anRequestId); // Definimos el la FOREIGN KEY
 
+
             // configuración para relación one-to-one Request and AnswerSatatus
             modelBuilder.Entity<Request>()
                 .HasOne<AnswerStatus>(r => r.answerStatus) // Utilizamos las propiedades de naegación
                 .WithOne(ans => ans.request) // Utilizamos las propiedades de naegación
                 .HasForeignKey<AnswerStatus>(ansF => ansF.RequestId); // Definimos el la FOREIGN KEY
+
 
             // configuracions para relacón one-to-many Locations and Area
             modelBuilder.Entity<Area>() // Parte 1 de la relación
@@ -129,11 +138,13 @@ namespace CENSO.Models
                 .WithMany(l => l.areas)
                 .HasForeignKey(area => area.locationId);
 
+
             // configuracions para relacón one-to-many Area and Request
             modelBuilder.Entity<Request>() // Parte 1 de la relación
                 .HasOne<Area>(req => req.area)
                 .WithMany(area => area.request)
                 .HasForeignKey(req => req.AreaId);
+
 
             // configuracions para relacón one-to-many Area and AnonRequest
             modelBuilder.Entity<AnonRequest>() // Parte 1 de la relación
@@ -141,11 +152,13 @@ namespace CENSO.Models
                 .WithMany(area => area.anonRequest)
                 .HasForeignKey(areq => areq.AreaId);
 
+
             // configuracions para relacón one-to-many Theme and Request
             modelBuilder.Entity<Request>()
                 .HasOne<Theme>(r => r.theme)
                 .WithMany(th => th.Requests)
                 .HasForeignKey(r => r.ThemeId);
+
 
             // configuracions para relacón one-to-many Theme and AnonRequest
             modelBuilder.Entity<AnonRequest>()
@@ -153,11 +166,13 @@ namespace CENSO.Models
                 .WithMany(th => th.AnonRequests)
                 .HasForeignKey(ar => ar.ThemeId);
 
+
             // configuracions para relacón one-to-many HRU and Roles
             modelBuilder.Entity<HRU>()
                 .HasOne<Roles>(hru => hru.roles)
                 .WithMany(r => r.hru)
                 .HasForeignKey(hru => hru.RoleId);
+
 
             // configuracions para relacón one-to-many Locations and Request
             modelBuilder.Entity<Request>()
@@ -166,12 +181,14 @@ namespace CENSO.Models
                 .HasForeignKey(r => r.LocationId)
                 .OnDelete(DeleteBehavior.NoAction); // Deshabilitamos la eliminacion en cascada
 
+
             // configuracions para relacón one-to-many Locations and AnonRequest
             modelBuilder.Entity<AnonRequest>()
                 .HasOne<Locations>(ar => ar.locations)
                 .WithMany(l => l.anonRequest)
                 .HasForeignKey(ar => ar.LocationId)
                 .OnDelete(DeleteBehavior.NoAction); // Deshabilitamos la eliminacion en cascada
+
 
             // configuracions para relacón one-to-many RequestStatus and Request
             modelBuilder.Entity<Request>()
@@ -180,12 +197,32 @@ namespace CENSO.Models
                 .HasForeignKey(r => r.StatusId)
                 .OnDelete(DeleteBehavior.NoAction);
 
+
             // configuracions para relacón one-to-many RequestStatusand AnonRequest
             modelBuilder.Entity<AnonRequest>()
                 .HasOne<RequestStatus>(ar => ar.requestStatus)
                 .WithMany(rs => rs.anonRequests)
                 .HasForeignKey(ar => ar.StatusId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+
+            // configuracions para relacón one-to-many HRU AnswerStatus
+            modelBuilder.Entity<AnswerStatus>()
+                .HasOne<HRU>(answer => answer.hru)
+                .WithMany(hru => hru.answerStatus)
+                .HasForeignKey(answer => answer.UserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+            // configuracions para relacón one-to-many HRU Request
+            modelBuilder.Entity<Request>()
+                .HasOne<HRU>(r => r.hru)
+                .WithMany(hru => hru.requests)
+                .HasForeignKey(r => r.rModificationUser)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+            // 
         }
     }
 }

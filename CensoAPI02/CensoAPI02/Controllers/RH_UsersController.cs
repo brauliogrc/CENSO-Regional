@@ -75,7 +75,6 @@ namespace CensoAPI02.Controllers
                     uName = newUser.uName,
                     uEmail = newUser.uEmail,
                     RoleId = newUser.RolId,
-                    uStatus = newUser.uStatus,
                     uCreationDate = DateTime.Now,
                     uCreationUser = 1,
                     uEmployeeNumber = newUser.EmployeeNumber,

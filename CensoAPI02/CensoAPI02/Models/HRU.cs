@@ -12,49 +12,57 @@ namespace CensoAPI02.Models
     public class HRU
     {
         [Key]
-        public int uId { get; set; } // Id del usuario
+        public int uId { get; set; }
 
         [MaxLength(50)]
         [Required]
-        public string uName { get; set; } // Nombre del usuario
+        public string uName { get; set; }
 
         [MaxLength(80)]
         [Required]
-        public string uEmail { get; set; } // Eamil del usuario
+        public string uEmail { get; set; }
 
         [Required]
         public long uEmployeeNumber { get; set; }
 
-        /*[Required]
-        public long supervisorNumber { get; set; }*/
+        [Required]
+        public long uSupervisorNumber { get; set; }
 
         [Required]
-        public DateTime uCreationDate { get; set; } // Fecha de cracion del usuario
+        public DateTime uCreationDate { get; set; }
 
         [Required]
-        public int uCreationUser { get; set; } // Usuario creador del usuario
+        public int uCreationUser { get; set; }
 
-        public DateTime uModificationDate { get; set; } // Fecha de modificacion del usuario
+        public DateTime uModificationDate { get; set; }
 
-        public int uModificationUser { get; set; } // Usuario modificador del usuario
+        public int uModificationUser { get; set; }
 
         [Required]
-        public bool uStatus { get; set; } // Estado del usuario -> true o false
+        public bool uStatus { get; set; }
+
 
         // Relationship M2M with table Theme
         public List<Theme> Themes { get; set; }
+
 
         // Relationship one-to-many wuith Location
         [Required]
         public int LocationId { get; set; }
         public Locations locations { get; set; }
 
+
         // Relationship one-to-many wuith Roles
         [Required]
         public int RoleId { get; set; }
-
         public Roles roles { get; set; }
 
 
+        // Relationship one-to-many entities HRU and AnswerSatus
+        public List<AnswerStatus> answerStatus { get; set; }
+
+
+        // Relationship one-to-many HRU Request
+        public List<Request> requests { get; set; }
     }
 }

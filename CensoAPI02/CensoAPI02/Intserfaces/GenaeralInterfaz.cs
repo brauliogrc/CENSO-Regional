@@ -11,21 +11,6 @@ namespace CensoAPI02.Intserfaces
     }
 
     // Cada interfz contiene los datos que la API solicita para realizar alguna acción
-    // Registrar un nuevo usuario
-    public class AddUserInterface
-    {
-        public string uName { get; set; }
-
-        public string uEmail { get; set; }
-
-        public int RolId { get; set; }
-
-        public int EmployeeNumber { get; set; }
-
-        public bool uStatus { get; set; } // Este valor se ingresa como numero 0=false y 1=true
-
-        public int LocationId { get; set; }
-    }
 
     // Realizar el logueo de un usuario
     public class LoginInterface
@@ -37,12 +22,32 @@ namespace CensoAPI02.Intserfaces
         public string pass { get; set; }
     }
 
+    // Registrar un nuevo usuario
+    public class AddUserInterface // Modificada
+    {
+        public string uName { get; set; }
+
+        public string uEmail { get; set; }
+
+        public int RolId { get; set; }
+
+        public long EmployeeNumber { get; set; }
+
+        public int uCreationUser { get; set; }
+
+        public int LocationId { get; set; }
+    }
+
     // Registrar una nueva Request
-    public class AddRequestInterface
+    public class AddRequestInterface // Modificada
     {
         public int rUserId { get; set; }
 
+        public string rUserName { get; set; }
+
         public int rEmployeeType { get; set; }
+
+        public int rEmployeeLeader { get; set; }
 
         public int QuestionId { get; set; }
 
@@ -58,7 +63,7 @@ namespace CensoAPI02.Intserfaces
     }
 
     // Registar una nueva AonRequest
-    public class AddAnonRequestInterface
+    public class AddAnonRequestInterface // Modificada
     {
         public int arEmployeeType { get; set; }
 
@@ -76,38 +81,48 @@ namespace CensoAPI02.Intserfaces
     }
 
     // Registar una nueva Location
-    public class AddLocations
+    public class AddLocationsInterface // Modificada
     {
         public string lName { get; set; }
 
-        public bool lStatus { get; set; }
+        public int lCreationUser { get; set; }
     }
 
     // Registar una nueva Question
-    public class AddQuestion
+    public class AddQuestionInterface // Modificada
     {
         public string qName { get; set; }
 
-        public bool qStatus { get; set; }
+        public int qCreationUser { get; set; }
 
         public int ThemeId { get; set; }
     }
 
     // Registar un nuevo Theme
-    public class AddTheme
+    public class AddThemeInterface // Modificada
     {
         public string tName { get; set; }
 
-        public bool tStatus { get; set; }
+        public int tCreationUser { get; set; }
 
         public int LocationId { get; set; }
     }
 
     // Registar una nueva Area
-    public class AddArea
+    public class AddAreaInterface
     {
         public string aName { get; set; }
 
         public int LocationId { get; set; }
+    }
+
+    // Registrar respuesta de tiket
+    public class AddAnswerInterface // Modificada
+    {
+        public int asUserId { get; set; }
+
+        public string asAnswer { get; set; }
+
+        public int RequestId { get; set; }
     }
 }

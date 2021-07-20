@@ -28,14 +28,13 @@ namespace CensoAPI02.Controllers
         // POST api/<QuestionController>
         // Agregar una nueva pregunta a la base de datos
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] AddQuestion value)
+        public async Task<IActionResult> Post([FromBody] AddQuestionInterface value)
         {
             try
             {
                 var newQuestion = new Question() // AGREGAR CREATIONUSER
                 {
                     qName = value.qName,
-                    qStatus = value.qStatus,
                     qCreationDate = DateTime.Now,
                     qCreationUser = 1 // Se obtiene automaticamente tras el logueo
                 };

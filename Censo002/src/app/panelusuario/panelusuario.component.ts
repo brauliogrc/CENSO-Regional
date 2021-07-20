@@ -1,17 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SrequestService } from '../services/request/srequest.service';
-import {
-  availableQues,
-  saveDataLogin,
-  newRequest,
-  availableTheme,
-  availableAreas,
-} from '../interfaces/interfaces';
-import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { LocationValidate } from '../services/validations';
+import { FieldsService } from '../services/fields.service';
+import { Theme, Question, Area, addRequest } from '../interfaces/newInterfaces';
+import { AddRequestService } from '../services/add-request.service';
 
 @Component({
   selector: 'app-panelusuario',
@@ -20,23 +15,14 @@ import { LocationValidate } from '../services/validations';
 })
 export class PanelusuarioComponent implements OnInit {
   // Array que recorreremos desde el html
-  Questions: availableQues[] = [];
+  Questions: Question[] = [];
 
-  Theme: availableTheme[] = [];
+  Theme: Theme[] = [];
 
-  Areas: availableAreas[] = [];
+  Areas: Area[] = [];
 
+  // Id de la localidad
   private location: number = 0;
-
-  private user: saveDataLogin = {
-    uId: 0,
-    uEmail: '',
-    uName: '',
-    locationId: 0,
-    roleId: 0,
-  };
-
-  // Array que almacenará los datos del usuario logeado
 
   /* Definimos los campos del formulario y agregamos validaciones sobre su contenido
    *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
@@ -52,35 +38,33 @@ export class PanelusuarioComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _reqServise: SrequestService,
+    private _requestService: AddRequestService,
     private _authService: AuthService,
-    private _fields: FieldsRequestService,
-    private _auth: AuthService,
+    private _fields: FieldsService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.user = this._authService.getUser();
+    // this.user = this._authService.getUser();
     // console.log(this.user);
 
     this.defineLocation();
   }
 
-  buscarUsuario() {
+  // Redireccion al componente fvacio
+  buscarUsuario(): void {
     this.router.navigate(['fvacio']);
   }
 
-  defineLocation() {
-    this.location = this.user.locationId;
-
+  // Definicion del id de la localidad para consultas
+  defineLocation(): void {
     const tokenValue: string | null = sessionStorage.getItem('location');
     const locationValidate = new LocationValidate();
     const locationValue = locationValidate.localityValidation(tokenValue);
 
-    if (locationValue == null){
-      this.location = this.user.locationId;
-    }
-    else{
+    if (locationValue == null) {
+      this.location = Number(sessionStorage.getItem('location'));
+    } else {
       this.location = locationValue;
     }
 
@@ -88,37 +72,39 @@ export class PanelusuarioComponent implements OnInit {
     this.getAreas();
   }
 
-  getName() {
-    return this.user.uName;
+  // Mostrado del nombre en el formulatio
+  getName(): string | null {
+    return sessionStorage.getItem('username');
   }
 
-  getTeme() {
-    this._fields.getTheme(this.location).subscribe(
+  // Obtencion de los temas relacionados a la localidad
+  getTeme(): void {
+    this._fields.getThme(this.location).subscribe(
       (data) => {
         this.Theme = [...data];
         console.log(this.Theme);
       },
       (error) => {
         console.error(error.error.message);
-        this.Theme = [];
       }
     );
   }
 
-  getQuetions(themeId: any) {
-    this._fields.getQuestions(themeId).subscribe(
+  // Obtencion de las preguntas relaciondas al tema
+  getQuetions(themeId: string): void {
+    this._fields.getQuestions(Number(themeId)).subscribe(
       (data) => {
         this.Questions = [...data];
         console.log(this.Questions);
       },
       (error) => {
         console.error(error.error.message);
-        this.Questions = [];
       }
     );
   }
 
-  getAreas() {
+  // Obtencion de las areas relacionadas a la localidad
+  getAreas(): void {
     this._fields.getAreas(this.location).subscribe(
       (data) => {
         this.Areas = [...data];
@@ -130,32 +116,38 @@ export class PanelusuarioComponent implements OnInit {
     );
   }
 
-  registerRequest() {
+  // Registro de la pticion en la base de datos
+  registerRequest(): void {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const req: newRequest = {
-      rUserId: this.user.uId,
+    const req: addRequest = {
+      rUserId: Number(sessionStorage.getItem('employeeNumber')),
+      rUserName: sessionStorage.getItem('username'),
       rEmployeeType: this.bodyRequest.get('rEmployeeType')?.value,
+      rEmployeeLeader: Number(sessionStorage.getItem('supervisorNumber')),
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
       AreaId: this.bodyRequest.get('AreaId')?.value,
+      ThemeId: this.bodyRequest.get('ThemeId')?.value,
+      LocationId: this.location,
       rIssue: this.bodyRequest.get('rIssue')?.value,
       rAttachement: this.bodyRequest.get('rAttachement')?.value,
-      ThemeId: this.bodyRequest.get('ThemeId')?.value,
-      LocationId: this.user.locationId,
     };
     console.log(req);
 
-    // Nos suscribimos al método del service, enviandole el objeto con los datos a registrar en la base de datos
-    this._reqServise.saveRequest(req).subscribe(
+    // Registro de la peticion en la base de datos
+    this._requestService.addNewRequest(req).subscribe(
       (data) => {
-        this.bodyRequest.reset();
         console.log(data);
-        console.log('Petición registrada con exito. N folio: ' + data.rId);
       },
       (error) => {
-        console.error(error);
+        console.error(error.error.message);
       }
     );
+  }
+
+  // Llamada el método de cerrar sesion
+  logout(): void {
+    this._authService.logout();
   }
 }

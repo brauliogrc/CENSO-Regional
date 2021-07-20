@@ -16,6 +16,9 @@ namespace CensoAPI02.Models
         [Required]
         public string aName { get; set; }
 
+        //[Required]
+        //public bool aStatus { get; set; }
+
         // Relacion one-2-many con Locations
         public int locationId { get; set; }
 

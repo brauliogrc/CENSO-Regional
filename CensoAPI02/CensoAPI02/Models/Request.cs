@@ -10,62 +10,68 @@ namespace CENSO.Models
     public class Request
     {
         [Key]
-        public int rId { get; set; } // Id y folio de la request
+        public int rId { get; set; }
 
         [Required]
-        public int rUserId { get; set; } // Igual a creation User (Se obtendrá desde el login)
+        public int rUserId { get; set; }
+
+        [Required][MaxLength(120)]
+        public string rUserName { get; set; }
 
         [MaxLength(500)]
         [Required]
-        public string rIssue { get; set; } // Contenido
+        public string rIssue { get; set; }
 
         [MaxLength(200)]
-        public string rAttachement { get; set; } // Ruta de archivo adjunto
+        public string rAttachement { get; set; }
 
         [Required]
-        public int rEmployeeType { get; set; } // Tipo de empleado -> implementar enumercion para este camo
-
-        // Posible eliminacion
-        public int rEmployeeLeader { get; set; } // Lider del empleado
+        public int rEmployeeType { get; set; }
+ 
+        public int rEmployeeLeader { get; set; }
 
         [Required]
-        public DateTime rCreationDate { get; set; } // Fecha de creación de la petición (Ingresada automáticamente)
+        public DateTime rCreationDate { get; set; }
 
-        public DateTime rModificationDate { get; set; } // Es el Id del usurio que realizó la Request
+        public DateTime rModificationDate { get; set; }
 
-        public int rModificationUser { get; set; } // Podria ser el usuario que realiza la respuesta
+
+        // Relationship one-to-many entities HRU Request
+        public int rModificationUser { get; set; }
+        public HRU hru { get; set; }
+
 
         // Relationship one-2-one entities Request and Qestion
         [Required]
         public int QuestionId { get; set; }
+        public Question question { get; set; }
 
-        public Question question { get; set; } // Relacionada con la entidad Question (propiedad de navegación)
 
         // Relationship one-2-one entities Request and AnswerStatus
         public AnswerStatus answerStatus { get; set; }
 
+
         // Relationship one-2-may entities Area and Request
         [Required]
         public int AreaId { get; set; }
-
         public Area area { get; set; }
+
 
         //Relationship one-2-many entities Request and Theme
         [Required]
         public int ThemeId { get; set; }
-
         public Theme theme { get; set; }
+
 
         // Relationshio one-2-many entities Locations and Request
         [Required ]
         public int LocationId { get; set; }
-
         public Locations locations { get; set; }
+
 
         // Relationship one-to-many entities RequestStatus and Request
         [Required]
         public int StatusId { get; set; }
-
         public RequestStatus requestStatus { get; set; }
     }
 }

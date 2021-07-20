@@ -49,8 +49,34 @@ export interface dataTickets {
   aId: number;
   aName: string;
   uId: number;
-  uName: string;
+  rUserName: string;
+  rsId: number;
+  rsStatus: string;
 }
+
+export interface dataAnonTikets {
+  thId: number;
+  tName: string;
+  qId: number;
+  qName: string;
+  arId: number;
+  arIssue: string;
+  aId: number;
+  aName: string;
+  rsId: number;
+  rsStatus: string;
+}
+
+aId: 1;
+aName: 'Area 002';
+arId: 100000;
+arIssue: 'Tiket anonimo 001';
+qId: 2;
+qName: 'Pregunta 003';
+rsId: 1;
+rsStatus: 'En proceso';
+tId: 1;
+tName: 'Tema 002';
 /************** Interfaes para registro de Request */
 export interface availableQues {
   qId: number;
@@ -104,6 +130,7 @@ export interface newRequest {
   QuestionId: number;
   rAttachement: string;
   rEmployeeType: number;
+  rUserName: string;
 }
 
 export interface newAnonRequest {

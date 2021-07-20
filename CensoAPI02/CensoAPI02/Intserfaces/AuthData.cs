@@ -12,6 +12,8 @@ namespace CensoAPI02.Intserfaces
 
         private long adminEmployeeNumber { get; set; }
 
+        public long adminSupervisorNumber { get; set; }
+
         private int adminRole { get; set; }
 
         private int adminLocation { get; set; }
@@ -19,8 +21,6 @@ namespace CensoAPI02.Intserfaces
         private string adminName { get; set; }
 
         private string adminEmail { get; set; }
-
-        // public string token { get; set; }
 
         // Setter methods
         public void setAdminId(int adminId)
@@ -31,6 +31,11 @@ namespace CensoAPI02.Intserfaces
         public void setAdminEmployeeNumber(long adminEmployeeNumber)
         {
             this.adminEmployeeNumber = adminEmployeeNumber;
+        }
+
+        public void setAdminSupervisorNumber(long adminSupervisorNumber)
+        {
+            this.adminSupervisorNumber = adminSupervisorNumber;
         }
 
         public void setAdminRole(int adminRole)
@@ -53,11 +58,6 @@ namespace CensoAPI02.Intserfaces
             this.adminEmail = adminEmail;
         }
 
-        /*public void setToken(string token)
-        {
-            this.token = token;
-        }*/
-
         // Getter methods
         public int getAdminId()
         {
@@ -67,6 +67,11 @@ namespace CensoAPI02.Intserfaces
         public long getAdminEmployeeNumber()
         {
             return this.adminEmployeeNumber;
+        }
+
+        public long getSupervisorNumber()
+        {
+            return this.adminSupervisorNumber;
         }
 
         public int getAdminRole()
@@ -88,7 +93,6 @@ namespace CensoAPI02.Intserfaces
         {
             return this.adminEmail;
         }
-
         
     }
 
@@ -98,18 +102,23 @@ namespace CensoAPI02.Intserfaces
         // Atributos del ususario
         private int EmployeeNumber { get; set; }
 
+        public string Email { get; set; }
+
         private string Location { get; set; }
 
         private string Name { get; set; }
 
         private int supervisorNumber { get; set; }
 
-        // public string token { get; set; }
-
         // Setter methods
         public void setUserEmployeeNumer(int EmployeeNumber)
         {
             this.EmployeeNumber = EmployeeNumber;
+        }
+
+        public void setUserEmail(string Email)
+        {
+            this.Email = Email;
         }
 
         public void setUserLocation(string Location)
@@ -127,15 +136,15 @@ namespace CensoAPI02.Intserfaces
             this.supervisorNumber = supervisorNumber;
         }
 
-        /*public void setToken(string token)
-        {
-            this.token = token;
-        }*/
-
         // Getter methods
         public int getUserEmployeeNumber()
         {
             return this.EmployeeNumber;
+        }
+
+        public string getUserEmail()
+        {
+            return this.Email;
         }
 
         public string getUserLocation()

@@ -73,14 +73,13 @@ namespace CensoAPI02.Controllers
         // POST api/<ThemeController>
         // Agregar un nuevo tema a la base de datos
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] AddTheme value)
+        public async Task<IActionResult> Post([FromBody] AddThemeInterface value)
         {
             try
             {
                 var newTheme = new Theme() // AGREGAR CREATIONUSER
                 {
                     tName = value.tName,
-                    tStatus = value.tStatus,
                     tCreationDate = DateTime.Now,
                     tCreationUser = 1
                 };

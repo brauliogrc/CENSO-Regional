@@ -32,81 +32,78 @@ namespace CensoAPI02.Controllers
 
         // Busqueda de folios con base en el id
         // En el home.component
-        [HttpGet] [Route("folioSearch/{id}")] [Authorize(Policy = "StaffRH")]
-        public async Task<ActionResult> GetFolio(int id)
+        [HttpGet] [Route("tiketsSearch/{locationId}/{requestId}")] [AllowAnonymous] // [Authorize(Policy = "StaffRH")]
+        public async Task<ActionResult> GetTikets(int locationId, int requestId)
         {
             try
             {
-                var query = from theme in _context.Theme
-                            join qth in _context.QuestionsThemes on theme.tId equals qth.ThemeId
-                            join question in _context.Questions on qth.QuestionId equals question.qId
-                            join request in _context.Requests on question.qId equals request.QuestionId
+                var tiket = from request in _context.Requests
+                            join status in _context.RequestStatus on request.StatusId equals status.rsId
+                            join theme in _context.Theme on request.ThemeId equals theme.tId
+                            join question in _context.Questions on request.QuestionId equals question.qId
                             join area in _context.Areas on request.AreaId equals area.aId
-                            join user in _context.HRU on request.rUserId equals user.uId
-                            //where theme.tStatus == true && question.qStatus == true && request.rId == id
-                            where request.rId == id
+                            join location in _context.Locations on request.LocationId equals location.lId
+                            where request.rId == requestId && location.lId == locationId
                             select new
                             {
-                                theme.tId,
-                                theme.tName,
-                                question.qId,
-                                question.qName,
+                                // Datos del tiket
                                 request.rId,
                                 request.rIssue,
-                                area.aId,
-                                area.aName,
-                                user.uId,
-                                user.uName
-                            };
-
-                if (query == null || query.Count() == 0)
-                {
-                    return NotFound(new { message = "Ningun ticket encontrado en la base de atos" });
-                }
-
-                return Ok(query);
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        // Busqueda del folio anonimo desde home
-        [HttpGet][Route("folioAnonSearch/{id}")][AllowAnonymous]
-        public async Task<ActionResult> GetFolioAnon(int id)
-        {
-            try
-            {
-                var query = from anonReq in _context.AnonRequests
-                            join question in _context.Questions on anonReq.QuestionId equals question.qId
-                            join theme in _context.Theme on anonReq.ThemeId equals theme.tId
-                            join area in _context.Areas on anonReq.AreaId equals area.aId
-                            join location in _context.Locations on anonReq.LocationId equals location.lId
-                            where anonReq.arId == id
-                            select new
-                            {
-                                anonReq.arId,
-                                anonReq.arEmployeeType,
-                                anonReq.arIssue,
-                                anonReq.arAttachement,
-                                question.qId,
-                                question.qName,
+                                request.rUserId,
+                                request.rUserName,
+                                // Datos del status
+                                status.rsId,
+                                status.rsStatus,
+                                // Datos del theme
                                 theme.tId,
                                 theme.tName,
+                                // Datos de la question
+                                question.qId,
+                                question.qName,
+                                // Datos del area
                                 area.aId,
-                                area.aName,
-                                location.lId,
-                                location.lName
+                                area.aName
                             };
 
-                if(query == null || query.Count() == 0)
+                if (tiket == null || tiket.Count() == 0)
                 {
-                    return NotFound(new { message = "Ningun ticket encontrado en la base de atos" });
+                    var anonTiket = from anonReq in _context.AnonRequests
+                                    join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
+                                    join theme in _context.Theme on anonReq.ThemeId equals theme.tId
+                                    join question in _context.Questions on anonReq.QuestionId equals question.qId
+                                    join area in _context.Areas on anonReq.AreaId equals area.aId
+                                    join location in _context.Locations on anonReq.LocationId equals location.lId
+                                    where anonReq.arId == requestId && location.lId == locationId
+                                    select new
+                                    {
+                                        // Datos del tiket anonimo
+                                        anonReq.arId,
+                                        anonReq.arIssue,
+                                        // Datos del status
+                                        status.rsId,
+                                        status.rsStatus,
+                                        // Datos del theme
+                                        theme.tId,
+                                        theme.tName,
+                                        // Datos de la question
+                                        question.qId,
+                                        question.qName,
+                                        // Datos del area
+                                        area.aId,
+                                        area.aName
+                                    };
+
+                    if (anonTiket == null || anonTiket.Count() == 0)
+                    {
+                        return NotFound(new { message = "Ningun ticket encontrado en la base de atos" });
+                    }
+
+                    return Ok(anonTiket);
                 }
 
-                return Ok(query);
-            }catch(Exception ex)
+                return Ok(tiket);
+            }
+            catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }

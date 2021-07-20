@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
-import {
-  availableLocations,
-  newAnonRequest,
-  availableTheme,
-  availableQues,
-  availableAreas,
-} from '../interfaces/interfaces';
 import { SrequestService } from '../services/request/srequest.service';
 import { SearchesService } from '../services/searches/searches.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/Auth/auth.service';
+import {
+  Location,
+  Theme,
+  Question,
+  Area,
+  addAnonRequest,
+} from '../interfaces/newInterfaces';
+import { FieldsService } from '../services/fields.service';
+import { AddAnonRequestService } from '../services/add-anon-request.service';
 
 @Component({
   selector: 'app-home',
@@ -19,50 +19,20 @@ import { AuthService } from '../services/Auth/auth.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  locationId: number = 0;
   // Contenedor de los datos de las localidades
-  Locations: availableLocations[] = [];
+  Locations: Location[] = [];
 
   // Contenedor de los datos de los temas
-  Theme: availableTheme[] = [];
+  Theme: Theme[] = [];
 
   // Contenedor de los datos de las preguntas
-  Questions: availableQues[] = [];
+  Questions: Question[] = [];
 
   // Contenedor de los datos de las areas
-  Areas: availableAreas[] = [];
+  Areas: Area[] = [];
 
-  constructor(
-    private _fb: FormBuilder,
-    private _fields: FieldsRequestService,
-    private _reqService: SrequestService,
-    private _searchFolio: SearchesService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    // Obtenemos las localidades disponibles
-    this._fields.getLocations().subscribe(
-      (data) => {
-        this.Locations = [...data];
-        console.log(this.Locations);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
-  navegarLogin() {
-    this.router.navigate(['/login']);
-  }
-
-  // Establecemos el id de la localidad y llamamos a los métodos que dependen de él
-  defineLocation(location: any) {
-    this.locationId = location;
-    this.getTheme();
-    this.getAreas();
-  }
+  // Id de la localidad
+  private location: number = 0;
 
   /* Definimos los campos del formulario y agregamos validaciones sobre su contenido
    *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
@@ -77,37 +47,71 @@ export class HomeComponent implements OnInit {
     ThemeId: ['', [Validators.required]],
   });
 
-  getTheme() {
-    this._fields.getTheme(this.locationId).subscribe(
+  constructor(
+    private _fb: FormBuilder,
+    private _fields: FieldsService,
+    private _anonRequestService: AddAnonRequestService,
+    private _searchFolio: SearchesService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.getLocations();
+  }
+
+  // Obtencion de la localidades disponibles
+  getLocations(): void {
+    this._fields.getLocations().subscribe(
+      (data) => {
+        this.Locations = [...data];
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
+  }
+
+  // Redireccionamiento al login
+  navegarLogin(): void {
+    this.router.navigate(['/login']);
+  }
+
+  // Establecemos el id de la localidad y llamamos a los métodos que dependen de él
+  defineLocation(location: any): void {
+    this.location = location;
+    this.getTheme();
+    this.getAreas();
+  }
+
+  // Obtencion de los temas relacionados a la localidad
+  getTheme(): void {
+    this._fields.getThme(this.location).subscribe(
       (data) => {
         this.Theme = [...data];
-        console.log(this.Theme);
       },
       (error) => {
         console.error(error.error.message);
-        this.Theme = [];
       }
     );
   }
 
-  getQuestions(themeId: any) {
-    this._fields.getQuestions(themeId).subscribe(
+  // Obtencion de las preguntas relacionadas a los temas
+  getQuestions(themeId: string): void {
+    this._fields.getQuestions(Number(themeId)).subscribe(
       (data) => {
         this.Questions = [...data];
-        console.log(this.Questions);
       },
       (error) => {
         console.error(error.error.message);
-        this.Questions = [];
       }
     );
   }
 
-  getAreas() {
-    this._fields.getAreas(this.locationId).subscribe(
+  // Obtencion de las areas relacionadas a la localidad
+  getAreas(): void {
+    this._fields.getAreas(this.location).subscribe(
       (data) => {
         this.Areas = [...data];
-        console.log(this.Areas);
       },
       (error) => {
         console.error(error.error.message);
@@ -115,31 +119,29 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  registerAnonRequest() {
+  // Registro de la peticion en la base de datos
+  registerAnonRequest(): void {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const anonReq: newAnonRequest = {
+    const anonReq: addAnonRequest = {
       arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
       QuestionId: this.bodyRequest.get('QuestionId')?.value,
       AreaId: this.bodyRequest.get('AreaId')?.value,
-      arIssue: this.bodyRequest.get('arIssue')?.value,
-      arAttachemen: this.bodyRequest.get('arAttachemen')?.value,
       ThemeId: this.bodyRequest.get('ThemeId')?.value,
       LocationId: this.bodyRequest.get('LocationId')?.value,
+      arIssue: this.bodyRequest.get('arIssue')?.value,
+      arAttachemen: this.bodyRequest.get('arAttachemen')?.value,
     };
-
     console.log(anonReq);
 
-    // Nos suscribimos al método del service, enviandole el objeto con los datos a registrar en la base de datos
-    this._reqService.saveAnonRequest(anonReq).subscribe(
+    // Registro de la peticion anonima en la base de datos
+    this._anonRequestService.addNewAnonRequest(anonReq).subscribe(
       (data) => {
-        this.bodyRequest.reset();
         console.log(data);
-        alert(`Peticion registrada con exito. N folio: ${data.arId}`);
       },
       (error) => {
-        console.error(error);
+        console.error(error.error.message);
       }
     );
   }
