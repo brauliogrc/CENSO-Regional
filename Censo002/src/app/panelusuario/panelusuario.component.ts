@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SrequestService } from '../services/request/srequest.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { LocationValidate } from '../services/validations';
-import { FieldsService } from '../services/fields.service';
+import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { Theme, Question, Area, addRequest } from '../interfaces/newInterfaces';
-import { AddRequestService } from '../services/add-request.service';
+import { AddRequestService } from '../services/newServices/Request/add-request.service';
 
 @Component({
   selector: 'app-panelusuario',

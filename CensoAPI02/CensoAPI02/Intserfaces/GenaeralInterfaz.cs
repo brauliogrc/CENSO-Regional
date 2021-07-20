@@ -86,6 +86,8 @@ namespace CensoAPI02.Intserfaces
         public string lName { get; set; }
 
         public int lCreationUser { get; set; }
+
+        public bool lStatus { get; set; }
     }
 
     // Registar una nueva Question
@@ -124,5 +126,12 @@ namespace CensoAPI02.Intserfaces
         public string asAnswer { get; set; }
 
         public int RequestId { get; set; }
+    }
+
+    public class SearchInterface
+    {
+        public int locationId { get; set; }
+
+        public int itemId { get; set; }
     }
 }

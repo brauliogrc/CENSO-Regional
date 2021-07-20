@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SrequestService } from '../services/request/srequest.service';
 import { SearchesService } from '../services/searches/searches.service';
 import { Router } from '@angular/router';
 import {
@@ -10,8 +9,8 @@ import {
   Area,
   addAnonRequest,
 } from '../interfaces/newInterfaces';
-import { FieldsService } from '../services/fields.service';
-import { AddAnonRequestService } from '../services/add-anon-request.service';
+import { FieldsService } from '../services/newServices/Fields/fields.service';
+import { AddAnonRequestService } from '../services/newServices/AnonRequest/add-anon-request.service';
 
 @Component({
   selector: 'app-home',
@@ -64,6 +63,7 @@ export class HomeComponent implements OnInit {
     this._fields.getLocations().subscribe(
       (data) => {
         this.Locations = [...data];
+        console.log(this.Locations);
       },
       (error) => {
         console.error(error.error.message);

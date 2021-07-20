@@ -33,7 +33,7 @@ namespace CensoAPI02.Controllers.NewControllers
                     lName = newLocation.lName,
                     lCreationDate = DateTime.Now,
                     lCreationUser = newLocation.lCreationUser,
-                    lStatus = true
+                    lStatus = newLocation.lStatus
                 };
 
                 // Registro de la nueva localidad en la tabla Locations

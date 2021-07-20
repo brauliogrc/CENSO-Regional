@@ -138,7 +138,24 @@
   /* Pagina Logueo */
   body, html{
     height: 100%;
+    font-family: "Starg Sans";
 }
+
+/*@font-face {
+    font-family: "Starg Sans";
+    src: url("assets/Tipografia/Continental\ Stag\ Sans-Light.otf");
+  }
+
+  @font-face {
+    font-family: "Starg Sans book";
+    src: url("assets/Tipografia/Continental\ Stag\ Sans-Book.otf");
+  }
+
+  @font-face {
+    font-family: "Starg Sans medium";
+    src: url("assets/Tipografia/Continental\ Stag\ Sans-Medium.otf");
+  }
+  */
 .BodyLogin{
     margin: 0;
     padding: 0;
@@ -148,6 +165,7 @@
     background-size: cover;
     background-attachment: fixed;
 
+    font-family: "Starg Sans";
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -217,249 +235,330 @@
 
 /*      Pagina Index         */
 .BodyIndexC{
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  
+  background-image: url(img/fondo2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 
-    background-image: url(img/fondo2.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+  /*display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;*/
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    overflow-y: scroll;
+}
+.BodyIndexC1{
+  margin: 0;
+  padding: 0;
+  
+  background-image: url(img/fondo2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
 }
 
 .headerIndexC{
-    width: 100vw;
-    height: 75px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 30px 10%;;
-    background: #00000088;
-    
+  width: 100vw;
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
+  background: #00000088;
+  
 }
 .h1CensoB{
-    color: #e2ae3e;
-    font-weight: 300;
+  color: #e2ae3e;
+  font-weight: 300;
 }
 .imgLogoIndexC{
 background-image: url(img/LogoConti.png);
- width: 9.5%;
+width: 9.5%;
 }
 .headerIndexC button[type="submit"]:hover{
-    background: none;
-    border: 1px solid #000000;
-    border-color: #e2ae3e;
-    color: white;
+  background: none;
+  border: 1px solid #000000;
+  border-color: #e2ae3e;
+  color: white;
 
 }
 .btnIndexC:hover{
-    background: none;
-    border: 1px solid #000000;
-    border-color: #e2ae3e;
-    color: white;
+  background: none;
+  border: 1px solid #000000;
+  border-color: #e2ae3e;
+  color: white;
 
 }
 .btnIndexC{
-    border: 0;
-    background: #e2ae3e ;
-    border-radius: 0.5 ;
-    cursor: pointer;
-    border-radius: 2em;
-    width: 150px;
-    height: 40px;
-
-    transition: 0.25s;
+  border: 0;
+  background: #e2ae3e ;
+  border-radius: 0.5 ;
+  cursor: pointer;
+  border-radius: 2em;
+  width: 150px;
+  height: 40px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  transition: 0.25s;
 }
+
+/* Boton enlace*/
+.btnIndexC001{
+  border: 0;
+  background: #e2ae3e ;
+  border-radius: 0.5 ;
+  cursor: pointer;
+  border-radius: 2em;
+  width: 150px;
+  height: 40px;
+  text-align: center;
+  text-decoration: none;
+  color: black;
+  transition: 0.25s;
+  
+}
+
+.btnIndexC001 a{
+  margin-top: 7px;
+  
+}
+
+.btnIndexC001:hover{
+  background: none;
+  border: 1px solid #000000;
+  border-color: #e2ae3e;
+  color: white;
+
+}
+/* Boton enlace*/
+
 .contenedorIndexC{
 
-    width: 90%;
-    margin: 40px auto;
-    padding-top: 40px;
-    background: rgba(255, 255, 255, 0.904);
-    border-radius: 1em;
-    text-align: center;
-    align-items: center;
+  width: 90%;
+  margin: 40px auto;
+  padding-top: 40px;
+  background: rgba(255, 255, 255, 0.904);
+  border-radius: 1em;
+  text-align: center;
+  align-items: center;
 
 }
 .imgBienestarC{
 
-    border-radius: 2em;
+  border-radius: 2em;
 
 }
 .footerIndexC{
-    width: 90%;
-    margin: 40px auto;
-    padding-top: 0px;
-    padding-bottom: 40px;
-    background: none;
-    border-radius: 1em;
-    text-align: center;
-    align-items: center;
+  width: 90%;
+  margin: 40px auto;
+  padding-top: 0px;
+  padding-bottom: 40px;
+  background: none;
+  border-radius: 1em;
+  text-align: center;
+  align-items: center;
 }
 
 .imgJaliscoC{
-    border-radius: 1.5em;
+  border-radius: 1.5em;
 }
 .contenedorIndexC1{
 
-    width: 90%;
-    margin: 40px auto;
-    padding-top: 40px;
-    background: rgba(255, 255, 255, 0.904);
-    border-radius: 1em;
-    display: flex;
-    justify-content: space-between;
-    text-align: center;
-    align-items: center;
+  width: 90%;
+  margin: 40px auto;
+  padding-top: 40px;
+  background: rgba(255, 255, 255, 0.904);
+  border-radius: 1em;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
 
 }
 .btnIndexOPC{
-    border: 0;
-    background: #e2ae3e ;
-    border-radius: 0.5 ;
-    cursor: pointer;
-    border-radius: 2em;
-    width: 300px;
-    height: 50px;
+  border: 0;
+  background: #e2ae3e ;
+  border-radius: 0.5 ;
+  cursor: pointer;
+  border-radius: 2em;
+  width: 300px;
+  height: 50px;
+  font-family: "Starg Sans book";
+  font-weight: 300;
 
-    transition: 0.25s;
+  transition: 0.25s;
 }
 .contenedorIndexC button[type="submit"]{
-    font-size: 20px;
-    color: black;
+  font-size: 20px;
+  color: black;
 
 }
 
 .contenedorIndexC button[type="submit"]:hover{
-    background: none;
-    border-color: #e2ae3e;
-    background: #e2ae3e8f;
+  background: none;
+  border-color: #e2ae3e;
+  background: #e2ae3e8f;
 
 }
 
 .hr {
-    margin: 40px auto;
-    width: 90%;
+  margin: 40px auto;
+  width: 90%;
 }
 
 .ContendorPageAngular{
-    background: none;
-    width: 90%;
-    margin: 40px auto;
-    padding: 15px;
-    border-radius: 1em;
+  background: none;
+  width: 90%;
+  margin: 40px auto;
+  padding: 15px;
+  border-radius: 1em;
 
-    font-size: 20px;
-    color: #cc9d38;
+  font-size: 20px;
+  color: #cc9d38;
 
 }
 .ContendorPageAngular0{
-    display: none;
+  display: none;
 }
-
 .ContendorPageAngular00{
   display: block;
 }
-
 .ContendorPageAngular01{
-    display: none;
-    background: rgba(255, 255, 255, 0.959);
-    border-radius: 3em;
-    width: 80%;
-    margin: 40px auto;
-    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+  display: none;
+  background: rgba(255, 255, 255, 0.959);
+  border-radius: 3em;
+  width: 80%;
+  margin: 40px auto;
+  box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
 
 }
 .contenedorPageAngular02{
-    background: rgba(255, 255, 255, 0.959);
-    border-radius: 3em;
-    width: 80%;
-    margin: 40px auto;
-    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+  background: rgba(255, 255, 255, 0.959);
+  border-radius: 10px;
+  width: 80%;
+  margin: 40px auto;
+  box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
 
 }
 .tabalaAnonima{
-    background: rgba(255, 255, 255, 0.959);
-    height: 600px;
-    overflow-y: scroll;
+  background: rgba(255, 255, 255, 0.959);
+  height: 600px;
+  overflow-y: scroll;
+}
+
+.tabalaAnonima1{
+  background: rgba(255, 255, 255, 0.959);
+  height: auto;
+  margin: 40px auto;
 }
 
 .ContendorPageAngular1{
-    background: rgba(255, 255, 255, 0.959);
-    border-radius: 3em;
-    width: 50%;
-    margin: 40px auto;
-    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+  background: rgba(255, 255, 255, 0.959);
+  border-radius: 3em;
+  width: 50%;
+  margin: 40px auto;
+  box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+}
+
+.ContendorPageAngular100{
+  
+  width: 100%;
+  margin: 40px auto;
+
 }
 
 .btnIndexC1{
-    border: 0;
-    background: #e2ae3e ;
-    border-radius: 0.5 ;
-    cursor: pointer;
-    border-radius: 2em;
-    width: 250px;
-    height: 40px;
+  border: 0;
+  background: #e2ae3e ;
+  border-radius: 0.5 ;
+  cursor: pointer;
+  border-radius: 2em;
+  width: 250px;
+  height: 40px;
 
 
-    transition: 0.25s;
+  transition: 0.25s;
 }
 
 .btnIndexC1:hover{
-    background: #e2ae3e8e ;
-    
+  background: #e2ae3e8e ;
+  
 
 }
 
 .Content-btn-folio{
-    background: rgba(255, 255, 255, 0.904);
-    width: 50%;
-    margin: 40px auto;
-    padding: 15px;
-    border-radius: 1em;
-    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
-    font-size: 20px;
-    font-weight: 400;
-    color: #cc9d38;
+  background: rgba(255, 255, 255, 0.904);
+  width: 50%;
+  margin: 40px auto;
+  padding: 15px;
+  border-radius: 1em;
+  box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+  font-size: 20px;
+  font-weight: 400;
+  color: #cc9d38;
 
 }
 .Content-btn-folio2{
-    width: 100%;
-    padding: 15px;
-    font-size: 15px;
-    font-weight: 400;
-    color: #cc9d38;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #cc9d38;
+  display: flex;
+  justify-content: center;
 
+}
+
+.btnbuscarF{
+
+  border: 0;
+  background: #e2ae3e ;
+  border-radius: 2px;
+  cursor: pointer;
+  width: 150px;
+  height: 40px;
+  font-size: small;
+
+
+  transition: 0.25s;
+
+}
+
+.btnbuscarF:hover{
+  background: none;
+  border-color: #e2ae3e;
+  background: #e2ae3e8f;
 }
 
 .content-titulo{
-    background: rgba(255, 255, 255, 0.904);
-    width: 35%;
-    margin: 40px auto;
-    padding: 15px;
-    border-radius: 1em;
-    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
-    font-size: 20px;
-    font-weight: 400;
-    color: #cc9d38;
+  background: rgba(255, 255, 255, 0.904);
+  width: 35%;
+  margin: 40px auto;
+  padding: 15px;
+  border-radius: 1em;
+  box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+  font-size: 20px;
+  font-weight: 400;
+  color: #cc9d38;
 
 }
 .content-titulo1{
-    width: 30%;
-    margin: 40px auto;
-    padding: 15px;
-    border-radius: 1em;
-    font-size: 70px;
-    font-weight: 400;
-    color: white;
-    justify-content: center;
+  width: 30%;
+  margin: 40px auto;
+  padding: 15px;
+  border-radius: 1em;
+  font-size: 70px;
+  font-weight: 400;
+  color: white;
+  justify-content: center;
+  text-align: center;
 
 }
 
@@ -468,18 +567,18 @@ background-image: url(img/LogoConti.png);
 
 /*      FIN Pagina Buscar         */
 .ContendorPageBusqueda{
-    background: rgba(255, 255, 255, 0.904);
-    width: 80%;
-    margin: 40px auto;
-    margin-top: -400px;
-    padding: 15px;
-    padding-top: 1em;
-    border-radius: 1em;
-    box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
-    font-size: 20px;
-    font-weight: 400;
-    color: #cc9d38;
-    overflow-y: scroll;
+  background: rgba(255, 255, 255, 0.904);
+  width: 80%;
+  margin: 40px auto;
+  margin-top: -400px;
+  padding: 15px;
+  padding-top: 1em;
+  border-radius: 1em;
+  box-shadow: -5px 5px 2px rgba(0, 0, 0, 0.103);
+  font-size: 20px;
+  font-weight: 400;
+  color: #cc9d38;
+  overflow-y: scroll;
 
 }
 
@@ -488,141 +587,145 @@ background-image: url(img/LogoConti.png);
 
 /*      Dashboard        */
 .Bodydashboard{
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 
-    background-image: url(img/fondo5.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+  background-image: url(img/fondo5.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
 }
 
 .headerDash{
-    background: rgba(0, 0, 0, 0.726);
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
+  background: rgba(0, 0, 0, 0.726);
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
 
 }
 .imgLogoDash{
-    width: 10.1%;
-    height: 80px;
+  width: 10.1%;
+  height: 80px;
 
 }
 .leftDash{
-    background: rgba(223, 223, 223, 0.822);
-    width: 10%;
-    height: 108%;
-    margin-top: -33px;
-
-
+  background: rgba(223, 223, 223, 0.822);
+  width: 10%;
+  height: 108%;
+  margin-top: -33px;
 
 }
 .options{
-    padding-top: 10px;
-    margin-top: -10px;
-    align-items: center;
+  padding-top: 10px;
+  margin-top: -10px;
+  align-items: center;
 }
 .options ul{
-    padding:0;
-    margin: 0;
+  padding:0;
+  margin: 0;
 
 }
 .options ul li{
-    list-style: none;
-    
+  list-style: none;
+  
 }
 .options button[type="submit"]:hover{
-    background: #e2ae3e ;
-    border: 1px solid #000000;
-    border-color: #e2ae3e;
+  background: #e2ae3e ;
+  border: 1px solid #000000;
+  border-color: #e2ae3e;
 
 }
 .btnDash{
-    background: none;
-    cursor: pointer;
-    border: 0;
-    margin-top: 1px;
-    width: 100%;
-    height: 40px;
-    border-radius: 5px;
-    color: black;
-    
-    font-size: 20px;
-    font-weight: 500;
-    text-align: start;
-    transition:  0.25s;
+  display: flex;
+      justify-content: start;
+      align-items: center;
+  background: none;
+  cursor: pointer;
+  border: 0;
+  margin-top: 1px;
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  color: black;
+  
+  font-size: 15px;
+  font-weight: 500;
+  text-align: start;
+  transition:  0.25s;
 
+}
+.textNavbar{
+  margin-left: 15px;
 }
 
 .hr1{
-    width: 60%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
+  width: 60%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
 }
 .NomUsuario{
-    width: 90%;
-    background: none;
-    border-radius: 0.8em;
-    margin: 10px auto;
-    text-align: center;
+  width: 90%;
+  background: none;
+  border-radius: 0.8em;
+  margin: 10px auto;
+  text-align: center;
 }
 .contenedorFlex{
-    background: none;
-    width: 100%;
-    height: 85%;
-    display: flex;
-    
+  background: none;
+  width: 100%;
+  height: 85%;
+  display: flex;
+  
 }
 .Contenido{
-    background: rgba(223, 223, 223, 0.822);
-    margin: 30px auto;
-    margin-top: -10px;
-    border-radius: 1em;
-    width: 85%;
-    height: 104%;
-    overflow-y: scroll;
+  background: rgba(223, 223, 223, 0.822);
+  margin: 30px auto;
+  margin-top: -10px;
+  border-radius: 1em;
+  width: 85%;
+  height: 104%;
+  overflow-y: scroll;
 }
 
 .contenido1{
-    background: none;
-    width: 85%;
-    margin: 40px auto;
-    margin-top: 80px;
+  background: none;
+  width: 85%;
+  margin: 40px auto;
+  margin-top: 80px;
 
 }
 
 .buscar{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  
 }
 
 .form-search{
-    width: 100%;
-    display: flex;
-    justify-content:right;
+  width: 100%;
+  display: flex;
+  justify-content:right;
 
 }
 .Search1{
-    width: 20%;
-    border-color: none;
-    border: 0;
-    border-radius: 10px;
+  width: 20%;
+  border-color: none;
+  border: 0;
+  border-radius: 10px;
 }
 
 #contenido{
-    display: none;
+  display: none;
 }
 /*      Dashboard        */
 html, body { height: 100%; }
@@ -965,12 +1068,43 @@ height: 100vh;
 /*  end respuestas de los tikets          */
 
 
+
+
+/* Otro agregado*/
+.hrAdmin{
+  display: none;
+}
+
+.cerrarSesion{
+  padding-right: 15px;
+}
+
+/* Otro agregado*/
+
 /*  responsive          */
 @media (max-width:1510px){
 
   .NomUsuario h3{
       display: none;
   }
+  /*Panel admin*/
+  .headerDash{
+
+  }
+  .btnDash{
+      
+  }
+  
+  
+  /*Panel admin*/
+
+
+/*Panel usuario*/
+.content-titulo{
+  width: 50%;
+}
+/*Panel usuario*/
+
 
   
 }
@@ -1001,8 +1135,19 @@ height: 100vh;
   .tituloresp{
       margin-bottom: -60px;
   }
+
+  /*PANEL ADMIN*/
+  .textNavbar{
+      margin-left: 10PX;
+  }
+
+  /*PANEL ADMIN*/
   
-  
+  /* home */
+  .Content-btn-folio h3{
+      font-size: 20px;
+  }
+  /* home */
 }
 
 @media (max-width:1157px){
@@ -1020,10 +1165,78 @@ height: 100vh;
   }
 
   .imgLogoDash{
-      width: 20%;
+      width: 150PX;
+  }
+
+  /*PANEL ADMIN*/
+  .textNavbar{
+      font-size: 12px;
+      margin-left: 10PX;
+  }
+
+  /*PANEL ADMIN*/
+  
+  /*home*/
+  .ContendorPageAngular1{
+      width: 90%;
+  }
+
+  .Content-btn-folio{
+      width: 90%;
+  }
+  /*home*/
+
+  /*Panel usuario*/
+  .content-titulo{
+      width: 60%;
+  }
+  /*Panel usuario*/
+}
+
+@media (max-width:961px){
+  /*  home    */
+  .imgLogoIndexC{
+      width: 150px;
+
+  }
+
+  .ContendorPageAngular1{
+      width: 95%;
+  }
+
+  .Content-btn-folio h3{
+      font-size: 30px;
+  }
+
+  .Content-btn-folio{
+      width: 90%;
   }
   
-  
+
+  .imgJaliscoC{
+      width: 80%;
+  }
+
+  /*PANEL ADMIN*/
+  .btnDash{
+      justify-content: center;
+  }
+  .imgMenu{
+      width: 20px;
+  }
+  .textNavbar{
+      display: none;
+  }
+
+  /*PANEL ADMIN*/
+  /*  home    */
+
+  /*Panel usuario*/
+  .content-titulo{
+      width: 70%;
+  }
+  /*Panel usuario*/
+
 }
 
 @media (max-width:768px){
@@ -1045,8 +1258,263 @@ height: 100vh;
   .tituloresp{
       margin-bottom: -60px;
   }
+      /*PANEL ADMIN*/
+      .hrAdmin{
+          display: block;
+      }
+      .NomUsuario{
+          
+          display: flex;
+          justify-content: center;
+          
+      }
+      .textUsuario{
+          
+          width: 30px;
+          height: 30px;
+          background: rgb(8, 161, 8);
+          border-radius: 100%;
+          border: 1px solid white;
+      }
+      .textUsuario p{
+          display: none;
+      }
+      /*PANEL ADMIN*/
+  /*home*/
+  .Content-btn-folio h3{
+      font-size: 20px;
+  }
+
+  .btnIndexOPC{
+      margin-bottom: 10px;
+  }
+
+  .ModalContenidoBusq{
+      overflow-y: scroll;
+     
+      height: 100%;
+  }
+  .ModalContenido1Busq{
+      width: 100%; 
+      padding: 10px 10px;
+
+  }
+
+  .tabalaAnonima1{
+      width: 110%;
+      height: 100%;
+      
+  }
   
+  .contenedores{
+      flex-direction: column;
+      position: relative;
+  width: 90%;
+  height: auto;
+  border: none;
+  background: #343A40;
+  display: flex;
   
+  }
+
+  .titulos{
+      width: 100%;
+      height: auto;
+      border: none;
+      align-items: center;
+      font-size: 18px;
+      text-align: center;
+      /*color: green;*/
+      
+      color: white;
+      
+  }
+
+  .textosContenido{
+  width: 100%;
+  height: auto;
+  padding: 0.2%;
+  color: white;
+  text-align: center;
+  border-bottom: 1px solid #454D55;
+  }
+  
+  /*home*/
+
+  /*Panel usuario*/
+  .content-titulo{
+      width: 80%;
+  }
+
+  
+  /*Panel usuario*/
 }
+@media (max-width:671px){
+/*  home    */
+.imgLogoIndexC{
+  padding-left: 0;
+  width: 100px;
+
+}
+
+.h1CensoB{
+  font-size: 20px;
+}
+/*  home    */
+
+/*Panel usuario*/
+
+.content-titulo{
+  width: 90%;
+}
+
+.content-titulo1{
+  width: 100%;
+}
+/*Panel usuario*/
+}
+
+@media (max-width:515px){
+ 
+
+/*  home    */
+.imgLogoIndexC{
+  padding-left: 0;
+  width: 100px;
+
+}
+
+.h1CensoB{
+  font-size: 15px;
+}
+/*  home    */
+
+/*Panel usuario*/
+.content-titulo{
+  width: 90%;
+}
+
+.content-titulo1{
+  width: 100%;
+}
+/*Panel usuario*/
+
+
+
+}
+
+@media (max-width:450px){
+    /*  login     */
+
+  .form-box{
+      width: 350px;
+      padding: 40px;
+      background: #ffffffb0;
+      border-radius: 1em;
+      text-align: center;
+  }
+  /*  login     */
+
+  /*PANEL ADMIN*/
+
+  .contenedorFlex{
+      flex-direction: column;
+  }
+  .NomUsuario{
+      display: none;
+  }
+  .h1CensoBsep{
+      padding-left: 20px;
+      font-size: 30px;
+  }
+  
+  .options{
+      width: 100%;
+      
+      display: flex;
+      justify-content: center;
+      
+  }
+  .options ul li{
+      float: left;
+      padding: 10px;
+
+  }
+  .imgMenu{
+      width: 25px;
+  }
+  .leftDash{
+      display: flex;
+      justify-content: center ;
+      background: rgba(223, 223, 223, 0.822);
+      width: 100%;
+      height: 7%;
+      margin-top: -20px;
+      margin-bottom: 30px;
+  
+  }
+  .Contenido{
+      width: 95%;
+      
+  }
+  /*PANEL ADMIN*/
+  /*  home    */
+.imgLogoIndexC{
+  display: none;
+
+}
+
+.btnIndexOPC{
+  margin-bottom: 10px;
+}
+
+.ContendorPageAngular1{
+  width: 95%;
+}
+
+.Content-btn-folio{
+  width: 90%;
+}
+
+.Content-btn-folio h3{
+  font-size: 14px;
+}
+
+.Content-btn-folio button{
+  width: 150px;
+  font-size: 10px;
+}
+
+.imgJaliscoC{
+  width: 100%;
+  border-radius: 5px;
+}
+
+.h1CensoB{
+  font-size: 30px;
+}
+/*  home    */
+
+.headerIndexC12{
+  width: 200%;
+  background: red;
+}
+.imgLogoDash{
+  display: none;
+}
+
+
+.BodyIndexC{
+  
+  /*display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;*/
+
+}
+
+
+}
+
+
 
 /*  responsive          */

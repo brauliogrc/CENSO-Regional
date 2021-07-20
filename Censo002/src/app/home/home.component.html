@@ -10,7 +10,7 @@
     <img src="../../assets/img/CensoBienestar.png" alt="" width="95%" class="imgBienestarC" />
     <hr class="hr" />
     <div class="ContainerIndexC1">
-      <button class="btnIndexOPC" type="submit">Registro con datos</button>
+      <button class="btnIndexOPC" type="submit" (click)="navegarLogin()">Registro con datos</button>
       <button class="btnIndexOPC" type="submit" onclick="mostrarRegistro()">
         Registro anónimo
       </button>
@@ -144,7 +144,8 @@
               <div class="md-3">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <button (click)="searchFolio(folioId.value)" class="btn btn-outline-secondary" type="button">
+                    <button (click)="searchFolio(folioId.value)" class="btn btn-outline-secondary" type="button"
+                      class="btnbuscarF">
                       Buscar Folio
                     </button>
                   </div>
@@ -154,146 +155,146 @@
               </div>
             </form>
             <div class="tabalaAnonima">
-              <!--FOLIO ENTABLADO CONTENIDO-->
-              <div *ngIf="folio">
-                <div class="tituloFolioAnonimo">
-                  <P>STATUS</P>
-                </div>
-                <div class="respTabla2">
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>ID:</p>s
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ folio.arId }}</p>
+                           <!--FOLIO ENTABLADO CONTENIDO-->
+                           <div *ngIf="folio">
+                            <div class="tituloFolioAnonimo">
+                              <P>STATUS</P>
+                            </div>
+                            <div class="respTabla2">
+                              <div class="contenedores">
+                                <div class="titulos">
+                                  <p>ID:</p>s
+                                </div>
+                                <div class="textosContenido">
+                                  <p>{{ folio.arId }}</p>
+                                </div>
+                              </div>
+                              <div class="contenedores">
+                                <div class="titulos">
+                                  <p>Nombre:</p>
+                                </div>
+                                <div class="textosContenido">
+                                  <p>Nombre Empleado</p>
+                                </div>
+                              </div>
+                              <div class="contenedores">
+                                <div class="titulos">
+                                  <p>Tema:</p>
+                                </div>
+                                <div class="textosContenido">
+                                  <p>{{ folio.tName }}</p>
+                                </div>
+                              </div>
+                              <div class="contenedores">
+                                <div class="titulos">
+                                  <p>Localidad:</p>
+                                </div>
+                                <div class="textosContenido">
+                                  <p>{{ folio.lName }}</p>
+                                </div>
+                              </div>
+                              <div class="contenedores">
+                                <div class="titulos">
+                                  <p>Tipo registro:</p>
+                                </div>
+                                <div class="textosContenido">
+                                  <p>{{ folio.qName }}</p>
+                                </div>
+                              </div>
+                              <div class="contenedores">
+                                <div class="titulos">
+                                  <p>Area:</p>
+                                </div>
+                                <div class="textosContenido">
+                                  <p>{{ folio.aName }}</p>
+                                </div>
+                              </div>
+                              <div class="contenedores">
+                                <div class="titulos">
+                                  <p>Caso:</p>
+                                </div>
+                                <div class="textosContenido">
+                                  <p>{{ folio.arIssue }}</p>
+                                </div>
+                              </div>
+                              <div class="contenedores">
+                                <div class="titulos">
+                                  <p>Evidencia:</p>
+                                </div>
+                                <div class="textosContenido">
+                                  <p>{{ folio.arAttachement }}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!--FOLIO ENTABLADO CONTENIDO-->
+            
+                          <!--FOLIO ANTERIOR DESECHO-->
+                          <div class="card-body">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Tipo de empleado</th>
+                                  <th>Tema</th>
+                                  <th>Localidad</th>
+                                  <th>Tipo de registro</th>
+                                  <th>Area</th>
+                                  <th>Caso</th>
+                                  <th>Evidencia</th>
+                                  <!-- <th>Estatus</th> -->
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <ng-container *ngIf="folio; else elseTemplate">
+                                  <!-- <tr
+                                    class="text-center"
+                                    (click)="evento(folio.rId, folio.rIssue, folio.tName)"
+                                  >
+                                    <td>{{ folio.rId }}</td>
+                                    <td>{{ folio.rIssue }}</td>
+                                    <td>{{ folio.tName }}</td>
+                                    <td>{{ folio.tId }}</td>
+                                  </tr> -->
+            
+                                  <tr>
+                                    <td data-label="ID :">{{ folio.arId }}</td>
+                                    <td data-label="Tipo Empleado :">Administrativo</td>
+                                    <td data-label="Tema :">{{ folio.tName }}</td>
+                                    <td data-label="Localidad :">{{ folio.lName }}</td>
+                                    <td data-label="Tipo registro :">{{ folio.qName }}</td>
+                                    <td data-label="Area :">{{ folio.aName }}</td>
+                                    <td data-label="Caso :" class="caso">
+                                      {{ folio.arIssue }}
+                                    </td>
+                                    <td data-label="Evidencia :">
+                                      {{ folio.arAttachement }}
+                                    </td>
+                                    <!-- <td data-label="Estatus :">Activo</td> -->
+                                  </tr>
+                                </ng-container>
+                                <ng-template #elseTemplate>
+                                  <!-- <tr class="text-center">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                  </tr> -->
+                                </ng-template>
+                              </tbody>
+                            </table>
+                          </div>
+                          <!--FOLIO ANTERIOR DESECHO-->
+            
+            
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Nombre:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>Nombre Empleado</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Tema:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ folio.tName }}</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Localidad:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ folio.lName }}</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Tipo registro:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ folio.qName }}</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Area:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ folio.aName }}</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Caso:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ folio.arIssue }}</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Evidencia:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ folio.arAttachement }}</p>
-                    </div>
-                  </div>
+            
+                  <!--<app-folioanonimoindex></app-folioanonimoindex>-->
                 </div>
               </div>
-              <!--FOLIO ENTABLADO CONTENIDO-->
-
-              <!--FOLIO ANTERIOR DESECHO-->
-              <div class="card-body">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Tipo de empleado</th>
-                      <th>Tema</th>
-                      <th>Localidad</th>
-                      <th>Tipo de registro</th>
-                      <th>Area</th>
-                      <th>Caso</th>
-                      <th>Evidencia</th>
-                      <!-- <th>Estatus</th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <ng-container *ngIf="folio; else elseTemplate">
-                      <!-- <tr
-                        class="text-center"
-                        (click)="evento(folio.rId, folio.rIssue, folio.tName)"
-                      >
-                        <td>{{ folio.rId }}</td>
-                        <td>{{ folio.rIssue }}</td>
-                        <td>{{ folio.tName }}</td>
-                        <td>{{ folio.tId }}</td>
-                      </tr> -->
-
-                      <tr>
-                        <td data-label="ID :">{{ folio.arId }}</td>
-                        <td data-label="Tipo Empleado :">Administrativo</td>
-                        <td data-label="Tema :">{{ folio.tName }}</td>
-                        <td data-label="Localidad :">{{ folio.lName }}</td>
-                        <td data-label="Tipo registro :">{{ folio.qName }}</td>
-                        <td data-label="Area :">{{ folio.aName }}</td>
-                        <td data-label="Caso :" class="caso">
-                          {{ folio.arIssue }}
-                        </td>
-                        <td data-label="Evidencia :">
-                          {{ folio.arAttachement }}
-                        </td>
-                        <!-- <td data-label="Estatus :">Activo</td> -->
-                      </tr>
-                    </ng-container>
-                    <ng-template #elseTemplate>
-                      <!-- <tr class="text-center">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                      </tr> -->
-                    </ng-template>
-                  </tbody>
-                </table>
-              </div>
-              <!--FOLIO ANTERIOR DESECHO-->
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!--<app-folioanonimoindex></app-folioanonimoindex>-->
-    </div>
-  </div>
-  <footer class="footerIndexC">
-    <img src="../../assets/img/imgJalisco.png" alt="" class="imgJaliscoC" />
-  </footer>
-</body>
+              <footer class="footerIndexC">
+                <img src="../../assets/img/imgJalisco.png" alt="" class="imgJaliscoC" />
+              </footer>
+            </body>

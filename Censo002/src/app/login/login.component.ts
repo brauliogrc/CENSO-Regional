@@ -6,7 +6,6 @@ import { AuthService } from '../services/Auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Token } from '../interfaces/newInterfaces';
 
-//
 const helper = new JwtHelperService();
 
 @Component({

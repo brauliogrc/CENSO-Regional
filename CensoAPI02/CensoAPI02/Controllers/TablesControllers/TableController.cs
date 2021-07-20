@@ -192,13 +192,74 @@ namespace CensoAPI02.Controllers.TablesControllers
                                   status.rsStatus
                               };
 
+                var anonTickets = from anonReq in _context.AnonRequests
+                                  join theme in _context.Theme on anonReq.ThemeId equals theme.tId
+                                  join question in _context.Questions on anonReq.QuestionId equals question.qId
+                                  join location in _context.Locations on anonReq.LocationId equals location.lId
+                                  join area in _context.Areas on anonReq.AreaId equals area.aId
+                                  join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
+                                  where anonReq.StatusId != 4 && location.lId == locationId
+                                  select new
+                                  {
+                                      // Datos del ticket
+                                      anonReq.arId,
+                                      anonReq.arIssue,
+                                      // Datos del tema
+                                      theme.tId,
+                                      theme.tName,
+                                      // Datos de la pregunta
+                                      question.qId,
+                                      question.qName,
+                                      // Datos del area
+                                      area.aId,
+                                      area.aName,
+                                      // Datos del status
+                                      status.rsId,
+                                      status.rsStatus
+                                  };
                 
+                if ((tickets == null || tickets.Count() == 0) && (anonTickets == null || anonTickets.Count() == 0))
+                {
+                    return NotFound(new { message = $"Ningun ticket se encuentra asociado con tu localidad" });
+                }
 
-                return Ok();
+                return Ok(new { tickets, anonTickets });
             }
             catch (Exception ex)
             {
                 return BadRequest(new { message = $"Ha ocurrido un error al obtener la lista de tickets. Error: {ex.Message}" });
+            }
+        }
+
+        // Listado de areas(requiere policy SUHR)
+        [HttpGet][Route("areaList/{locationId}")][AllowAnonymous]
+        public async Task<ActionResult> getAreaList(int locationId)
+        {
+            try
+            {
+                var query = from area in _context.Areas
+                            join location in _context.Locations on area.locationId equals location.lId
+                            where location.lId == locationId
+                            select new
+                            {
+                                // Datos el area
+                                area.aId,
+                                area.aName,
+                                // Datos de la localidad
+                                location.lId,
+                                location.lName
+                            };
+
+                if (query == null || query.Count() == 0)
+                {
+                    return NotFound(new { message = $"Ninguna area se encuentra asociada a tu localidad" });
+                }
+
+                return Ok(query);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al obtener la lista de areas. Error: {ex.Message}" });
             }
         }
     }

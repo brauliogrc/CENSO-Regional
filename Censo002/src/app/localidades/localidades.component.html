@@ -46,7 +46,7 @@
       </thead>
       <tbody>
         <ng-container *ngIf="!location; else elseTemplate">
-          <tr *ngFor="let location of locations">
+          <tr *ngFor="let location of Locations">
             <td>{{ location.lId }}</td>
             <td>{{ location.lName }}</td>
             <td>{{ location.lStatus }}</td>
@@ -57,11 +57,11 @@
         </ng-container>
         <ng-template #elseTemplate>
           <tr>
-            <td>{{ location.lId }}</td>
-            <td>{{ location.lName }}</td>
-            <td>{{ location.lStatus }}</td>
+            <td>{{ location[0].lId }}</td>
+            <td>{{ location[0].lName }}</td>
+            <td>{{ location[0].lStatus }}</td>
             <td>
-                <button (click)="deleteLocation(location.lId)" class="btn btn-danger">Eliminar</button>
+                <button (click)="deleteLocation(location[0].lId)" class="btn btn-danger">Eliminar</button>
             </td>
           </tr>
         </ng-template>

@@ -145,3 +145,27 @@ varsion 3.6.2 plus
     -36 Localidades ingresadas en la base de datos
 
 ~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 19/07/2021
+
+version 3.6.3
+    -Se agregaron estilos de web responsive design
+    -Se agrego panelusuariobuq completo 
+    -se agrego tabla nueva del folio en el home
+    -se agrego cambios en panel admin junto con sus respectivos nuevos estilos
+    -se agregaron estilos nuevos en login (sin ningun cambio interno)
+
+~Alexis~
+======================================================================================================================
+
+fecha actualizacion: 20/07/2021
+
+version 3.6.4 beta
+    -Modificacion de controladores en la api
+    -Nuevos servicios añadidos en la carpeta serivices
+    -Nuevas interfaces generadas
+    -Consustas a la base de datos mejoradas
+
+~Braulio~
+======================================================================================================================

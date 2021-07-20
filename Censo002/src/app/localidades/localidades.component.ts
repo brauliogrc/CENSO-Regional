@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { SlocationsService } from '../services/locations/slocations.service';
-import { dataLocations, dataNewLocation } from '../interfaces/interfaces';
-import { DataTableService } from '../services/tables/data-table.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SearchesService } from '../services/searches/searches.service';
 import { AuthService } from '../services/Auth/auth.service';
 import { Router } from '@angular/router';
+import { locationList, addLocation } from '../interfaces/newInterfaces';
+import { ListService } from '../services/newServices/List/list.service';
+import { LocationService } from '../services/newServices/Location/location.service';
+import { SearchService } from '../services/newServices/Search/search.service';
 
 @Component({
   selector: 'app-localidades',
@@ -14,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class LocalidadesComponent implements OnInit {
   // Array que contiene la informacion de las localidades disponibles para ser mostradas en la tabla
-  locations: dataLocations[] = [];
+  Locations: locationList[] = [];
 
   // Toma los valores de la localidad buscada por medio del id
   location: any;
@@ -25,10 +26,10 @@ export class LocalidadesComponent implements OnInit {
   });
 
   constructor(
-    private _service: DataTableService,
-    private _locationService: SlocationsService,
+    private _listService: ListService,
+    private _locationService: LocationService,
     private _fb: FormBuilder,
-    private _searches: SearchesService,
+    private _searchService: SearchService,
     private _authService: AuthService,
     private router: Router
   ) {}
@@ -46,68 +47,62 @@ export class LocalidadesComponent implements OnInit {
       console.clear();
       return;
     }
-    this.getAllLocations();
+    this.getLocationList();
   }
 
-  // Obtenemos las localidades desde el service
-  getAllLocations() {
-    this._service.tableLocations().subscribe(
+  // Obtencion del listado de localidades dispoibles
+  getLocationList(): void {
+    this._listService.getLocationList().subscribe(
       (data) => {
-        console.log(data);
-
-        this.locations = [...data];
+        this.Locations = [...data];
       },
       (error) => {
-        console.error('Error getting data ' + error);
+        console.error(error.error.message);
       }
     );
   }
 
-  addNewLocation() {
-    const dataNewLocation: dataNewLocation = {
+  // Registrar una nueva localidad en la tabla locations de la base de datos
+  addNewLocation(): void {
+    const newLocation: addLocation = {
       lName: this.newLocation.get('lName')?.value,
+      lCreationUser: Number(sessionStorage.getItem('userId')),
       lStatus: this.newLocation.get('lStatus')?.value,
     };
-    console.log(dataNewLocation);
+    console.log(newLocation);
 
-    this._locationService.addNewLocation(dataNewLocation).subscribe(
+    this._locationService.addNewLocation(newLocation).subscribe(
       (data) => {
-        this.newLocation.reset();
-        console.log('Localidad registrada con el Id: ' + data.lId);
-        alert(
-          `Se ha registrado la localidad ${data.lName} con el id ${data.lId}.`
-        );
-        this.getAllLocations();
+        console.log(data.message);
+        this.getLocationList();
       },
       (error) => {
-        console.error(error);
+        console.error(error.error.message);
       }
     );
   }
 
-  deleteLocation(id: number) {
-    this._locationService.deleteLocation(id).subscribe(
+  // Borrado logico de la localidad de la tabla locations
+  deleteLocation(locationId: number): void {
+    this._locationService.deleteLocaion(locationId).subscribe(
       (data) => {
-        console.log('Localidad eliminada');
-        alert(`Localidad "${data.lName}" eliminada`);
-        this.getAllLocations();
+        this.getLocationList();
       },
       (error) => {
-        console.error(error);
+        console.error(error.error.message);
       }
     );
   }
 
   // Busca una localidad con base al id dado
-  search(idLocation: any) {
-    this._searches.getSpecificLocation(idLocation).subscribe(
+  search(locationId: any): void {
+    this._searchService.searchLocation(Number(locationId)).subscribe(
       (data) => {
         this.location = data;
-        this.locations = [];
-        console.log(this.location);
+        this.Locations = [];
       },
       (error) => {
-        alert(error.error.message);
+        console.error(error.error.message);
       }
     );
   }
