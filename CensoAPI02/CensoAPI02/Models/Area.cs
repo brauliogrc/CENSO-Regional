@@ -16,16 +16,18 @@ namespace CensoAPI02.Models
         [Required]
         public string aName { get; set; }
 
-        //[Required]
-        //public bool aStatus { get; set; }
+        [Required]
+        public bool aStatus { get; set; }
 
-        // Relacion one-2-many con Locations
-        public int locationId { get; set; }
+        // Relacion many-2-many con Locations
+        //public int locationId { get; set; }
 
-        public Locations locations { get; set; }
+        public List<Locations> locations { get; set; }
+
 
         //Relationship one-2-many entities Area and Request
         public List<Request> request { get; set; }
+
 
         //Relationship one-2-many entities Area and AnonRequest
         public List<AnonRequest> anonRequest { get; set; }

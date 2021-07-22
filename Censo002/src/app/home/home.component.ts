@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SearchesService } from '../services/searches/searches.service';
 import { Router } from '@angular/router';
 import {
   Location,
@@ -50,7 +49,6 @@ export class HomeComponent implements OnInit {
     private _fb: FormBuilder,
     private _fields: FieldsService,
     private _anonRequestService: AddAnonRequestService,
-    private _searchFolio: SearchesService,
     private router: Router
   ) {}
 
@@ -154,14 +152,14 @@ export class HomeComponent implements OnInit {
 
   // Busqueda de folio en la base de datos con base en su id
   searchFolio(folioId: any) {
-    this._searchFolio.searchFolioAnon(folioId).subscribe(
-      (data) => {
-        this.folio = data[0];
-        console.log(this.folio);
-      },
-      (error) => {
-        console.error(error.error.message);
-      }
-    );
+    // this._searchFolio.searchFolioAnon(folioId).subscribe(
+    //   (data) => {
+    //     this.folio = data[0];
+    //     console.log(this.folio);
+    //   },
+    //   (error) => {
+    //     console.error(error.error.message);
+    //   }
+    // );
   }
 }

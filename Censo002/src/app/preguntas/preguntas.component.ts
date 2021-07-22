@@ -1,20 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import {
-  dataQuestion,
-  availableLocations,
-  availableTheme,
-  dataNewQuestion,
-} from '../interfaces/interfaces';
-import { SquestionsService } from '../services/questions/squestions.service';
-// import { SquestionsService } from '../services/questions/squestions.service';
-import { DataTableService } from '../services/tables/data-table.service';
-// import { MatSelect } from '@angular/material/select';
-import { SthemeService } from '../services/theme/stheme.service';
-import { SearchesService } from '../services/searches/searches.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
-import { FieldsRequestService } from '../services/fieldsRequest/fields-request.service';
 
 @Component({
   selector: 'app-preguntas',
@@ -23,14 +10,14 @@ import { FieldsRequestService } from '../services/fieldsRequest/fields-request.s
 })
 export class PreguntasComponent implements OnInit {
   // Array que contiene loa datos de las preguntas para ser mostrados en la tabla
-  questions: dataQuestion[] = [];
+  questions: any[] = [];
 
   question: any;
 
   // Array que contiene las locations disponibles para mostrar en la lista desplegable
-  Locations: availableLocations[] = [];
+  Locations: any[] = [];
 
-  Theme: availableTheme[] = [];
+  Theme: any[] = [];
 
   newQuestion = this._fb.group({
     Locations: ['', [Validators.required]],
@@ -40,13 +27,8 @@ export class PreguntasComponent implements OnInit {
   });
 
   constructor(
-    private _service: DataTableService,
     private _fb: FormBuilder,
-    private _themService: SthemeService,
-    private _questionService: SquestionsService,
-    private _searches: SearchesService,
     private _authService: AuthService,
-    private _fields : FieldsRequestService,
     private router: Router
   ) {}
 
@@ -71,83 +53,83 @@ export class PreguntasComponent implements OnInit {
 
   getLocations() {
     // Obtenemos las Locations dispnibles
-    this._fields.getLocations().subscribe(
-      (data) => {
-        this.Locations = [...data];
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+    // this._fields.getLocations().subscribe(
+    //   (data) => {
+    //     this.Locations = [...data];
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
   }
 
   getAllQuestiosn() {
-    this._service.tableQuestions().subscribe(
-      (data) => {
-        this.questions = [...data];
-      },
-      (error) => {
-        console.error('Error getting data ' + error);
-      }
-    );
+    // this._service.tableQuestions().subscribe(
+    //   (data) => {
+    //     this.questions = [...data];
+    //   },
+    //   (error) => {
+    //     console.error('Error getting data ' + error);
+    //   }
+    // );
   }
 
   addNewQuestion() {
-    const dataNewQuestion: dataNewQuestion = {
+    const dataNewQuestion: any = {
       qName: this.newQuestion.get('qName')?.value,
       qStatus: this.newQuestion.get('qStatus')?.value,
       ThemeId: this.newQuestion.get('ThemeId')?.value,
     };
     console.log(dataNewQuestion);
 
-    this._questionService.addNewQuestion(dataNewQuestion).subscribe(
-      (data) => {
-        console.log(data);
-        alert(`Nueva pregunta ${data.qName} registrada con el id ${data.qId}.`);
-        this.getAllQuestiosn();
-        this.newQuestion.reset();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+    // this._questionService.addNewQuestion(dataNewQuestion).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //     alert(`Nueva pregunta ${data.qName} registrada con el id ${data.qId}.`);
+    //     this.getAllQuestiosn();
+    //     this.newQuestion.reset();
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
   }
 
   onSelect(id: any): void {
-    this._fields.getTheme(id).subscribe(
-      (data) => {
-        console.log(data);
-        this.Theme = [...data];
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+    // this._fields.getTheme(id).subscribe(
+    //   (data) => {
+    //     console.log(data);
+    //     this.Theme = [...data];
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
   }
 
   deleteQuestion(id: number) {
-    this._questionService.deleteQuestion(id).subscribe(
-      (data) => {
-        console.log('Pregunta eliminada');
-        alert(`Pregunta "${data.qName}" eliminada`);
-        this.getAllQuestiosn();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+    // this._questionService.deleteQuestion(id).subscribe(
+    //   (data) => {
+    //     console.log('Pregunta eliminada');
+    //     alert(`Pregunta "${data.qName}" eliminada`);
+    //     this.getAllQuestiosn();
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
   }
 
   search(idQuestion: any) {
-    this._searches.getSpecificQuestion(idQuestion).subscribe(
-      (data) => {
-        this.question = data;
-        this.questions = [];
-        console.log(this.question);
-      },
-      (error) => {
-        alert(error);
-      }
-    );
+    // this._searches.getSpecificQuestion(idQuestion).subscribe(
+    //   (data) => {
+    //     this.question = data;
+    //     this.questions = [];
+    //     console.log(this.question);
+    //   },
+    //   (error) => {
+    //     alert(error);
+    //   }
+    // );
   }
 }

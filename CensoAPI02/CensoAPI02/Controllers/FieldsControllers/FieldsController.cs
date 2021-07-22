@@ -1,4 +1,5 @@
 ﻿using CENSO.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -109,7 +110,8 @@ namespace CensoAPI02.Controllers.FieldsControllers
             try
             {
                 var query = from area in _context.Areas
-                            join location in _context.Locations on area.locationId equals location.lId
+                            join al in _context.AreasLocations on area.aId equals al.AreaId
+                            join location in _context.Locations on al.LocationId equals location.lId
                             where location.lId == locationId
                             select new
                             {
@@ -120,13 +122,36 @@ namespace CensoAPI02.Controllers.FieldsControllers
 
                 if (query == null || query.Count() == 0)
                 {
-                    return NotFound(new { message = $"ninguna area se encuentra relacionada con est localidad" });
+                    return NotFound(new { message = $"Ninguna area se encuentra relacionada con est localidad" });
                 }
 
                 return Ok(query);
             }catch(Exception ex)
             {
                 return BadRequest(new { message = $"Ha ocurrido un error al obtener las areas. Error: {ex.Message}" });
+            }
+        }
+
+        // Obtencion de los roles disponibles (requiere policy SUHR)
+        [HttpGet][Route("getRoles")] [AllowAnonymous]
+        public async Task<ActionResult> getRoles()
+        {
+            try
+            {
+                var query = await _context.Roles
+                    .Select(rol => new { rol.rolId, rol.rolName })
+                    .ToListAsync();
+
+                if (query == null || query.Count == 0)
+                {
+                    return NotFound(new { message = $"Ningun rol encontrado" });
+                }
+
+                return Ok(query);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al obtener los roles. Error: {ex.Message}" });
             }
         }
     }

@@ -38,4 +38,11 @@ export class FieldsService {
       `${environment.API_URL}` + this.MyApiUrl + 'getAreas/' + locationId
     );
   }
+
+  // Obtencion de los roles
+  getRoles(): Observable<any> {
+    return this._http.get(
+      `${environment.API_URL}` + this.MyApiUrl + 'getRoles'
+    );
+  }
 }

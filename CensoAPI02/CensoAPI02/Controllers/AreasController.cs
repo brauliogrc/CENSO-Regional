@@ -26,7 +26,7 @@ namespace CensoAPI02.Controllers
 
         // POST api/<AreasController>
         // Agregar una nueva area a la base de datos
-        [HttpPost]
+        /*[HttpPost]
         public async Task<IActionResult> Post([FromBody] AddAreaInterface value)
         {
             try
@@ -43,6 +43,6 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
+        }*/
     }
 }

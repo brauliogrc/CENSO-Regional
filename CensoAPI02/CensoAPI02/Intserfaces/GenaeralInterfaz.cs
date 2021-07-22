@@ -35,6 +35,8 @@ namespace CensoAPI02.Intserfaces
 
         public int uCreationUser { get; set; }
 
+        public bool uStatus { get; set; }
+
         public int LocationId { get; set; }
     }
 
@@ -97,6 +99,8 @@ namespace CensoAPI02.Intserfaces
 
         public int qCreationUser { get; set; }
 
+        public bool qStatus { get; set; }
+
         public int ThemeId { get; set; }
     }
 
@@ -106,6 +110,8 @@ namespace CensoAPI02.Intserfaces
         public string tName { get; set; }
 
         public int tCreationUser { get; set; }
+
+        public bool tStatus { get; set; }
 
         public int LocationId { get; set; }
     }
@@ -128,10 +134,5 @@ namespace CensoAPI02.Intserfaces
         public int RequestId { get; set; }
     }
 
-    public class SearchInterface
-    {
-        public int locationId { get; set; }
-
-        public int itemId { get; set; }
-    }
+    
 }

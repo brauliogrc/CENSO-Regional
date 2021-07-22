@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DataTableService } from '../services/tables/data-table.service';
-import { dataTickets, dataAnonTikets } from '../interfaces/interfaces';
-import { SearchesService } from '../services/searches/searches.service';
 import { AuthService } from '../services/Auth/auth.service';
 import { Router } from '@angular/router';
 
@@ -11,17 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./tikets.component.css'],
 })
 export class TiketsComponent implements OnInit {
-  Tikets: dataTickets[] = [];
-  AnonTikets: dataAnonTikets[] = [];
+  Tikets: any[] = [];
+  AnonTikets: any[] = [];
 
   tiket: any;
 
-  constructor(
-    private _dataTable: DataTableService,
-    private _searchService: SearchesService,
-    private _auth: AuthService,
-    private router: Router
-  ) {}
+  constructor(private _auth: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.validRole();
@@ -44,18 +36,18 @@ export class TiketsComponent implements OnInit {
 
   // Obtencion de listado de tikets (tanto anonimos como con datos)
   getTiketsList() {
-    this._dataTable
-      .tableTickets(Number(sessionStorage.getItem('location')))
-      .subscribe(
-        (data) => {
-          console.log(data);
-          this.Tikets = [...data.tikets];
-          this.AnonTikets = [...data.anonTikets];
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+    // this._dataTable
+    //   .tableTickets(Number(sessionStorage.getItem('location')))
+    //   .subscribe(
+    //     (data) => {
+    //       console.log(data);
+    //       this.Tikets = [...data.tikets];
+    //       this.AnonTikets = [...data.anonTikets];
+    //     },
+    //     (error) => {
+    //       console.error(error);
+    //     }
+    //   );
   }
 
   // Busqueda de un tiket mediante su id

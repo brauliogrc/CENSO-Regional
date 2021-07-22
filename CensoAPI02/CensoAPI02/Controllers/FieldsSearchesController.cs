@@ -110,7 +110,7 @@ namespace CensoAPI02.Controllers
         }
 
         // Obtencion de las areas disponibles segun la localidad seleccioanda
-        [HttpGet][Route("FieldAreas/{id}")]
+        /*[HttpGet][Route("FieldAreas/{id}")]
         public async Task<ActionResult> GetAreas(int id)
         {
             try
@@ -122,7 +122,7 @@ namespace CensoAPI02.Controllers
                     l.lId
                 }).Where(condition => condition.lId == id).ToListAsync();
 
-                if(query == null || query.Count == 0)
+                if(query == null || query.Count() == 0)
                 {
                     return NotFound(new { message = "Ningun area encontrada en esta localidad" });
                 }
@@ -132,7 +132,7 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
+        }*/
 
     }
 }

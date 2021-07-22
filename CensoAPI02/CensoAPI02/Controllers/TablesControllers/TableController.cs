@@ -59,7 +59,7 @@ namespace CensoAPI02.Controllers.TablesControllers
             {
                 var query = from user in _context.HRU
                             join location in _context.Locations on user.LocationId equals location.lId
-                            join role in _context.Roles on user.uId equals role.rolId
+                            join role in _context.Roles on user.RoleId equals role.rolId
                             where user.uStatus == true && location.lId == locationId
                             select new
                             {
@@ -68,6 +68,7 @@ namespace CensoAPI02.Controllers.TablesControllers
                                 user.uEmployeeNumber,
                                 user.uName,
                                 user.uStatus,
+                                user.uEmail,
                                 // Datos del rol
                                 role.rolId,
                                 role.rolName,
@@ -238,7 +239,8 @@ namespace CensoAPI02.Controllers.TablesControllers
             try
             {
                 var query = from area in _context.Areas
-                            join location in _context.Locations on area.locationId equals location.lId
+                            join al in _context.AreasLocations on area.aId equals al.AreaId
+                            join location in _context.Locations on al.LocationId equals location.lId
                             where location.lId == locationId
                             select new
                             {

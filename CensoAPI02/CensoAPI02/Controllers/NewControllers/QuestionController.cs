@@ -34,7 +34,7 @@ namespace CensoAPI02.Controllers.NewControllers
                     qName = newQuestion.qName,
                     qCreationDate = DateTime.Now,
                     qCreationUser = newQuestion.qCreationUser,
-                    qStatus = true
+                    qStatus = newQuestion.qStatus
                 };
 
                 // Registro de la nueva pregunta a la tabla Questions

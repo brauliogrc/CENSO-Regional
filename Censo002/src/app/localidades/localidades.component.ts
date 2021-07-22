@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SearchesService } from '../services/searches/searches.service';
 import { AuthService } from '../services/Auth/auth.service';
 import { Router } from '@angular/router';
 import { locationList, addLocation } from '../interfaces/newInterfaces';
@@ -75,6 +74,7 @@ export class LocalidadesComponent implements OnInit {
       (data) => {
         console.log(data.message);
         this.getLocationList();
+        this.newLocation.reset();
       },
       (error) => {
         console.error(error.error.message);

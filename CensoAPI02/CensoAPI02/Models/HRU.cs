@@ -64,5 +64,9 @@ namespace CensoAPI02.Models
 
         // Relationship one-to-many HRU Request
         public List<Request> requests { get; set; }
+
+
+        // Relationship one-to-many HRU AnonRequest
+        public List<AnonRequest> anonRequests { get; set; }
     }
 }

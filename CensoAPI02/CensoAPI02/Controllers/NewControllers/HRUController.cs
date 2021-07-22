@@ -39,7 +39,7 @@ namespace CensoAPI02.Controllers.NewControllers
                     uName = newUser.uName,
                     uEmail = newUser.uEmail,
                     RoleId = newUser.RolId,
-                    uStatus = true,
+                    uStatus = newUser.uStatus,
                     LocationId = newUser.LocationId,
                     uCreationUser = newUser.uCreationUser,
                     uCreationDate = DateTime.Now,

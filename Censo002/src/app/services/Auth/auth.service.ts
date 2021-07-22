@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { saveDataLogin } from 'src/app/interfaces/interfaces';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -20,16 +19,7 @@ export class AuthService {
   get isLogged(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
-
-  // Guardado temporal de datos de los datos de usuario
-  private user: saveDataLogin = {
-    uId: 0,
-    uEmail: '',
-    uName: '',
-    locationId: 0,
-    roleId: 0,
-  };
-
+  
   constructor(private _http: HttpClient, private router: Router) {
     this.checkToken();
   }
@@ -53,27 +43,6 @@ export class AuthService {
   //   );
   // }
   //////////////////////////////////////////////////////////
-
-  // Almacenamos los datos recuperados del usuario en una varibale para accederla más tarde
-  setData(
-    locationId: any,
-    userName: any,
-    userId: any,
-    userEmail: any,
-    roleId: any = 0
-  ) {
-    this.user.locationId = locationId;
-    this.user.uName = userName;
-    this.user.uId = userId;
-    this.user.uEmail = userEmail;
-    this.user.roleId = roleId;
-  }
-
-  getUser() {
-    console.log(this.user);
-
-    return this.user;
-  }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /** METODOS PARA LA AUTENTICACIÓN */

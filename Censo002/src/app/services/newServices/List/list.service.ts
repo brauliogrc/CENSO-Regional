@@ -39,14 +39,14 @@ export class ListService {
     );
   }
 
-  // Obtencion de los tickets en una localidad
+  // Obtencion del listado de tickets en una localidad
   getTicketList(locationId: number): Observable<any> {
     return this._http.get(
       `${environment.API_URL}` + this.MyApiUrl + 'ticketList/' + locationId
     );
   }
 
-  // Obtencion de las areas en una localidad
+  // Obtencion del listado de areas en una localidad
   getAreaList(locationId: number): Observable<any> {
     return this._http.get(
       `${environment.API_URL}` + this.MyApiUrl + 'areaList/' + locationId

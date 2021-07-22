@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { dataLogin } from '../interfaces/interfaces';
 import { AuthService } from '../services/Auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Token } from '../interfaces/newInterfaces';
+import { dataLogin, Token } from '../interfaces/newInterfaces';
 
 const helper = new JwtHelperService();
 

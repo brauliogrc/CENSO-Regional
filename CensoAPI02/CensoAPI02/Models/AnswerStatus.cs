@@ -25,6 +25,11 @@ namespace CensoAPI02.Models
         public Request request { get; set; }
 
 
+        // Relationship one-2-one entities AnonRequest and AnswerStatus
+        public int AnonRequestId { get; set; }
+        public AnonRequest anonRequest { get; set; }
+
+
         // Relationship one-to-many entities HRU and AnswerSatus
         [Required]
         public int UserId { get; set; }
