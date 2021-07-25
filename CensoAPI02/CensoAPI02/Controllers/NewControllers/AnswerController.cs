@@ -33,24 +33,43 @@ namespace CensoAPI02.Controllers.NewControllers
                 var addAnswer = new AnswerStatus()
                 {
                     UserId = newAnswer.asUserId,
-                    asAnswer = newAnswer.asAnswer,
-                    RequestId = newAnswer.RequestId,
-                    asCrestionDate = DateTime.Now
-                };
+                    asAnswer = newAnswer.asAnswer,                    
+                    asCreationDate = DateTime.Now,
 
-                // Registro de la nueva respuesta en la tabla AnswerStatus
-                _context.Answer.Add(addAnswer);
-                await _context.SaveChangesAsync();
+                };                
 
-                // Anadir apartado de modificacion para anonRequest
                 // Modificacion del tiket
                 var ticketModification = await _context.Requests.FindAsync(newAnswer.RequestId);
+
+                if (ticketModification == null)
+                {
+                    var anonTicketModification = await _context.AnonRequests.FindAsync(newAnswer.RequestId);
+
+                    addAnswer.AnonRequestId = newAnswer.RequestId;
+                    addAnswer.RequestId = null;
+                    anonTicketModification.arModificationDate = DateTime.Now;
+                    anonTicketModification.arModificationUser = newAnswer.asUserId;
+                    anonTicketModification.StatusId = 4;
+
+                    // Regsitr de la moficacion el ticket anonimo
+                    _context.AnonRequests.Update(anonTicketModification);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new { message = $"Respuesta {addAnswer.asId} del tiket {newAnswer.RequestId}, registrada correctamente" });
+                }
+
+                addAnswer.RequestId = newAnswer.RequestId;
+                addAnswer.anonRequest = null;
                 ticketModification.rModificationUser = newAnswer.asUserId;
                 ticketModification.rModificationDate = DateTime.Now;
                 ticketModification.StatusId = 2;
 
                 // Regsitro de las modificaciones del tiket
                 _context.Requests.Update(ticketModification);
+                await _context.SaveChangesAsync();
+
+                // Registro de la nueva respuesta en la tabla AnswerStatus
+                _context.Answer.Add(addAnswer);
                 await _context.SaveChangesAsync();
 
                 return Ok(new { message = $"Respuesta {addAnswer.asId} del tiket {newAnswer.RequestId}, registrada correctamente" });

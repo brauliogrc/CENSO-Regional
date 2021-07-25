@@ -3,7 +3,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { locationList, questionList } from 'src/app/interfaces/newInterfaces';
 import { environment } from 'src/environments/environment';
-import { searchData, userList, themeList, ticketList } from '../../../interfaces/newInterfaces';
+import {
+  searchData,
+  userList,
+  themeList,
+  ticketList,
+} from '../../../interfaces/newInterfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -57,8 +62,8 @@ export class SearchService {
   }
 
   // Busqueda de un ticket en una localidad
-  searchTicket(searchData: searchData): Observable<ticketList> {
-    return this._http.get<ticketList>(
+  searchTicket(searchData: searchData): Observable<any> {
+    return this._http.get(
       `${environment.API_URL}` +
         this.MyApiUrl +
         'ticketSearch/' +

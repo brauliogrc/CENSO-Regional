@@ -1,16 +1,29 @@
 <body class="BodyIndexC" style="overflow: auto">
   <header>
     <div class="headerIndexC">
-      <img src="../../assets/img/LogoConti.png" alt="Continental" class="imgLogoIndexC" />
+      <img
+        src="assets/img/LogoConti.png"
+        alt="Continental"
+        class="imgLogoIndexC"
+      />
       <h1 class="h1CensoB">CENSO Bienestar</h1>
-      <button class="btnIndexC" (click)="navegarLogin()" type="submit">iniciar Sesion</button>
+      <button class="btnIndexC" (click)="navegarLogin()" type="submit">
+        iniciar Sesion
+      </button>
     </div>
   </header>
   <div class="contenedorIndexC">
-    <img src="../../assets/img/CensoBienestar.png" alt="" width="95%" class="imgBienestarC" />
+    <img
+      src="assets/img/CensoBienestar.png"
+      alt=""
+      width="95%"
+      class="imgBienestarC"
+    />
     <hr class="hr" />
     <div class="ContainerIndexC1">
-      <button class="btnIndexOPC" type="submit" (click)="navegarLogin()">Registro con datos</button>
+      <button class="btnIndexOPC" type="submit" (click)="navegarLogin()">
+        Registro con datos
+      </button>
       <button class="btnIndexOPC" type="submit" onclick="mostrarRegistro()">
         Registro anónimo
       </button>
@@ -31,16 +44,27 @@
           <!-- Inicio del FORM 
                     el form se enlaza con la variable bodyRequest del Component por medio de [formGroup]
                     se llama al método registerRequest por medio de la directiva (ngSubmit)-->
-          <form [formGroup]="bodyRequest" (ngSubmit)="registerAnonRequest()" class="row g-3 needs-validation"
-            novalidate>
+          <form
+            [formGroup]="bodyRequest"
+            (ngSubmit)="registerAnonRequest()"
+            class="row g-3 needs-validation"
+            novalidate
+          >
             <!-- <form class="row g-3 needs-validation" novalidate> -->
 
             <div class="md-3">
               <!-- ******** tipo de empleado ********** -->
               <!-- cada campo esta reacionado con una variable en el Component llamada igual que
                         el contenido de formControlName -->
-              <label for="validationCustom04" class="form-label">Tipo de Empleado(a)</label>
-              <select formControlName="arEmployeeType" class="form-select" id="validationCustom04" required>
+              <label for="validationCustom04" class="form-label"
+                >Tipo de Empleado(a)</label
+              >
+              <select
+                formControlName="arEmployeeType"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
                 <option value="1">Administrativo</option>
                 <option value="2">Sindicalizado</option>
               </select>
@@ -49,10 +73,21 @@
 
             <!-- Campo de localidad -->
             <div class="md-3">
-              <label for="validationCustom04" class="form-label">Localidad</label>
-              <select #locationId formControlName="LocationId" (change)="defineLocation(locationId.value)"
-                class="form-select" id="validationCustom04" required>
-                <option *ngFor="let location of Locations" value="{{ location.lId }}">
+              <label for="validationCustom04" class="form-label"
+                >Localidad</label
+              >
+              <select
+                #locationId
+                formControlName="LocationId"
+                (change)="defineLocation(locationId.value)"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
+                <option
+                  *ngFor="let location of Locations"
+                  value="{{ location.lId }}"
+                >
                   {{ location.lName }}
                 </option>
               </select>
@@ -62,8 +97,14 @@
             <!--agregue este campo del tema-->
             <div class="md-3">
               <label for="validationCustom04" class="form-label">Tema</label>
-              <select #themeId formControlName="ThemeId" (change)="getQuestions(themeId.value)" class="form-select"
-                id="validationCustom04" required>
+              <select
+                #themeId
+                formControlName="ThemeId"
+                (change)="getQuestions(themeId.value)"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
                 <option *ngFor="let th of Theme" value="{{ th.tId }}">
                   {{ th.tName }}
                 </option>
@@ -73,10 +114,20 @@
 
             <div class="md-3">
               <!-- *********** tipo de registro ************ -->
-              <label for="validationCustom04" class="form-label">Pregunta</label>
+              <label for="validationCustom04" class="form-label"
+                >Pregunta</label
+              >
               <!-- Recorremos el arreglo questions para mostrar cada uno de sus elemetnos -->
-              <select formControlName="QuestionId" class="form-select" id="validationCustom04" required>
-                <option *ngFor="let question of Questions" value="{{ question.qId }}">
+              <select
+                formControlName="QuestionId"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
+                <option
+                  *ngFor="let question of Questions"
+                  value="{{ question.qId }}"
+                >
                   {{ question.qName }}
                 </option>
               </select>
@@ -86,7 +137,12 @@
             <div class="mb-3">
               <!-- ************ nave del trabajador ***************** -->
               <label for="validationCustom04" class="form-label">Area</label>
-              <select formControlName="AreaId" class="form-select" id="validationCustom04" required>
+              <select
+                formControlName="AreaId"
+                class="form-select"
+                id="validationCustom04"
+                required
+              >
                 <option *ngFor="let area of Areas" value="{{ area.aId }}">
                   {{ area.aName }}
                 </option>
@@ -97,24 +153,48 @@
 
             <div class="mb-3">
               <!-- ************* contenido de la solicitud ************** -->
-              <label for="exampleFormControlTextarea1" class="form-label">¿Qué necesitas decirnos?</label>
-              <textarea formControlName="arIssue" maxlength="499" class="form-control" id="exampleFormControlTextarea1"
-                rows="3" required></textarea>
+              <label for="exampleFormControlTextarea1" class="form-label"
+                >¿Qué necesitas decirnos?</label
+              >
+              <textarea
+                formControlName="arIssue"
+                maxlength="499"
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="3"
+                required
+              ></textarea>
             </div>
 
             <div>
               <!-- ************ archivo de evidencia ************** -->
-              <label for="formFileLg" class="form-label">Evidencia (Opcional)</label>
-              <input formControlName="arAttachemen" class="form-control form-control-lg" id="formFileLg" type="file" />
+              <label for="formFileLg" class="form-label"
+                >Evidencia (Opcional)</label
+              >
+              <input
+                formControlName="arAttachemen"
+                class="form-control form-control-lg"
+                id="formFileLg"
+                type="file"
+              />
             </div>
 
             <div class="col-12">
               <!-- ******************* terminos y condicionees ******************* -->
               <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required />
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="invalidCheck"
+                  required
+                />
                 <label class="form-check-label" for="invalidCheck">
                   He leido el presente
-                  <a href="http://glas822a:8001/media/uploads/aviso_privacidad.pdf">aviso de privacidad</a>
+                  <a
+                    href="http://glas822a:8001/media/uploads/aviso_privacidad.pdf"
+                    >aviso de privacidad</a
+                  >
                   y acepto el tratamiento de mis datos personales por
                   Continental.
                 </label>
@@ -126,7 +206,11 @@
             <!-- **************** botón de envio del formulario **************** -->
             <div class="col-12">
               <!-- validacion de contenido de formulario valido -->
-              <button [disabled]="bodyRequest.invalid" class="btnIndexC1" type="submit">
+              <button
+                [disabled]="bodyRequest.invalid"
+                class="btnIndexC1"
+                type="submit"
+              >
                 Crear folio de reporte
               </button>
               <!-- <button class="btnIndexC1" type="submit">Crear folio de reporte</button> -->
@@ -144,19 +228,29 @@
               <div class="md-3">
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <button (click)="searchFolio(folioId.value)" class="btn btn-outline-secondary" type="button"
-                      class="btnbuscarF">
+                    <button
+                      (click)="searchFolio(folioId.value)"
+                      class="btn btn-outline-secondary"
+                      type="button"
+                      class="btnbuscarF"
+                    >
                       Buscar Folio
                     </button>
                   </div>
-                  <input #folioId type="number" class="form-control" placeholder="" aria-label=""
-                    aria-describedby="basic-addon1" />
+                  <input
+                    #folioId
+                    type="number"
+                    class="form-control"
+                    placeholder=""
+                    aria-label=""
+                    aria-describedby="basic-addon1"
+                  />
                 </div>
               </div>
             </form>
             <div class="ModalContenidoBusq" id="ModalContenidoBusq">
               <div class="ModalContenido1Busq">
-                <div class="tabalaAnonima1">
+                <div *ngIf="folio" class="tabalaAnonima1">
                   <div class="tituloFolioAnonimo">
                     <P>STATUS</P>
                   </div>
@@ -164,20 +258,20 @@
                     <div *ngIf="folio">
                       <div class="contenedores">
                         <div class="titulos">
-                          <p>Empleado:</p>
+                          <p>Folio:</p>
                         </div>
                         <div class="textosContenido">
                           <p>{{ folio.arId }}</p>
                         </div>
                       </div>
-                      <div class="contenedores">
+                      <!-- <div class="contenedores">
                         <div class="titulos">
                           <p>Nombre:</p>
                         </div>
                         <div class="textosContenido">
                           <p>Nombre Empleado</p>
                         </div>
-                      </div>
+                      </div> -->
                       <div class="contenedores">
                         <div class="titulos">
                           <p>Caso:</p>
@@ -191,46 +285,53 @@
                           <p>Status:</p>
                         </div>
                         <div class="textosContenido">
-                          <p>Abierto/Cerrado</p>
+                          <p>{{ folio.rsStatus }}</p>
                         </div>
                       </div>
-                      <div class="contenedores">
-                        <div class="titulos">
-                          <p>Atiende:</p>
+
+                      <ng-template *ngIf="responsable">
+                        <div class="contenedores">
+                          <div class="titulos">
+                            <p>Atiende:</p>
+                          </div>
+                          <div class="textosContenido">
+                            <p>{{ responsable.uName }}</p>
+                          </div>
                         </div>
-                        <div class="textosContenido">
-                          <p>Nombre quien atiende</p>
+                        <div class="contenedores">
+                          <div class="titulos">
+                            <p>Respuesta:</p>
+                          </div>
+                          <div class="textosContenido">
+                            <p>{{ responsable.request }}</p>
+                          </div>
                         </div>
-                      </div>
-                      <div class="contenedores">
-                        <div class="titulos">
-                          <p>Respuesta:</p>
+                        <div class="contenedores">
+                          <div class="titulos">
+                            <p>Se respondio:</p>
+                          </div>
+                          <div class="textosContenido">
+                            <p>{{ responsable.asCreationDate }}</p>
+                          </div>
                         </div>
-                        <div class="textosContenido">
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                            Perspiciatis rerum praesentium voluptatum ut aliquid omnis magnam distinctio
-                          </p>
+                        <div class="contenedores">
+                          <div class="titulos">
+                            <p>Archivo Adjunto:</p>
+                          </div>
+                          <div class="textosContenido">
+                            <p>{{ folio.arAttachement }}</p>
+                          </div>
                         </div>
-                      </div>
-                      <div class="contenedores">
-                        <div class="titulos">
-                          <p>Se respondio:</p>
-                        </div>
-                        <div class="textosContenido">
-                          <p>1950/01/01</p>
-                        </div>
-                      </div>
-                      <div class="contenedores">
-                        <div class="titulos">
-                          <p>Archivo Adjunto:</p>
-                        </div>
-                        <div class="textosContenido">
-                          <p>{{ folio.arAttachement }}</p>
-                        </div>
-                      </div>
+                      </ng-template>
                     </div>
                   </div>
-                  <button id="close" class="btn btn-outline-secondary" type="button">Cerrar</button>
+                  <button
+                    id="close"
+                    class="btn btn-outline-secondary"
+                    type="button"
+                  >
+                    Cerrar
+                  </button>
                 </div>
               </div>
             </div>

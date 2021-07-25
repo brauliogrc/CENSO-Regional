@@ -3,93 +3,172 @@
         <h1>Respuesta de folio</h1>
     </div>
 
-    <div class="respTabla">
-        <div class="contenedores">
-            <div class="titulos">
-                <p>Folio:</p>
-            </div>
-            <div class="textosContenido">
-                <p>12345678</p>
-            </div>
-            <div class="titulos">
-                <p>Fecha creacion :</p>
-            </div>
-            <div class="textosContenido">
-                <p>09/02/1950</p>
-            </div>
-        </div>
-        <div class="contenedores">
-            <div class="titulos">
-                <p>Nombre supervisor:</p>
-            </div>
-            <div class="textosContenido">
-                <p>Nombre supervisor</p>
-            </div>
-        </div>
-        <div class="contenedores">
-            <div class="titulos">
-                <p>Tipo Empleado:</p>
-            </div>
-            <div class="textosContenido">
-                <p>Administrativo</p>
-            </div>
-        </div>
-        <div class="contenedores">
-            <div class="titulos">
-                <p>Nombre Empleado:</p>
-            </div>
-            <div class="textosContenido">
-                <p>Anonimo</p>
-            </div>
-        </div>
-        <div class="contenedores">
-            <div class="titulos">
-                <p>Numero Empleado:</p>
-            </div>
-            <div class="textosContenido">
-                <p>0</p>
-            </div>
-        </div>
-        <div class="contenedores">
-            <div class="titulos">
-                <p>Nave:</p>
-            </div>
-            <div class="textosContenido">
-                <p>1</p>
-            </div>
-        </div>
-        <div class="contenedores">
-            <div class="titulos">
-                <p>Dias Transcurridos:</p>
-            </div>
-            <div class="textosContenido">
-                <p>0</p>
-            </div>
-        </div>
-        <div class="contenedores">
-            <div class="titulos">
-                <p>Contenido:</p>
-            </div>
-            <div class="textosContenido">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Perspiciatis rerum praesentium voluptatum ut aliquid omnis magnam distinctio
-                    quisquam architecto aut tempore, consequatur voluptate repudiandae voluptatem laboriosam
-                    dolorum! Dolore, necessitatibus. Voluptates!consequatur voluptate repudiandae voluptatem
-                    laboriosam dolorum! Dolore, necessitatibus. Voluptates!consequatur voluptate repudiandae
-                    voluptatem laboriosam dolorum! Dolore, necessitatibus. Voluptates!consequatur voluptate
-                    repudi</p>
-            </div>
-        </div>
-        <div class="contenedores">
-            <div class="titulos">
-                <p>Evidencia:</p>
-            </div>
-            <div class="textosContenido">
-                <p>false</p>
-            </div>
-        </div>
+    <div *ngIf="flag" class="respTabla" style="overflow: auto">
 
+        <ng-container *ngIf="!anonTicketData; else elseTemplate">
+            
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Folio:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ ticketData.rId }}</p>
+                </div>
+                <div class="titulos">
+                    <p>Fecha creacion :</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ ticketData.rCreationDate }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Nombre supervisor:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ ticketData.rEmployeeLeader }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Tipo Empleado:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ ticketData.rEmployeeType }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Nombre Empleado:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ ticketData.rUserName }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Numero Empleado:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ ticketData.rUserId }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Nave:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ ticketData.aName }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Dias Transcurridos:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ daysPassed }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Contenido:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ ticketData.rIssue }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Evidencia:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ ticketData.rAttachement }}</p>
+                </div>
+            </div>
 
+        </ng-container>
+        <ng-template #elseTemplate>
+            
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Folio:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ anonTicketData.arId }}</p>
+                </div>
+                <div class="titulos">
+                    <p>Fecha creacion :</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ anonTicketData.arCreationDate }}</p>
+                </div>
+            </div>
+            <!-- <div class="contenedores">
+                <div class="titulos">
+                    <p>Nombre supervisor:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ anonTicketData}}</p>
+                </div>
+            </div> -->
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Tipo Empleado:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ anonTicketData.arEmployeeType }}</p>
+                </div>
+            </div>
+            <!-- <div class="contenedores">
+                <div class="titulos">
+                    <p>Nombre Empleado:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>Anonimo</p>
+                </div>
+            </div> -->
+            <!-- <div class="contenedores">
+                <div class="titulos">
+                    <p>Numero Empleado:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>0</p>
+                </div>
+            </div> -->
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Nave:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ anonTicketData.aName }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Dias Transcurridos:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ daysPassed }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Contenido:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ anonTicketData.arIssue }}</p>
+                </div>
+            </div>
+            <div class="contenedores">
+                <div class="titulos">
+                    <p>Evidencia:</p>
+                </div>
+                <div class="textosContenido">
+                    <p>{{ anonTicketData.arAttachement }}</p>
+                </div>
+            </div>
+
+        </ng-template>
         <div class="respTabla1">
             <form action="">
                 <div class="contenedores">

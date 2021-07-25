@@ -17,16 +17,15 @@ namespace CensoAPI02.Models
         public string asAnswer { get; set; }
 
         [Required]
-        public DateTime asCrestionDate { get; set; }
+        public DateTime asCreationDate { get; set; }
 
         // Relationship one-2-one entities Request and AnswerStatus
-        [Required]
-        public int RequestId { get; set; }
+        public int? RequestId { get; set; }
         public Request request { get; set; }
 
 
         // Relationship one-2-one entities AnonRequest and AnswerStatus
-        public int AnonRequestId { get; set; }
+        public int? AnonRequestId { get; set; }
         public AnonRequest anonRequest { get; set; }
 
 

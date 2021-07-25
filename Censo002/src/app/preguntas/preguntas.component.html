@@ -18,7 +18,7 @@
       <div class="col-md-6">
         <label for="inputState" class="form-label">Location</label>
         <select formControlName="Locations" #locationId id="inputState" class="form-select"
-          (change)="onSelect(locationId.value)">
+          (change)="getTheme(locationId.value)">
           <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
         </select>
       </div>
@@ -64,7 +64,7 @@
     <tbody>
 
       <ng-container *ngIf="!question; else elseTemplate">
-        <tr *ngFor="let question of questions">
+        <tr *ngFor="let question of Questions">
           <td>{{ question.qId }}</td>
           <td>{{ question.qName }}</td>
           <td>{{ question.tName }}</td>
@@ -76,13 +76,13 @@
       </ng-container>
       <ng-template #elseTemplate>
         <tr>
-          <td>{{ question.qId }}</td>
-          <td>{{ question.qName }}</td>
-          <td>{{ question.tName }}</td>
-          <td>{{ question.qStatus }}</td>
+          <td>{{ question[0].qId }}</td>
+          <td>{{ question[0].qName }}</td>
+          <td>{{ question[0].tName }}</td>
+          <td>{{ question[0].qStatus }}</td>
           <td>
-            <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Responder</button>
-            <button (click)="deleteQuestion(question.qId)" class="btn btn-danger">Eliminar</button>
+            <button (click)="deleteQuestion(question[0].qId)" class="btn btn-danger">Responder</button>
+            <button (click)="deleteQuestion(question[0].qId)" class="btn btn-danger">Eliminar</button>
           </td>
         </tr>
       </ng-template>

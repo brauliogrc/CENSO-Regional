@@ -2,10 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
-import { addTheme, themeList, Location } from '../interfaces/newInterfaces';
+import {
+  addTheme,
+  themeList,
+  Location,
+  searchData,
+} from '../interfaces/newInterfaces';
 import { ThemeService } from '../services/newServices/Theme/theme.service';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { ListService } from '../services/newServices/List/list.service';
+import { SearchService } from '../services/newServices/Search/search.service';
 
 @Component({
   selector: 'app-temas',
@@ -32,6 +38,7 @@ export class TemasComponent implements OnInit {
     private _themeService: ThemeService,
     private _fieldsService: FieldsService,
     private _listService: ListService,
+    private _searchService: SearchService,
     private _authService: AuthService,
     private router: Router
   ) {}
@@ -67,7 +74,7 @@ export class TemasComponent implements OnInit {
     );
   }
 
-  // Obtencion de las localidades disponibles
+  // Obtencion de los temas disponibles
   getThemeList(): void {
     this._listService
       .getThemeList(Number(sessionStorage.getItem('location')))
@@ -94,6 +101,7 @@ export class TemasComponent implements OnInit {
       (data) => {
         console.log(data.message);
         this.getThemeList();
+        this.newTheme.reset();
       },
       (error) => {
         console.error(error.error.message);
@@ -101,10 +109,12 @@ export class TemasComponent implements OnInit {
     );
   }
 
+  // Borrado logico de un tema
   deleteTheme(themeId: number): void {
     this._themeService.deleteTheme(themeId).subscribe(
       (data) => {
         console.log(data.message);
+        this.th = null;
         this.getThemeList();
       },
       (error) => {
@@ -113,16 +123,24 @@ export class TemasComponent implements OnInit {
     );
   }
 
-  search(idTheme: any) {
-    // this._searches.getSpecificTheme(idTheme).subscribe(
-    //   (data) => {
-    //     this.th = data;
-    //     this.theme = [];
-    //     console.log(this.th);
-    //   },
-    //   (error) => {
-    //     alert(error.error.message);
-    //   }
-    // );
+  // Busqueda de un tema en especifico
+  search(themeId: string): void {
+    if (themeId) {
+      // Definicioin de los datos de busquedas
+      let themeSearch: searchData = {
+        locationId: Number(sessionStorage.getItem('location')),
+        itemId: Number(themeId),
+      };
+
+      this._searchService.searchTheme(themeSearch).subscribe(
+        (data) => {
+          this.th = data;
+          this.Theme = [];
+        },
+        (error) => {
+          console.error(error.error.messae);
+        }
+      );
+    }
   }
 }

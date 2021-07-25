@@ -28,11 +28,11 @@ namespace CensoAPI02.Models
         [Required]
         public DateTime arCreationDate { get; set; }
 
-        public DateTime arModificationDate { get; set; }
+        public DateTime? arModificationDate { get; set; }
 
 
         // Relationship one-to-many entities HRU AnonRequest
-        public int arModificationUser { get; set; }
+        public int? arModificationUser { get; set; }
         public HRU hru { get; set; }
 
 

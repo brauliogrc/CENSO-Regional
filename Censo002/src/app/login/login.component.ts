@@ -80,8 +80,11 @@ export class LoginComponent implements OnInit {
   }
 
   redirect() {
-    const role: number = Number(sessionStorage.getItem('role'));
-    if (role != 0 && this._authService.isLogged) {
+    const role: string | null = sessionStorage.getItem('role');
+
+    let aut: boolean = role == 'undefined' ? false : true;
+
+    if (aut && this._authService.isLogged) {
       this.router.navigate(['/paneladmin']);
     } else if (this._authService.isLogged) {
       this.router.navigate(['/panelusuario']);

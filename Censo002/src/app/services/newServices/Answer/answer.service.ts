@@ -19,7 +19,4 @@ export class AnswerService {
       newAnswer
     );
   }
-
-  
- 
 }

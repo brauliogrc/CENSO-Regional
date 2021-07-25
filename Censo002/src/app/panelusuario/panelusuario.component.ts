@@ -78,6 +78,7 @@ export class PanelusuarioComponent implements OnInit {
 
   // Obtencion de los temas relacionados a la localidad
   getTeme(): void {
+    this.Theme = [];
     this._fields.getThme(this.location).subscribe(
       (data) => {
         this.Theme = [...data];
@@ -91,6 +92,7 @@ export class PanelusuarioComponent implements OnInit {
 
   // Obtencion de las preguntas relaciondas al tema
   getQuetions(themeId: string): void {
+    this.Questions = [];
     this._fields.getQuestions(Number(themeId)).subscribe(
       (data) => {
         this.Questions = [...data];
@@ -104,6 +106,7 @@ export class PanelusuarioComponent implements OnInit {
 
   // Obtencion de las areas relacionadas a la localidad
   getAreas(): void {
+    this.Areas = [];
     this._fields.getAreas(this.location).subscribe(
       (data) => {
         this.Areas = [...data];
@@ -138,6 +141,7 @@ export class PanelusuarioComponent implements OnInit {
     this._requestService.addNewRequest(req).subscribe(
       (data) => {
         console.log(data);
+        this.bodyRequest.reset();
       },
       (error) => {
         console.error(error.error.message);

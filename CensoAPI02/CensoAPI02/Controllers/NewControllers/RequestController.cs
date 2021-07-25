@@ -41,7 +41,11 @@ namespace CensoAPI02.Controllers.NewControllers
                     QuestionId = newRequest.QuestionId,
                     ThemeId = newRequest.ThemeId,
                     LocationId = newRequest.LocationId,
-                    StatusId = 1
+                    StatusId = 1,
+
+                    // Datos nulos
+                    rModificationUser = null,
+                    rModificationDate = null
                 };
 
                 // Registro de la nueva peticion en la tabla Request

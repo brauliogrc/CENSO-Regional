@@ -157,7 +157,6 @@ export interface addUser {
   EmployeeNumber: number;
   uStatus: boolean;
   uCreationUser: number;
-  LocationId: number;
 }
 
 export interface addTheme {

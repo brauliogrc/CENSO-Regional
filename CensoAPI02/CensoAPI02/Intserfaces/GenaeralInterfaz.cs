@@ -37,7 +37,7 @@ namespace CensoAPI02.Intserfaces
 
         public bool uStatus { get; set; }
 
-        public int LocationId { get; set; }
+        //public int LocationId { get; set; }
     }
 
     // Registrar una nueva Request
@@ -134,5 +134,10 @@ namespace CensoAPI02.Intserfaces
         public int RequestId { get; set; }
     }
 
-    
+    public class SearchInterfcae
+    {
+        public int locationId { get; set; }
+
+        public int itemId { get; set; }
+    }
 }

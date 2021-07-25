@@ -2,6 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
+import {
+  questionList,
+  Location,
+  Theme,
+  addQuestion,
+} from '../interfaces/newInterfaces';
+import { SearchService } from '../services/newServices/Search/search.service';
+import { QuestionService } from '../services/newServices/Question/question.service';
+import { FieldsService } from '../services/newServices/Fields/fields.service';
+import { ListService } from '../services/newServices/List/list.service';
+import { searchData } from '../interfaces/newInterfaces';
 
 @Component({
   selector: 'app-preguntas',
@@ -10,14 +21,14 @@ import { AuthService } from '../services/Auth/auth.service';
 })
 export class PreguntasComponent implements OnInit {
   // Array que contiene loa datos de las preguntas para ser mostrados en la tabla
-  questions: any[] = [];
+  Questions: questionList[] = [];
 
   question: any;
 
   // Array que contiene las locations disponibles para mostrar en la lista desplegable
-  Locations: any[] = [];
+  Locations: Location[] = [];
 
-  Theme: any[] = [];
+  Theme: Theme[] = [];
 
   newQuestion = this._fb.group({
     Locations: ['', [Validators.required]],
@@ -28,6 +39,10 @@ export class PreguntasComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
+    private _searchService: SearchService,
+    private _questionService: QuestionService,
+    private _fieldsService: FieldsService,
+    private _listService: ListService,
     private _authService: AuthService,
     private router: Router
   ) {}
@@ -47,89 +62,105 @@ export class PreguntasComponent implements OnInit {
       console.clear();
       return;
     }
-    this.getAllQuestiosn();
+    this.getQuestionList();
     this.getLocations();
   }
 
-  getLocations() {
-    // Obtenemos las Locations dispnibles
-    // this._fields.getLocations().subscribe(
-    //   (data) => {
-    //     this.Locations = [...data];
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
+  // Obtencion de las localidades disponibles
+  getLocations(): void {
+    this._fieldsService.getLocations().subscribe(
+      (data) => {
+        this.Locations = [...data];
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
   }
 
-  getAllQuestiosn() {
-    // this._service.tableQuestions().subscribe(
-    //   (data) => {
-    //     this.questions = [...data];
-    //   },
-    //   (error) => {
-    //     console.error('Error getting data ' + error);
-    //   }
-    // );
+  // Obtencion de los temas disponibles segun la localidad
+  getTheme(locationId: string): void {
+    this.Theme = [];
+    if (locationId) {
+      this._fieldsService.getThme(Number(locationId)).subscribe(
+        (data) => {
+          this.Theme = [...data];
+        },
+        (error) => {
+          console.error(error.error.message);
+        }
+      );
+    }
   }
 
-  addNewQuestion() {
-    const dataNewQuestion: any = {
+  // Obtencion de las preguntas disponibles
+  getQuestionList(): void {
+    this._listService
+      .getQuestionList(Number(sessionStorage.getItem('location')))
+      .subscribe(
+        (data) => {
+          this.Questions = [...data];
+        },
+        (error) => {
+          console.error(error.error.message);
+        }
+      );
+  }
+
+  // Regustro de una nueva pregunta en la tabla Questions
+  addNewQuestion(): void {
+    const dataNewQuestion: addQuestion = {
       qName: this.newQuestion.get('qName')?.value,
       qStatus: this.newQuestion.get('qStatus')?.value,
+      qCreationUser: Number(sessionStorage.getItem('userId')),
       ThemeId: this.newQuestion.get('ThemeId')?.value,
     };
     console.log(dataNewQuestion);
 
-    // this._questionService.addNewQuestion(dataNewQuestion).subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     alert(`Nueva pregunta ${data.qName} registrada con el id ${data.qId}.`);
-    //     this.getAllQuestiosn();
-    //     this.newQuestion.reset();
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
+    this._questionService.addNewQuestion(dataNewQuestion).subscribe(
+      (data) => {
+        console.log(data.message);
+        this.getQuestionList();
+        this.newQuestion.reset();
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
   }
 
-  onSelect(id: any): void {
-    // this._fields.getTheme(id).subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //     this.Theme = [...data];
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
+  // Borrado logico de una pregunta
+  deleteQuestion(questionId: number) {
+    this._questionService.deleteQuestion(questionId).subscribe(
+      (data) => {
+        console.log(data.message);
+        this.question = null;
+        this.getQuestionList();
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
   }
 
-  deleteQuestion(id: number) {
-    // this._questionService.deleteQuestion(id).subscribe(
-    //   (data) => {
-    //     console.log('Pregunta eliminada');
-    //     alert(`Pregunta "${data.qName}" eliminada`);
-    //     this.getAllQuestiosn();
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
-  }
+  // Busqueda de una pregunta en especifico
+  search(questionId: any) {
+    if (questionId) {
+      // Definicion de datos de busqueda
+      let questionSearch: searchData = {
+        locationId: Number(sessionStorage.getItem('location')),
+        itemId: Number(questionId),
+      };
 
-  search(idQuestion: any) {
-    // this._searches.getSpecificQuestion(idQuestion).subscribe(
-    //   (data) => {
-    //     this.question = data;
-    //     this.questions = [];
-    //     console.log(this.question);
-    //   },
-    //   (error) => {
-    //     alert(error);
-    //   }
-    // );
+      this._searchService.searchQuestion(questionSearch).subscribe(
+        (data) => {
+          this.question = data;
+          this.Questions = [];
+        },
+        (error) => {
+          console.error(error.error.message);
+        }
+      );
+    }
   }
 }

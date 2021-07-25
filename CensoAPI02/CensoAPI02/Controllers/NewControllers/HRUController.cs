@@ -40,13 +40,12 @@ namespace CensoAPI02.Controllers.NewControllers
                     uEmail = newUser.uEmail,
                     RoleId = newUser.RolId,
                     uStatus = newUser.uStatus,
-                    LocationId = newUser.LocationId,
                     uCreationUser = newUser.uCreationUser,
                     uCreationDate = DateTime.Now,
                 };
 
                 // Consulta del SupervisorNumber para asignarlo a los datos del usuario
-                string query = "SELECT [SupervisorNumber] FROM [p_HRPortal].[dbo].[VW_EmployeeData] WHERE EmployeeNumber = " + addUser.uEmployeeNumber;
+                string query = "SELECT [SupervisorNumber], [Plant] FROM [p_HRPortal].[dbo].[VW_EmployeeData] WHERE EmployeeNumber = " + addUser.uEmployeeNumber;
                 using (SqlConnection conn = new SqlConnection(_config.GetConnectionString("HRPortal")))
                 {
                     SqlCommand command = new SqlCommand(query, conn);
@@ -57,11 +56,19 @@ namespace CensoAPI02.Controllers.NewControllers
                     {
                         int flag = 0;
                         long supervisorNumber;
+                        int locationId;
+                        Validations validations = new Validations();
                         while (reader.Read() && flag == 0)
                         {
-                            Console.WriteLine(reader.GetInt32(0));
+                            Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)}");
+
                             supervisorNumber = Convert.ToInt64(reader.GetInt32(0));
+                            locationId = validations.localityValidation(reader.GetString(1));
+                            if (locationId == 0) return BadRequest(new { message = $"El usuario lo cuenta con una ocalidad" });
+
+
                             addUser.uSupervisorNumber = supervisorNumber;
+                            addUser.LocationId = locationId;
                             flag++;
                         }
                     }

@@ -39,7 +39,11 @@ namespace CensoAPI02.Controllers.NewControllers
                     AreaId = newAnonRequest.AreaId,
                     ThemeId = newAnonRequest.ThemeId,
                     LocationId = newAnonRequest.LocationId,
-                    StatusId = 1
+                    StatusId = 1,
+
+                    // Datos nulos
+                    arModificationUser = null,
+                    arModificationDate = null
                 };
 
                 // Registro de la nueva peticion anonima en la tabla AnonRequest
@@ -49,7 +53,7 @@ namespace CensoAPI02.Controllers.NewControllers
                 return Ok(new { addAnonRequest, message = $"Peticion {addAnonRequest.arId} registrada con exito" });
             }catch(Exception ex)
             {
-                return BadRequest(new { message = $"Ha ocurrido un error al registrar la peticion. Error: {ex.Message}" });
+                return BadRequest(new { message = $"Ha ocurrido un error al registrar la peticion. Error: {ex.InnerException}" });
             }
         }
 

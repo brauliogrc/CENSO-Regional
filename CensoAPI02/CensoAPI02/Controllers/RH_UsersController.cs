@@ -79,7 +79,7 @@ namespace CensoAPI02.Controllers
                     uCreationUser = 1,
                     uEmployeeNumber = newUser.EmployeeNumber,
                     //uModificationDate = DateTime.Now,
-                    LocationId = newUser.LocationId
+                    //LocationId = newUser.LocationId
                 };
 
                 _context.HRU.Add(newUser2);

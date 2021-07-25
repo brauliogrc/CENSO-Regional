@@ -10,6 +10,7 @@ import {
 } from '../interfaces/newInterfaces';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { AddAnonRequestService } from '../services/newServices/AnonRequest/add-anon-request.service';
+import { TicketService } from '../services/newServices/Ticket/ticket.service';
 
 @Component({
   selector: 'app-home',
@@ -48,6 +49,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
     private _fields: FieldsService,
+    private _ticketService: TicketService,
     private _anonRequestService: AddAnonRequestService,
     private router: Router
   ) {}
@@ -83,6 +85,7 @@ export class HomeComponent implements OnInit {
 
   // Obtencion de los temas relacionados a la localidad
   getTheme(): void {
+    this.Theme = [];
     this._fields.getThme(this.location).subscribe(
       (data) => {
         this.Theme = [...data];
@@ -95,6 +98,7 @@ export class HomeComponent implements OnInit {
 
   // Obtencion de las preguntas relacionadas a los temas
   getQuestions(themeId: string): void {
+    this.Questions = [];
     this._fields.getQuestions(Number(themeId)).subscribe(
       (data) => {
         this.Questions = [...data];
@@ -107,6 +111,7 @@ export class HomeComponent implements OnInit {
 
   // Obtencion de las areas relacionadas a la localidad
   getAreas(): void {
+    this.Areas = [];
     this._fields.getAreas(this.location).subscribe(
       (data) => {
         this.Areas = [...data];
@@ -137,6 +142,7 @@ export class HomeComponent implements OnInit {
     this._anonRequestService.addNewAnonRequest(anonReq).subscribe(
       (data) => {
         console.log(data);
+        this.bodyRequest.reset();
       },
       (error) => {
         console.error(error.error.message);
@@ -149,17 +155,21 @@ export class HomeComponent implements OnInit {
   // PANEL DE BUSQUEDA
 
   folio: any;
+  responsable: any;
 
   // Busqueda de folio en la base de datos con base en su id
   searchFolio(folioId: any) {
-    // this._searchFolio.searchFolioAnon(folioId).subscribe(
-    //   (data) => {
-    //     this.folio = data[0];
-    //     console.log(this.folio);
-    //   },
-    //   (error) => {
-    //     console.error(error.error.message);
-    //   }
-    // );
+    this._ticketService
+      .getAnonTicketStatus(Number(folioId))
+      .subscribe((data) => {
+        this.folio = data.anonTicket[0];
+        console.log(this.folio);
+        if (data.answer) {
+          this.responsable = data.answer;
+          console.log(this.responsable);
+        } else {
+          console.log(data.message);
+        }
+      });
   }
 }

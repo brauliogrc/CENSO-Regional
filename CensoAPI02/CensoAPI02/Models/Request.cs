@@ -33,11 +33,11 @@ namespace CENSO.Models
         [Required]
         public DateTime rCreationDate { get; set; }
 
-        public DateTime rModificationDate { get; set; }
+        public DateTime? rModificationDate { get; set; }
 
 
         // Relationship one-to-many entities HRU Request
-        public int rModificationUser { get; set; }
+        public int? rModificationUser { get; set; }
         public HRU hru { get; set; }
 
 

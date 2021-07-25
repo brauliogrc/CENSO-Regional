@@ -44,12 +44,12 @@
       </select>
     </div>
     <!-- Location -->
-    <div class="col-md-4">
+    <!-- <div class="col-md-4">
       <label for="inputState" class="form-label">Localidad</label>
       <select formControlName="LocationId" id="inputState" class="form-select">
         <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
       </select>
-    </div>
+    </div> -->
     <!-- Bonton registro -->
     <div class="col-12">
       <button [disabled]="newUser.invalid" class="btnIndexC" type="submit">Añadir</button>

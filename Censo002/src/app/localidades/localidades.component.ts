@@ -86,6 +86,8 @@ export class LocalidadesComponent implements OnInit {
   deleteLocation(locationId: number): void {
     this._locationService.deleteLocaion(locationId).subscribe(
       (data) => {
+        console.log(data.message);
+        this.location = null;
         this.getLocationList();
       },
       (error) => {

@@ -40,7 +40,6 @@ export class UsuariosComponent implements OnInit {
     uEmail: ['', [Validators.required, Validators.maxLength(80)]],
     RolId: ['', [Validators.required]],
     uStatus: ['', [Validators.required]],
-    LocationId: ['', [Validators.required]],
     EmployeeNumber: ['', [Validators.required]],
   });
 
@@ -123,7 +122,6 @@ export class UsuariosComponent implements OnInit {
       uStatus: this.newUser.get('uStatus')?.value,
       EmployeeNumber: this.newUser.get('EmployeeNumber')?.value,
       uCreationUser: Number(sessionStorage.getItem('userId')),
-      LocationId: this.newUser.get('LocationId')?.value,
     };
     console.log(dataNewUser);
 
@@ -132,6 +130,7 @@ export class UsuariosComponent implements OnInit {
       (data) => {
         console.log(data.message);
         this.getUserList();
+        this.newUser.reset();
       },
       (error) => {
         console.error(error.error.message);
@@ -144,6 +143,7 @@ export class UsuariosComponent implements OnInit {
     this._userSerice.deleteUser(userId).subscribe(
       (data) => {
         console.log(data.message);
+        this.user = null;
         this.getUserList();
       },
       (error) => {
@@ -152,12 +152,13 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-  search(idUser: string): void {
-    if (idUser) {
+  // Busqueda de un usuario en especifico
+  search(userId: string): void {
+    if (userId) {
       // Definicion de los datos de busqueda
       let userSearch: searchData = {
         locationId: Number(sessionStorage.getItem('location')),
-        itemId: Number(idUser),
+        itemId: Number(userId),
       };
 
       this._searchService.searchUser(userSearch).subscribe(
