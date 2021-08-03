@@ -48,8 +48,6 @@ namespace CensoAPI02.Controllers.NewControllers
                 };
 
                 // Agregando los datos a la interface del correo
-                
-
                 EmailInformation emailInformation = new EmailInformation();
                 emailInformation.themeId = newAnonRequest.ThemeId;
                 emailInformation.locationId = newAnonRequest.LocationId;
@@ -94,6 +92,7 @@ namespace CensoAPI02.Controllers.NewControllers
                     addAnonRequest.arAttachement = null;
                 }
 
+                // Envio de correos
                 List<string> emails = new List<string>();
 
                 var email = from user in _context.HRU

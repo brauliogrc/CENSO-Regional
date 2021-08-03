@@ -167,5 +167,9 @@ version 3.6.4 beta
     -Nuevas interfaces generadas
     -Consustas a la base de datos mejoradas
 
+
 ~Braulio~
+
+por añadir
+    envio de coreos, registro de imagenes
 ======================================================================================================================
