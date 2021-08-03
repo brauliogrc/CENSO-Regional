@@ -23,7 +23,7 @@ namespace CensoAPI02.Models
         public string arIssue { get; set; } // Contenido
 
         [MaxLength(200)]
-        public string arAttachement { get; set; } // Ruta de archivo adjunto
+        public string? arAttachement { get; set; } // Ruta de archivo adjunto Nuleable
 
         [Required]
         public DateTime arCreationDate { get; set; }
@@ -32,7 +32,7 @@ namespace CensoAPI02.Models
 
 
         // Relationship one-to-many entities HRU AnonRequest
-        public int? arModificationUser { get; set; }
+        public long? arModificationUser { get; set; }
         public HRU hru { get; set; }
 
 

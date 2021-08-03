@@ -64,7 +64,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
 
                 if (query == null || query.Count() == 0)
                 {
-                    return NotFound(new { message = $"Ningun thema se encuentra relacionado con esta localidad" });
+                    return NotFound(new { message = $"Ningun tema se encuentra relacionado con esta localidad" });
                 }
 
                 return Ok(query);

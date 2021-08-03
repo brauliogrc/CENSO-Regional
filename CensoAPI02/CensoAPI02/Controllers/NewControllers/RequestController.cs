@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace CensoAPI02.Controllers.NewControllers
@@ -21,9 +23,9 @@ namespace CensoAPI02.Controllers.NewControllers
             _context = context;
         }
 
-        // Registrar una nueva peticion
+        // Registrar una nueva peticion (requiere autorize)
         [HttpPost][Route("newRequest")][AllowAnonymous]
-        public async Task<IActionResult> addNewRequest([FromBody] AddRequestInterface newRequest)
+        public async Task<IActionResult> addNewRequest([FromForm] AddRequestInterface newRequest)
         {
             try
             {
@@ -36,7 +38,7 @@ namespace CensoAPI02.Controllers.NewControllers
                     rEmployeeType = newRequest.rEmployeeType,
                     rCreationDate = DateTime.Now,
                     rIssue = newRequest.rIssue,
-                    rAttachement = newRequest.rAttachement,
+                    //rAttachement = newRequest.rAttachement,
                     AreaId = newRequest.AreaId,
                     QuestionId = newRequest.QuestionId,
                     ThemeId = newRequest.ThemeId,
@@ -52,14 +54,50 @@ namespace CensoAPI02.Controllers.NewControllers
                 _context.Requests.Add(addRequest);
                 await _context.SaveChangesAsync();
 
-                return Ok(new { addRequest, message = $"Peticion {addRequest.rId}, registrada con exito" });
+                // Guardado del archivo adjunto
+                var file = newRequest.rAttachement;
+                var folderName = Path.Combine("Resources", "Evidences");
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+
+                if (file != null)
+                {
+                    if (file.Length > 0)
+                    {
+                        var fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                        var fullPath = Path.Combine(pathToSave, fileName);
+                        var dbPath = Path.Combine(folderName, fileName);
+
+                        // cambiando el nombre al archivo
+                        //var assetsRoute = 'assets\\Evidences\\Tickets' + newRequest.rAttachement + '.' + extencion;
+                        var extencion = Path.GetExtension(file.FileName).Substring(1);
+                        var newName = addRequest.rId;
+                        var newPath = pathToSave + '\\' + newName + '.' + extencion;
+
+                        using (var fileStream = new FileStream(newPath, FileMode.Create))
+                        {
+                            file.CopyTo(fileStream);
+                        }
+
+                        Console.WriteLine($"Full Path: {fullPath}\ndbPath: {dbPath}");
+                        addRequest.rAttachement = newPath;
+                    }
+
+                    _context.Requests.Update(addRequest);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    addRequest.rAttachement = null;
+                }
+
+                return Ok(new { addRequest.rId, message = $"Peticion {addRequest.rId}, registrada con exito" });
             }catch(Exception ex)
             {
                 return BadRequest(new { message = $"Ha ocurrido un error al registrar la peticion. Error {ex.Message}" });
             }
         }
 
-        //Eliminacion ogica de la peticion
+        //Eliminacion ogica de la peticion (requiere policy staff rh)
         [HttpDelete][Route("deleteRequest/{requestId}")][AllowAnonymous]
         public async Task<IActionResult> deleteRequest(int requestId)
         {

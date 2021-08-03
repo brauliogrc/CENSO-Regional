@@ -152,7 +152,7 @@ export interface addLocation {
 
 export interface addUser {
   uName: string;
-  uEmail: string;
+  uEmail: string | null;
   RolId: number;
   EmployeeNumber: number;
   uStatus: boolean;
@@ -177,4 +177,12 @@ export interface addAnswer {
   asUserId: number;
   asAnswer: string;
   RequestId: number;
+}
+
+// Interface de la informacion del usuario
+export interface userInformation {
+  employeeNumber: number;
+  location: string;
+  name: string;
+  email: string | null;
 }

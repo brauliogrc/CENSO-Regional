@@ -72,10 +72,10 @@ namespace CENSO.Models
                     .HasForeignKey(prop => prop.ThemeId),
                     hrth => hrth.HasOne(prop => prop.HRU)
                     .WithMany()
-                    .HasForeignKey(prop => prop.HRUId),
+                    .HasForeignKey(prop => prop.UserId),
                     hrth =>
                     {
-                        hrth.HasKey(prop => new { prop.ThemeId, prop.HRUId });
+                        hrth.HasKey(prop => new { prop.ThemeId, prop.UserId });
                     }
                 );
 

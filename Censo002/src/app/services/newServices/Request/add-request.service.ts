@@ -13,7 +13,7 @@ export class AddRequestService {
   constructor(private _http: HttpClient) {}
 
   // Registro de la peticion en la tabla Request
-  addNewRequest(newRequest: addRequest): Observable<any> {
+  addNewRequest(newRequest: any): Observable<any> {
     return this._http.post(
       `${environment.API_URL}` + this.MyApiUrl + 'newRequest',
       newRequest

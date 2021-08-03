@@ -91,7 +91,7 @@ export class TiketsComponent implements OnInit {
       this._searchService.searchTicket(ticketSearch).subscribe(
         (data) => {
           this.flag = true;
-          if (data.rUserName != null) {
+          if (data.rUserName[0] != null) {
             this.tiket = data;
             this.anonTicket = null;
             console.log(this.tiket[0]);

@@ -155,7 +155,8 @@ namespace CensoAPI02.Controllers.NewControllers
                                  };
 
                 var answer = from answerStatus in _context.Answer
-                             join user in _context.HRU on answerStatus.UserId equals user.uId
+                             //join user in _context.HRU on answerStatus.UserId equals user.uId
+                             join user in _context.HRU on answerStatus.UserId equals user.uEmployeeNumber
                              join anonRequest in _context.AnonRequests on answerStatus.AnonRequestId equals anonRequest.arId
                              where answerStatus.AnonRequestId == ticketId && anonRequest.StatusId != 4
                              select new
@@ -165,7 +166,7 @@ namespace CensoAPI02.Controllers.NewControllers
                                  answerStatus.request,
                                  answerStatus.asCreationDate,
                                  // Datos del usuario
-                                 user.uId,
+                                 //user.uId,
                                  user.uName,
                                  user.uEmployeeNumber
                              };
@@ -211,7 +212,8 @@ namespace CensoAPI02.Controllers.NewControllers
                              };
 
                 var answer = from answerStatus in _context.Answer
-                             join user in _context.HRU on answerStatus.UserId equals user.uId
+                             //join user in _context.HRU on answerStatus.UserId equals user.uId
+                             join user in _context.HRU on answerStatus.UserId equals user.uEmployeeNumber
                              join request in _context.Requests on answerStatus.RequestId equals request.rId
                              where answerStatus.RequestId == ticketId && request.StatusId != 4
                              select new
@@ -221,7 +223,7 @@ namespace CensoAPI02.Controllers.NewControllers
                                  answerStatus.request,
                                  answerStatus.asCreationDate,
                                  // Datos del usuario
-                                 user.uId,
+                                 //user.uId,
                                  user.uName,
                                  user.uEmployeeNumber
                              };

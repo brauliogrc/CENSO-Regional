@@ -23,7 +23,7 @@ namespace CENSO.Models
         public string rIssue { get; set; }
 
         [MaxLength(200)]
-        public string rAttachement { get; set; }
+        public string? rAttachement { get; set; } // Nuleable
 
         [Required]
         public int rEmployeeType { get; set; }
@@ -37,7 +37,7 @@ namespace CENSO.Models
 
 
         // Relationship one-to-many entities HRU Request
-        public int? rModificationUser { get; set; }
+        public long? rModificationUser { get; set; }
         public HRU hru { get; set; }
 
 

@@ -75,6 +75,7 @@ export class LocalidadesComponent implements OnInit {
         console.log(data.message);
         this.getLocationList();
         this.newLocation.reset();
+        this.location = null;
       },
       (error) => {
         console.error(error.error.message);

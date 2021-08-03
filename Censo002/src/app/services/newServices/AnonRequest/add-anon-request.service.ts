@@ -13,7 +13,7 @@ export class AddAnonRequestService {
   constructor(private _http: HttpClient) {}
 
   // Registro de la pticion en la tabla AnonRequest
-  addNewAnonRequest(newAnonRequest: addAnonRequest): Observable<any> {
+  addNewAnonRequest(newAnonRequest: any): Observable<any> {
     return this._http.post(
       `${environment.API_URL}` + this.MyApiUrl + 'newAnonRequest',
       newAnonRequest

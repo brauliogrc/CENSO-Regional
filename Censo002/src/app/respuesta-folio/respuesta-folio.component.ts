@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Pipe } from '@angular/core';
+import {
+  DomSanitizer,
+  SafeResourceUrl,
+  SafeUrl,
+  SafeValue,
+} from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
@@ -20,7 +26,8 @@ export class RespuestaFolioComponent implements OnInit {
   constructor(
     private _ticketService: TicketService,
     private router: Router,
-    private _auth: AuthService
+    private _auth: AuthService,
+    private _sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -46,9 +53,10 @@ export class RespuestaFolioComponent implements OnInit {
     this.getTicketData();
   }
 
+  evidenceRoute: SafeValue = '';
+  value: any;
   // Obtencion de los datos del ticket
   getTicketData(): void {
-    
     this._ticketService.getTicketData(this.ticketId).subscribe(
       (data) => {
         if (data.anonTicketData) {
@@ -59,6 +67,20 @@ export class RespuestaFolioComponent implements OnInit {
           );
 
           console.log(this.anonTicketData);
+
+          // Sanitizacion de la URL de la evidencia
+          // this.evidenceRoute = this._sanitizer.bypassSecurityTrustUrl(
+          //   `url(${this.anonTicketData.arAttachement})`
+          // );
+          // console.log({ this: this.evidenceRoute });
+
+          // this.value = window.location.href;
+          // console.log(this.value);
+          // this.value = '';
+          // console.log( this.value );
+          // this.value = this.anonTicketData.arAttachement;
+          // console.log(this.value);
+
           this.flag = true;
         } else {
           this.ticketData = data.ticketData[0];

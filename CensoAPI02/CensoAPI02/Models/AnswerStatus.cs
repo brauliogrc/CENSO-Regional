@@ -16,6 +16,9 @@ namespace CensoAPI02.Models
         [Required]
         public string asAnswer { get; set; }
 
+        [MaxLength(200)]
+        public string? asAttachement { get; set; }
+
         [Required]
         public DateTime asCreationDate { get; set; }
 
@@ -31,7 +34,7 @@ namespace CensoAPI02.Models
 
         // Relationship one-to-many entities HRU and AnswerSatus
         [Required]
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public HRU hru { get; set; }
     }
 }

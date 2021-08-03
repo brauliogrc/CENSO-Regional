@@ -1,109 +1,105 @@
 <div class="contenidoResp">
-    <div class="tituloresp">
-        <h1>Respuesta de folio</h1>
-    </div>
+  <div class="tituloresp">
+    <h1>Respuesta de folio</h1>
+  </div>
 
-    <div *ngIf="flag" class="respTabla" style="overflow: auto">
-
-        <ng-container *ngIf="!anonTicketData; else elseTemplate">
-            
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Folio:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ ticketData.rId }}</p>
-                </div>
-                <div class="titulos">
-                    <p>Fecha creacion :</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ ticketData.rCreationDate }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Nombre supervisor:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ ticketData.rEmployeeLeader }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Tipo Empleado:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ ticketData.rEmployeeType }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Nombre Empleado:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ ticketData.rUserName }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Numero Empleado:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ ticketData.rUserId }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Nave:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ ticketData.aName }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Dias Transcurridos:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ daysPassed }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Contenido:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ ticketData.rIssue }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Evidencia:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ ticketData.rAttachement }}</p>
-                </div>
-            </div>
-
-        </ng-container>
-        <ng-template #elseTemplate>
-            
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Folio:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ anonTicketData.arId }}</p>
-                </div>
-                <div class="titulos">
-                    <p>Fecha creacion :</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ anonTicketData.arCreationDate }}</p>
-                </div>
-            </div>
-            <!-- <div class="contenedores">
+  <div *ngIf="flag" class="respTabla" style="overflow: auto">
+    <ng-container *ngIf="!anonTicketData; else elseTemplate">
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Folio:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rId }}</p>
+        </div>
+        <div class="titulos">
+          <p>Fecha creacion :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rCreationDate }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Nombre supervisor:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rEmployeeLeader }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Tipo Empleado:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rEmployeeType }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Nombre Empleado:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rUserName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Numero Empleado:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rUserId }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Nave:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.aName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Dias Transcurridos:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ daysPassed }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Contenido:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rIssue }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Evidencia:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rAttachement }}</p>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Folio:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.arId }}</p>
+        </div>
+        <div class="titulos">
+          <p>Fecha creacion :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.arCreationDate }}</p>
+        </div>
+      </div>
+      <!-- <div class="contenedores">
                 <div class="titulos">
                     <p>Nombre supervisor:</p>
                 </div>
@@ -111,15 +107,15 @@
                     <p>{{ anonTicketData}}</p>
                 </div>
             </div> -->
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Tipo Empleado:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ anonTicketData.arEmployeeType }}</p>
-                </div>
-            </div>
-            <!-- <div class="contenedores">
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Tipo Empleado:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.arEmployeeType }}</p>
+        </div>
+      </div>
+      <!-- <div class="contenedores">
                 <div class="titulos">
                     <p>Nombre Empleado:</p>
                 </div>
@@ -127,7 +123,7 @@
                     <p>Anonimo</p>
                 </div>
             </div> -->
-            <!-- <div class="contenedores">
+      <!-- <div class="contenedores">
                 <div class="titulos">
                     <p>Numero Empleado:</p>
                 </div>
@@ -135,105 +131,109 @@
                     <p>0</p>
                 </div>
             </div> -->
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Nave:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ anonTicketData.aName }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Dias Transcurridos:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ daysPassed }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Contenido:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ anonTicketData.arIssue }}</p>
-                </div>
-            </div>
-            <div class="contenedores">
-                <div class="titulos">
-                    <p>Evidencia:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ anonTicketData.arAttachement }}</p>
-                </div>
-            </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Nave:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.aName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Dias Transcurridos:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ daysPassed }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Contenido:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.arIssue }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Evidencia:</p>
+        </div>
+        <div class="textosContenido">
+          <p>
+            <a target="_blank" href="{{anonTicketData.arAttachement}}">{{
+              anonTicketData.arAttachement
+            }}</a>
+          </p>
+          <a href="file:///{{value}}">e ver si esta si</a>
 
-        </ng-template>
-        <div class="respTabla1">
-            <form action="">
-                <div class="contenedores">
-                    <div class="titulos1">
-                        <p>Numero de empleado del encargado:</p>
-                    </div>
-                    <div class="textosContenido">
-                        <input type="text" class="inputschidos" id="">
-                    </div>
-                    <div class="titulos1">
-                        <p>Encargado:</p>
-                    </div>
-                    <div class="textosContenido">
-                        <input type="text" class="inputschidos" id="">
-                    </div>
-                </div>
-
-                <div class="contenedores">
-                    <div class="titulos">
-                        <p>Status:</p>
-                    </div>
-                    <div class="textosContenido">
-                        <select class="form-select" id="validationCustom04" required>
-                            <option>Activo</option>
-                            <option>inactivo</option>
-                        </select>
-                        <div class="invalid-feedback">
-                            Selecciona una opción.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="contenedores">
-                    <div class="titulos">
-                        <p>Respuesta:</p>
-                    </div>
-                    <div class="textosContenido">
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                </div>
-
-                <div class="contenedores">
-                    <div class="titulos">
-                        <p>Adjunto:</p>
-                    </div>
-                    <div class="textosContenido">
-                        <input class="form-control form-control-lg" id="formFileLg" type="file">
-                    </div>
-                </div>
-
-                <div class="contenedores">
-
-                    <button class="BotonRespuesta">Guardar</button>
-
-
-
-                </div>
-
-
-            </form>
-            <div class="contBotonCerrar"><button class="BotonRespuesta">Cerrar</button></div>
-
+          <!-- <img src="{{ anonTicketData.arAttachement }}" alt="Evicendia" /> -->
+        </div>
+      </div>
+    </ng-template>
+    <div class="respTabla1">
+      <form action="">
+        <div class="contenedores">
+          <div class="titulos1">
+            <p>Numero de empleado del encargado:</p>
+          </div>
+          <div class="textosContenido">
+            <input type="text" class="inputschidos" id="" />
+          </div>
+          <div class="titulos1">
+            <p>Encargado:</p>
+          </div>
+          <div class="textosContenido">
+            <input type="text" class="inputschidos" id="" />
+          </div>
         </div>
 
+        <div class="contenedores">
+          <div class="titulos">
+            <p>Status:</p>
+          </div>
+          <div class="textosContenido">
+            <select class="form-select" id="validationCustom04" required>
+              <option>Activo</option>
+              <option>inactivo</option>
+            </select>
+            <div class="invalid-feedback">Selecciona una opción.</div>
+          </div>
+        </div>
 
+        <div class="contenedores">
+          <div class="titulos">
+            <p>Respuesta:</p>
+          </div>
+          <div class="textosContenido">
+            <textarea
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="contenedores">
+          <div class="titulos">
+            <p>Adjunto:</p>
+          </div>
+          <div class="textosContenido">
+            <input
+              class="form-control form-control-lg"
+              id="formFileLg"
+              type="file"
+            />
+          </div>
+        </div>
+
+        <div class="contenedores">
+          <button class="BotonRespuesta">Guardar</button>
+        </div>
+      </form>
+      <div class="contBotonCerrar">
+        <button class="BotonRespuesta">Cerrar</button>
+      </div>
     </div>
-
+  </div>
 </div>

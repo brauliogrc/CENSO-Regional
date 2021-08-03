@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
 
           // Llamadas a los métodos de guardado del sessionStorage
           this._authService.saveEmployeenumber(this.dataToken.nameid);
-          this._authService.saveUserId(this.dataToken.userId);
+          // this._authService.saveUserId(this.dataToken.userId);
           this._authService.saveUsername(this.dataToken.Username);
           this._authService.saveSupervisorNumber(
             this.dataToken.SupervisorNumber

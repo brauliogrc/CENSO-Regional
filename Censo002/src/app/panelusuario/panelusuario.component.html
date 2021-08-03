@@ -68,7 +68,7 @@
               id="validationCustom04"
               required
             >
-              <option disabled value="1">Administrativo</option>
+              <option value="1">Administrativo</option>
               <option value="2">Sindicalizado</option>
             </select>
             <div class="invalid-feedback">Selecciona una opcion.</div>
@@ -146,11 +146,12 @@
             <label for="formFileLg" class="form-label"
               >Evidencia (Opcional)</label
             >
-            <input
+            <input #fileUpload
               formControlName="rAttachement"
               class="form-control form-control-lg"
               id="formFileLg"
               type="file"
+              (change)="onFileSelected($event)"
             />
           </div>
 
@@ -158,6 +159,7 @@
             <div class="form-check">
               <!-- ******************* terminos y condicionees ******************* -->
               <input
+                formControlName="Terminos"
                 class="form-check-input"
                 type="checkbox"
                 value=""

@@ -42,9 +42,52 @@ export class LocationValidate {
     return null;
   }
 
+  localityNameValidation(): string | null {
+    let locationId: number = Number(sessionStorage.getItem('location'));
+
+    if (locationId ==  1)     return 'AIS SLP';
+    if (locationId ==  2)     return 'Benecke Kaliko';
+    if (locationId ==  3)     return 'Cuautla';
+    if (locationId ==  4)     return 'Cuautla GDL';
+    if (locationId ==  5)     return 'Federal Distr';
+    if (locationId ==  6)     return 'Finance Center';
+    if (locationId ==  7)     return 'HBS Greenfield';
+    if (locationId ==  8)     return 'Juarez';
+    if (locationId ==  9)     return 'Juarez 1';
+    if (locationId ==  10)    return 'Juarez 2';
+    if (locationId ==  11)    return 'Las Colinas';
+    if (locationId ==  12)    return 'Montemorelos';
+    if (locationId ==  13)    return 'Monterrey';
+    if (locationId ==  14)    return 'Morelia';
+    if (locationId ==  15)    return 'Morganton';
+    if (locationId ==  16)    return 'MX-AG-Aguascalientes-Auto';
+    if (locationId ==  17)    return 'MX-GT- Silao-FC Vitesco-';
+    if (locationId ==  18)    return 'MX-GT-Silao-Las Colinas II';
+    if (locationId ==  19)    return 'MX-GT-Silao-Las Colinas MX';
+    if (locationId ==  20)    return 'MX-MO-Cuautla-Vitesco';
+    if (locationId ==  21)    return 'MX-SL-San Luis Potosi-HBS MX';
+    if (locationId ==  22)    return 'Nogales';
+    if (locationId ==  23)    return 'Old Juarez 1';
+    if (locationId ==  24)    return 'Planta Fipasi';
+    if (locationId ==  25)    return 'Puebla';
+    if (locationId ==  26)    return 'Queretaro';
+    if (locationId ==  27)    return 'Rubi';
+    if (locationId ==  28)    return 'San Luis Potosi';
+    if (locationId ==  29)    return 'Santa Anita';
+    if (locationId ==  30)    return 'Texcoco';
+    if (locationId ==  31)    return 'Tijera';
+    if (locationId ==  32)    return 'Tire SLP';
+    if (locationId ==  33)    return 'Tlalnepantla';
+    if (locationId ==  34)    return 'Tlaquepaque';
+    if (locationId ==  35)    return 'Vib. Control';
+    if (locationId ==  36)    return 'Zapopan';
+
+    return null;
+  }
+
   employeeTypeValidation(employeeType: number): string | null {
-    if (employeeType == 1)  return 'Administrativo';
-    if (employeeType == 2)  return 'Sindicalizado';
+    if (employeeType == 1) return 'Administrativo';
+    if (employeeType == 2) return 'Sindicalizado';
 
     return null;
   }

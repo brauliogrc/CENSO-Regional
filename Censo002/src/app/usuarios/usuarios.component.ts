@@ -6,13 +6,13 @@ import { ListService } from '../services/newServices/List/list.service';
 import { UserService } from '../services/newServices/user/user.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
+import { userInformation } from '../interfaces/newInterfaces';
 import {
   addUser,
   Location,
   Rol,
   userList,
   searchData,
-  locationList,
 } from '../interfaces/newInterfaces';
 
 @Component({
@@ -31,6 +31,15 @@ export class UsuariosComponent implements OnInit {
 
   // Array que contendra los datos de los Roles de la base de datos para mostrar en la lista desplegable
   Roles: Rol[] = [];
+
+  private userInformation: userInformation = {
+    email: '',
+    employeeNumber: 0,
+    name: '',
+    location: '',
+  };
+
+  flag: boolean = false;
 
   /* Definimos los campos del formulario y agregamos validaciones sobre su contenido
    *  Cada campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
@@ -71,6 +80,7 @@ export class UsuariosComponent implements OnInit {
     this.getUserList();
     this.getlocations();
     this.getRoles();
+    this.flag = false;
   }
 
   getlocations(): void {
@@ -111,31 +121,81 @@ export class UsuariosComponent implements OnInit {
       );
   }
 
-  addNewUser(): void {
-    /**
-     * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
-     */
-    const dataNewUser: addUser = {
-      uName: this.newUser.get('uName')?.value,
-      uEmail: this.newUser.get('uEmail')?.value,
-      RolId: this.newUser.get('RolId')?.value,
-      uStatus: this.newUser.get('uStatus')?.value,
-      EmployeeNumber: this.newUser.get('EmployeeNumber')?.value,
-      uCreationUser: Number(sessionStorage.getItem('userId')),
-    };
-    console.log(dataNewUser);
+  // Validacion de tecla precionada
+  eventHandler(event: any, employeeNumber: string) {
+    // console.log(event, event.keyCode, event.keyIdentifier);
+    // console.log(event.keyCode, event.keyIdentifier);
+    let keyCode: number = event.keyCode;
+    console.log(keyCode);
+    if (keyCode === 32) {
+      this._userSerice.getUserInformation(Number(employeeNumber)).subscribe(
+        (data) => {
+          this.userInformation.email = data.email;
+          this.userInformation.employeeNumber = data.employeeNumber;
+          this.userInformation.name = data.name;
+          this.userInformation.location = data.location;
+          console.log(this.userInformation);
+        },
+        (error) => {
+          console.error(error.error.message);
+        }
+      );
+    }
+  }
 
-    // Registro del nuevo usuario en la tabla HRU
-    this._userSerice.addNewUser(dataNewUser).subscribe(
-      (data) => {
-        console.log(data.message);
-        this.getUserList();
-        this.newUser.reset();
-      },
-      (error) => {
-        console.error(error.error.message);
-      }
-    );
+  // Muestra el nombre del usuario
+  getUserName = (): string => {
+    if (this.userInformation.name.length > 4) {
+      this.flag = true;
+    }
+    return this.userInformation.name;
+  };
+
+  // Muestra el correo del usuario
+  getEmail = (): string | null => {
+    if (this.userInformation.email) {
+      return this.userInformation.email;
+    }
+
+    return null;
+  };
+
+  // Muestra la localidad del ususario
+  getLocation = (): string => {
+    return this.userInformation.location;
+  };
+
+  addNewUser(): void {
+    if (this.flag) {
+      /**
+       * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
+       */
+
+      // TODO
+      const dataNewUser: addUser = {
+        uName: this.getUserName(),
+        uEmail: this.getEmail(),
+        RolId: this.newUser.get('RolId')?.value,
+        uStatus: this.newUser.get('uStatus')?.value,
+        EmployeeNumber: this.newUser.get('EmployeeNumber')?.value,
+        uCreationUser: Number(sessionStorage.getItem('userId')),
+      };
+      console.log(dataNewUser);
+
+      // Registro del nuevo usuario en la tabla HRU
+      this._userSerice.addNewUser(dataNewUser).subscribe(
+        (data) => {
+          console.log(data.message);
+          this.getUserList();
+          this.newUser.reset();
+        },
+        (error) => {
+          console.error(error.error.message);
+        }
+      );
+    } else {
+      console.log('Datos invalidos');
+    }
   }
 
   // Borrado logico del usuario
@@ -153,12 +213,12 @@ export class UsuariosComponent implements OnInit {
   }
 
   // Busqueda de un usuario en especifico
-  search(userId: string): void {
-    if (userId) {
+  search(employeeNumber: string): void {
+    if (employeeNumber) {
       // Definicion de los datos de busqueda
       let userSearch: searchData = {
         locationId: Number(sessionStorage.getItem('location')),
-        itemId: Number(userId),
+        itemId: Number(employeeNumber),
       };
 
       this._searchService.searchUser(userSearch).subscribe(

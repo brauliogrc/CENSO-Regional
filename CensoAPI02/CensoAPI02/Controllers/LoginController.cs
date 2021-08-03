@@ -58,7 +58,7 @@ namespace CensoAPI02.Controllers
                     .Select(hru => new
                     {
                         hru.uName,
-                        hru.uId,
+                        //hru.uId,
                         hru.uEmail,
                         hru.LocationId,
                         hru.RoleId,
@@ -109,7 +109,7 @@ namespace CensoAPI02.Controllers
                 }
 
                 AdministratorAuthData administrator = new AdministratorAuthData();
-                administrator.setAdminId(user.uId);
+                //administrator.setAdminId(user.uId);
                 administrator.setAdminEmployeeNumber(user.uEmployeeNumber);
                 administrator.setAdminRole(user.RoleId);
                 administrator.setAdminLocation(user.LocationId);
@@ -180,7 +180,7 @@ namespace CensoAPI02.Controllers
 
             var claims = new ClaimsIdentity(); // Creamos los claims para poder iniciar sesion
             claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, adminData.getAdminEmployeeNumber().ToString())); // Creación de un claim con el nombre del usuario
-            claims.AddClaim(new Claim("userId", adminData.getAdminId().ToString()));
+            //claims.AddClaim(new Claim("userId", adminData.getAdminId().ToString()));
             claims.AddClaim(new Claim("Username", adminData.getAdminName().ToString()));
             claims.AddClaim(new Claim("SupervisorNumber", adminData.getSupervisorNumber().ToString()));
             claims.AddClaim(new Claim("Location", adminData.getAdminLocation().ToString()));

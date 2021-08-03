@@ -8,7 +8,7 @@ namespace CensoAPI02.Models.UnionTables
 {
     public class HRUsersTheme
     {
-        public int HRUId { get; set; }
+        public long UserId { get; set; }
 
         public int ThemeId { get; set; }
 

@@ -44,6 +44,7 @@ export class HomeComponent implements OnInit {
     arAttachemen: ['', [Validators.maxLength(200)]],
     LocationId: ['', [Validators.required]],
     ThemeId: ['', [Validators.required]],
+    Terminos: ['', [Validators.required]],
   });
 
   constructor(
@@ -127,28 +128,50 @@ export class HomeComponent implements OnInit {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const anonReq: addAnonRequest = {
-      arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
-      QuestionId: this.bodyRequest.get('QuestionId')?.value,
-      AreaId: this.bodyRequest.get('AreaId')?.value,
-      ThemeId: this.bodyRequest.get('ThemeId')?.value,
-      LocationId: this.bodyRequest.get('LocationId')?.value,
-      arIssue: this.bodyRequest.get('arIssue')?.value,
-      arAttachemen: this.bodyRequest.get('arAttachemen')?.value,
-    };
-    console.log(anonReq);
+    //  const anonReq: addAnonRequest = {
+    //   arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
+    //   QuestionId: this.bodyRequest.get('QuestionId')?.value,
+    //   AreaId: this.bodyRequest.get('AreaId')?.value,
+    //   ThemeId: this.bodyRequest.get('ThemeId')?.value,
+    //   LocationId: this.bodyRequest.get('LocationId')?.value,
+    //   arIssue: this.bodyRequest.get('arIssue')?.value,
+    //   arAttachemen: this.file,
+    // };
+
+    const formData = new FormData();
+    formData.append('arEmployeeType', this.bodyRequest.get('arEmployeeType')?.value);
+    formData.append('QuestionId',     this.bodyRequest.get('QuestionId')?.value);
+    formData.append('AreaId',         this.bodyRequest.get('AreaId')?.value);
+    formData.append('ThemeId',        this.bodyRequest.get('ThemeId')?.value);
+    formData.append('LocationId',     this.bodyRequest.get('LocationId')?.value);
+    formData.append('arIssue',        this.bodyRequest.get('arIssue')?.value);
+    formData.append('arAttachement',  this.file);
 
     // Registro de la peticion anonima en la base de datos
-    this._anonRequestService.addNewAnonRequest(anonReq).subscribe(
+    this._anonRequestService.addNewAnonRequest(formData).subscribe(
       (data) => {
         console.log(data);
         this.bodyRequest.reset();
+        let fileName = data[0];
       },
       (error) => {
         console.error(error.error.message);
       }
     );
   }
+
+  // Upload selected file
+  private file: any;
+
+  onFileSelected = (event: any) => {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.file = file;
+      
+      console.log(file);
+    }
+  };
 
   // ==================================================================================================================================================
 
@@ -159,9 +182,8 @@ export class HomeComponent implements OnInit {
 
   // Busqueda de folio en la base de datos con base en su id
   searchFolio(folioId: any) {
-    this._ticketService
-      .getAnonTicketStatus(Number(folioId))
-      .subscribe((data) => {
+    this._ticketService.getAnonTicketStatus(Number(folioId)).subscribe(
+      (data) => {
         this.folio = data.anonTicket[0];
         console.log(this.folio);
         if (data.answer) {
@@ -170,6 +192,10 @@ export class HomeComponent implements OnInit {
         } else {
           console.log(data.message);
         }
-      });
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
   }
 }

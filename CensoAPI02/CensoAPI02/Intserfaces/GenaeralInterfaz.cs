@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -61,7 +62,7 @@ namespace CensoAPI02.Intserfaces
 
         public string rIssue { get; set; }
 
-        public string rAttachement { get; set; }
+        public IFormFile rAttachement { get; set; }
     }
 
     // Registar una nueva AonRequest
@@ -79,7 +80,7 @@ namespace CensoAPI02.Intserfaces
 
         public string arIssue { get; set; }
 
-        public string arAttachemen { get; set; }
+        public IFormFile arAttachement { get; set; }
     }
 
     // Registar una nueva Location
@@ -132,12 +133,56 @@ namespace CensoAPI02.Intserfaces
         public string asAnswer { get; set; }
 
         public int RequestId { get; set; }
+
+        public IFormFile asAttachement { get; set; }
     }
 
+    // Datos necesarios para una busqueda (No implementada)
     public class SearchInterfcae
     {
         public int locationId { get; set; }
 
         public int itemId { get; set; }
+    }
+
+    // Busqueda inicial del usuario en la base de datos y obtencion de su informacion
+    public class UserInformation
+    {
+        public int employeeNumber { get; set; }
+
+        public string location { get; set; }
+
+        public string name { get; set; }
+
+        public string email { get; set; }
+    }
+
+    // Interfaz de informacion para el envio de Emails
+    public class EmailInformation
+    {
+        public int themeId { get; set; }
+
+        public string themeName { get; set; }
+
+        public int locationId { get; set; }
+
+        public string locationName { get; set; }
+
+        public int ticketId { get; set; }
+
+        public string Issue { get; set; }
+
+        // setters
+        public void setThemeId(int thmeId)
+        {
+            this.themeId = themeId;
+        }
+
+        public void setThemeName(string themeName)
+        {
+            this.themeName = themeName;
+        }
+
+
     }
 }

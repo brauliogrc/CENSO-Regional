@@ -36,7 +36,7 @@ namespace CensoAPI02.Controllers.NewControllers
                     asAnswer = newAnswer.asAnswer,                    
                     asCreationDate = DateTime.Now,
 
-                };                
+                };
 
                 // Modificacion del tiket
                 var ticketModification = await _context.Requests.FindAsync(newAnswer.RequestId);
@@ -53,6 +53,10 @@ namespace CensoAPI02.Controllers.NewControllers
 
                     // Regsitr de la moficacion el ticket anonimo
                     _context.AnonRequests.Update(anonTicketModification);
+                    await _context.SaveChangesAsync();
+
+                    // Registro de la nueva respuesta en la tabla AnswerStatus
+                    _context.Answer.Add(addAnswer);
                     await _context.SaveChangesAsync();
 
                     return Ok(new { message = $"Respuesta {addAnswer.asId} del tiket {newAnswer.RequestId}, registrada correctamente" });

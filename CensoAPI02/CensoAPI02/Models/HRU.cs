@@ -11,8 +11,11 @@ namespace CensoAPI02.Models
 {
     public class HRU
     {
+        //[Key]
+        //public int uId { get; set; }
+
         [Key]
-        public int uId { get; set; }
+        public long uEmployeeNumber { get; set; }
 
         [MaxLength(50)]
         [Required]
@@ -20,10 +23,7 @@ namespace CensoAPI02.Models
 
         [MaxLength(80)]
         [Required]
-        public string uEmail { get; set; }
-
-        [Required]
-        public long uEmployeeNumber { get; set; }
+        public string? uEmail { get; set; } // Nuleable
 
         [Required]
         public long uSupervisorNumber { get; set; }
@@ -34,9 +34,9 @@ namespace CensoAPI02.Models
         [Required]
         public int uCreationUser { get; set; }
 
-        public DateTime uModificationDate { get; set; }
+        public DateTime? uModificationDate { get; set; } // Nullable
 
-        public int uModificationUser { get; set; }
+        public int? uModificationUser { get; set; } // Nullable
 
         [Required]
         public bool uStatus { get; set; }

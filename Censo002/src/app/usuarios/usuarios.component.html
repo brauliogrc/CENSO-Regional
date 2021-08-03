@@ -11,22 +11,19 @@
   <form [formGroup]="newUser" (ngSubmit)="addNewUser()" class="row g-3">
     
     <h1>Añadir Usuario</h1>
-    <!-- Sujeto a eliminación -->
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Numero de empleado</label>
-      <input formControlName="EmployeeNumber" type="number" class="form-control" id="inputEmail4">
+      <input #employeeNumber (keypress)="eventHandler($event, employeeNumber.value)" formControlName="EmployeeNumber" type="number" class="form-control" id="inputEmail4">
     </div>
-    <!--  -->
-
-    <!-- Name -->
+      <!-- Name -->
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Nombre</label>
-      <input formControlName="uName" type="text" class="form-control" id="inputEmail4">
+      <input  formControlName="uName" type="text" class="form-control" id="inputEmail4" value="{{getUserName()}}">
     </div>
     <!-- Email -->
     <div class="col-md-6">
       <label for="inputEmail4" class="form-label">Email</label>
-      <input formControlName="uEmail" type="email" class="form-control" id="inputEmail4">
+      <input  formControlName="uEmail" type="email" class="form-control" id="inputEmail4" value="{{getEmail()}}">
     </div>
     <!-- Rol -->
     <div class="col-md-6">
@@ -44,15 +41,16 @@
       </select>
     </div>
     <!-- Location -->
-    <!-- <div class="col-md-4">
+    <div class="col-md-4">
       <label for="inputState" class="form-label">Localidad</label>
-      <select formControlName="LocationId" id="inputState" class="form-select">
+      <input disabled type="text" class="form-control" id="inputEmail4" value="{{getLocation()}}">
+      <!-- <select formControlName="LocationId" id="inputState" class="form-select">
         <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
-      </select>
-    </div> -->
+      </select> -->
+    </div>
     <!-- Bonton registro -->
     <div class="col-12">
-      <button [disabled]="newUser.invalid" class="btnIndexC" type="submit">Añadir</button>
+      <button *ngIf="flag" class="btnIndexC" type="submit">Añadir</button>
     </div>
     <!-- Fin del Form -->
   </form>
@@ -60,8 +58,8 @@
   <hr>
 </div>
       <form class="form-search">
-        <input #userId class="Search1" type="number" placeholder="Buscar" aria-label="Search">
-        <button (click)="search(userId.value)" class="btnIndexC" type="submit">Buscar</button>
+        <input #employeeNumber class="Search1" type="number" placeholder="Buscar" aria-label="Search">
+        <button (click)="search(employeeNumber.value)" class="btnIndexC" type="submit">Buscar</button>
       </form>
       <hr>
       <table class="table table-dark table-sm">

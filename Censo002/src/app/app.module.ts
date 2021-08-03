@@ -25,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { BienvenidoComponent } from './bienvenido/bienvenido.component';
 import { RespuestaFolioComponent } from './respuesta-folio/respuesta-folio.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { RespuestaFolioComponent } from './respuesta-folio/respuesta-folio.compo
     ReactiveFormsModule,
     NoopAnimationsModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    NgxFileDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

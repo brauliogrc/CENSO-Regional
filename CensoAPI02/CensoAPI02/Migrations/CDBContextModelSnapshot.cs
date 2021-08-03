@@ -126,8 +126,8 @@ namespace CensoAPI02.Migrations
                     b.Property<DateTime?>("rModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("rModificationUser")
-                        .HasColumnType("int");
+                    b.Property<long?>("rModificationUser")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("rUserId")
                         .HasColumnType("int");
@@ -228,8 +228,8 @@ namespace CensoAPI02.Migrations
                     b.Property<DateTime?>("arModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("arModificationUser")
-                        .HasColumnType("int");
+                    b.Property<long?>("arModificationUser")
+                        .HasColumnType("bigint");
 
                     b.HasKey("arId");
 
@@ -261,13 +261,17 @@ namespace CensoAPI02.Migrations
                     b.Property<int?>("RequestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("asAnswer")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("asAttachement")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("asCreationDate")
                         .HasColumnType("datetime2");
@@ -309,9 +313,9 @@ namespace CensoAPI02.Migrations
 
             modelBuilder.Entity("CensoAPI02.Models.HRU", b =>
                 {
-                    b.Property<int>("uId")
+                    b.Property<long>("uEmployeeNumber")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                        .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("LocationId")
@@ -331,13 +335,10 @@ namespace CensoAPI02.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<long>("uEmployeeNumber")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("uModificationDate")
+                    b.Property<DateTime?>("uModificationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("uModificationUser")
+                    b.Property<int?>("uModificationUser")
                         .HasColumnType("int");
 
                     b.Property<string>("uName")
@@ -351,7 +352,7 @@ namespace CensoAPI02.Migrations
                     b.Property<long>("uSupervisorNumber")
                         .HasColumnType("bigint");
 
-                    b.HasKey("uId");
+                    b.HasKey("uEmployeeNumber");
 
                     b.HasIndex("LocationId");
 
@@ -414,12 +415,12 @@ namespace CensoAPI02.Migrations
                     b.Property<int>("ThemeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("HRUId")
-                        .HasColumnType("int");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
-                    b.HasKey("ThemeId", "HRUId");
+                    b.HasKey("ThemeId", "UserId");
 
-                    b.HasIndex("HRUId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("HRUsersThemes");
                 });
@@ -618,15 +619,15 @@ namespace CensoAPI02.Migrations
 
             modelBuilder.Entity("CensoAPI02.Models.UnionTables.HRUsersTheme", b =>
                 {
-                    b.HasOne("CensoAPI02.Models.HRU", "HRU")
-                        .WithMany()
-                        .HasForeignKey("HRUId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("CENSO.Models.Theme", "Theme")
                         .WithMany()
                         .HasForeignKey("ThemeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CensoAPI02.Models.HRU", "HRU")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

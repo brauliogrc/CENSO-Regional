@@ -54,18 +54,18 @@ namespace CensoAPI02.Controllers.SearchesControllers
 
         //Busqueda de un usuario especifico en la localidad (requiere policy SUHR)
         [HttpGet][Route("userSearch/{locationId}/{itemId}")][AllowAnonymous]
-        public async Task<ActionResult> userSearch(int locationId, int itemId)
+        public async Task<ActionResult> userSearch(int locationId, long itemId)
         {
             try
             {
                 var query = from user in _context.HRU
                             join location in _context.Locations on user.LocationId equals location.lId
-                            join role in _context.Roles on user.uId equals role.rolId
-                            where user.uStatus == true && user.uId == itemId && location.lId == locationId 
+                            join role in _context.Roles on user.uEmployeeNumber equals role.rolId
+                            where user.uStatus == true && user.uEmployeeNumber == itemId && location.lId == locationId 
                             select new
                             {
                                 // Datos del usuario
-                                user.uId,
+                                //user.uId,
                                 user.uEmployeeNumber,
                                 user.uName,
                                 user.uStatus,

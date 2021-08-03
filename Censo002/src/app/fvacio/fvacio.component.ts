@@ -46,4 +46,9 @@ export class FvacioComponent implements OnInit {
         );
     }
   }
+
+  // Llamada al metodo de cerrar sesion
+  logout() {
+    this._authService.logout();
+  }
 }

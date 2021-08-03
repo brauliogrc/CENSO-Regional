@@ -33,6 +33,7 @@ export class PanelusuarioComponent implements OnInit {
     rIssue: ['', [Validators.required, Validators.maxLength(500)]],
     rAttachement: ['', [Validators.maxLength(200)]],
     ThemeId: ['', [Validators.required]],
+    Terminos: ['', [Validators.required]],
   });
 
   constructor(
@@ -123,22 +124,35 @@ export class PanelusuarioComponent implements OnInit {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const req: addRequest = {
-      rUserId: Number(sessionStorage.getItem('employeeNumber')),
-      rUserName: sessionStorage.getItem('username'),
-      rEmployeeType: this.bodyRequest.get('rEmployeeType')?.value,
-      rEmployeeLeader: Number(sessionStorage.getItem('supervisorNumber')),
-      QuestionId: this.bodyRequest.get('QuestionId')?.value,
-      AreaId: this.bodyRequest.get('AreaId')?.value,
-      ThemeId: this.bodyRequest.get('ThemeId')?.value,
-      LocationId: this.location,
-      rIssue: this.bodyRequest.get('rIssue')?.value,
-      rAttachement: this.bodyRequest.get('rAttachement')?.value,
-    };
-    console.log(req);
+    // const req: addRequest = {
+    //   rUserId: Number(sessionStorage.getItem('employeeNumber')),
+    //   rUserName: sessionStorage.getItem('username'),
+    //   rEmployeeType: this.bodyRequest.get('rEmployeeType')?.value,
+    //   rEmployeeLeader: Number(sessionStorage.getItem('supervisorNumber')),
+    //   QuestionId: this.bodyRequest.get('QuestionId')?.value,
+    //   AreaId: this.bodyRequest.get('AreaId')?.value,
+    //   ThemeId: this.bodyRequest.get('ThemeId')?.value,
+    //   LocationId: this.location,
+    //   rIssue: this.bodyRequest.get('rIssue')?.value,
+    //   rAttachement: this.bodyRequest.get('rAttachement')?.value,
+    // };
+    // console.log(req);
+
+    const formData = new FormData();
+    formData.append('rUserId',          String(sessionStorage.getItem('employeeNumber')));
+    formData.append('rUserName',        String(sessionStorage.getItem('username')));
+    formData.append('rEmployeeType',    this.bodyRequest.get('rEmployeeType')?.value);
+    formData.append('rEmployeeLeader',  String(sessionStorage.getItem('supervisorNumber')));
+    formData.append('QuestionId',       this.bodyRequest.get('QuestionId')?.value);
+    formData.append('AreaId',           this.bodyRequest.get('AreaId')?.value);
+    formData.append('ThemeId',          this.bodyRequest.get('ThemeId')?.value);
+    formData.append('LocationId',       String(this.location));
+    formData.append('rIssue',           this.bodyRequest.get('rIssue')?.value);
+    formData.append('rAttachement',     this.file);
+
 
     // Registro de la peticion en la base de datos
-    this._requestService.addNewRequest(req).subscribe(
+    this._requestService.addNewRequest(formData).subscribe(
       (data) => {
         console.log(data);
         this.bodyRequest.reset();
@@ -148,6 +162,18 @@ export class PanelusuarioComponent implements OnInit {
       }
     );
   }
+
+  // Upload selected file
+  private file: any;
+
+  onFileSelected = (event: any) => {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.file = file;
+      console.log(file + 'asamclskmx');
+    }
+  };
 
   // Llamada el método de cerrar sesion
   logout(): void {
