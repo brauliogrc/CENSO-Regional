@@ -9,7 +9,7 @@ import { AuthService } from '../services/Auth/auth.service';
   styleUrls: ['./paneladmin.component.css'],
 })
 export class PaneladminComponent implements OnInit {
-  constructor(private router: Router, private _authService: AuthService) {}
+  constructor(private router: Router, private _authService: AuthService) { }
 
   private user: saveDataLogin = {
     uId: 0,
@@ -42,6 +42,9 @@ export class PaneladminComponent implements OnInit {
   }
   navegarPreguntas() {
     this.router.navigate(['paneladmin/preguntas']);
+  }
+  navegarReportes() {
+    this.router.navigate(['paneladmin/Reportes']);
   }
 
   getName() {

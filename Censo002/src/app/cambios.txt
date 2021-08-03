@@ -169,3 +169,15 @@ version 3.6.4 beta
 
 ~Braulio~
 ======================================================================================================================
+
+fecha actualizacion: 02/08/2021
+
+version 3.6.5 beta
+    -Se agrego tabla de areas
+    -Usuarios se agrego boton y nuevo modal
+    -preguntas se agrego boton con nuevo modal
+    -se implemento reportes en el menu y como componente
+
+~Alexis~
+======================================================================================================================
+

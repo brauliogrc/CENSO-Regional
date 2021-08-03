@@ -15,6 +15,7 @@ import { PanelusuarioComponent } from './panelusuario/panelusuario.component';
 import { PanelusuariobusqComponent } from './panelusuariobusq/panelusuariobusq.component';
 import { FolioanonimoindexComponent } from './folioanonimoindex/folioanonimoindex.component';
 import { BienvenidoComponent } from './bienvenido/bienvenido.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },                           // uncionalidad de registro de folio y busquesa de folio anonimo (Flata estilo de la tabla)
@@ -39,6 +40,7 @@ const routes: Routes = [
       { path: 'areas', component: AreasComponent },
       { path: 'preguntas', component: PreguntasComponent },
       { path: 'tikets', component: TiketsComponent },
+      { path: 'reportes', component: ReportesComponent },
       { path: '**', pathMatch: 'full', redirectTo: 'bienvenido' },
 
     ]

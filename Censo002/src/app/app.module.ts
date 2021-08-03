@@ -25,6 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import { BienvenidoComponent } from './bienvenido/bienvenido.component';
 import { RespuestaFolioComponent } from './respuesta-folio/respuesta-folio.component';
+import { ReportesComponent } from './reportes/reportes.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { RespuestaFolioComponent } from './respuesta-folio/respuesta-folio.compo
     PanelusuariobusqComponent,
     PaneladminComponent,
     BienvenidoComponent,
-    RespuestaFolioComponent
+    RespuestaFolioComponent,
+    ReportesComponent
   ],
   imports: [
     BrowserModule,

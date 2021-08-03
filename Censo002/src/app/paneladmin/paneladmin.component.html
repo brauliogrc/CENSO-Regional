@@ -2,8 +2,10 @@
 
   <header class="headerDash">
     <img src="../../assets/img/LogoConti.png" alt="" class="imgLogoDash">
-    <h1 class="h1CensoB">CENSO Panel</h1>
-    <div>
+    <div class="h1CensoBsep">
+      <h1 class="h1CensoB">CENSO Panel</h1>
+    </div>
+    <div class="cerrarSesion">
       <button (click)="logout()" class="btnIndexC" type="submit">Cerrar Sesion</button>
     </div>
   </header>
@@ -45,6 +47,10 @@
           <li><button id="_6" type="submit" (click)="navegarPreguntas()" onclick="noMostrar()" class="btnDash"><img
                 class="imgMenu" src="../../assets/img/pregunta.png" alt="" width="15px">
               <div class="textNavbar">Preguntas</div>
+            </button></li>
+          <li><button id="_6" type="submit" (click)="navegarReportes()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="../../assets/img/ticket.png" alt="" width="15px">
+              <div class="textNavbar">Reportes</div>
             </button></li>
         </ul>
       </div>
