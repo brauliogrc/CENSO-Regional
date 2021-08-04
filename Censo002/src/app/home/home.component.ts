@@ -11,6 +11,7 @@ import {
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { AddAnonRequestService } from '../services/newServices/AnonRequest/add-anon-request.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
+import { statusCode } from '../../assets/ts/SweetAlert';
 
 @Component({
   selector: 'app-home',
@@ -105,7 +106,8 @@ export class HomeComponent implements OnInit {
         this.Questions = [...data];
       },
       (error) => {
-        console.error(error.error.message);
+        console.error(Number(error.status), 'error code');
+        statusCode(Number(error.status), error.error.message);
       }
     );
   }
@@ -139,13 +141,16 @@ export class HomeComponent implements OnInit {
     // };
 
     const formData = new FormData();
-    formData.append('arEmployeeType', this.bodyRequest.get('arEmployeeType')?.value);
-    formData.append('QuestionId',     this.bodyRequest.get('QuestionId')?.value);
-    formData.append('AreaId',         this.bodyRequest.get('AreaId')?.value);
-    formData.append('ThemeId',        this.bodyRequest.get('ThemeId')?.value);
-    formData.append('LocationId',     this.bodyRequest.get('LocationId')?.value);
-    formData.append('arIssue',        this.bodyRequest.get('arIssue')?.value);
-    formData.append('arAttachement',  this.file);
+    formData.append(
+      'arEmployeeType',
+      this.bodyRequest.get('arEmployeeType')?.value
+    );
+    formData.append('QuestionId', this.bodyRequest.get('QuestionId')?.value);
+    formData.append('AreaId', this.bodyRequest.get('AreaId')?.value);
+    formData.append('ThemeId', this.bodyRequest.get('ThemeId')?.value);
+    formData.append('LocationId', this.bodyRequest.get('LocationId')?.value);
+    formData.append('arIssue', this.bodyRequest.get('arIssue')?.value);
+    formData.append('arAttachement', this.file);
 
     // Registro de la peticion anonima en la base de datos
     this._anonRequestService.addNewAnonRequest(formData).subscribe(
@@ -168,7 +173,7 @@ export class HomeComponent implements OnInit {
 
     if (file) {
       this.file = file;
-      
+
       console.log(file);
     }
   };

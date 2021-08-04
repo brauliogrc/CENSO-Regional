@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CENSO.Models;
+using CensoAPI02.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -17,21 +20,55 @@ namespace CensoAPI02.Intserfaces
         private static string pass = "Cuchao101710";
         private static string displayName = "CENSO Test";
 
+        // Obtencion del nombre del tema que se encuentra relacionado con el ticket
+        public string getThemeName(CDBContext _context, int themeId)
+        {
+            var ticketTheme = from theme in _context.Theme
+                           where theme.tId == themeId
+                           select new { theme.tName };
+
+            if (ticketTheme == null || ticketTheme.Count() == 0)
+            {
+                return null;
+            }
+
+            return ticketTheme.First().tName.ToString();
+        }
+
+        // Obtencion del correo de los usuarios relacionados al tema
+        public List<string> getUserEmails(CDBContext _context, int themeId)
+        {
+            var mails = from user in _context.HRU
+                         join ut in _context.HRUsersThemes on user.uEmployeeNumber equals ut.UserId
+                         join theme in _context.Theme on ut.ThemeId equals theme.tId
+                         where user.uStatus == true && theme.tId == themeId
+                         select new { user.uEmail };
+
+            if (mails == null || mails.Count() == 0)
+            {
+                return null;
+            }
+
+            List<string> emails = new List<string>();
+
+            foreach (var mail in mails)
+            {
+                emails.Add(mail.uEmail);
+            }
+
+            return emails;
+        }
+
         // Envio del correo
-        public void sendMails(List<string> userEmails, EmailInformation emailContent)
+        public void sendMails(MailData mailData)
         {
             try
             {
-                List<string> emails = new List<string>();
-                emails.Add("dbhs6798@gmail.com");
-                emails.Add("brauliogrc95@gmail.com");
-                emails.Add("bruno100012@outlook.com");
-
-                foreach (string email in userEmails)
+                foreach (string email in mailData.emails)
                 {
                     MailMessage mailMessage = new MailMessage(emailOrigen, email);
                     mailMessage.Subject = "CENSO RH";
-                    mailMessage.Body = $"<p>Sea ha generado una nueva solicitud relacionada al tema {emailContent.themeId}, con numero de folio xxxx </p>";
+                    mailMessage.Body = $"<p>Sea ha generado una nueva solicitud relacionada al tema {mailData.themeName}, con numero de folio {mailData.ticketId} </p>";
                     mailMessage.IsBodyHtml = true;
 
                     SmtpClient smtp = new SmtpClient("smtp.gmail.com");
@@ -42,7 +79,6 @@ namespace CensoAPI02.Intserfaces
                     smtp.Send(mailMessage);
                     smtp.Dispose();
                 }
-
 
             }
             catch (Exception ex)

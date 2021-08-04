@@ -1,113 +1,112 @@
-<!-- copia de respaldo en caso de que algo salga mal con el git -->
 <div class="contenido1">
-    <div class="buscar">
-    <h1>Usuarios</h1>
-    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Añadir Usuario</button>
-  </div>
-  <hr>
-
-  <div id="contenido">
-  <!-- Inicio del Form -->
-  <form [formGroup]="newUser" (ngSubmit)="addNewUser()" class="row g-3">
-    
-    <h1>Añadir Usuario</h1>
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Numero de empleado</label>
-      <input #employeeNumber (keypress)="eventHandler($event, employeeNumber.value)" formControlName="EmployeeNumber" type="number" class="form-control" id="inputEmail4">
-    </div>
-      <!-- Name -->
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Nombre</label>
-      <input  formControlName="uName" type="text" class="form-control" id="inputEmail4" value="{{getUserName()}}">
-    </div>
-    <!-- Email -->
-    <div class="col-md-6">
-      <label for="inputEmail4" class="form-label">Email</label>
-      <input  formControlName="uEmail" type="email" class="form-control" id="inputEmail4" value="{{getEmail()}}">
-    </div>
-    <!-- Rol -->
-    <div class="col-md-6">
-      <label for="inputState" class="form-label">Rol</label>
-      <select formControlName="RolId" id="inputState" class="form-select">
-        <option *ngFor="let rol of Roles" value="{{rol.rolId}}">{{rol.rolName}}</option>
-      </select>
-    </div>
-    <!-- Estatus -->
-    <div class="col-md-4">
-      <label for="inputState" class="form-label">Estatus</label>
-      <select formControlName="uStatus" id="inputState" class="form-select">
-        <option value=true >Activo</option>
-        <option value=false >Inactivo</option>
-      </select>
-    </div>
-    <!-- Location -->
-    <div class="col-md-4">
-      <label for="inputState" class="form-label">Localidad</label>
-      <input disabled type="text" class="form-control" id="inputEmail4" value="{{getLocation()}}">
-      <!-- <select formControlName="LocationId" id="inputState" class="form-select">
-        <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
-      </select> -->
-    </div>
-    <!-- Bonton registro -->
-    <div class="col-12">
-      <button *ngIf="flag" class="btnIndexC" type="submit">Añadir</button>
-    </div>
-    <!-- Fin del Form -->
-  </form>
-
-  <hr>
+  <div class="buscar">
+  <h1>Usuarios</h1>
+  <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Añadir Usuario</button>
 </div>
-      <form class="form-search">
-        <input #employeeNumber class="Search1" type="number" placeholder="Buscar" aria-label="Search">
-        <button (click)="search(employeeNumber.value)" class="btnIndexC" type="submit">Buscar</button>
-      </form>
-      <hr>
-      <table class="table table-dark table-sm">
-          <thead>
-              <tr>
-                  <th>ID</th>
-                  <th>Numero de empleado</th>
-                  <th>Nombre</th>
-                  <th>Email</th>
-                  <th>Rol</th>
-                  <th>Estatus</th>
-                  <th>Ubicación</th>
-                  <th>Acciones</th>
-              </tr>
-          </thead>
-          <tbody>
+<hr>
 
-            <ng-container *ngIf="!user; else elseTemplate">
-              <tr *ngFor="let user of Users">
-                <td>{{ user.uId }}</td>
-                <td>{{ user.uEmployeeNumber}}</td>
-                <td>{{ user.uName }}</td>
-                <td>{{ user.uEmail }}</td>
-                <td>{{ user.rolName }}</td>
-                <td>{{ user.uStatus }}</td>
-                <td>{{ user.lName }}</td>
-                  <td>
-                      <button (click)="deleteUser(user.uId)" class="btn btn-danger">Eliminar</button>
-                  </td>
-              </tr>
-            </ng-container>
-            <ng-template #elseTemplate>
-              <tr>
-                <td>{{ user[0].uId }}</td>
-                <td>{{ user[0].uEmployeeNumber}}</td>
-                <td>{{ user[0].uName }}</td>
-                <td>{{ user[0].uEmail }}</td>
-                <td>{{ user[0].rolName }}</td>
-                <td>{{ user[0].uStatus }}</td>
-                <td>{{ user[0].lName }}</td>
+<div id="contenido">
+<!-- Inicio del Form -->
+<form [formGroup]="newUser" (ngSubmit)="addNewUser()" class="row g-3">
+  
+  <h1>Añadir Usuario</h1>
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Numero de empleado</label>
+    <input #employeeNumber (keypress)="eventHandler($event, employeeNumber.value)" formControlName="EmployeeNumber" type="number" class="form-control" id="inputEmail4">
+  </div>
+    <!-- Name -->
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Nombre</label>
+    <input  formControlName="uName" type="text" class="form-control" id="inputEmail4" value="{{getUserName()}}">
+  </div>
+  <!-- Email -->
+  <div class="col-md-6">
+    <label for="inputEmail4" class="form-label">Email</label>
+    <input  formControlName="uEmail" type="email" class="form-control" id="inputEmail4" value="{{getEmail()}}">
+  </div>
+  <!-- Rol -->
+  <div class="col-md-6">
+    <label for="inputState" class="form-label">Rol</label>
+    <select formControlName="RolId" id="inputState" class="form-select">
+      <option *ngFor="let rol of Roles" value="{{rol.rolId}}">{{rol.rolName}}</option>
+    </select>
+  </div>
+  <!-- Estatus -->
+  <div class="col-md-4">
+    <label for="inputState" class="form-label">Estatus</label>
+    <select formControlName="uStatus" id="inputState" class="form-select">
+      <option value=true >Activo</option>
+      <option value=false >Inactivo</option>
+    </select>
+  </div>
+  <!-- Location -->
+  <div class="col-md-4">
+    <label for="inputState" class="form-label">Localidad</label>
+    <input disabled type="text" class="form-control" id="inputEmail4" value="{{getLocation()}}">
+    <!-- <select formControlName="LocationId" id="inputState" class="form-select">
+      <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
+    </select> -->
+  </div>
+  <!-- Bonton registro -->
+  <div class="col-12">
+    <button *ngIf="flag" class="btnIndexC" type="submit">Añadir</button>
+  </div>
+  <!-- Fin del Form -->
+</form>
+
+<hr>
+</div>
+    <form class="form-search">
+      <input #employeeNumber class="Search1" type="number" placeholder="Buscar" aria-label="Search">
+      <button (click)="search(employeeNumber.value)" class="btnIndexC" type="submit">Buscar</button>
+    </form>
+    <hr>
+    <table class="table table-dark table-sm">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Numero de empleado</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th>Estatus</th>
+                <th>Ubicación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+
+          <ng-container *ngIf="!user; else elseTemplate">
+            <tr *ngFor="let user of Users">
+              <td>{{ user.uId }}</td>
+              <td>{{ user.uEmployeeNumber}}</td>
+              <td>{{ user.uName }}</td>
+              <td>{{ user.uEmail }}</td>
+              <td>{{ user.rolName }}</td>
+              <td>{{ user.uStatus }}</td>
+              <td>{{ user.lName }}</td>
                 <td>
-                    <button (click)="deleteUser(user[0].uId)" class="btn btn-danger">Eliminar</button>
+                    <button (click)="deleteUser(user.uId)" class="btn btn-danger">Eliminar</button>
                 </td>
-              </tr>
-            </ng-template>
-          </tbody>
-      </table>
-  
-  
-  
+            </tr>
+          </ng-container>
+          <ng-template #elseTemplate>
+            <tr>
+              <td>{{ user[0].uId }}</td>
+              <td>{{ user[0].uEmployeeNumber}}</td>
+              <td>{{ user[0].uName }}</td>
+              <td>{{ user[0].uEmail }}</td>
+              <td>{{ user[0].rolName }}</td>
+              <td>{{ user[0].uStatus }}</td>
+              <td>{{ user[0].lName }}</td>
+              <td>
+                  <button (click)="deleteUser(user[0].uId)" class="btn btn-danger">Eliminar</button>
+              </td>
+            </tr>
+          </ng-template>
+        </tbody>
+    </table>
+
+
+
 </div>

@@ -169,7 +169,26 @@ version 3.6.4 beta
 
 
 ~Braulio~
+======================================================================================================================
 
-por añadir
-    envio de coreos, registro de imagenes
+fecha actualizacion: 02/08/2021
+
+version 3.6.5 beta
+    -Se agrego tabla de areas
+    -Usuarios se agrego boton y nuevo modal
+    -preguntas se agrego boton con nuevo modal
+    -se implemento reportes en el menu y como componente
+
+~Alexis~
+======================================================================================================================
+
+fecha actualizacion: 04/08/2021
+
+version 3.6.6
+    -Guardado de archivos en las peticiones de los componetes home y panel usuarios
+    -Manejador de envio de correos electronicos
+    -Aligeramiento de los metodos de registro de peticiones
+
+
+~Braulio~
 ======================================================================================================================

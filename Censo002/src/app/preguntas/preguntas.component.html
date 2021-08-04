@@ -43,13 +43,60 @@
         <button [disabled]="newQuestion.invalid" class="btnIndexC" type="submit">Añadir</button>
       </div>
     </form>
+    <div class="contentañadirTem">
+      <button id="open" class="btnIndexC" type="submit">Añadir temas</button>
+    </div>
+    <!--Para el modal-->
+    <div class="ModalContenido" id="ModalContenido">
+      <div class="ModalContenido1">
+        <h2>Agrega los temas de tu pregunta</h2>
+        <h3>Nombre pregunta</h3>
+        <div class="ModuloAgregar0">
+          <div class="moduloAgregar">
+            <div class="moduloAgregar1">
+              <h2>Agregar un topico</h2>
+              <button class="btnPregunta" type="submit">+</button>
+            </div>
+
+            <label for="inputState" class="form-label">Topico</label>
+            <select id="inputState" class="form-select">
+              <option>Topico 1</option>
+              <option>Topico 1</option>
+            </select>
+
+          </div>
+        </div>
+        <div class="tablaagregar">
+          <table class="table table-success table-striped">
+            <thead>
+              <tr>
+                <th>Topico agregado</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>topico 1</td>
+                <td><button class="btn btn-danger">Eliminar</button></td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <button class="btnIndexC">Añadir</button>
+        <button id="close" class="btn btn-danger">Cerrar</button>
+      </div>
+
+    </div>
+    <!--Para el modal-->
     <!-- Fin Form -->
-    <hr>
+    <hr id="modalagregar">
     <form class="form-search">
       <input #idQuestion class="Search1" type="number" placeholder="Buscar" aria-label="Search">
       <button (click)="search(idQuestion.value)" class="btnIndexC" type="submit">Buscar</button>
     </form>
-    <hr>
+    <hr id="modalagregar1">
   </div>
   <table class="table table-dark table-sm">
     <thead>

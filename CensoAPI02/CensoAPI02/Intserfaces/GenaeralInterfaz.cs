@@ -158,31 +158,23 @@ namespace CensoAPI02.Intserfaces
     }
 
     // Interfaz de informacion para el envio de Emails
-    public class EmailInformation
+    public class MailData
     {
+        public MailData(int ticketId, int themeId, string issue)
+        {
+            this.ticketId = ticketId;
+            this.themeId = themeId;
+            this.Issue = issue;
+        }
+
         public int themeId { get; set; }
 
         public string themeName { get; set; }
-
-        public int locationId { get; set; }
-
-        public string locationName { get; set; }
 
         public int ticketId { get; set; }
 
         public string Issue { get; set; }
 
-        // setters
-        public void setThemeId(int thmeId)
-        {
-            this.themeId = themeId;
-        }
-
-        public void setThemeName(string themeName)
-        {
-            this.themeName = themeName;
-        }
-
-
+        public List<string> emails { get; set; }
     }
 }

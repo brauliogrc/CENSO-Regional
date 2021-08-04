@@ -6,7 +6,7 @@
     </button>
   </div>
 
-  <hr />
+<hr>
 
   <div id="contenido">
     <!-- Inicio Form -->
@@ -87,6 +87,7 @@
     <tbody>
       <ng-container *ngIf="!th; else elseTemplate">
         <tr *ngFor="let th of Theme">
+
           <td>{{ th.tId }}</td>
           <td>{{ th.tName }}</td>
           <td>{{ th.lName }}</td>

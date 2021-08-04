@@ -18,6 +18,7 @@ namespace CensoAPI02.Controllers.NewControllers
     public class AnonRequestController : ControllerBase
     {
         private readonly CDBContext _context;
+        private EmailHandler handler = new EmailHandler();
 
         public AnonRequestController(CDBContext context)
         {
@@ -46,12 +47,6 @@ namespace CensoAPI02.Controllers.NewControllers
                     arModificationUser = null,
                     arModificationDate = null
                 };
-
-                // Agregando los datos a la interface del correo
-                EmailInformation emailInformation = new EmailInformation();
-                emailInformation.themeId = newAnonRequest.ThemeId;
-                emailInformation.locationId = newAnonRequest.LocationId;
-                emailInformation.Issue = newAnonRequest.arIssue;
 
                 // Registro de la nueva peticion anonima en la tabla AnonRequest
                 _context.AnonRequests.Add(addAnonRequest);
@@ -92,24 +87,12 @@ namespace CensoAPI02.Controllers.NewControllers
                     addAnonRequest.arAttachement = null;
                 }
 
-                // Envio de correos
-                List<string> emails = new List<string>();
 
-                var email = from user in _context.HRU
-                            join ut in _context.HRUsersThemes on user.uEmployeeNumber equals ut.UserId
-                            join theme in _context.Theme on ut.ThemeId equals theme.tId
-                            where user.uStatus == true && theme.tId == newAnonRequest.ThemeId
-                            select new { user.uEmail };
-
-                foreach (var item in email)
-                {
-                    emails.Add(item.uEmail);
-                }
-
-                EmailHandler emailHandler = new EmailHandler();
-                emailHandler.sendMails(emails, emailInformation);
-                emailHandler = null;
-
+                // Envio de correo electronico
+                MailData mailData = new MailData(addAnonRequest.arId, addAnonRequest.ThemeId, addAnonRequest.arIssue);
+                mailData.themeName = handler.getThemeName(_context, mailData.themeId);
+                mailData.emails = handler.getUserEmails(_context, mailData.themeId);
+                handler.sendMails(mailData);
 
                 return Ok(new { addAnonRequest, message = $"Peticion {addAnonRequest.arId} registrada con exito" });
             }catch(Exception ex)

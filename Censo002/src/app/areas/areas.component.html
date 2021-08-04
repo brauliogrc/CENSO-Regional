@@ -1,40 +1,65 @@
-<style>
-
-
-</style>
-
-<div class="body2">
-
-<div class="container"> 
-    <div class="card">
-        <div class="car-header">
-            <h3>Areas</h3>
-        </div>
-        <div class="card-body">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Location</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let area of areas" class="text-center">
-                        <td>{{area.aId}}</td>
-                        <td>{{area.aName}}</td>
-                        <td>{{area.lName}}</td>
-                        <td>
-                            <button class="btn btn-warning">Edit</button>
-                            <button class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<div class="contenido1">
+    <div class="buscar">
+        <h1>Áreas</h1>
+        <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Agregar Área</button>
     </div>
 
-</div>
+    <hr>
+    <div id="contenido">
+        <form action="">
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Nombre Área</label>
+                <input type="email" class="form-control" id="inputEmail4">
+            </div>
+            <div class="col-md-6">
+                <label for="inputState" class="form-label">Ubicación</label>
+                <select id="inputState" class="form-select">
+                    <option selected>Tijera</option>
+                    <option>tijera</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="inputState" class="form-label">Estatus</label>
+                <select id="inputState" class="form-select">
+                    <option selected>Activo</option>
+                    <option>Inactivo</option>
+                </select>
+            </div>
+
+
+            <div class="contentañadirTem">
+                <button class="btnIndexC" type="submit">Añadir</button>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <form class="form-search">
+        <input class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">
+        <button class="btnIndexC" type="submit">Buscar</button>
+    </form>
+    <hr>
+    <table class="table table-dark table-sm">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tema</th>
+                <th>Estatus</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <!-- <td>{{area.aId}}</td>
+                <td>{{area.aName}}</td>
+                <td>{{area.lName}}</td> -->
+                <td></td>
+                <td>
+                    <button class="btn btn-danger">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 </div>

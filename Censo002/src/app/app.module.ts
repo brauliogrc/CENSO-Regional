@@ -1,5 +1,5 @@
-import { NgModule }       from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { BienvenidoComponent } from './bienvenido/bienvenido.component';
 import { RespuestaFolioComponent } from './respuesta-folio/respuesta-folio.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
-
+import { ReportesComponent } from './reportes/reportes.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,8 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     PanelusuariobusqComponent,
     PaneladminComponent,
     BienvenidoComponent,
-    RespuestaFolioComponent
+    RespuestaFolioComponent,
+    ReportesComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,9 +57,9 @@ import { NgxFileDropModule } from 'ngx-file-drop';
     NoopAnimationsModule,
     MatSelectModule,
     FormsModule,
-    NgxFileDropModule
+    NgxFileDropModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

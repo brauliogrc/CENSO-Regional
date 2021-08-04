@@ -17,6 +17,7 @@ namespace CensoAPI02.Controllers.NewControllers
     public class RequestController : ControllerBase
     {
         private readonly CDBContext _context;
+        private EmailHandler handler = new EmailHandler();
 
         public  RequestController(CDBContext context)
         {
@@ -89,6 +90,12 @@ namespace CensoAPI02.Controllers.NewControllers
                 {
                     addRequest.rAttachement = null;
                 }
+
+                // Envio de correo electronico
+                MailData mailData = new MailData(addRequest.rId, addRequest.ThemeId, addRequest.rIssue);
+                mailData.themeName = handler.getThemeName(_context, mailData.themeId);
+                mailData.emails = handler.getUserEmails(_context, mailData.themeId);
+                handler.sendMails(mailData);
 
                 return Ok(new { addRequest.rId, message = $"Peticion {addRequest.rId}, registrada con exito" });
             }catch(Exception ex)
