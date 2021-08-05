@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { areaList } from '../../../interfaces/newInterfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -47,8 +48,8 @@ export class ListService {
   }
 
   // Obtencion del listado de areas en una localidad
-  getAreaList(locationId: number): Observable<any> {
-    return this._http.get(
+  getAreaList(locationId: number): Observable<areaList[]> {
+    return this._http.get<areaList[]>(
       `${environment.API_URL}` + this.MyApiUrl + 'areaList/' + locationId
     );
   }

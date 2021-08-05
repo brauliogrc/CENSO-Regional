@@ -100,6 +100,16 @@ export interface questionList {
   tName: string;
 }
 
+export interface areaList {
+  // Datos del area
+  aId: number;
+  aName: string;
+  aStatus: boolean;
+  // Datos de la localiad
+  lId: number;
+  lName: string;
+}
+
 export interface ticketList {
   // Datos del ticket
   rId: number;
@@ -171,6 +181,12 @@ export interface addQuestion {
   qCreationUser: number;
   qStatus: boolean;
   ThemeId: number;
+}
+
+export interface addArea {
+  aName: number;
+  aStatus: boolean;
+  LocationId: number;
 }
 
 export interface addAnswer {

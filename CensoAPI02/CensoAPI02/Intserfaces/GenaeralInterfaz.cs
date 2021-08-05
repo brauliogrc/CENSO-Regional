@@ -122,6 +122,8 @@ namespace CensoAPI02.Intserfaces
     {
         public string aName { get; set; }
 
+        public bool aStatus { get; set; }
+
         public int LocationId { get; set; }
     }
 
@@ -169,12 +171,12 @@ namespace CensoAPI02.Intserfaces
 
         public int themeId { get; set; }
 
-        public string themeName { get; set; }
+        public string? themeName { get; set; }
 
         public int ticketId { get; set; }
 
         public string Issue { get; set; }
 
-        public List<string> emails { get; set; }
+        public List<string>? emails { get; set; }
     }
 }

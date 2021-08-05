@@ -237,5 +237,40 @@ namespace CensoAPI02.Controllers.SearchesControllers
                 return BadRequest(new { message = $"Ha ocuttido un error al obtener el ticket. Error: {ex.Message}" });
             }
         }
+
+        // Busqueda de un area especifica en la localidad (requiere policy SUHR)
+        [HttpGet][Route("areaSearch/{locationId}/{itemId}")][AllowAnonymous]
+        public async Task<ActionResult> areaSearch(int locationId, int itemId)
+        {
+            try
+            {
+                var query = from area in _context.Areas
+                            join al in _context.AreasLocations on area.aId equals al.AreaId
+                            join location in _context.Locations on al.LocationId equals location.lId
+                            // where area.aStatus == true && area.aId == itemId && location.lId == locationId
+                            where area.aId == itemId && location.lId == locationId
+                            select new
+                            {
+                                // Datos del area
+                                area.aId,
+                                area.aName,
+                                area.aStatus,
+                                // Datos de la localiad
+                                location.lId,
+                                location.lName
+                            };
+
+                if (query == null || query.Count() == 0)
+                {
+                    return NotFound(new { message = $"El area no se encuentra en la localidad" });
+                }
+
+                return Ok(query);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocuttido un error al obtener el area. Error: {ex.Message}" });
+            }
+        }
     }
 }

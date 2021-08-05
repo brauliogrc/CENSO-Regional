@@ -92,6 +92,12 @@ namespace CensoAPI02.Controllers.NewControllers
                 MailData mailData = new MailData(addAnonRequest.arId, addAnonRequest.ThemeId, addAnonRequest.arIssue);
                 mailData.themeName = handler.getThemeName(_context, mailData.themeId);
                 mailData.emails = handler.getUserEmails(_context, mailData.themeId);
+
+                if (mailData.themeName == null || mailData.emails == null)
+                {
+                    return Ok(new { addAnonRequest, message = $"La peticion ha sido registrada, pero ha ocurrido un error al enviar correo de notificacion a RH. Favor de ponerse en contacto con soporte" });
+                }
+
                 handler.sendMails(mailData);
 
                 return Ok(new { addAnonRequest, message = $"Peticion {addAnonRequest.arId} registrada con exito" });

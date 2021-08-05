@@ -1,6 +1,11 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { addAnonRequest } from 'src/app/interfaces/newInterfaces';
 import { environment } from 'src/environments/environment';
 
@@ -20,10 +25,17 @@ export class AddAnonRequestService {
 
   // Registro de la pticion en la tabla AnonRequest
   addNewAnonRequest(newAnonRequest: any): Observable<any> {
-    return this._http.post(
-      `${environment.API_URL}` + this.MyApiUrl + 'newAnonRequest',
-      newAnonRequest
-    );
+    return this._http
+      .post(
+        `${environment.API_URL}` + this.MyApiUrl + 'newAnonRequest',
+        newAnonRequest
+      )
+      .pipe(
+        catchError((err: any) => {
+          console.warn(err);
+          return throwError(err);
+        })
+      );
   }
 
   // Eliminacion de la peticion de la tabla AnonRequest

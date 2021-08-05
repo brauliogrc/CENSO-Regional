@@ -11,7 +11,8 @@ import {
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { AddAnonRequestService } from '../services/newServices/AnonRequest/add-anon-request.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
-import { statusCode } from '../../assets/ts/SweetAlert';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -53,6 +54,7 @@ export class HomeComponent implements OnInit {
     private _fields: FieldsService,
     private _ticketService: TicketService,
     private _anonRequestService: AddAnonRequestService,
+    private _showError: ShowErrorService,
     private router: Router
   ) {}
 
@@ -67,8 +69,9 @@ export class HomeComponent implements OnInit {
         this.Locations = [...data];
         console.log(this.Locations);
       },
-      (error) => {
-        console.error(error.error.message);
+      (error: HttpErrorResponse) => {
+        console.error(error);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -92,8 +95,9 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.Theme = [...data];
       },
-      (error) => {
-        console.error(error.error.message);
+      (error: HttpErrorResponse) => {
+        console.error(error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -105,9 +109,9 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.Questions = [...data];
       },
-      (error) => {
-        console.error(Number(error.status), 'error code');
-        statusCode(Number(error.status), error.error.message);
+      (error: HttpErrorResponse) => {
+        console.error(error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -119,8 +123,9 @@ export class HomeComponent implements OnInit {
       (data) => {
         this.Areas = [...data];
       },
-      (error) => {
-        console.error(error.error.message);
+      (error: HttpErrorResponse) => {
+        console.error(error);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -159,8 +164,9 @@ export class HomeComponent implements OnInit {
         this.bodyRequest.reset();
         let fileName = data[0];
       },
-      (error) => {
-        console.error(error.error.message);
+      (error: HttpErrorResponse) => {
+        console.error(error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -198,8 +204,9 @@ export class HomeComponent implements OnInit {
           console.log(data.message);
         }
       },
-      (error) => {
-        console.error(error.error.message);
+      (error: HttpErrorResponse) => {
+        console.error(error.message);
+        this._showError.statusCode(error);
       }
     );
   }

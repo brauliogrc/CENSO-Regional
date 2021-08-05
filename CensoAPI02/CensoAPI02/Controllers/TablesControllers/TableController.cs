@@ -242,11 +242,13 @@ namespace CensoAPI02.Controllers.TablesControllers
                             join al in _context.AreasLocations on area.aId equals al.AreaId
                             join location in _context.Locations on al.LocationId equals location.lId
                             where location.lId == locationId
+                            //where area.aStatus == true && location.lId == locationId
                             select new
                             {
                                 // Datos el area
                                 area.aId,
                                 area.aName,
+                                area.aStatus,
                                 // Datos de la localidad
                                 location.lId,
                                 location.lName

@@ -1,65 +1,86 @@
 <div class="contenido1">
-    <div class="buscar">
-        <h1>Áreas</h1>
-        <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Agregar Área</button>
-    </div>
+  <div class="buscar">
+    <h1>Áreas</h1>
+    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">
+      Agregar Área
+    </button>
+  </div>
 
-    <hr>
-    <div id="contenido">
-        <form action="">
-            <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Nombre Área</label>
-                <input type="email" class="form-control" id="inputEmail4">
-            </div>
-            <div class="col-md-6">
-                <label for="inputState" class="form-label">Ubicación</label>
-                <select id="inputState" class="form-select">
-                    <option selected>Tijera</option>
-                    <option>tijera</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <label for="inputState" class="form-label">Estatus</label>
-                <select id="inputState" class="form-select">
-                    <option selected>Activo</option>
-                    <option>Inactivo</option>
-                </select>
-            </div>
+  <hr />
+  <div id="contenido">
+    <form [formGroup]="newArea" (ngSubmit)="addNewArea()">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Nombre Área</label>
+        <input formControlName="aName" type="email" class="form-control" id="inputEmail4" />
+      </div>
+      <div class="col-md-6">
+        <label for="inputState" class="form-label">Ubicación</label>
+        <select formControlName="LocationId" id="inputState" class="form-select">
+          <option *ngFor="let location of Locations" value="{{ location.lId }}">{{ location.lName }}</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="inputState" class="form-label">Estatus</label>
+        <select formControlName="aStatus" id="inputState" class="form-select">
+          <option value="true">Activo</option>
+          <option value="false">Inactivo</option>
+        </select>
+      </div>
 
-
-            <div class="contentañadirTem">
-                <button class="btnIndexC" type="submit">Añadir</button>
-            </div>
-        </form>
-    </div>
-    <hr>
-
-    <form class="form-search">
-        <input class="Search1" type="Search User" placeholder="Buscar" aria-label="Search">
-        <button class="btnIndexC" type="submit">Buscar</button>
+      <div class="contentañadirTem">
+        <button [disabled]="newArea.invalid" class="btnIndexC" type="submit">Añadir</button>
+      </div>
     </form>
-    <hr>
-    <table class="table table-dark table-sm">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Tema</th>
-                <th>Estatus</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <!-- <td>{{area.aId}}</td>
-                <td>{{area.aName}}</td>
-                <td>{{area.lName}}</td> -->
-                <td></td>
-                <td>
-                    <button class="btn btn-danger">Eliminar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  </div>
+  <hr />
 
+  <form class="form-search">
+    <input #SearchArea
+      class="Search1"
+      type="Search User"
+      placeholder="Buscar"
+      aria-label="Search"
+    />
+    <button class="btnIndexC" type="submit" (click)="searchArea(SearchArea.value)">Buscar</button>
+  </form>
+  <hr />
+  <table class="table table-dark table-sm">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Localidad</th>
+        <th>Estatus</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <ng-container *ngIf="!area; else elseTemplate">
+        <tr *ngFor="let area of Areas">
+          <td>{{ area.aId }}</td>
+          <td>{{ area.aName }}</td>
+          <td>{{ area.lName }}</td>
+          <td>{{ area.aStatus }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteArea(area.aId)">Eliminar</button>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <tr>
+          <td>{{ area[0].aId }}</td>
+          <td>{{ area[0].aName }}</td>
+          <td>{{ area[0].lName }}</td>
+          <td>{{ area[0].aStatus }}</td>
+          <td>
+            <button class="btn btn-danger" (click)="deleteArea(area[0].aId)">Eliminar</button>
+          </td>
+        </tr>
+      </ng-template>
+      
+
+      
+    </tbody>
+  </table>
 </div>

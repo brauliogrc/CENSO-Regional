@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { locationList, questionList } from 'src/app/interfaces/newInterfaces';
 import { environment } from 'src/environments/environment';
+import { areaList } from '../../../interfaces/newInterfaces';
 import {
   searchData,
   userList,
@@ -67,6 +68,18 @@ export class SearchService {
       `${environment.API_URL}` +
         this.MyApiUrl +
         'ticketSearch/' +
+        searchData.locationId +
+        '/' +
+        searchData.itemId
+    );
+  }
+
+  // Busqueda de un area en una localidad
+  searchArea(searchData: searchData): Observable<areaList> {
+    return this._http.get<areaList>(
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'areaSearch/' +
         searchData.locationId +
         '/' +
         searchData.itemId

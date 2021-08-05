@@ -71,7 +71,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
                 if (query == null)
                 {
-                    return NotFound(new { message = $"La preginta {questionId}, no se encuentra en la bse de datos" });
+                    return NotFound(new { message = $"La pregunta {questionId}, no se encuentra en la bse de datos" });
                 }
 
                 // Modificacion del status para la eliminacion logica

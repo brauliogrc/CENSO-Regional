@@ -56,13 +56,12 @@
               <!-- ******** tipo de empleado ********** -->
               <!-- cada campo esta reacionado con una variable en el Component llamada igual que
                         el contenido de formControlName -->
-              <label for="validationCustom04" class="form-label"
+              <label class="form-label"
                 >Tipo de Empleado(a)</label
               >
               <select
                 formControlName="arEmployeeType"
                 class="form-select"
-                id="validationCustom04"
                 required
               >
                 <option value="1">Administrativo</option>
@@ -73,7 +72,7 @@
 
             <!-- Campo de localidad -->
             <div class="md-3">
-              <label for="validationCustom04" class="form-label"
+              <label class="form-label"
                 >Localidad</label
               >
               <select
@@ -81,7 +80,6 @@
                 formControlName="LocationId"
                 (change)="defineLocation(locationId.value)"
                 class="form-select"
-                id="validationCustom04"
                 required
               >
                 <option
@@ -96,13 +94,12 @@
 
             <!--agregue este campo del tema-->
             <div class="md-3">
-              <label for="validationCustom04" class="form-label">Tema</label>
+              <label class="form-label">Tema</label>
               <select
                 #themeId
                 formControlName="ThemeId"
                 (change)="getQuestions(themeId.value)"
                 class="form-select"
-                id="validationCustom04"
                 required
               >
                 <option *ngFor="let th of Theme" value="{{ th.tId }}">
@@ -114,14 +111,13 @@
 
             <div class="md-3">
               <!-- *********** tipo de registro ************ -->
-              <label for="validationCustom04" class="form-label"
+              <label class="form-label"
                 >Pregunta</label
               >
               <!-- Recorremos el arreglo questions para mostrar cada uno de sus elemetnos -->
               <select
                 formControlName="QuestionId"
                 class="form-select"
-                id="validationCustom04"
                 required
               >
                 <option
@@ -136,11 +132,10 @@
 
             <div class="mb-3">
               <!-- ************ nave del trabajador ***************** -->
-              <label for="validationCustom04" class="form-label">Area</label>
+              <label class="form-label">Area</label>
               <select
                 formControlName="AreaId"
                 class="form-select"
-                id="validationCustom04"
                 required
               >
                 <option *ngFor="let area of Areas" value="{{ area.aId }}">
