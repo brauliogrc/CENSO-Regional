@@ -60,56 +60,6 @@
       <input #employeeNumber class="Search1" type="number" placeholder="Buscar" aria-label="Search">
       <button (click)="search(employeeNumber.value)" class="btnIndexC" type="submit">Buscar</button>
     </form>
-<<<<<<< HEAD
-    <div class="contentañadirTem">
-      <button id="open" class="btnIndexC" type="submit">Añadir temas</button>
-    </div>
-    <!--Para el modal-->
-    <div class="ModalContenido" id="ModalContenido">
-      <div class="ModalContenido1">
-        <h2>Agrega los temas de tu pregunta</h2>
-        <h3>Nombre pregunta</h3>
-        <div class="ModuloAgregar0">
-          <div class="moduloAgregar">
-            <div class="moduloAgregar1">
-              <h2>Agregar un topico</h2>
-              <button class="btnPregunta" type="submit">+</button>
-            </div>
-
-            <label for="inputState" class="form-label">Topico</label>
-            <select id="inputState" class="form-select">
-              <option>Topico 1</option>
-              <option>Topico 1</option>
-            </select>
-
-          </div>
-        </div>
-        <div class="tablaagregar">
-          <table class="table table-success table-striped">
-            <thead>
-              <tr>
-                <th>Topico agregado</th>
-                <th>Eliminar</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>topico 1</td>
-                <td><button class="btn btn-danger">Eliminar</button></td>
-
-              </tr>
-
-            </tbody>
-          </table>
-        </div>
-        <button class="btnIndexC">Añadir</button>
-        <button id="close" class="btn btn-danger">Cerrar</button>
-      </div>
-
-    </div>
-    <!--Para el modal-->
-=======
->>>>>>> f141cd6e415b3612c59ab7bd2bf311ade051c2a8
     <hr>
     <table class="table table-dark table-sm">
         <thead>
@@ -126,38 +76,6 @@
         </thead>
         <tbody>
 
-<<<<<<< HEAD
-      <ng-container *ngIf="!user; else elseTemplate">
-        <tr *ngFor="let user of Users">
-          <td>{{ user.uId }}</td>
-          <td>{{ user.uName }}</td>
-          <td>{{ user.uEmail }}</td>
-          <td>{{ user.rolName }}</td>
-          <td>{{ user.uStatus }}</td>
-          <td>{{ user.lName }}</td>
-          <td>
-            <button class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width=22px"></button>
-            <button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width=22px"></button>
-          </td>
-        </tr>
-      </ng-container>
-      <ng-template #elseTemplate>
-        <tr>
-          <td>{{ user.uId }}</td>
-          <td>{{ user.uName }}</td>
-          <td>{{ user.uEmail }}</td>
-          <td>{{ user.rolName }}</td>
-          <td>{{ user.uStatus }}</td>
-          <td>{{ user.lName }}</td>
-          <td>
-            <button class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width=22px"></button>
-            <button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width=22px"></button>
-          </td>
-        </tr>
-      </ng-template>
-    </tbody>
-  </table>
-=======
           <ng-container *ngIf="!user; else elseTemplate">
             <tr *ngFor="let user of Users">
               <td>{{ user.uId }}</td>
@@ -188,7 +106,6 @@
           </ng-template>
         </tbody>
     </table>
->>>>>>> f141cd6e415b3612c59ab7bd2bf311ade051c2a8
 
 
 
