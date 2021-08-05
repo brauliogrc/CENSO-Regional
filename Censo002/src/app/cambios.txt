@@ -196,7 +196,7 @@ version 3.6.6
 fecha actualizacion: 05/08/2021
 
 version 3.6.6 beta
-   
+   -Se agrego en el componente usuario dos botones con imagenes
 
 
 ~Alexis~
