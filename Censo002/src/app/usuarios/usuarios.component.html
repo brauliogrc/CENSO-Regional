@@ -66,6 +66,50 @@
     <div class="contentañadirTem">
       <button id="open" class="btnIndexC" type="submit">Añadir temas</button>
     </div>
+    <!--Para el modal-->
+    <div class="ModalContenido" id="ModalContenido">
+      <div class="ModalContenido1">
+        <h2>Agrega los temas de tu pregunta</h2>
+        <h3>Nombre pregunta</h3>
+        <div class="ModuloAgregar0">
+          <div class="moduloAgregar">
+            <div class="moduloAgregar1">
+              <h2>Agregar un topico</h2>
+              <button class="btnPregunta" type="submit">+</button>
+            </div>
+
+            <label for="inputState" class="form-label">Topico</label>
+            <select id="inputState" class="form-select">
+              <option>Topico 1</option>
+              <option>Topico 1</option>
+            </select>
+
+          </div>
+        </div>
+        <div class="tablaagregar">
+          <table class="table table-success table-striped">
+            <thead>
+              <tr>
+                <th>Topico agregado</th>
+                <th>Eliminar</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>topico 1</td>
+                <td><button class="btn btn-danger">Eliminar</button></td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <button class="btnIndexC">Añadir</button>
+        <button id="close" class="btn btn-danger">Cerrar</button>
+      </div>
+
+    </div>
+    <!--Para el modal-->
     <hr>
   </div>
   <form class="form-search">
@@ -97,7 +141,8 @@
           <td>{{ user.uStatus }}</td>
           <td>{{ user.lName }}</td>
           <td>
-            <button (click)="deleteUser(user.lId)" class="btn btn-danger">Eliminar</button>
+            <button class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width=22px"></button>
+            <button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width=22px"></button>
           </td>
         </tr>
       </ng-container>
@@ -110,7 +155,8 @@
           <td>{{ user.uStatus }}</td>
           <td>{{ user.lName }}</td>
           <td>
-            <button (click)="deleteUser(user.lId)" class="btn btn-danger">Eliminar</button>
+            <button class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width=22px"></button>
+            <button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width=22px"></button>
           </td>
         </tr>
       </ng-template>

@@ -6,13 +6,7 @@
 
   <hr />
   <form class="form-search">
-    <input
-      #tiketId
-      class="Search1"
-      type="number"
-      placeholder="Buscar"
-      aria-label="Search"
-    />
+    <input #tiketId class="Search1" type="number" placeholder="Buscar" aria-label="Search" />
     <button (click)="search(tiketId.value)" class="btnIndexC" type="submit">
       Buscar
     </button>
@@ -70,7 +64,8 @@
           <td></td>
           <td>{{ tiket.aName }}</td>
           <td>
-            <button class="btn btn-danger">Eliminar</button>
+            <button class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width=22px"></button>
+            <button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width=22px"></button>
           </td>
         </tr>
       </ng-template>
