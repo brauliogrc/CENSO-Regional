@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SearchesService } from '../services/searches/searches.service';
 import { Router } from '@angular/router';
 import {
   Location,
@@ -11,6 +10,8 @@ import {
 } from '../interfaces/newInterfaces';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { AddAnonRequestService } from '../services/newServices/AnonRequest/add-anon-request.service';
+import { TicketService } from '../services/newServices/Ticket/ticket.service';
+import { statusCode } from '../../assets/ts/SweetAlert';
 
 @Component({
   selector: 'app-home',
@@ -44,13 +45,14 @@ export class HomeComponent implements OnInit {
     arAttachemen: ['', [Validators.maxLength(200)]],
     LocationId: ['', [Validators.required]],
     ThemeId: ['', [Validators.required]],
+    Terminos: ['', [Validators.required]],
   });
 
   constructor(
     private _fb: FormBuilder,
     private _fields: FieldsService,
+    private _ticketService: TicketService,
     private _anonRequestService: AddAnonRequestService,
-    private _searchFolio: SearchesService,
     private router: Router
   ) {}
 
@@ -85,6 +87,7 @@ export class HomeComponent implements OnInit {
 
   // Obtencion de los temas relacionados a la localidad
   getTheme(): void {
+    this.Theme = [];
     this._fields.getThme(this.location).subscribe(
       (data) => {
         this.Theme = [...data];
@@ -97,18 +100,21 @@ export class HomeComponent implements OnInit {
 
   // Obtencion de las preguntas relacionadas a los temas
   getQuestions(themeId: string): void {
+    this.Questions = [];
     this._fields.getQuestions(Number(themeId)).subscribe(
       (data) => {
         this.Questions = [...data];
       },
       (error) => {
-        console.error(error.error.message);
+        console.error(Number(error.status), 'error code');
+        statusCode(Number(error.status), error.error.message);
       }
     );
   }
 
   // Obtencion de las areas relacionadas a la localidad
   getAreas(): void {
+    this.Areas = [];
     this._fields.getAreas(this.location).subscribe(
       (data) => {
         this.Areas = [...data];
@@ -124,21 +130,34 @@ export class HomeComponent implements OnInit {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
-    const anonReq: addAnonRequest = {
-      arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
-      QuestionId: this.bodyRequest.get('QuestionId')?.value,
-      AreaId: this.bodyRequest.get('AreaId')?.value,
-      ThemeId: this.bodyRequest.get('ThemeId')?.value,
-      LocationId: this.bodyRequest.get('LocationId')?.value,
-      arIssue: this.bodyRequest.get('arIssue')?.value,
-      arAttachemen: this.bodyRequest.get('arAttachemen')?.value,
-    };
-    console.log(anonReq);
+    //  const anonReq: addAnonRequest = {
+    //   arEmployeeType: this.bodyRequest.get('arEmployeeType')?.value,
+    //   QuestionId: this.bodyRequest.get('QuestionId')?.value,
+    //   AreaId: this.bodyRequest.get('AreaId')?.value,
+    //   ThemeId: this.bodyRequest.get('ThemeId')?.value,
+    //   LocationId: this.bodyRequest.get('LocationId')?.value,
+    //   arIssue: this.bodyRequest.get('arIssue')?.value,
+    //   arAttachemen: this.file,
+    // };
+
+    const formData = new FormData();
+    formData.append(
+      'arEmployeeType',
+      this.bodyRequest.get('arEmployeeType')?.value
+    );
+    formData.append('QuestionId', this.bodyRequest.get('QuestionId')?.value);
+    formData.append('AreaId', this.bodyRequest.get('AreaId')?.value);
+    formData.append('ThemeId', this.bodyRequest.get('ThemeId')?.value);
+    formData.append('LocationId', this.bodyRequest.get('LocationId')?.value);
+    formData.append('arIssue', this.bodyRequest.get('arIssue')?.value);
+    formData.append('arAttachement', this.file);
 
     // Registro de la peticion anonima en la base de datos
-    this._anonRequestService.addNewAnonRequest(anonReq).subscribe(
+    this._anonRequestService.addNewAnonRequest(formData).subscribe(
       (data) => {
         console.log(data);
+        this.bodyRequest.reset();
+        let fileName = data[0];
       },
       (error) => {
         console.error(error.error.message);
@@ -146,18 +165,38 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  // Upload selected file
+  private file: any;
+
+  onFileSelected = (event: any) => {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.file = file;
+
+      console.log(file);
+    }
+  };
+
   // ==================================================================================================================================================
 
   // PANEL DE BUSQUEDA
 
   folio: any;
+  responsable: any;
 
   // Busqueda de folio en la base de datos con base en su id
   searchFolio(folioId: any) {
-    this._searchFolio.searchFolioAnon(folioId).subscribe(
+    this._ticketService.getAnonTicketStatus(Number(folioId)).subscribe(
       (data) => {
-        this.folio = data[0];
+        this.folio = data.anonTicket[0];
         console.log(this.folio);
+        if (data.answer) {
+          this.responsable = data.answer;
+          console.log(this.responsable);
+        } else {
+          console.log(data.message);
+        }
       },
       (error) => {
         console.error(error.error.message);

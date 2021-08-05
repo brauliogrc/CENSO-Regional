@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { DataTableService } from '../services/tables/data-table.service';
-import { dataTickets, dataAnonTikets } from '../interfaces/interfaces';
-import { SearchesService } from '../services/searches/searches.service';
 import { AuthService } from '../services/Auth/auth.service';
 import { Router } from '@angular/router';
+import {
+  ticketList,
+  anonTicketList,
+  searchData,
+} from '../interfaces/newInterfaces';
+import { ListService } from '../services/newServices/List/list.service';
+import { SearchService } from '../services/newServices/Search/search.service';
+import { TicketService } from '../services/newServices/Ticket/ticket.service';
 
 @Component({
   selector: 'app-tikets',
@@ -11,14 +16,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./tikets.component.css'],
 })
 export class TiketsComponent implements OnInit {
-  Tikets: dataTickets[] = [];
-  AnonTikets: dataAnonTikets[] = [];
+  Tikets: ticketList[] = [];
+  AnonTikets: anonTicketList[] = [];
 
   tiket: any;
+  anonTicket: any;
+
+  flag: boolean = false;
 
   constructor(
-    private _dataTable: DataTableService,
-    private _searchService: SearchesService,
+    private _listService: ListService,
+    private _searchService: SearchService,
+    private _ticketService: TicketService,
     private _auth: AuthService,
     private router: Router
   ) {}
@@ -39,30 +48,71 @@ export class TiketsComponent implements OnInit {
       console.clear();
       return;
     }
+    this.flag = false;
     this.getTiketsList();
   }
 
   // Obtencion de listado de tikets (tanto anonimos como con datos)
-  getTiketsList() {
-    this._dataTable
-      .tableTickets(Number(sessionStorage.getItem('location')))
+  getTiketsList(): void {
+    this._listService
+      .getTicketList(Number(sessionStorage.getItem('location')))
       .subscribe(
         (data) => {
-          console.log(data);
-          this.Tikets = [...data.tikets];
-          this.AnonTikets = [...data.anonTikets];
+          this.Tikets = [...data.tickets];
+          this.AnonTikets = [...data.anonTickets];
         },
         (error) => {
-          console.error(error);
+          console.error(error.error.message);
         }
       );
   }
 
+  // Borrado logico de un ticket
+  deleteTicket(ticketId: number): void {
+    this._ticketService.deleteTicket(ticketId).subscribe(
+      (data) => {
+        console.log(data.message);
+        this.getTiketsList();
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
+  }
+
   // Busqueda de un tiket mediante su id
-  search(tiketId: any) {}
+  search(ticketId: string) {
+    if (ticketId) {
+      let ticketSearch: searchData = {
+        locationId: Number(sessionStorage.getItem('location')),
+        itemId: Number(ticketId),
+      };
+
+      this._searchService.searchTicket(ticketSearch).subscribe(
+        (data) => {
+          this.flag = true;
+          if (data.rUserName[0] != null) {
+            this.tiket = data;
+            this.anonTicket = null;
+            console.log(this.tiket[0]);
+          } else {
+            this.anonTicket = data;
+            this.tiket = null;
+            console.log(this.anonTicket[0]);
+          }
+          this.Tikets = [];
+          this.AnonTikets = [];
+        },
+        (error) => {
+          console.error(error.error.message);
+        }
+      );
+    }
+  }
 
   // Obtencion de los datos de la tabla al hacer click en una row
-  onClick(requestiId: any) {
-    console.log('Prueba de clik ' + requestiId);
+  ticketResponse(ticketId: number) {
+    this._ticketService.tiket = ticketId;
+    this.router.navigate(['/respuestafolio']);
   }
 }

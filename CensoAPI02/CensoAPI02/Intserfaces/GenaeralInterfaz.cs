@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -35,7 +36,9 @@ namespace CensoAPI02.Intserfaces
 
         public int uCreationUser { get; set; }
 
-        public int LocationId { get; set; }
+        public bool uStatus { get; set; }
+
+        //public int LocationId { get; set; }
     }
 
     // Registrar una nueva Request
@@ -59,7 +62,7 @@ namespace CensoAPI02.Intserfaces
 
         public string rIssue { get; set; }
 
-        public string rAttachement { get; set; }
+        public IFormFile rAttachement { get; set; }
     }
 
     // Registar una nueva AonRequest
@@ -77,7 +80,7 @@ namespace CensoAPI02.Intserfaces
 
         public string arIssue { get; set; }
 
-        public string arAttachemen { get; set; }
+        public IFormFile arAttachement { get; set; }
     }
 
     // Registar una nueva Location
@@ -97,6 +100,8 @@ namespace CensoAPI02.Intserfaces
 
         public int qCreationUser { get; set; }
 
+        public bool qStatus { get; set; }
+
         public int ThemeId { get; set; }
     }
 
@@ -106,6 +111,8 @@ namespace CensoAPI02.Intserfaces
         public string tName { get; set; }
 
         public int tCreationUser { get; set; }
+
+        public bool tStatus { get; set; }
 
         public int LocationId { get; set; }
     }
@@ -126,12 +133,48 @@ namespace CensoAPI02.Intserfaces
         public string asAnswer { get; set; }
 
         public int RequestId { get; set; }
+
+        public IFormFile asAttachement { get; set; }
     }
 
-    public class SearchInterface
+    // Datos necesarios para una busqueda (No implementada)
+    public class SearchInterfcae
     {
         public int locationId { get; set; }
 
         public int itemId { get; set; }
+    }
+
+    // Busqueda inicial del usuario en la base de datos y obtencion de su informacion
+    public class UserInformation
+    {
+        public int employeeNumber { get; set; }
+
+        public string location { get; set; }
+
+        public string name { get; set; }
+
+        public string email { get; set; }
+    }
+
+    // Interfaz de informacion para el envio de Emails
+    public class MailData
+    {
+        public MailData(int ticketId, int themeId, string issue)
+        {
+            this.ticketId = ticketId;
+            this.themeId = themeId;
+            this.Issue = issue;
+        }
+
+        public int themeId { get; set; }
+
+        public string themeName { get; set; }
+
+        public int ticketId { get; set; }
+
+        public string Issue { get; set; }
+
+        public List<string> emails { get; set; }
     }
 }

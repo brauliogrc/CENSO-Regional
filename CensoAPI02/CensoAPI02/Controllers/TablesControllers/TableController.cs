@@ -28,7 +28,7 @@ namespace CensoAPI02.Controllers.TablesControllers
             try
             {
                 var query = await _context.Locations
-                    .Where(l => l.lStatus == true)
+                    //.Where(l => l.lStatus == true)
                     .Select(l => new
                     {
                         // Datos de localidades
@@ -59,15 +59,16 @@ namespace CensoAPI02.Controllers.TablesControllers
             {
                 var query = from user in _context.HRU
                             join location in _context.Locations on user.LocationId equals location.lId
-                            join role in _context.Roles on user.uId equals role.rolId
-                            where user.uStatus == true && location.lId == locationId
+                            join role in _context.Roles on user.RoleId equals role.rolId
+                            where location.lId == locationId //&& user.uStatus == true
                             select new
                             {
                                 // Datos del usuario
-                                user.uId,
+                                //user.uId,
                                 user.uEmployeeNumber,
                                 user.uName,
                                 user.uStatus,
+                                user.uEmail,
                                 // Datos del rol
                                 role.rolId,
                                 role.rolName,
@@ -99,7 +100,7 @@ namespace CensoAPI02.Controllers.TablesControllers
                 var query = from theme in _context.Theme
                             join lt in _context.LocationsThemes on theme.tId equals lt.ThemeId
                             join location in _context.Locations on lt.LocationId equals location.lId
-                            where theme.tStatus == true && location.lId == locationId
+                            where location.lId == locationId //&& theme.tStatus == true
                             select new
                             {
                                 // Datos del tema
@@ -134,7 +135,7 @@ namespace CensoAPI02.Controllers.TablesControllers
                             join theme in _context.Theme on qt.ThemeId equals theme.tId
                             join lt in _context.LocationsThemes on theme.tId equals lt.ThemeId
                             join location in _context.Locations on lt.LocationId equals location.lId
-                            where question.qStatus == true && location.lId == locationId
+                            where location.lId == locationId //&& question.qStatus == true
                             select new
                             {
                                 // Datos de la pregunta
@@ -171,7 +172,7 @@ namespace CensoAPI02.Controllers.TablesControllers
                               join location in _context.Locations on request.LocationId equals location.lId
                               join area in _context.Areas on request.AreaId equals area.aId
                               join status in _context.RequestStatus on request.StatusId equals status.rsId
-                              where request.StatusId != 4 && location.lId == locationId
+                              where location.lId == locationId //&& request.StatusId != 4
                               select new
                               {
                                   // Datos del ticket
@@ -198,7 +199,7 @@ namespace CensoAPI02.Controllers.TablesControllers
                                   join location in _context.Locations on anonReq.LocationId equals location.lId
                                   join area in _context.Areas on anonReq.AreaId equals area.aId
                                   join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
-                                  where anonReq.StatusId != 4 && location.lId == locationId
+                                  where location.lId == locationId //&& anonReq.StatusId != 4
                                   select new
                                   {
                                       // Datos del ticket
@@ -238,7 +239,8 @@ namespace CensoAPI02.Controllers.TablesControllers
             try
             {
                 var query = from area in _context.Areas
-                            join location in _context.Locations on area.locationId equals location.lId
+                            join al in _context.AreasLocations on area.aId equals al.AreaId
+                            join location in _context.Locations on al.LocationId equals location.lId
                             where location.lId == locationId
                             select new
                             {

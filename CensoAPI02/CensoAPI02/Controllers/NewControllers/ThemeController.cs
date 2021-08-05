@@ -34,7 +34,7 @@ namespace CensoAPI02.Controllers.NewControllers
                     tName = newTheme.tName,
                     tCreationDate = DateTime.Now,
                     tCreationUser = newTheme.tCreationUser,
-                    tStatus = true
+                    tStatus = newTheme.tStatus
                 };
 
                 // Registro del nuevo tema en la tabla de la tabla Theme

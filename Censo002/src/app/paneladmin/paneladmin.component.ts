@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { saveDataLogin } from '../interfaces/interfaces';
 import { AuthService } from '../services/Auth/auth.service';
 
 @Component({
@@ -11,16 +10,7 @@ import { AuthService } from '../services/Auth/auth.service';
 export class PaneladminComponent implements OnInit {
   constructor(private router: Router, private _authService: AuthService) { }
 
-  private user: saveDataLogin = {
-    uId: 0,
-    uEmail: '',
-    uName: '',
-    locationId: 0,
-    roleId: 0,
-  };
-
   ngOnInit(): void {
-    this.user = this._authService.getUser();
     this.getName();
     this.getRole();
   }

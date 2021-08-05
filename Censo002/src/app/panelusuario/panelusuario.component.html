@@ -24,14 +24,10 @@
     </div>
     <div class="content-titulo">
       <div class="Content-btn-folio2">
-<<<<<<< HEAD
         <button class="btnIndexC1" type="submit">Crear Folio</button>
         <button class="btnIndexC1" (click)="buscarUsuario()" type="submit">
           Consultar Folio
         </button>
-=======
-        <button class="btnIndexC1" (click)="buscarUsuario()" type="submit">Consultar Folio</button>
->>>>>>> e790581359795ca03cf8720151a68ebb1b8feaf4
       </div>
     </div>
 
@@ -49,7 +45,6 @@
           <!-- ********* Nombre empleado ******** -->
           <!-- cada campo esta reacionado con una variable en el Componen llamada igual que
                       el contenido de formControlName -->
-<<<<<<< HEAD
           <label for="validationCustom04" class="form-label"
             >Nombre Empleado</label
           >
@@ -61,11 +56,6 @@
             aria-label="Disabled input example"
             disabled
           />
-=======
-          <label for="validationCustom04" class="form-label">Nombre Empleado(a)</label>
-          <input value="{{getName()}}" class="form-control" type="text" placeholder="Disabled input"
-            aria-label="Disabled input example" disabled>
->>>>>>> e790581359795ca03cf8720151a68ebb1b8feaf4
 
           <div class="md-3">
             <!-- ******** tipo de empleado ********** -->
@@ -78,7 +68,7 @@
               id="validationCustom04"
               required
             >
-              <option disabled value="1">Administrativo</option>
+              <option value="1">Administrativo</option>
               <option value="2">Sindicalizado</option>
             </select>
             <div class="invalid-feedback">Selecciona una opcion.</div>
@@ -156,11 +146,12 @@
             <label for="formFileLg" class="form-label"
               >Evidencia (Opcional)</label
             >
-            <input
+            <input #fileUpload
               formControlName="rAttachement"
               class="form-control form-control-lg"
               id="formFileLg"
               type="file"
+              (change)="onFileSelected($event)"
             />
           </div>
 
@@ -168,6 +159,7 @@
             <div class="form-check">
               <!-- ******************* terminos y condicionees ******************* -->
               <input
+                formControlName="Terminos"
                 class="form-check-input"
                 type="checkbox"
                 value=""

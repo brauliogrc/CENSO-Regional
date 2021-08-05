@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import {
-  dataUsers,
-  dataNewUser,
-  availableLocations,
-  availableRoles,
-} from '../interfaces/interfaces';
-import { ShrUsersService } from '../services/hruser/shr-users.service';
-import { DataTableService } from '../services/tables/data-table.service';
-import { SearchesService } from '../services/searches/searches.service';
 import { AuthService } from '../services/Auth/auth.service';
 import { Router } from '@angular/router';
+import { ListService } from '../services/newServices/List/list.service';
+import { UserService } from '../services/newServices/user/user.service';
+import { SearchService } from '../services/newServices/Search/search.service';
+import { FieldsService } from '../services/newServices/Fields/fields.service';
+import { userInformation } from '../interfaces/newInterfaces';
+import {
+  addUser,
+  Location,
+  Rol,
+  userList,
+  searchData,
+} from '../interfaces/newInterfaces';
 
 @Component({
   selector: 'app-usuarios',
@@ -19,15 +22,24 @@ import { Router } from '@angular/router';
 })
 export class UsuariosComponent implements OnInit {
   // Array que contendra los datos de los usuarios de la base de datos para mostrar en la tabla
-  Users: dataUsers[] = [];
+  Users: userList[] = [];
 
   user: any;
 
   // Array que contendra los datos de las locations de la base de datos para mostrar en la lista desplegable
-  Locations: availableLocations[] = [];
+  Locations: Location[] = [];
 
   // Array que contendra los datos de los Roles de la base de datos para mostrar en la lista desplegable
-  Roles: availableRoles[] = [];
+  Roles: Rol[] = [];
+
+  private userInformation: userInformation = {
+    email: '',
+    employeeNumber: 0,
+    name: '',
+    location: '',
+  };
+
+  flag: boolean = false;
 
   /* Definimos los campos del formulario y agregamos validaciones sobre su contenido
    *  Cada campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
@@ -37,16 +49,16 @@ export class UsuariosComponent implements OnInit {
     uEmail: ['', [Validators.required, Validators.maxLength(80)]],
     RolId: ['', [Validators.required]],
     uStatus: ['', [Validators.required]],
-    LocationId: ['', [Validators.required]],
     EmployeeNumber: ['', [Validators.required]],
   });
 
   constructor(
-    private _service: DataTableService,
-    private _fb: FormBuilder,
-    private _userSerice: ShrUsersService,
-    private _searches: SearchesService,
+    private _listService: ListService,
+    private _userSerice: UserService,
+    private _searchService: SearchService,
     private _authService: AuthService,
+    private _fieldsService: FieldsService,
+    private _fb: FormBuilder,
     private router: Router
   ) {}
 
@@ -65,107 +77,159 @@ export class UsuariosComponent implements OnInit {
       console.clear();
       return;
     }
-    this.getAllUsers();
+    this.getUserList();
     this.getlocations();
     this.getRoles();
+    this.flag = false;
   }
 
-  getlocations() {
+  getlocations(): void {
     // Obtenemos las localidades disponibles
-    this._service.tableLocations().subscribe(
+    this._fieldsService.getLocations().subscribe(
       (data) => {
-        console.log(data);
         this.Locations = [...data];
       },
       (error) => {
-        console.error(error);
+        console.error(error.error.message);
       }
     );
   }
 
-  getRoles() {
-    // Obtenemos los Roles disponibles
-    this._userSerice.getRoles().subscribe(
+  // Obtencion de los roles disponibles
+  getRoles(): void {
+    this._fieldsService.getRoles().subscribe(
       (data) => {
-        console.log(data);
         this.Roles = [...data];
       },
       (error) => {
-        console.error(error);
+        console.error(error.error.message);
       }
     );
   }
 
   // Obtenemos los datos de los usuarios para mostrarlos en la tabla
-  getAllUsers() {
-    this._service.tableUsers().subscribe(
-      (data) => {
-        console.log(data);
-
-        this.Users = [...data];
-      },
-      (error) => {
-        console.error('Error getting data ' + error);
-      }
-    );
-  }
-
-  addNewUser() {
-    /**
-     * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
-     */
-    const dataNewUser: dataNewUser = {
-      // Asignar una interface
-      uName: this.newUser.get('uName')?.value,
-      uEmail: this.newUser.get('uEmail')?.value,
-      RolId: this.newUser.get('RolId')?.value,
-      uStatus: this.newUser.get('uStatus')?.value,
-      LocationId: this.newUser.get('LocationId')?.value,
-      EmployeeNumber: this.newUser.get('EmployeeNumber')?.value,
-    };
-    console.log(dataNewUser);
-
-    // Llamamos al metodo del servicio encargado de enviar la infromacion a la api apra que registre al usuario
-    this._userSerice.addNewUser(dataNewUser).subscribe(
-      (data) => {
-        this.newUser.reset();
-        console.log('Usuario registrados con el Id: ' + data.uId);
-        alert(`Se ha registrado a "${data.uName}" con el id ${data.uId}.`);
-        this.getAllUsers();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
-  deleteUser(id: number) {
-    this._userSerice.deleteUser(id).subscribe(
-      (data) => {
-        console.log('Usuario eliminado');
-        alert(`Usuario "${data.uName}" eliminado`);
-        this.getAllUsers();
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }
-
-  search(idUser: any) {
-    if (idUser) {
-      this._searches.getSpecificUser(idUser).subscribe(
+  getUserList(): void {
+    this._listService
+      .getUserList(Number(sessionStorage.getItem('location')))
+      .subscribe(
         (data) => {
-          this.user = data;
-          this.Users = [];
-          console.log(this.user);
+          this.Users = [...data];
         },
         (error) => {
-          alert(error.error.message);
+          console.error(error.error.message);
+        }
+      );
+  }
+
+  // Validacion de tecla precionada
+  eventHandler(event: any, employeeNumber: string) {
+    // console.log(event, event.keyCode, event.keyIdentifier);
+    // console.log(event.keyCode, event.keyIdentifier);
+    let keyCode: number = event.keyCode;
+    console.log(keyCode);
+    if (keyCode === 32) {
+      this._userSerice.getUserInformation(Number(employeeNumber)).subscribe(
+        (data) => {
+          this.userInformation.email = data.email;
+          this.userInformation.employeeNumber = data.employeeNumber;
+          this.userInformation.name = data.name;
+          this.userInformation.location = data.location;
+          console.log(this.userInformation);
+        },
+        (error) => {
+          console.error(error.error.message);
+        }
+      );
+    }
+  }
+
+  // Muestra el nombre del usuario
+  getUserName = (): string => {
+    if (this.userInformation.name.length > 4) {
+      this.flag = true;
+    }
+    return this.userInformation.name;
+  };
+
+  // Muestra el correo del usuario
+  getEmail = (): string | null => {
+    if (this.userInformation.email) {
+      return this.userInformation.email;
+    }
+
+    return null;
+  };
+
+  // Muestra la localidad del ususario
+  getLocation = (): string => {
+    return this.userInformation.location;
+  };
+
+  addNewUser(): void {
+    if (this.flag) {
+      /**
+       * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
+       */
+
+      // TODO
+      const dataNewUser: addUser = {
+        uName: this.getUserName(),
+        uEmail: this.getEmail(),
+        RolId: this.newUser.get('RolId')?.value,
+        uStatus: this.newUser.get('uStatus')?.value,
+        EmployeeNumber: this.newUser.get('EmployeeNumber')?.value,
+        uCreationUser: Number(sessionStorage.getItem('userId')),
+      };
+      console.log(dataNewUser);
+
+      // Registro del nuevo usuario en la tabla HRU
+      this._userSerice.addNewUser(dataNewUser).subscribe(
+        (data) => {
+          console.log(data.message);
+          this.getUserList();
+          this.newUser.reset();
+        },
+        (error) => {
+          console.error(error.error.message);
         }
       );
     } else {
-      console.log('Datos no validos');
+      console.log('Datos invalidos');
+    }
+  }
+
+  // Borrado logico del usuario
+  deleteUser(userId: number): void {
+    this._userSerice.deleteUser(userId).subscribe(
+      (data) => {
+        console.log(data.message);
+        this.user = null;
+        this.getUserList();
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
+  }
+
+  // Busqueda de un usuario en especifico
+  search(employeeNumber: string): void {
+    if (employeeNumber) {
+      // Definicion de los datos de busqueda
+      let userSearch: searchData = {
+        locationId: Number(sessionStorage.getItem('location')),
+        itemId: Number(employeeNumber),
+      };
+
+      this._searchService.searchUser(userSearch).subscribe(
+        (data) => {
+          this.user = data;
+          this.Locations = [];
+        },
+        (error) => {
+          console.error(error.error.message);
+        }
+      );
     }
   }
 }

@@ -16,18 +16,25 @@ namespace CensoAPI02.Models
         [Required]
         public string asAnswer { get; set; }
 
+        [MaxLength(200)]
+        public string? asAttachement { get; set; }
+
         [Required]
-        public DateTime asCrestionDate { get; set; }
+        public DateTime asCreationDate { get; set; }
 
         // Relationship one-2-one entities Request and AnswerStatus
-        [Required]
-        public int RequestId { get; set; }
+        public int? RequestId { get; set; }
         public Request request { get; set; }
+
+
+        // Relationship one-2-one entities AnonRequest and AnswerStatus
+        public int? AnonRequestId { get; set; }
+        public AnonRequest anonRequest { get; set; }
 
 
         // Relationship one-to-many entities HRU and AnswerSatus
         [Required]
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public HRU hru { get; set; }
     }
 }

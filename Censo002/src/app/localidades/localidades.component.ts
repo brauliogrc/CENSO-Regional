@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SearchesService } from '../services/searches/searches.service';
 import { AuthService } from '../services/Auth/auth.service';
 import { Router } from '@angular/router';
 import { locationList, addLocation } from '../interfaces/newInterfaces';
@@ -75,6 +74,8 @@ export class LocalidadesComponent implements OnInit {
       (data) => {
         console.log(data.message);
         this.getLocationList();
+        this.newLocation.reset();
+        this.location = null;
       },
       (error) => {
         console.error(error.error.message);
@@ -86,6 +87,8 @@ export class LocalidadesComponent implements OnInit {
   deleteLocation(locationId: number): void {
     this._locationService.deleteLocaion(locationId).subscribe(
       (data) => {
+        console.log(data.message);
+        this.location = null;
         this.getLocationList();
       },
       (error) => {

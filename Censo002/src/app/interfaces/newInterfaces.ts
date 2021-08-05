@@ -1,3 +1,9 @@
+// interface de logueo
+export interface dataLogin {
+  usernumber: number;
+  pass: string;
+}
+
 export interface Token {
   token: string;
 }
@@ -20,6 +26,11 @@ export interface Question {
 export interface Area {
   aId: number;
   aName: string;
+}
+
+export interface Rol {
+  rolId: number;
+  rolName: string;
 }
 
 // Interfaces de nuevas peticiones
@@ -60,12 +71,13 @@ export interface userList {
   uEmployeeNumber: number;
   uName: string;
   uStatus: boolean;
+  uEmail: string;
   // Datos del rol
   rolId: number;
   rolName: string;
   // Datos de la localidad
   lId: number;
-  lNam: string;
+  lName: string;
 }
 
 export interface themeList {
@@ -78,7 +90,7 @@ export interface themeList {
   lName: string;
 }
 
-export interface questionLst {
+export interface questionList {
   // Datos de la pregunta
   qId: number;
   qName: string;
@@ -125,9 +137,52 @@ export interface anonTicketList {
   rsStatus: string;
 }
 
+// Interface de busquda
+export interface searchData {
+  locationId: number;
+  itemId: number;
+}
+
 // Interface nueva localidad
-export interface addLocation{
-  lName:string;
-  lCreationUser:number;
-  lStatus:boolean;
+export interface addLocation {
+  lName: string;
+  lCreationUser: number;
+  lStatus: boolean;
+}
+
+export interface addUser {
+  uName: string;
+  uEmail: string | null;
+  RolId: number;
+  EmployeeNumber: number;
+  uStatus: boolean;
+  uCreationUser: number;
+}
+
+export interface addTheme {
+  tName: string;
+  tStatus: boolean;
+  tCreationUser: number;
+  LocationId: number;
+}
+
+export interface addQuestion {
+  qName: string;
+  qCreationUser: number;
+  qStatus: boolean;
+  ThemeId: number;
+}
+
+export interface addAnswer {
+  asUserId: number;
+  asAnswer: string;
+  RequestId: number;
+}
+
+// Interface de la informacion del usuario
+export interface userInformation {
+  employeeNumber: number;
+  location: string;
+  name: string;
+  email: string | null;
 }

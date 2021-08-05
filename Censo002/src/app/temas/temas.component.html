@@ -1,10 +1,12 @@
 <div class="contenido1">
   <div class="buscar">
     <h1>Tema</h1>
-    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Añadir tema</button>
+    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">
+      Añadir tema
+    </button>
   </div>
 
-  <hr>
+<hr>
 
   <div id="contenido">
     <!-- Inicio Form -->
@@ -13,21 +15,32 @@
       <!-- Name -->
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Nombre del tema</label>
-        <input formControlName="tName" type="email" class="form-control" id="inputEmail4">
+        <input
+          formControlName="tName"
+          type="email"
+          class="form-control"
+          id="inputEmail4"
+        />
       </div>
       <!-- Location -->
       <div class="col-md-6">
-        <label for="inputState" class="form-label">Localidad</label>
-        <select formControlName="LocationId" id="inputState" class="form-select">
-          <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
+        <label for="inputState" class="form-label">Ubicación</label>
+        <select
+          formControlName="LocationId"
+          id="inputState"
+          class="form-select"
+        >
+          <option *ngFor="let location of Locations" value="{{ location.lId }}">
+            {{ location.lName }}
+          </option>
         </select>
       </div>
       <!-- Estatus -->
       <div class="col-md-4">
         <label for="inputState" class="form-label">Estatus</label>
         <select formControlName="tStatus" id="inputState" class="form-select">
-          <option value=true selected>Activo</option>
-          <option value=false>Inactivo</option>
+          <option value="true" selected>Activo</option>
+          <option value="false">Inactivo</option>
         </select>
       </div>
       <!-- <div class="col-md-4">
@@ -40,17 +53,27 @@
 
       <!-- Boton registro -->
       <div class="col-12">
-        <button [disabled]="newTheme.invalid" class="btnIndexC" type="submit">Añadir</button>
+        <button [disabled]="newTheme.invalid" class="btnIndexC" type="submit">
+          Añadir
+        </button>
       </div>
     </form>
     <!-- Fin Form -->
-    <hr>
+    <hr />
   </div>
   <form class="form-search">
-    <input #idTheme class="Search1" type="number" placeholder="Buscar" aria-label="Search">
-    <button (click)="search(idTheme.value)" class="btnIndexC" type="submit">Buscar</button>
+    <input
+      #idTheme
+      class="Search1"
+      type="number"
+      placeholder="Buscar"
+      aria-label="Search"
+    />
+    <button (click)="search(idTheme.value)" class="btnIndexC" type="submit">
+      Buscar
+    </button>
   </form>
-  <hr>
+  <hr />
   <table class="table table-dark table-sm">
     <thead>
       <tr>
@@ -62,27 +85,35 @@
       </tr>
     </thead>
     <tbody>
-
       <ng-container *ngIf="!th; else elseTemplate">
-        <tr *ngFor="let th of theme">
+        <tr *ngFor="let th of Theme">
+
           <td>{{ th.tId }}</td>
           <td>{{ th.tName }}</td>
           <td>{{ th.lName }}</td>
           <td>{{ th.tStatus }}</td>
           <td>
-            <button (click)="deleteTheme(th.tId)" class="btn btn-danger">Eliminar</button>
+            <button (click)="deleteTheme(th.tId)" class="btn btn-danger">
+              Eliminar
+            </button>
           </td>
         </tr>
       </ng-container>
       <ng-template #elseTemplate>
         <tr>
-          <td>{{ th.tId }}</td>
-          <td>{{ th.tName }}</td>
-          <td>{{ th.lName }}</td>
-          <td>{{ th.tStatus }}</td>
+          <td>{{ th[0].tId }}</td>
+          <td>{{ th[0].tName }}</td>
+          <td>{{ th[0].lName }}</td>
+          <td>{{ th[0].tStatus }}</td>
           <td>
+<<<<<<< HEAD
             <button class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width=22px"></button>
             <button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width=22px"></button>
+=======
+            <button (click)="deleteTheme(th[0].tId)" class="btn btn-danger">
+              Eliminar
+            </button>
+>>>>>>> f141cd6e415b3612c59ab7bd2bf311ade051c2a8
           </td>
         </tr>
       </ng-template>

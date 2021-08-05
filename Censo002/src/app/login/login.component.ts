@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { dataLogin } from '../interfaces/interfaces';
 import { AuthService } from '../services/Auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Token } from '../interfaces/newInterfaces';
+import { dataLogin, Token } from '../interfaces/newInterfaces';
 
 const helper = new JwtHelperService();
 
@@ -56,7 +55,7 @@ export class LoginComponent implements OnInit {
 
           // Llamadas a los métodos de guardado del sessionStorage
           this._authService.saveEmployeenumber(this.dataToken.nameid);
-          this._authService.saveUserId(this.dataToken.userId);
+          // this._authService.saveUserId(this.dataToken.userId);
           this._authService.saveUsername(this.dataToken.Username);
           this._authService.saveSupervisorNumber(
             this.dataToken.SupervisorNumber
@@ -81,8 +80,11 @@ export class LoginComponent implements OnInit {
   }
 
   redirect() {
-    const role: number = Number(sessionStorage.getItem('role'));
-    if (role != 0 && this._authService.isLogged) {
+    const role: string | null = sessionStorage.getItem('role');
+
+    let aut: boolean = role == 'undefined' ? false : true;
+
+    if (aut && this._authService.isLogged) {
       this.router.navigate(['/paneladmin']);
     } else if (this._authService.isLogged) {
       this.router.navigate(['/panelusuario']);

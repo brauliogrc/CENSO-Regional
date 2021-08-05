@@ -1,48 +1,56 @@
 <body class="BodyIndexC">
-
   <header class="headermas">
-
     <div class="headerIndexC">
-      <img src="../../assets/img/LogoConti.png" alt="Continental" class="imgLogoIndexC">
+      <img
+        src="../../assets/img/LogoConti.png"
+        alt="Continental"
+        class="imgLogoIndexC"
+      />
       <h1 class="h1CensoB">CENSO Bienestar</h1>
       <div>
-        <button class="btnIndexC" type="submit">Cerrar sesión</button>
+        <button (click)="logout()" class="btnIndexC" type="submit">Cerrar sesión</button>
       </div>
     </div>
-
   </header>
 
-
   <div class="ContendorPageAngular00">
-
     <div class="content-titulo">
-
       <div class="Content-btn-folio2">
-
-
         <button class="btnIndexC1" type="submit">Crear folio</button>
       </div>
     </div>
     <!--</div>-->
     <div class="ContendorPageAngular1">
       <div class="ContendorPageAngular">
-
-
-
         <div class="ContendorPageAngular">
           <form action="" class="">
             <div class="md-3">
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <button id="open" type="button" class="btnbuscarF">Buscar Folio</button>
+                  <button
+                    (click)="getTicketStatus(ticketId.value)"
+                    id="open"
+                    type="button"
+                    class="btnbuscarF"
+                  >
+                    Buscar Folio
+                  </button>
                 </div>
-                <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                <input
+                  #ticketId
+                  type="number"
+                  class="form-control"
+                  placeholder=""
+                  aria-label=""
+                  aria-describedby="basic-addon1"
+                />
               </div>
             </div>
           </form>
+
           <div class="ModalContenidoBusq" id="ModalContenidoBusq">
             <div class="ModalContenido1Busq">
-              <div class="tabalaAnonima1">
+              <div *ngIf="ticketStatus" class="tabalaAnonima1">
                 <div class="tituloFolioAnonimo">
                   <P>STATUS</P>
                 </div>
@@ -52,7 +60,7 @@
                       <p>Empleado:</p>
                     </div>
                     <div class="textosContenido">
-                      <p>12345678</p>
+                      <p>{{ ticketStatus.rUserId }}</p>
                     </div>
                   </div>
                   <div class="contenedores">
@@ -60,7 +68,7 @@
                       <p>Nombre:</p>
                     </div>
                     <div class="textosContenido">
-                      <p>Nombre Empleado</p>
+                      <p>{{ ticketStatus.rUserName }}</p>
                     </div>
                   </div>
                   <div class="contenedores">
@@ -68,13 +76,7 @@
                       <p>Caso:</p>
                     </div>
                     <div class="textosContenido">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Perspiciatis rerum praesentium voluptatum ut aliquid omnis magnam distinctio
-                        quisquam architecto aut tempore, consequatur voluptate repudiandae voluptatem laboriosam
-                        dolorum! Dolore, necessitatibus. Voluptates!consequatur voluptate repudiandae voluptatem
-                        laboriosam dolorum! Dolore, necessitatibus. Voluptates!consequatur voluptate repudiandae
-                        voluptatem laboriosam dolorum! Dolore, necessitatibus. Voluptates!consequatur voluptate
-                        repudi</p>
+                      <p>{{ ticketStatus.rIssue }}</p>
                     </div>
                   </div>
                   <div class="contenedores">
@@ -82,56 +84,56 @@
                       <p>Status:</p>
                     </div>
                     <div class="textosContenido">
-                      <p>Abierto/Cerrado</p>
+                      <p>{{ ticketStatus.rsStatus }}</p>
                     </div>
                   </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Atiende:</p>
+                  <ng-template *ngIf="responsable">
+                    <div class="contenedores">
+                      <div class="titulos">
+                        <p>Atiende:</p>
+                      </div>
+                      <div class="textosContenido">
+                        <p>{{ responsable.uName }}</p>
+                      </div>
                     </div>
-                    <div class="textosContenido">
-                      <p>Nombre quien atiende</p>
+                    <div class="contenedores">
+                      <div class="titulos">
+                        <p>Respuesta:</p>
+                      </div>
+                      <div class="textosContenido">
+                        <p>{{ responsable.request }}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Respuesta:</p>
+                    <div class="contenedores">
+                      <div class="titulos">
+                        <p>Se respondio:</p>
+                      </div>
+                      <div class="textosContenido">
+                        <p>{{ responsable.asCreationDate }}</p>
+                      </div>
                     </div>
-                    <div class="textosContenido">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Perspiciatis rerum praesentium voluptatum ut aliquid omnis magnam distinctio
-                      </p>
+                    <div class="contenedores">
+                      <div class="titulos">
+                        <p>Archivo Adjunto:</p>
+                      </div>
+                      <div class="textosContenido">
+                        <p>{{ ticketStatus.rAttachement }}</p>
+                      </div>
                     </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Se respondio:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>1950/01/01</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Archivo Adjunto:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>Archivo</p>
-                    </div>
-                  </div>
+                  </ng-template>
                 </div>
-                <button id="close" class="btn btn-outline-secondary" type="button">Cerrar</button>
+                <button
+                  id="close"
+                  class="btn btn-outline-secondary"
+                  type="button"
+                >
+                  Cerrar
+                </button>
               </div>
             </div>
           </div>
         </div>
-
-
-
-
-
       </div>
     </div>
   </div>
-
 </body>

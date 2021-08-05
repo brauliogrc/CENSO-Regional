@@ -1,56 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { SquestionsService } from '../services/questions/squestions.service';
-import { SrequestService } from '../services/request/srequest.service';
-import { availableQues, newAnonRequest, availableLocations, availableTheme } from '../interfaces/interfaces';
-import { DataTableService } from '../services/tables/data-table.service';
-import { SthemeService } from '../services/theme/stheme.service';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-folioanonimoindex',
   templateUrl: './folioanonimoindex.component.html',
-  styleUrls: ['./folioanonimoindex.component.css']
+  styleUrls: ['./folioanonimoindex.component.css'],
 })
 export class FolioanonimoindexComponent implements OnInit {
-
   // Array que recorreremos desde el html
-  questions: availableQues[] = [];
+  questions: any[] = [];
 
-  Locations : availableLocations[] = [];
+  Locations: any[] = [];
 
-  Theme : availableTheme[] = [];
+  Theme: any[] = [];
 
   /* Definimos los campos del formulario y agregamos validaciones sobre su contenido
    *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
-  */
+   */
   bodyRequest = this._fb.group({
-    arEmployeeType:  ['', [Validators.required]],
+    arEmployeeType: ['', [Validators.required]],
     QuestionId: ['', [Validators.required]],
-    AreaId : ['', [Validators.required]],
+    AreaId: ['', [Validators.required]],
     arIssue: ['', [Validators.required, Validators.maxLength(500)]],
     arAttachemen: ['', [Validators.maxLength(200)]],
     location: ['', [Validators.required]],
-    ThemeId: ['', [Validators.required]]
+    ThemeId: ['', [Validators.required]],
   });
 
-  constructor(  private _fb:FormBuilder,
-                private _reqService:SrequestService,
-                private _dataTable:DataTableService,
-                ) { 
-  }
+  constructor(private _fb: FormBuilder) {}
 
   ngOnInit(): void {
-
-    this._dataTable.tableLocations().subscribe(data => {
-      this.Locations = [... data];
-      console.log(this.Locations);
-      
-    }, error => {
-      console.error(error);
-    })
+    // this._dataTable.tableLocations().subscribe(data => {
+    //   this.Locations = [... data];
+    //   console.log(this.Locations);
+    // }, error => {
+    //   console.error(error);
+    // })
   }
 
-  registerAnonRequest(){
+  registerAnonRequest() {
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
@@ -61,18 +54,18 @@ export class FolioanonimoindexComponent implements OnInit {
       arIssue: this.bodyRequest.get('arIssue')?.value,
       arAttachemen: this.bodyRequest.get('arAttachemen')?.value,
       ThemeId: this.bodyRequest.get('ThemeId')?.value,
-      LocationId:this.bodyRequest.get('ThemeId')?.value
-    }
+      LocationId: this.bodyRequest.get('ThemeId')?.value,
+    };
     console.log(anonReq);
-    
+
     // Nos suscribimos al método del service, enviandole el objeto con los datos a registrar en la base de datos
-    this._reqService.saveAnonRequest(anonReq).subscribe(data => {
-      this.bodyRequest.reset();
-      console.log(data);
-      console.log('Petición registrada con exito. N folio: ' + data.arId);
-    }, error => {
-      console.error(error);
-    })
+    // this._reqService.saveAnonRequest(anonReq).subscribe(data => {
+    //   this.bodyRequest.reset();
+    //   console.log(data);
+    //   console.log('Petición registrada con exito. N folio: ' + data.arId);
+    // }, error => {
+    //   console.error(error);
+    // })
   }
 
   // getThemes(idLocation : any){
@@ -86,6 +79,6 @@ export class FolioanonimoindexComponent implements OnInit {
 
   // Obtenemos las questions que se encuentran disponibles suscribiendonos al método del service
   // getQuestions(idTheme : any){
-    
+
   // }
 }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,17 @@ namespace CensoAPI02.Controllers.NewControllers
         {
             try
             {
+                // Verifica si el usuario ya se encuentra registrado
+                var userExistence = from user in _context.HRU
+                                    where user.uEmployeeNumber == newUser.EmployeeNumber
+                                    select user.uEmployeeNumber;
+
+
+                if (!(userExistence == null || userExistence.Count() == 0))
+                {
+                    return Conflict(new { message = $"El usuario ya se enceuntra registrado" });
+                }
+
                 // Asignacion de valores a los campos de la tabla HRU
                 var addUser = new HRU()
                 {
@@ -39,14 +51,21 @@ namespace CensoAPI02.Controllers.NewControllers
                     uName = newUser.uName,
                     uEmail = newUser.uEmail,
                     RoleId = newUser.RolId,
-                    uStatus = true,
-                    LocationId = newUser.LocationId,
+                    uStatus = newUser.uStatus,
                     uCreationUser = newUser.uCreationUser,
                     uCreationDate = DateTime.Now,
+                    uModificationDate = null,
+                    uModificationUser = null
                 };
 
+                // En caso de correo nulo
+                if (addUser.uEmail == "" || addUser.uEmail.Length == 0)
+                {
+                    addUser.uEmail = null;
+                }
+
                 // Consulta del SupervisorNumber para asignarlo a los datos del usuario
-                string query = "SELECT [SupervisorNumber] FROM [p_HRPortal].[dbo].[VW_EmployeeData] WHERE EmployeeNumber = " + addUser.uEmployeeNumber;
+                string query = "SELECT [SupervisorNumber], [Plant] FROM [p_HRPortal].[dbo].[VW_EmployeeData] WHERE EmployeeNumber = " + addUser.uEmployeeNumber;
                 using (SqlConnection conn = new SqlConnection(_config.GetConnectionString("HRPortal")))
                 {
                     SqlCommand command = new SqlCommand(query, conn);
@@ -57,11 +76,19 @@ namespace CensoAPI02.Controllers.NewControllers
                     {
                         int flag = 0;
                         long supervisorNumber;
+                        int locationId;
+                        Validations validations = new Validations();
                         while (reader.Read() && flag == 0)
                         {
-                            Console.WriteLine(reader.GetInt32(0));
+                            Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)}");
+
                             supervisorNumber = Convert.ToInt64(reader.GetInt32(0));
+                            locationId = validations.localityValidation(reader.GetString(1));
+                            if (locationId == 0) return BadRequest(new { message = $"El usuario lo cuenta con una ocalidad" });
+
+
                             addUser.uSupervisorNumber = supervisorNumber;
+                            addUser.LocationId = locationId;
                             flag++;
                         }
                     }
@@ -76,9 +103,68 @@ namespace CensoAPI02.Controllers.NewControllers
                 return Ok(new { message = $"Usuario {addUser.uName} con numero de empleado {addUser.uEmployeeNumber}, registrado correctamente" });
             }catch(Exception ex)
             {
-                return BadRequest(new { message = $"Ha ocurrido un error al registrar el usuario. Error: {ex.Message}" });
+                return BadRequest(new { message = $"Ha ocurrido un error al registrar el usuario. Error: {ex.InnerException}" });
             }
         }
+
+
+        // Busqueda de informacion de un usuario (requiere policy surh)
+        [HttpGet]
+        [Route("userInformation/{location}/{employeeNumber}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> getUserInformation(string location, int employeeNumber)
+        {
+            try
+            {
+                var userExistence = from user in _context.HRU
+                                    where user.uEmployeeNumber == employeeNumber
+                                    select user.uEmployeeNumber;
+
+
+                if ( !(userExistence == null || userExistence.Count() == 0) )
+                {
+                    return Conflict(new { message = $"El usuario ya se enceuntra registrado" });
+                }
+
+                string query = "SELECT [EmployeeNumber], [Plant], [FullName], [EMail] FROM [p_HRPortal].[dbo].[VW_EmployeeData] WHERE Plant = '" + location + "' and EmployeeNumber = " + employeeNumber;
+                using( SqlConnection connection = new SqlConnection( _config.GetConnectionString( "HRPortal" ) ) )
+                {
+                    UserInformation userInformation = new UserInformation();
+
+                    SqlCommand command = new SqlCommand(query, connection);
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        int flag = 0;
+                        while(reader.Read() && flag == 0)
+                        {
+                            //Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(0)} - {reader.GetString(2)} - {reader.GetString(3)}");
+                            Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)} - {reader.GetString(2)} - {reader.GetString(3)}");
+
+                            userInformation.employeeNumber = reader.GetInt32(0);
+                            userInformation.location = reader.GetString(1);
+                            userInformation.name = reader.GetString(2);
+                            userInformation.email = reader.GetString(3);
+
+                            flag = 1;
+                        }
+                    }else
+                    {
+                        return NotFound(new { message = $"Usurio no ecnontrado en su localidad" });
+                    }
+
+                    connection.Close();
+                    return Ok(userInformation);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al obtener la informacion del usuario. Error: {ex.Message}" });
+            }
+        }
+
 
         // Eliminacioón lógica de usuario
         [HttpDelete] [Route("deleteUser/{userId}")][AllowAnonymous]
@@ -104,6 +190,6 @@ namespace CensoAPI02.Controllers.NewControllers
             {
                 return BadRequest(new { message = $"Ha ocurido un error al eliminar el usuatio. Error: {ex.Message}" });
             }
-        }
+        }        
     }
 }

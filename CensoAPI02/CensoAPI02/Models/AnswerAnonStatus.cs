@@ -22,9 +22,9 @@ namespace CensoAPI02.Models
         public DateTime anCreationDate { get; set; } // Fecha de creacion de la respuesata -> podria estar ligada la arModificationDate de anonymousRequest
 
         // Relationship one-2-one entities anonymousRequest and AnswerAnonStatus
-        [Required]
-        public int anRequestId { get; set; }
+        //[Required]
+        //public int anRequestId { get; set; }
 
-        public AnonRequest anonRequest { get; set; }
+        //public AnonRequest anonRequest { get; set; }
     }
 }

@@ -167,6 +167,7 @@ version 3.6.4 beta
     -Nuevas interfaces generadas
     -Consustas a la base de datos mejoradas
 
+
 ~Braulio~
 ======================================================================================================================
 
@@ -181,6 +182,7 @@ version 3.6.5 beta
 ~Alexis~
 ======================================================================================================================
 
+<<<<<<< HEAD
 fecha actualizacion: 05/08/2021
 
 version 3.6.6 beta
@@ -189,3 +191,15 @@ version 3.6.6 beta
 ~Alexis~
 ======================================================================================================================
 
+=======
+fecha actualizacion: 04/08/2021
+
+version 3.6.6
+    -Guardado de archivos en las peticiones de los componetes home y panel usuarios
+    -Manejador de envio de correos electronicos
+    -Aligeramiento de los metodos de registro de peticiones
+
+
+~Braulio~
+======================================================================================================================
+>>>>>>> f141cd6e415b3612c59ab7bd2bf311ade051c2a8

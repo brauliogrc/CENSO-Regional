@@ -53,22 +53,23 @@ namespace CensoAPI02.Controllers.SearchesControllers
         }
 
         //Busqueda de un usuario especifico en la localidad (requiere policy SUHR)
-        [HttpGet][Route("userSearch")][AllowAnonymous]
-        public async Task<ActionResult> userSearch([FromBody] SearchInterface searchData)
+        [HttpGet][Route("userSearch/{locationId}/{itemId}")][AllowAnonymous]
+        public async Task<ActionResult> userSearch(int locationId, long itemId)
         {
             try
             {
                 var query = from user in _context.HRU
                             join location in _context.Locations on user.LocationId equals location.lId
-                            join role in _context.Roles on user.uId equals role.rolId
-                            where user.uStatus == true && user.uId == searchData.itemId && location.lId == searchData.locationId 
+                            join role in _context.Roles on user.uEmployeeNumber equals role.rolId
+                            where user.uStatus == true && user.uEmployeeNumber == itemId && location.lId == locationId 
                             select new
                             {
                                 // Datos del usuario
-                                user.uId,
+                                //user.uId,
                                 user.uEmployeeNumber,
                                 user.uName,
                                 user.uStatus,
+                                user.uEmail,
                                 // Datos del rol
                                 role.rolId,
                                 role.rolName,
@@ -91,15 +92,15 @@ namespace CensoAPI02.Controllers.SearchesControllers
         }
 
         // Busqueda de un tema especifico en la localidad (requiere policy SUHR)
-        [HttpGet][Route("themeSearch")][AllowAnonymous]
-        public async Task<ActionResult> themeSearch([FromBody] SearchInterface searchData)
+        [HttpGet][Route("themeSearch/{locationId}/{itemId}")][AllowAnonymous]
+        public async Task<ActionResult> themeSearch(int locationId, int itemId)
         {
             try
             {
                 var query = from theme in _context.Theme
                             join lt in _context.LocationsThemes on theme.tId equals lt.ThemeId
                             join location in _context.Locations on lt.LocationId equals location.lId
-                            where theme.tStatus == true && theme.tId == searchData.itemId && location.lId == searchData.locationId
+                            where theme.tStatus == true && theme.tId == itemId && location.lId == locationId
                             select new
                             {
                                 // Datos del tema
@@ -125,8 +126,8 @@ namespace CensoAPI02.Controllers.SearchesControllers
         }
 
         // Busqueda de una pregunta especifica en la localidad (requiere policy SUHR)
-        [HttpGet][Route("questionSearch")][AllowAnonymous]
-        public async Task<ActionResult> questionSearch([FromBody] SearchInterface searchData)
+        [HttpGet][Route("questionSearch/{locationId}/{itemId}")][AllowAnonymous]
+        public async Task<ActionResult> questionSearch(int locationId, int itemId)
         {
             try
             {
@@ -135,7 +136,7 @@ namespace CensoAPI02.Controllers.SearchesControllers
                             join theme in _context.Theme on qt.ThemeId equals theme.tId
                             join lt in _context.LocationsThemes on theme.tId equals lt.ThemeId
                             join location in _context.Locations on lt.LocationId equals location.lId
-                            where question.qStatus == true && question.qId == searchData.itemId && location.lId == searchData.locationId
+                            where question.qStatus == true && question.qId == itemId && location.lId == locationId
                             select new
                             {
                                 // Datos de la pregunta
@@ -161,8 +162,8 @@ namespace CensoAPI02.Controllers.SearchesControllers
         }
 
         // Busqueda de un tiket especifico en la localidad
-        [HttpGet][Route("ticketSearch")][AllowAnonymous]
-        public async Task<ActionResult> ticketSearch([FromBody] SearchInterface searchData)
+        [HttpGet][Route("ticketSearch/{locationId}/{itemId}")][AllowAnonymous]
+        public async Task<ActionResult> ticketSearch(int locationId, int itemId)
         {
             try
             {
@@ -172,7 +173,7 @@ namespace CensoAPI02.Controllers.SearchesControllers
                              join location in _context.Locations on request.LocationId equals location.lId
                              join area in _context.Areas on request.AreaId equals area.aId
                              join status in _context.RequestStatus on request.StatusId equals status.rsId
-                             where request.StatusId != 4 && request.rId == searchData.itemId && location.lId == searchData.locationId
+                             where request.StatusId != 4 && request.rId == itemId && location.lId == locationId
                              select new
                              {
                                  // Datos del ticket
@@ -201,7 +202,7 @@ namespace CensoAPI02.Controllers.SearchesControllers
                                      join location in _context.Locations on anonReq.LocationId equals location.lId
                                      join area in _context.Areas on anonReq.AreaId equals area.aId
                                      join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
-                                     where anonReq.StatusId != 4 && anonReq.arId == searchData.itemId && location.lId == searchData.locationId
+                                     where anonReq.StatusId != 4 && anonReq.arId == itemId && location.lId == locationId
                                      select new
                                      {
                                          // Datos del ticket

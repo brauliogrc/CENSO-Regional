@@ -23,14 +23,18 @@ namespace CensoAPI02.Models
         public string arIssue { get; set; } // Contenido
 
         [MaxLength(200)]
-        public string arAttachement { get; set; } // Ruta de archivo adjunto
+        public string? arAttachement { get; set; } // Ruta de archivo adjunto Nuleable
 
         [Required]
         public DateTime arCreationDate { get; set; }
 
-        public DateTime arModificationDate { get; set; }
+        public DateTime? arModificationDate { get; set; }
 
-        public int arModificationUser { get; set; } // Podria ser el usuario que realiza la respuesta
+
+        // Relationship one-to-many entities HRU AnonRequest
+        public long? arModificationUser { get; set; }
+        public HRU hru { get; set; }
+
 
         // Relationship one-2-one entities anonymousRequest and Qestion
         [Required]
@@ -38,8 +42,10 @@ namespace CensoAPI02.Models
 
         public Question question { get; set; }
 
+
         // Relationship one-2-one entities anonymousRequest and AnswerAnonStatus
-        public AnswerAnonStatus answerAnonStatus { get; set; }
+        public AnswerStatus answerStatus { get; set; }
+
 
         // Relationship one-2-may entities Area and AnonRequest
         [Required]
@@ -47,17 +53,20 @@ namespace CensoAPI02.Models
 
         public Area area { get; set; }
 
+
         //Relationship one-2-many entities AnonRequest and Theme
         [Required]
         public int ThemeId { get; set; }
 
         public Theme theme { get; set; }
 
+
         // Relationshio one-2-many entities Locations and AnonRequest
         [Required]
         public int LocationId { get; set; }
 
         public Locations locations { get; set; }
+
 
         // Relationship one-to-many entities RequestStatus and AnonRequest
         [Required]

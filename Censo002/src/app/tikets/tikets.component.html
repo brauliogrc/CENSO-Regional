@@ -26,9 +26,9 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngIf="!tiket; else elseTemplate">
+      <ng-container *ngIf="!flag; else elseTemplate">
         <!-- Tikets con datos -->
-        <tr *ngFor="let tiket of Tikets" (click)="onClick(tiket.rId)">
+        <tr *ngFor="let tiket of Tikets">
           <td>{{ tiket.rId }}</td>
           <td>{{ tiket.tName }}</td>
           <td>{{ tiket.qName }}</td>
@@ -37,11 +37,16 @@
           <td>{{ tiket.aName }}</td>
           <td>{{ tiket.rsStatus }}</td>
           <td>
-            <button class="btn btn-danger">Eliminar</button>
+            <button (click)="ticketResponse(tiket.rId)" class="btn btn-danger">
+              Responder
+            </button>
+            <button (click)="deleteTicket(tiket.rId)" class="btn btn-danger">
+              Eliminar
+            </button>
           </td>
         </tr>
         <!-- Tikets anonimos -->
-        <tr *ngFor="let anonTiket of AnonTikets" (click)="onClick(tiket.rId)">
+        <tr *ngFor="let anonTiket of AnonTikets">
           <td>{{ anonTiket.arId }}</td>
           <td>{{ anonTiket.tName }}</td>
           <td>{{ anonTiket.qName }}</td>
@@ -50,11 +55,23 @@
           <td>{{ anonTiket.aName }}</td>
           <td>{{ anonTiket.rsStatus }}</td>
           <td>
-            <button class="btn btn-danger">Eliminar</button>
+            <button
+              (click)="ticketResponse(anonTiket.arId)"
+              class="btn btn-danger"
+            >
+              Responder
+            </button>
+            <button
+              (click)="deleteTicket(anonTiket.arId)"
+              class="btn btn-danger"
+            >
+              Eliminar
+            </button>
           </td>
         </tr>
       </ng-container>
       <ng-template #elseTemplate>
+<<<<<<< HEAD
         <tr>
           <td>{{ tiket.rId }}</td>
           <td>{{ tiket.tName }}</td>
@@ -68,6 +85,58 @@
             <button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width=22px"></button>
           </td>
         </tr>
+=======
+        <ng-container *ngIf="!anonTicket; else elseTemplate">
+          <tr>
+            <td>{{ tiket[0].rId }}</td>
+            <td>{{ tiket[0].tName }}</td>
+            <td>{{ tiket[0].qName }}</td>
+            <td>{{ tiket[0].rUserName }}</td>
+            <td>{{ tiket[0].rIssue }}</td>
+            <td>{{ tiket[0].aName }}</td>
+            <td>{{ tiket[0].rsStatus }}</td>
+            <td>
+              <button
+                (click)="ticketResponse(tiket[0].rId)"
+                class="btn btn-danger"
+              >
+                Responder
+              </button>
+              <button
+                (click)="deleteTicket(tiket[0].rId)"
+                class="btn btn-danger"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <tr>
+            <td>{{ anonTicket[0].arId }}</td>
+            <td>{{ anonTicket[0].tName }}</td>
+            <td>{{ anonTicket[0].qName }}</td>
+            <td></td>
+            <td>{{ anonTicket[0].arIssue }}</td>
+            <td>{{ anonTicket[0].aName }}</td>
+            <td>{{ anonTicket[0].rsStatus }}</td>
+            <td>
+              <button
+                (click)="ticketResponse(anonTicket[0].arId)"
+                class="btn btn-danger"
+              >
+                Responder
+              </button>
+              <button
+                (click)="deleteTicket(anonTicket[0].arId)"
+                class="btn btn-danger"
+              >
+                Eliminar
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+>>>>>>> f141cd6e415b3612c59ab7bd2bf311ade051c2a8
       </ng-template>
     </tbody>
   </table>
