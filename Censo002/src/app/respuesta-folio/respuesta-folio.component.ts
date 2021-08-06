@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
 import { LocationValidate } from '../services/validations';
+import { AnswerService } from '../services/newServices/Answer/answer.service';
+import { searchData, User } from '../interfaces/newInterfaces';
+import { FieldsService } from '../services/newServices/Fields/fields.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-respuesta-folio',
@@ -23,12 +27,26 @@ export class RespuestaFolioComponent implements OnInit {
   flag: boolean = false;
   private ticketId: number = 0;
 
+  availableUsers: User[] = [];
+
+  currentUser: any = sessionStorage.getItem('employeeNumber');
+
   constructor(
-    private _ticketService: TicketService,
     private router: Router,
+    private _fb: FormBuilder,
     private _auth: AuthService,
-    private _sanitizer: DomSanitizer
+    private _fields: FieldsService,
+    private _sanitizer: DomSanitizer,
+    private _answerService: AnswerService,
+    private _ticketService: TicketService
   ) {}
+
+  // Definición del formulario
+  newAnswer = this._fb.group({
+    asUserId: ['', [Validators.required]],
+    asAnswer: ['', [Validators.required]],
+    asAttachement: ['', [Validators.maxLength(200)]],
+  });
 
   ngOnInit(): void {
     this.validRole();
@@ -48,13 +66,12 @@ export class RespuestaFolioComponent implements OnInit {
       return;
     }
     this.flag = false;
-    this.ticketId = this._ticketService.tiket;
+    this.ticketId = this._ticketService.getTicket;
     console.log(this.ticketId);
     this.getTicketData();
+    console.log('folio de respuestas');
   }
 
-  evidenceRoute: SafeValue = '';
-  value: any;
   // Obtencion de los datos del ticket
   getTicketData(): void {
     this._ticketService.getTicketData(this.ticketId).subscribe(
@@ -66,22 +83,10 @@ export class RespuestaFolioComponent implements OnInit {
             data.anonTicketData[0].arEmployeeType
           );
 
-          console.log(this.anonTicketData);
-
-          // Sanitizacion de la URL de la evidencia
-          // this.evidenceRoute = this._sanitizer.bypassSecurityTrustUrl(
-          //   `url(${this.anonTicketData.arAttachement})`
-          // );
-          // console.log({ this: this.evidenceRoute });
-
-          // this.value = window.location.href;
-          // console.log(this.value);
-          // this.value = '';
-          // console.log( this.value );
-          // this.value = this.anonTicketData.arAttachement;
-          // console.log(this.value);
+          console.log(this.anonTicketData.tId);
 
           this.flag = true;
+          this.getAvailableUsers(this.anonTicketData.tId);
         } else {
           this.ticketData = data.ticketData[0];
 
@@ -91,6 +96,7 @@ export class RespuestaFolioComponent implements OnInit {
 
           console.log(this.ticketData);
           this.flag = true;
+          this.getAvailableUsers(this.ticketData.tId);
         }
         this.daysPassed = data.daysPassed;
       },
@@ -99,6 +105,57 @@ export class RespuestaFolioComponent implements OnInit {
       }
     );
   }
+
+  // Obtención de los usuarios asociados al tema del ticket en una localidad
+  getAvailableUsers(themeId: number): void {
+    if (themeId) {
+      const searchData: searchData = {
+        locationId: Number(sessionStorage.getItem('location')),
+        itemId: themeId,
+      };
+      this._fields.getAvailableUsers(searchData).subscribe(
+        (data) => {
+          this.availableUsers = [...data];
+          console.log(this.availableUsers);
+        },
+        (error) => {
+          console.error(error.error.message);
+        }
+      );
+    }
+  }
+
+  // Guardado de la nueva respuesta
+  registerAnswer(): void {
+    const formData = new FormData();
+    formData.append('asUserId', this.newAnswer.get('asUserId')?.value);
+    formData.append('asAnswer', this.newAnswer.get('asAnswer')?.value);
+    formData.append('RequestId', String(this.ticketId));
+    formData.append('asAttachement', this.file);
+
+    this._answerService.addNewAnswer(formData).subscribe(
+      (data) => {
+        console.log('Registro exitoso de la respuesta');
+        console.log(data.message);
+        this.newAnswer.reset();
+        this.ticketId = 0;
+      },
+      (error) => {
+        console.log(error.error.message);
+      }
+    );
+  }
+
+  // Manejo del arcvhivo seleccionado
+  private file: any;
+  onFileSelected = (event: any): void => {
+    const file: File = event.target.files[0];
+
+    if (file) {
+      this.file = file;
+      console.log(file);
+    }
+  };
 
   // Obtencion del tipo de empleado
   getEmployeeType(employeeType: number): string | null {

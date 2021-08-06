@@ -9,7 +9,14 @@ import { environment } from 'src/environments/environment';
 export class TicketService {
   private MyApiUrl: string = 'Ticket/';
 
-  tiket: number = 0;
+  // Ticketid es necesario para realizar la consulta de los datos en el "respuesta-folio.component"
+  private ticket: number = 0;
+  set setTicket(ticketId : number) {
+    this.ticket = ticketId;
+  }
+  get getTicket() : number {
+    return this.ticket;
+  }
 
   constructor(private _http: HttpClient) {}
 

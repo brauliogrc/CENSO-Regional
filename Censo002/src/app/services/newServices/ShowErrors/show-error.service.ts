@@ -9,15 +9,15 @@ export class ShowErrorService {
   constructor() {}
 
   statusCode = (error: HttpErrorResponse) => {
-    if (error.status === 0) this.ConnectionReused(String(error.message));
-    if (error.status === 404) this.NotFound(String(error.error.message));
-    if (error.status === 400) this.BadRequest(String(error.error.message));
+    if (Number(error.status) === 0) this.ConnectionReused(String(error.message));
+    else if (Number(error.status) === 404) this.NotFound(String(error.error.message));
+    else if (Number(error.status) === 400) this.BadRequest(String(error.error.message));
     else this.UnconrolledError(String(error.message));
   };
 
   private NotFound = (error: string) => {
     Swal.fire({
-      title: '404. Not Found',
+      // title: '404. Not Found',
       text: error,
       icon: 'question',
       backdrop: false,

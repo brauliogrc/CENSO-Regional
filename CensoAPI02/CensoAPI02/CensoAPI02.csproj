@@ -50,7 +50,7 @@
 
   <ItemGroup>
     <Folder Include="Models\prueba\" />
-    <Folder Include="Resources\Evidences\" />
+    <Folder Include="Resources\Answer\" />
   </ItemGroup>
 
 </Project>

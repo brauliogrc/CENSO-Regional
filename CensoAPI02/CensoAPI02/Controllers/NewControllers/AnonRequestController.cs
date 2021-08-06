@@ -54,7 +54,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
                 // Guardado del archivo adjunto
                 var file = newAnonRequest.arAttachement;
-                var folderName = Path.Combine("Resources", "Evidences");
+                var folderName = Path.Combine("Resources", "Request");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
                 if (file != null)

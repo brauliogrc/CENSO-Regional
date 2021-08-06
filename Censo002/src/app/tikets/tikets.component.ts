@@ -112,7 +112,7 @@ export class TiketsComponent implements OnInit {
 
   // Obtencion de los datos de la tabla al hacer click en una row
   ticketResponse(ticketId: number) {
-    this._ticketService.tiket = ticketId;
+    this._ticketService.setTicket = ticketId;
     this.router.navigate(['/respuestafolio']);
   }
 }

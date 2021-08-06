@@ -201,3 +201,14 @@ version 3.6.6 beta
 
 ~Alexis~
 ======================================================================================================================
+
+fecha actualizacion: 05/08/2021
+
+version 3.6.6
+    -Separación de la lógica para el enviio de correos
+    -Creacion del sercio "show-errors" para el manejo de errores y muestra de alertas
+    -Manejo de errores en el componente home
+
+
+~Braulio~
+======================================================================================================================

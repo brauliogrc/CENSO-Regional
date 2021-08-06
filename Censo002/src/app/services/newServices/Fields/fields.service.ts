@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { searchData, User } from '../../../interfaces/newInterfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,18 @@ export class FieldsService {
   getRoles(): Observable<any> {
     return this._http.get(
       `${environment.API_URL}` + this.MyApiUrl + 'getRoles'
+    );
+  }
+
+  // Obtención de los usuarios asociados al tema del ticket en una localidad
+  getAvailableUsers(availableUser: searchData): Observable<User[]> {
+    return this._http.get<User[]>(
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'userAssignment/' +
+        availableUser.locationId +
+        '/' +
+        availableUser.itemId
     );
   }
 }

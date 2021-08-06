@@ -69,6 +69,22 @@
       </div>
       <div class="contenedores">
         <div class="titulos">
+          <p>Tema :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.tName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Pregunta :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.qName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
           <p>Contenido:</p>
         </div>
         <div class="textosContenido">
@@ -99,14 +115,6 @@
           <p>{{ anonTicketData.arCreationDate }}</p>
         </div>
       </div>
-      <!-- <div class="contenedores">
-                <div class="titulos">
-                    <p>Nombre supervisor:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>{{ anonTicketData}}</p>
-                </div>
-            </div> -->
       <div class="contenedores">
         <div class="titulos">
           <p>Tipo Empleado:</p>
@@ -115,22 +123,6 @@
           <p>{{ anonTicketData.arEmployeeType }}</p>
         </div>
       </div>
-      <!-- <div class="contenedores">
-                <div class="titulos">
-                    <p>Nombre Empleado:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>Anonimo</p>
-                </div>
-            </div> -->
-      <!-- <div class="contenedores">
-                <div class="titulos">
-                    <p>Numero Empleado:</p>
-                </div>
-                <div class="textosContenido">
-                    <p>0</p>
-                </div>
-            </div> -->
       <div class="contenedores">
         <div class="titulos">
           <p>Nave:</p>
@@ -152,7 +144,7 @@
           <p>Tema :</p>
         </div>
         <div class="textosContenido">
-          <p>{{  }}</p>
+          <p>{{ anonTicketData.tName }}</p>
         </div>
       </div>
       <div class="contenedores">
@@ -160,7 +152,7 @@
           <p>Pregunta :</p>
         </div>
         <div class="textosContenido">
-          <p>{{  }}</p>
+          <p>{{ anonTicketData.qName }}</p>
         </div>
       </div>
       <div class="contenedores">
@@ -177,31 +169,37 @@
         </div>
         <div class="textosContenido">
           <p>
-            <a target="_blank" href="{{anonTicketData.arAttachement}}">{{
+            <a target="_blank" href="{{ anonTicketData.arAttachement }}">{{
               anonTicketData.arAttachement
             }}</a>
           </p>
-          <a href="file:///{{value}}">e ver si esta si</a>
+          <!-- <a href="file:///{{value}}">e ver si esta si</a> -->
 
           <!-- <img src="{{ anonTicketData.arAttachement }}" alt="Evicendia" /> -->
         </div>
       </div>
     </ng-template>
     <div class="respTabla1">
-      <form action="">
+      <form [formGroup]="newAnswer" (ngSubmit)="registerAnswer()">
         <div class="contenedores">
           <div class="titulos1">
             <p>Numero de empleado del encargado:</p>
           </div>
           <div class="textosContenido">
-            <select class="form-select" id="validationCustom04" required>
-              <option>Num Empleado</option>
+            <select formControlName="asUserId" id="employee" class="form-select" required>
+              <option selected value="{{ currentUser }}" ></option>
+              <option
+                *ngFor="let user of availableUsers"
+                value="{{ user.uEmployeeNumber }}"
+              >
+                {{ user.uEmployeeNumber }} - {{ user.uName }}
+              </option>
             </select>
             <div class="invalid-feedback">Selecciona una opción.</div>
           </div>
         </div>
 
-        <div class="contenedores">
+        <!-- <div class="contenedores">
           <div class="titulos">
             <p>Status:</p>
           </div>
@@ -212,14 +210,14 @@
             </select>
             <div class="invalid-feedback">Selecciona una opción.</div>
           </div>
-        </div>
+        </div> -->
 
         <div class="contenedores">
           <div class="titulos">
             <p>Respuesta:</p>
           </div>
           <div class="textosContenido">
-            <textarea
+            <textarea formControlName="asAnswer"
               class="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
@@ -232,16 +230,17 @@
             <p>Adjunto:</p>
           </div>
           <div class="textosContenido">
-            <input
+            <input formControlName="asAttachement"
               class="form-control form-control-lg"
               id="formFileLg"
+              (change)="onFileSelected($event)"
               type="file"
             />
           </div>
         </div>
 
         <div class="contenedores">
-          <button class="BotonRespuesta">Guardar</button>
+          <button [disabled]="newAnswer.invalid" class="BotonRespuesta" type="submit">Guardar</button>
         </div>
       </form>
       <div class="contBotonCerrar">

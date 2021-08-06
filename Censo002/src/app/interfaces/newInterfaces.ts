@@ -33,6 +33,11 @@ export interface Rol {
   rolName: string;
 }
 
+export interface User {
+  uEmployeeNumber: number;
+  uName: string;
+}
+
 // Interfaces de nuevas peticiones
 export interface addRequest {
   rUserId: number;

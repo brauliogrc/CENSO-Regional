@@ -134,7 +134,7 @@ namespace CensoAPI02.Intserfaces
 
         public string asAnswer { get; set; }
 
-        public int RequestId { get; set; }
+        public string RequestId { get; set; }
 
         public IFormFile asAttachement { get; set; }
     }
