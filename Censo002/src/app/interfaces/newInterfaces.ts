@@ -38,6 +38,11 @@ export interface User {
   uName: string;
 }
 
+export interface ticketStatus {
+  rsId: number;
+  rsStatus: string;
+}
+
 // Interfaces de nuevas peticiones
 export interface addRequest {
   rUserId: number;

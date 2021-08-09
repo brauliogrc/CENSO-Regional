@@ -195,8 +195,13 @@ version 3.6.6
 
 fecha actualizacion: 05/08/2021
 
-version 3.6.6 beta
+version 3.6.7
    -Se agrego en el componente usuario dos botones con imagenes
+   -Se agrego en el componente Tikets dos botones con imagenes
+   -Se agrego en el componente Temas dos botones con imagenes
+   -Se agrego en el componente Preguntas dos botones con imagenes
+   -Se agrego en el componente Localidades dos botones con imagenes
+   -Se agrego en el componente areas dos botones con imagenes
 
 
 ~Alexis~
@@ -209,6 +214,18 @@ version 3.6.6
     -Creacion del sercio "show-errors" para el manejo de errores y muestra de alertas
     -Manejo de errores en el componente home
 
+
+~Braulio~
+======================================================================================================================
+fecha actualizacion: 09/08/2021
+
+version 3.6.8
+    -Funcionamiento del componente de respuesta de folios
+    -Actualizacion de la respuesta de un folio
+    -Actializacion del estado de un ticket
+    -Modificación del controlador de registr de una repuesta para que compruebe si
+        si el ticket ya fue respondido
+    
 
 ~Braulio~
 ======================================================================================================================

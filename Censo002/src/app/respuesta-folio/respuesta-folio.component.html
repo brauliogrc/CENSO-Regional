@@ -186,8 +186,8 @@
             <p>Numero de empleado del encargado:</p>
           </div>
           <div class="textosContenido">
-            <select formControlName="asUserId" id="employee" class="form-select" required>
-              <option selected value="{{ currentUser }}" ></option>
+            <select formControlName="asUserId" id="employee" class="form-select">
+              <option selected value="{{ getCurrentUser }}" ></option>
               <option
                 *ngFor="let user of availableUsers"
                 value="{{ user.uEmployeeNumber }}"
@@ -199,18 +199,28 @@
           </div>
         </div>
 
-        <!-- <div class="contenedores">
+        <div class="contenedores">
+          <div class="titulos">
+            <p>Estatus actual:</p>
+          </div>
+          <div class="textosContenido">
+            <p>{{currentStatus}}</p>
+            <div class="invalid-feedback">Selecciona una opción.</div>
+          </div>
+        </div>
+
+        <div class="contenedores">
           <div class="titulos">
             <p>Status:</p>
           </div>
           <div class="textosContenido">
-            <select class="form-select" id="validationCustom04" required>
-              <option>Activo</option>
-              <option>inactivo</option>
+            <select formControlName="requestStatus" class="form-select" id="validationCustom04" required>
+              <option value="1"></option>
+              <option *ngFor="let status of ticketStatus" value="{{status.rsId}}">{{status.rsStatus}}</option>
             </select>
             <div class="invalid-feedback">Selecciona una opción.</div>
           </div>
-        </div> -->
+        </div>
 
         <div class="contenedores">
           <div class="titulos">
@@ -221,6 +231,7 @@
               class="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
+              placeholder="{{answer}}"
             ></textarea>
           </div>
         </div>

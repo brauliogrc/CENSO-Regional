@@ -1,4 +1,5 @@
 ﻿using CENSO.Models;
+using CensoAPI02.Intserfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,8 @@ namespace CensoAPI02.Controllers.NewControllers
     {
 
         private readonly CDBContext _context;
+        private static TicketAnswered ticketAnswered = new TicketAnswered();
+        private AnswerData answer;
 
         public TicketController(CDBContext context)
         {
@@ -25,13 +28,17 @@ namespace CensoAPI02.Controllers.NewControllers
         [HttpGet][Route("ticketData/{ticketId}")][AllowAnonymous]
         public async Task<ActionResult> getTicketData(int ticketId)
         {
+
             int daysPassed;
             try
             {
+
+
                 var ticketData = from request in _context.Requests
                                  join area in _context.Areas on request.AreaId equals area.aId
                                  join theme in _context.Theme on request.ThemeId equals theme.tId
                                  join question in _context.Questions on request.QuestionId equals question.qId
+                                 join status in _context.RequestStatus on request.StatusId equals status.rsId
                                  where request.rId == ticketId
                                  select new
                                  {
@@ -52,7 +59,10 @@ namespace CensoAPI02.Controllers.NewControllers
                                      theme.tName,
                                      // Datos de la pregunta
                                      question.qId,
-                                     question.qName
+                                     question.qName,
+                                     // Datos del satatus
+                                     status.rsId,
+                                     status.rsStatus
                                  };
 
                 if (ticketData == null || ticketData.Count() == 0)
@@ -61,6 +71,7 @@ namespace CensoAPI02.Controllers.NewControllers
                                          join area in _context.Areas on anonRequest.AreaId equals area.aId
                                          join theme in _context.Theme on anonRequest.ThemeId equals theme.tId
                                          join question in _context.Questions on anonRequest.QuestionId equals question.qId
+                                         join status in _context.RequestStatus on anonRequest.StatusId equals status.rsId
                                          where anonRequest.arId == ticketId
                                          select new
                                          {
@@ -78,7 +89,10 @@ namespace CensoAPI02.Controllers.NewControllers
                                              theme.tName,
                                              // Datos de la pregunta
                                              question.qId,
-                                             question.qName
+                                             question.qName,
+                                             // Datos del satatus
+                                             status.rsId,
+                                             status.rsStatus
                                          };
 
                     if (anonTicketData == null || anonTicketData.Count() == 0)
@@ -89,7 +103,16 @@ namespace CensoAPI02.Controllers.NewControllers
                     daysPassed = Convert.ToInt32((DateTime.Now - anonTicketData.First().arCreationDate).TotalDays);
                     if (daysPassed < 1) daysPassed = 0;
 
-                    return Ok(new { anonTicketData, daysPassed });
+                    // Verifcacionde la existencia de la respuesta del ticket
+                    this.answer = ticketAnswered.answered(_context, ticketId);
+
+                    if (this.answer.flag == 0)
+                    {
+                        return Ok(new { anonTicketData, daysPassed });
+                    }
+
+                    return Ok(new { anonTicketData, daysPassed, this.answer });
+
                 }
 
                 daysPassed = Convert.ToInt32((DateTime.Now - ticketData.First().rCreationDate).TotalDays);
@@ -163,8 +186,9 @@ namespace CensoAPI02.Controllers.NewControllers
                              {
                                  // Datos de la respuesta
                                  answerStatus.asId,
-                                 answerStatus.request,
+                                 //answerStatus.request,
                                  answerStatus.asCreationDate,
+                                 answerStatus.asAnswer,
                                  // Datos del usuario
                                  //user.uId,
                                  user.uName,

@@ -192,5 +192,31 @@ namespace CensoAPI02.Controllers.FieldsControllers
                 return BadRequest(new { message = $"Ha ocurrido un error al obtener los usuarios asignados al tema. Error {ex.Message}" });
             }
         }
+
+        // Obtención de los estado de los tickets (requiere policy staff rh)
+        [HttpGet][Route("getTicketStatus")][AllowAnonymous]
+        public async Task<ActionResult> getTicketStatus()
+        {
+            try
+            {
+                var estado = from status in _context.RequestStatus
+                              select new
+                              {
+                                  status.rsId,
+                                  status.rsStatus
+                              };
+
+                if (estado == null || estado.Count() == 0)
+                {
+                    return NotFound(new { message = $"No se ha encontrada ningun estatus en la base de datos" });
+                }
+
+                return Ok(estado);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error en la obtencion de los estados de las peticiones" });
+            }
+        }
     }
 }

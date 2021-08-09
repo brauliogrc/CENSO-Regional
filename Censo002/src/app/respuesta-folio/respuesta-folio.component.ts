@@ -1,16 +1,11 @@
 import { Component, Input, OnInit, Pipe } from '@angular/core';
-import {
-  DomSanitizer,
-  SafeResourceUrl,
-  SafeUrl,
-  SafeValue,
-} from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
 import { LocationValidate } from '../services/validations';
 import { AnswerService } from '../services/newServices/Answer/answer.service';
-import { searchData, User } from '../interfaces/newInterfaces';
+import { searchData, User, ticketStatus } from '../interfaces/newInterfaces';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { FormBuilder, Validators } from '@angular/forms';
 
@@ -22,14 +17,23 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class RespuestaFolioComponent implements OnInit {
   ticketData: any;
   anonTicketData: any;
-  daysPassed: number = 0;
+
+  daysPassed: number = 0; // Dias transcurridos desde la creación del Ticket
+  answer: string | null = null; // Almacenamiento de la respuesta actual
+  currentStatus: string = ''; // Almacenamiento de estado actual
 
   flag: boolean = false;
   private ticketId: number = 0;
 
   availableUsers: User[] = [];
+  ticketStatus: ticketStatus[] = [];
 
-  currentUser: any = sessionStorage.getItem('employeeNumber');
+  valorNul = null;
+
+  private currentUser: any = sessionStorage.getItem('employeeNumber');
+  get getCurrentUser() {
+    return this.currentUser;
+  }
 
   constructor(
     private router: Router,
@@ -43,13 +47,15 @@ export class RespuestaFolioComponent implements OnInit {
 
   // Definición del formulario
   newAnswer = this._fb.group({
-    asUserId: ['', [Validators.required]],
-    asAnswer: ['', [Validators.required]],
+    asUserId: [''],
+    asAnswer: [''],
     asAttachement: ['', [Validators.maxLength(200)]],
+    requestStatus: ['', [Validators.required]],
   });
 
   ngOnInit(): void {
     this.validRole();
+    // console.log('valor', this.valorNul);
   }
 
   // Validacion del rol del usuario
@@ -67,9 +73,10 @@ export class RespuestaFolioComponent implements OnInit {
     }
     this.flag = false;
     this.ticketId = this._ticketService.getTicket;
-    console.log(this.ticketId);
+    // console.log(this.ticketId);
+    this.getTicketStatus();
     this.getTicketData();
-    console.log('folio de respuestas');
+    // console.log('folio de respuestas');
   }
 
   // Obtencion de los datos del ticket
@@ -87,6 +94,8 @@ export class RespuestaFolioComponent implements OnInit {
 
           this.flag = true;
           this.getAvailableUsers(this.anonTicketData.tId);
+
+          this.currentStatus = data.anonTicketData[0].rsStatus;
         } else {
           this.ticketData = data.ticketData[0];
 
@@ -97,8 +106,12 @@ export class RespuestaFolioComponent implements OnInit {
           console.log(this.ticketData);
           this.flag = true;
           this.getAvailableUsers(this.ticketData.tId);
+
+          this.currentStatus = data.ticketData[0].rsStatus;
         }
         this.daysPassed = data.daysPassed;
+        if (data.answer.asAnswer) this.answer = data.answer.asAnswer;
+        console.log(this.currentStatus);
       },
       (error) => {
         console.error(error.error.message);
@@ -116,7 +129,7 @@ export class RespuestaFolioComponent implements OnInit {
       this._fields.getAvailableUsers(searchData).subscribe(
         (data) => {
           this.availableUsers = [...data];
-          console.log(this.availableUsers);
+          // console.log(this.availableUsers);
         },
         (error) => {
           console.error(error.error.message);
@@ -125,13 +138,32 @@ export class RespuestaFolioComponent implements OnInit {
     }
   }
 
+  // Obtencion de los estado que puede tener un ticket
+  getTicketStatus() {
+    this._fields.getTicketStatus().subscribe(
+      (data) => {
+        this.ticketStatus = [...data];
+        // console.log(this.ticketStatus);
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
+  }
+
   // Guardado de la nueva respuesta
   registerAnswer(): void {
     const formData = new FormData();
     formData.append('asUserId', this.newAnswer.get('asUserId')?.value);
     formData.append('asAnswer', this.newAnswer.get('asAnswer')?.value);
     formData.append('RequestId', String(this.ticketId));
+    formData.append(
+      'requestStatus',
+      this.newAnswer.get('requestStatus')?.value
+    );
     formData.append('asAttachement', this.file);
+
+    console.log(this.newAnswer.get('asUserId')?.value);
 
     this._answerService.addNewAnswer(formData).subscribe(
       (data) => {

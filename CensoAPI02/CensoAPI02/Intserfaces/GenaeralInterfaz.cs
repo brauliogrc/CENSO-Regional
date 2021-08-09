@@ -136,6 +136,8 @@ namespace CensoAPI02.Intserfaces
 
         public string RequestId { get; set; }
 
+        public int requestStatus { get; set; }
+
         public IFormFile asAttachement { get; set; }
     }
 
@@ -178,5 +180,14 @@ namespace CensoAPI02.Intserfaces
         public string Issue { get; set; }
 
         public List<string>? emails { get; set; }
+    }
+
+    public class AnswerData
+    {
+        public int asId { get; set; }
+
+        public string asAnswer { get; set; }
+
+        public int flag { get; set; }
     }
 }

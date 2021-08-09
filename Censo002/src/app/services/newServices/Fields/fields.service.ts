@@ -2,7 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { searchData, User } from '../../../interfaces/newInterfaces';
+import {
+  searchData,
+  User,
+  ticketStatus,
+} from '../../../interfaces/newInterfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +60,13 @@ export class FieldsService {
         availableUser.locationId +
         '/' +
         availableUser.itemId
+    );
+  }
+
+  // Obtencion de los estado que puede tener un ticket
+  getTicketStatus(): Observable<ticketStatus[]> {
+    return this._http.get<ticketStatus[]>(
+      `${environment.API_URL}` + this.MyApiUrl + 'getTicketStatus'
     );
   }
 }
