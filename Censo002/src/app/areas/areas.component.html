@@ -56,11 +56,59 @@
                 <td>{{area.lName}}</td> -->
                 <td></td>
                 <td>
-                    <button class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
+                    <button id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
                     <button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
                 </td>
             </tr>
         </tbody>
     </table>
+
+    <!--Modal para la edicion de formularios -->
+    <div class="ModalEdit" id="ModalEdit">
+        <div class="ModalEditBack" id="ModalEditBack">
+          <div class="ModalTituloEdit">
+            <h1>Editar Area</h1>
+            <h4>Nombre area</h4>
+          </div>
+
+          <div class="ModalContenidoEdit">
+            <form class="row g-3">
+
+
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Nombre Área</label>
+                <input type="email" class="form-control" id="inputEmail4">
+              </div>
+              <div class="col-md-6">
+                <label for="inputState" class="form-label">Ubicación</label>
+                <select id="inputState" class="form-select">
+                  <option selected>Tijera</option>
+                  <option>tijera</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="inputState" class="form-label">Estatus</label>
+                <select id="inputState" class="form-select">
+                  <option selected>Activo</option>
+                  <option>Inactivo</option>
+                </select>
+              </div>
+
+              <!--Boton de actualizar-->
+              <div class="col-12">
+                <button class="btnIndexC" type="submit">Actualizar</button>
+
+              </div>
+              <!--Boton de actualizar-->
+            </form>
+          </div>
+          <div class="ModalBotonCerrar">
+            <button class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
+
+          </div>
+        </div>
+
+      </div>
+      <!--Modal para la edicion de formularios -->
 
 </div>
