@@ -19,6 +19,7 @@ namespace CensoAPI02.Controllers.NewControllers
     {
         private readonly CDBContext _context;
         private EmailHandler handler = new EmailHandler();
+        private ImageManager imageManager = new ImageManager();
 
         public AnonRequestController(CDBContext context)
         {
@@ -52,7 +53,17 @@ namespace CensoAPI02.Controllers.NewControllers
                 _context.AnonRequests.Add(addAnonRequest);
                 await _context.SaveChangesAsync();
 
-                // Guardado del archivo adjunto
+                // Guardado del archivio adjunto del ticket
+                string path = imageManager.saveTicketImage(newAnonRequest.arAttachement, addAnonRequest.arId);
+
+                if (path != null)
+                {
+                    addAnonRequest.arAttachement = path;
+                    _context.AnonRequests.Update(addAnonRequest);
+                    await _context.SaveChangesAsync();
+                }
+
+                /*// Guardado del archivo adjunto
                 var file = newAnonRequest.arAttachement;
                 var folderName = Path.Combine("Resources", "Request");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
@@ -85,7 +96,7 @@ namespace CensoAPI02.Controllers.NewControllers
                 else
                 {
                     addAnonRequest.arAttachement = null;
-                }
+                }*/
 
 
                 // Envio de correo electronico

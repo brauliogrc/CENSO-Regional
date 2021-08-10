@@ -20,6 +20,9 @@ namespace CensoAPI02.Controllers.NewControllers
         private readonly CDBContext _context;
         private static TicketAnswered answered = new TicketAnswered();
         private AnswerData respuesta;
+        private ImageManager imageManager = new ImageManager();
+        private string path;
+
 
         public AnswerController(CDBContext context)
         {
@@ -50,6 +53,11 @@ namespace CensoAPI02.Controllers.NewControllers
                     {
                         actualizaRespuesta.asAnswer = newAnswer.asAnswer;
                     }
+                    /*// Actualizacion del archivo adjunto
+                    if (newAnswer.asAttachement != null)
+                    {
+
+                    }*/
 
                     actualizaRespuesta.asCreationDate = DateTime.Now;
                     actualizaRespuesta.UserId = newAnswer.asUserId;
@@ -89,6 +97,8 @@ namespace CensoAPI02.Controllers.NewControllers
                     return Ok(new { message = $"Se ha actualizado la respuesta del ticket." });
                 }
 
+
+                // Registro de la nueva respuesta
                 var addAnswer = new AnswerStatus()
                 {
                     UserId = newAnswer.asUserId,
@@ -117,6 +127,16 @@ namespace CensoAPI02.Controllers.NewControllers
                     _context.Answer.Add(addAnswer);
                     await _context.SaveChangesAsync();
 
+                    // Guardado del archivio adjunto a la respuesta
+                    this.path = imageManager.saveTicketImage(newAnswer.asAttachement, addAnswer.asId);
+
+                    if (this.path != null)
+                    {
+                        addAnswer.asAttachement = this.path;
+                        _context.Answer.Update(addAnswer);
+                        await _context.SaveChangesAsync();
+                    }
+
                     return Ok(new { message = $"Respuesta {addAnswer.asId} del tiket {RequestId}, registrada correctamente" });
                 }
 
@@ -133,6 +153,16 @@ namespace CensoAPI02.Controllers.NewControllers
                 // Registro de la nueva respuesta en la tabla AnswerStatus
                 _context.Answer.Add(addAnswer);
                 await _context.SaveChangesAsync();
+
+                // Guardado del archivio adjunto a la respuesta
+                this.path = imageManager.saveTicketImage(newAnswer.asAttachement, addAnswer.asId);
+
+                if (this.path != null)
+                {
+                    addAnswer.asAttachement = this.path;
+                    _context.Answer.Update(addAnswer);
+                    await _context.SaveChangesAsync();
+                }
 
                 /*// Guardado del archivo adjuto
                 var file = newAnswer.asAttachement;

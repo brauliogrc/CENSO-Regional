@@ -18,6 +18,7 @@ namespace CensoAPI02.Controllers.NewControllers
     {
         private readonly CDBContext _context;
         private EmailHandler handler = new EmailHandler();
+        private ImageManager imageManager = new ImageManager();
 
         public  RequestController(CDBContext context)
         {
@@ -55,7 +56,17 @@ namespace CensoAPI02.Controllers.NewControllers
                 _context.Requests.Add(addRequest);
                 await _context.SaveChangesAsync();
 
-                // Guardado del archivo adjunto
+                // Guardado del archivio adjunto del ticket
+                string path = imageManager.saveTicketImage(newRequest.rAttachement, addRequest.rId);
+
+                if (path != null)
+                {
+                    addRequest.rAttachement = path;
+                    _context.Requests.Update(addRequest);
+                    await _context.SaveChangesAsync();
+                }
+
+                /*// Guardado del archivo adjunto
                 var file = newRequest.rAttachement;
                 var folderName = Path.Combine("Resources", "Request");
                 var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
@@ -89,7 +100,7 @@ namespace CensoAPI02.Controllers.NewControllers
                 else
                 {
                     addRequest.rAttachement = null;
-                }
+                }*/
 
                 // Envio de correo electronico
                 MailData mailData = new MailData(addRequest.rId, addRequest.ThemeId, addRequest.rIssue);

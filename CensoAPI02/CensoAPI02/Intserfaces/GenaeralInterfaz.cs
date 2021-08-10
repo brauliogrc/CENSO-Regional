@@ -182,6 +182,7 @@ namespace CensoAPI02.Intserfaces
         public List<string>? emails { get; set; }
     }
 
+    // Interface de obtencion de datos para la actualización de una respuesta
     public class AnswerData
     {
         public int asId { get; set; }

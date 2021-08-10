@@ -47,7 +47,7 @@ export class RespuestaFolioComponent implements OnInit {
 
   // Definición del formulario
   newAnswer = this._fb.group({
-    asUserId: [''],
+    asUserId: ['', [Validators.required]],
     asAnswer: [''],
     asAttachement: ['', [Validators.maxLength(200)]],
     requestStatus: ['', [Validators.required]],

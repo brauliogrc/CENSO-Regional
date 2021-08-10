@@ -186,9 +186,9 @@ namespace CensoAPI02.Controllers.NewControllers
                              {
                                  // Datos de la respuesta
                                  answerStatus.asId,
-                                 //answerStatus.request,
                                  answerStatus.asCreationDate,
                                  answerStatus.asAnswer,
+                                 answerStatus.asAttachement,
                                  // Datos del usuario
                                  //user.uId,
                                  user.uName,
