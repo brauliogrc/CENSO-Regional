@@ -200,6 +200,8 @@ export class UsuariosComponent implements OnInit {
 
   // Borrado logico del usuario
   deleteUser(userId: number): void {
+    // console.log(userId);
+
     this._userSerice.deleteUser(userId).subscribe(
       (data) => {
         console.log(data.message);
@@ -214,6 +216,8 @@ export class UsuariosComponent implements OnInit {
 
   // Busqueda de un usuario en especifico
   search(employeeNumber: string): void {
+    // console.log(employeeNumber);
+    
     if (employeeNumber) {
       // Definicion de los datos de busqueda
       let userSearch: searchData = {

@@ -148,12 +148,10 @@ html {
     font-family: "Starg Sans";
     src: url("assets/Tipografia/Continental\ Stag\ Sans-Light.otf");
   }
-
   @font-face {
     font-family: "Starg Sans book";
     src: url("assets/Tipografia/Continental\ Stag\ Sans-Book.otf");
   }
-
   @font-face {
     font-family: "Starg Sans medium";
     src: url("assets/Tipografia/Continental\ Stag\ Sans-Medium.otf");
@@ -192,11 +190,6 @@ html {
   width: 200px;
   border-radius: 100%;
 }
-
-#employee {
-  width: 400px;
-}
-
 .form-box input[type="number"],
 .form-box input[type="password"],
 .form-box button[type="submit"] {
@@ -1405,3 +1398,114 @@ body {
 }
 
 /*  responsive          */
+.contentañadirTem {
+  display: flex;
+  margin-top: 20px;
+}
+/* Modales de edicion de formularios */
+.ModalEdit {
+  display: flex;
+  background: rgba(39, 39, 39, 0.603);
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.644);
+}
+
+.ModalEditBack {
+  background: white;
+  width: 60%;
+  padding: 10px;
+  transition: 0.5s ease all;
+  transform: scale(0);
+  border-radius: 100%;
+  opacity: 0;
+}
+.ModalEditBack.active {
+  opacity: 1;
+  transform: scale(0.9);
+  border-radius: 1em;
+}
+
+.ModalTituloEdit {
+  width: 100%;
+  text-align: center;
+}
+
+.ModalContenidoEdit {
+  background: rgba(0, 0, 0, 0.13);
+  width: 100%;
+  padding: 20px;
+}
+.ModalBotonCerrar {
+  display: flexbox;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+.TablaTemasUsuarios {
+  height: 100px;
+  overflow-y: scroll;
+}
+
+/* Modales de edicion de formularios agregar tema */
+.ModalEditTemas {
+  display: flex;
+  background: rgba(39, 39, 39, 0.603);
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  pointer-events: none;
+  opacity: 0;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.644);
+}
+
+.ModalEditBackTemas {
+  background: white;
+  width: 60%;
+  padding: 10px;
+  transition: 0.5s ease all;
+  transform: scale(0);
+  border-radius: 100%;
+  opacity: 0;
+}
+.ModalEditBackTemas.active {
+  opacity: 1;
+  transform: scale(0.9);
+  border-radius: 1em;
+}
+
+.ModalTituloEdit {
+  width: 100%;
+  text-align: center;
+}
+
+.ModalContenidoEdit {
+  background: rgba(0, 0, 0, 0.13);
+  width: 100%;
+  padding: 20px;
+}
+.ModalBotonCerrar {
+  display: flexbox;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+.TablaTemasUsuarios {
+  height: 100px;
+  overflow-y: scroll;
+}
+
+/* Modales de edicion de formularios agregar tema */
+
+/* Modales de edicion de formularios */

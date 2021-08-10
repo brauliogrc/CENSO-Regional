@@ -16,7 +16,7 @@ namespace CensoAPI02.Models
         public string anAnswer { get; set; } // Contenido de la resppuesta
 
         [Required]
-        public int anUserId { get; set; } // Id del usuario que respondió la pregunta
+        public long anUserId { get; set; } // Id del usuario que respondió la pregunta
 
         [Required]
         public DateTime anCreationDate { get; set; } // Fecha de creacion de la respuesata -> podria estar ligada la arModificationDate de anonymousRequest

@@ -60,7 +60,7 @@ namespace CensoAPI02.Controllers.SearchesControllers
             {
                 var query = from user in _context.HRU
                             join location in _context.Locations on user.LocationId equals location.lId
-                            join role in _context.Roles on user.uEmployeeNumber equals role.rolId
+                            join role in _context.Roles on user.RoleId equals role.rolId
                             where user.uStatus == true && user.uEmployeeNumber == itemId && location.lId == locationId 
                             select new
                             {

@@ -167,17 +167,17 @@ namespace CensoAPI02.Controllers.NewControllers
 
 
         // Eliminacioón lógica de usuario
-        [HttpDelete] [Route("deleteUser/{userId}")][AllowAnonymous]
-        public async Task<IActionResult> deleteUser(int userId)
+        [HttpDelete] [Route("deleteUser/{employeeNumber}")][AllowAnonymous]
+        public async Task<IActionResult> deleteUser(long employeeNumber)
         {
             try
             {
                 // Busqieda del usuario por medio del Id
-                var query = await _context.HRU.FindAsync(userId);
+                var query = await _context.HRU.FindAsync(employeeNumber);
 
                 if (query == null)
                 {
-                    return NotFound(new {message = $"El usuario {userId}, no se encuentra en la base de datos" });
+                    return NotFound(new {message = $"El usuario {employeeNumber}, no se encuentra en la base de datos" });
                 }
 
                 // Modificacion del campo status para la eliminació lógica
@@ -185,7 +185,7 @@ namespace CensoAPI02.Controllers.NewControllers
                 _context.HRU.Update(query);
                 await _context.SaveChangesAsync();
 
-                return Ok(new { message = $"El usuario {userId}, ha sido eliminado con exito" });
+                return Ok(new { message = $"El usuario {employeeNumber}, ha sido eliminado con exito" });
             }catch(Exception ex)
             {
                 return BadRequest(new { message = $"Ha ocurido un error al eliminar el usuatio. Error: {ex.Message}" });
