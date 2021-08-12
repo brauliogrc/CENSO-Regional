@@ -1,30 +1,31 @@
-var mostrarContenidoModalpopup = document.getElementById('mostrarContenidoModalpopup'),
-    ModalEditBack = document.getElementById('ModalEditBack'),
-    quitarContenidoModalpopup = document.getElementById('quitarContenidoModalpopup');
+const mostrarContenidoModalpopup = document.getElementById('mostrarContenidoModalpopup');
+const ModalEditBack = document.getElementById('ModalEditBack');
+const quitarContenidoModalpopup = document.getElementById('quitarContenidoModalpopup');
 
-mostrarContenidoModalpopup.addEventListener('click', function () {
+mostrarContenidoModalpopup.addEventListener('click', () => {
     ModalEditBack.classList.add('active');
+    //ModalEditBack.getElementById('ModalEditBack').classList.add('active');
     document.getElementById('ModalEdit').style.pointerEvents = 'all';
     document.getElementById('ModalEdit').style.opacity = 1;
 });
 
-quitarContenidoModalpopup.addEventListener('click', function () {
+quitarContenidoModalpopup.addEventListener('click', () => {
     ModalEditBack.classList.remove('active');
     document.getElementById('ModalEdit').style.pointerEvents = 'none';
     document.getElementById('ModalEdit').style.opacity = 0;
 });
 
-var mostrarContenidoModalpopupTemas = document.getElementById('mostrarContenidoModalpopupTemas'),
-    ModalEditBackTemas = document.getElementById('ModalEditBackTemas'),
-    quitarContenidoModalpopupTemas = document.getElementById('quitarContenidoModalpopupTemas');
+const mostrarContenidoModalpopupTemas = document.getElementById('mostrarContenidoModalpopupTemas');
+const ModalEditBackTemas = document.getElementById('ModalEditBackTemas');
+const quitarContenidoModalpopupTemas = document.getElementById('quitarContenidoModalpopupTemas');
 
-mostrarContenidoModalpopupTemas.addEventListener('click', function () {
+mostrarContenidoModalpopupTemas.addEventListener('click', () => {
     ModalEditBackTemas.classList.add('active');
     document.getElementById('ModalEditTemas').style.pointerEvents = 'all';
     document.getElementById('ModalEditTemas').style.opacity = 1;
 });
 
-quitarContenidoModalpopupTemas.addEventListener('click', function () {
+quitarContenidoModalpopupTemas.addEventListener('click', () => {
     ModalEditBackTemas.classList.remove('active');
     document.getElementById('ModalEditTemas').style.pointerEvents = 'none';
     document.getElementById('ModalEditTemas').style.opacity = 0;
