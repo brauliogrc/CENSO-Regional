@@ -153,11 +153,17 @@ export class UsuariosComponent implements OnInit {
 
   // Muestra el correo del usuario
   getEmail = (): string | null => {
-    if (this.userInformation.email) {
+    // console.log(this.newUser.get('uEmail')?.value);
+    // this.userInformation.email?.split(" ").join("");
+    if (this.userInformation.email?.length != 0) {
+      // console.log(this.userInformation.email);
       return this.userInformation.email;
+      
     }
+    // console.log(this.newUser.get('uEmail')?.value);
+    
 
-    return null;
+    return this.newUser.get('uEmail')?.value;
   };
 
   // Muestra la localidad del ususario
@@ -174,7 +180,7 @@ export class UsuariosComponent implements OnInit {
       // TODO
       const dataNewUser: addUser = {
         uName: this.getUserName(),
-        uEmail: this.getEmail(),
+        uEmail: this.newUser.get('uEmail')?.value ,
         RolId: this.newUser.get('RolId')?.value,
         uStatus: this.newUser.get('uStatus')?.value,
         EmployeeNumber: this.newUser.get('EmployeeNumber')?.value,
@@ -217,7 +223,7 @@ export class UsuariosComponent implements OnInit {
   // Busqueda de un usuario en especifico
   search(employeeNumber: string): void {
     // console.log(employeeNumber);
-    
+
     if (employeeNumber) {
       // Definicion de los datos de busqueda
       let userSearch: searchData = {

@@ -1509,3 +1509,5 @@ body {
 /* Modales de edicion de formularios agregar tema */
 
 /* Modales de edicion de formularios */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

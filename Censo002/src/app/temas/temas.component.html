@@ -120,4 +120,70 @@
       </ng-template>
     </tbody>
   </table>
+
+  <!--Modal para la edicion de formularios -->
+  <div class="ModalEdit" id="ModalEdit">
+    <div class="ModalEditBack" id="ModalEditBack">
+      <div class="ModalTituloEdit">
+        <h1>Editar Tema</h1>
+        <h4>Tema</h4>
+      </div>
+
+      <div class="ModalContenidoEdit">
+        <form class="row g-3">
+          <!--Todo contenido del form -->
+
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Nombre del tema</label>
+            <input type="email" class="form-control" id="inputEmail4">
+          </div>
+          <div class="col-md-6">
+            <label for="inputState" class="form-label">Ubicación</label>
+            <select id="inputState" class="form-select">
+              <option selected>Activo</option>
+              <option>Inactivo</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">Estatus</label>
+            <select id="inputState" class="form-select">
+              <option selected>Activo</option>
+              <option>Inactivo</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">Preguntas</label>
+            <select id="inputState" class="form-select">
+              <option selected>pregunta 1</option>
+              <option>pregunta 2</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">Localidades</label>
+            <select id="inputState" class="form-select">
+              <option selected>pregunta 1</option>
+              <option>pregunta 2</option>
+            </select>
+          </div>
+
+          <!--Todo contenido del form -->
+
+          <!--Boton de actualizar-->
+          <div class="col-12">
+            <button class="btnIndexC" type="submit">Actualizar</button>
+
+          </div>
+          <!--Boton de actualizar-->
+        </form>
+      </div>
+      <div class="ModalBotonCerrar">
+        <button class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
+
+      </div>
+    </div>
+
+  </div>
+  <!--Modal para la edicion de formularios -->
 </div>
