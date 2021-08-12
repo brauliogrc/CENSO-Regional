@@ -1,3 +1,4 @@
+// Solo hace que aparaesca la ventana del modal
 const mostrarContenidoModalpopup = document.getElementById('mostrarContenidoModalpopup');
 const ModalEditBack = document.getElementById('ModalEditBack');
 const quitarContenidoModalpopup = document.getElementById('quitarContenidoModalpopup');
@@ -7,6 +8,7 @@ mostrarContenidoModalpopup.addEventListener('click', () => {
     //ModalEditBack.getElementById('ModalEditBack').classList.add('active');
     document.getElementById('ModalEdit').style.pointerEvents = 'all';
     document.getElementById('ModalEdit').style.opacity = 1;
+    console.log('Entró');
 });
 
 quitarContenidoModalpopup.addEventListener('click', () => {
@@ -15,6 +17,8 @@ quitarContenidoModalpopup.addEventListener('click', () => {
     document.getElementById('ModalEdit').style.opacity = 0;
 });
 
+
+// Modal de añadir temas
 const mostrarContenidoModalpopupTemas = document.getElementById('mostrarContenidoModalpopupTemas');
 const ModalEditBackTemas = document.getElementById('ModalEditBackTemas');
 const quitarContenidoModalpopupTemas = document.getElementById('quitarContenidoModalpopupTemas');
@@ -29,4 +33,4 @@ quitarContenidoModalpopupTemas.addEventListener('click', () => {
     ModalEditBackTemas.classList.remove('active');
     document.getElementById('ModalEditTemas').style.pointerEvents = 'none';
     document.getElementById('ModalEditTemas').style.opacity = 0;
-});
+}); 

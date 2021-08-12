@@ -28,6 +28,8 @@ import { RespuestaFolioComponent } from './respuesta-folio/respuesta-folio.compo
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ReportesComponent } from './reportes/reportes.component';
 
+import { CreateScriptsService } from './services/newServices/CreateScripts/create-scripts.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +61,9 @@ import { ReportesComponent } from './reportes/reportes.component';
     FormsModule,
     NgxFileDropModule,
   ],
-  providers: [],
+  providers: [
+    CreateScriptsService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

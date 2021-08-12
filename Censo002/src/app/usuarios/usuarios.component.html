@@ -1,3 +1,5 @@
+<script src="../../assets/js/popoupEdicion.js"></script>
+
 <div class="contenido1">
   <div class="buscar">
   <h1>Usuarios</h1>
@@ -85,7 +87,8 @@
               <td>{{ user.lName }}</td>
                 <td>
                   <button  id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
-                    <button (click)="deleteUser(user.uId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+                  <button (click)="deleteUser(user.uId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+                  <button class="btn btn-success" id="mostrarContenidoModalpopupTemas" type="submit">Añadir temas</button>
                 </td>
             </tr>
           </ng-container>
@@ -100,7 +103,8 @@
               <td>{{ user[0].lName }}</td>
               <td>
                 <button  id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
-                  <button (click)="deleteUser(user[0].uId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+                <button (click)="deleteUser(user[0].uId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+                <button class="btn btn-success" id="mostrarContenidoModalpopupTemas" type="submit">Añadir temas</button>
               </td>
             </tr>
           </ng-template>
@@ -163,19 +167,19 @@
             <tbody>
               <tr>
                 <td>Tema 1</td>
-                <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button></td>
+                <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button></td>
               </tr>
               <tr>
                 <td>Tema 1</td>
-                <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button></td>
+                <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button></td>
               </tr>
               <tr>
                 <td>Tema 1</td>
-                <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button></td>
+                <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button></td>
               </tr>
               <tr>
                 <td>Tema 1</td>
-                <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button></td>
+                <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button></td>
               </tr>
             </tbody>
           </table>
@@ -234,22 +238,22 @@
                 <tbody>
                   <tr>
                     <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit..</td>
-                    <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button>
+                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
                     </td>
                   </tr>
                   <tr>
                     <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button>
+                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
                     </td>
                   </tr>
                   <tr>
                     <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button>
+                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
                     </td>
                   </tr>
                   <tr>
                     <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button>
+                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
                     </td>
                   </tr>
                 </tbody>

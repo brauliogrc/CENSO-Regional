@@ -13,6 +13,7 @@ import { QuestionService } from '../services/newServices/Question/question.servi
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { ListService } from '../services/newServices/List/list.service';
 import { searchData } from '../interfaces/newInterfaces';
+import { CreateScriptsService } from '../services/newServices/CreateScripts/create-scripts.service';
 
 @Component({
   selector: 'app-preguntas',
@@ -38,6 +39,7 @@ export class PreguntasComponent implements OnInit {
   });
 
   constructor(
+    private _createScripts: CreateScriptsService,
     private _fb: FormBuilder,
     private _searchService: SearchService,
     private _questionService: QuestionService,
@@ -45,7 +47,9 @@ export class PreguntasComponent implements OnInit {
     private _listService: ListService,
     private _authService: AuthService,
     private router: Router
-  ) {}
+  ) {
+    this._createScripts.CargaArchivos( ["popoupEdicion"] );
+  }
 
   ngOnInit(): void {
     this.validRole();

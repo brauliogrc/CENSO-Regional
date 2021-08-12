@@ -115,6 +115,7 @@ namespace CensoAPI02.Controllers
                 administrator.setAdminLocation(user.LocationId);
                 administrator.setAdminName(user.uName);
                 administrator.setAdminEmail(user.uEmail);
+                administrator.setAdminSupervisorNumber(user.uSupervisorNumber);
 
                 token = generateAdministratorToken(administrator);
                 administrator = null;

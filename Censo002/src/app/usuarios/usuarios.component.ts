@@ -15,6 +15,8 @@ import {
   searchData,
 } from '../interfaces/newInterfaces';
 
+import { CreateScriptsService } from '../services/newServices/CreateScripts/create-scripts.service';
+
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
@@ -53,6 +55,7 @@ export class UsuariosComponent implements OnInit {
   });
 
   constructor(
+    private _createScript: CreateScriptsService,
     private _listService: ListService,
     private _userSerice: UserService,
     private _searchService: SearchService,
@@ -60,7 +63,9 @@ export class UsuariosComponent implements OnInit {
     private _fieldsService: FieldsService,
     private _fb: FormBuilder,
     private router: Router
-  ) {}
+  ) {
+    this._createScript.CargaArchivos( [ "popoupEdicion" ] );
+  }
 
   ngOnInit(): void {
     this.validRole();
@@ -158,10 +163,8 @@ export class UsuariosComponent implements OnInit {
     if (this.userInformation.email?.length != 0) {
       // console.log(this.userInformation.email);
       return this.userInformation.email;
-      
     }
     // console.log(this.newUser.get('uEmail')?.value);
-    
 
     return this.newUser.get('uEmail')?.value;
   };
@@ -180,7 +183,7 @@ export class UsuariosComponent implements OnInit {
       // TODO
       const dataNewUser: addUser = {
         uName: this.getUserName(),
-        uEmail: this.newUser.get('uEmail')?.value ,
+        uEmail: this.newUser.get('uEmail')?.value,
         RolId: this.newUser.get('RolId')?.value,
         uStatus: this.newUser.get('uStatus')?.value,
         EmployeeNumber: this.newUser.get('EmployeeNumber')?.value,

@@ -34,7 +34,7 @@ export class PaneladminComponent implements OnInit {
     this.router.navigate(['paneladmin/preguntas']);
   }
   navegarReportes() {
-    this.router.navigate(['paneladmin/Reportes']);
+    this.router.navigate(['paneladmin/reportes']);
   }
 
   getName() {

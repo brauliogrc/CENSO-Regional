@@ -41,7 +41,7 @@ const routes: Routes = [
       { path: 'areas', component: AreasComponent },
       { path: 'preguntas', component: PreguntasComponent },
       { path: 'tikets', component: TiketsComponent },
-      { path: 'reportes', component: ReportesComponent },
+      { path: 'reportes', component: ReportesComponent }, 
       { path: '**', pathMatch: 'full', redirectTo: 'bienvenido' },
     ],
   }, //
