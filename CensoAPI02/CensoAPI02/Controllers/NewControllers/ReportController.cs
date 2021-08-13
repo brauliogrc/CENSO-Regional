@@ -26,30 +26,84 @@ namespace CensoAPI02.Controllers.NewControllers
             try
             {
                 var tickets = from request in _context.Requests
-                              join user in _context.HRU on request.rUserId equals user.uEmployeeNumber
+                              //join user in _context.HRU on request.rUserId equals user.uEmployeeNumber
                               join theme in _context.Theme on request.ThemeId equals theme.tId
                               join question in _context.Questions on request.QuestionId equals question.qId
                               join location in _context.Locations on request.LocationId equals location.lId
                               join area in _context.Areas on request.AreaId equals area.aId
                               join status in _context.RequestStatus on request.StatusId equals status.rsId
-                              join answer in _context.Answer on request.rId equals answer.RequestId
+                              //join answer in _context.Answer on request.rId equals answer.RequestId
                               where location.lId == locationId //&& request.StatusId != 4
                               select new
                               {
-                                  
+                                  // Datos del ticket
+                                  request.rId,
+                                  request.rUserId,
+                                  request.rUserName,
+                                  request.rEmployeeLeader,
+                                  request.rEmployeeType,
+                                  request.rCreationDate,
+                                  // Datos de la localidad
+                                  location.lId,
+                                  location.lName,
+                                  // Datos del usuario
+                                  /*user.uEmployeeNumber,
+                                  user.uName,*/
+                                  // Datos del tema
+                                  theme.tId,
+                                  theme.tName,
+                                  // Datos de la pregunta
+                                  question.qId,
+                                  question.qName,
+                                  // Datos del area
+                                  area.aId,
+                                  area.aName,
+                                  // Datos de la respuesta
+                                  /*answer.asId,
+                                  answer.asAnswer,
+                                  answer.asCreationDate,*/
+                                  // Datos del estatus
+                                  status.rsId,
+                                  status.rsStatus
                               };
 
                 var anonTickets = from anonReq in _context.AnonRequests
+                                  //join user in _context.HRU on anonReq.arModificationUser equals user.uEmployeeNumber
                                   join theme in _context.Theme on anonReq.ThemeId equals theme.tId
                                   join question in _context.Questions on anonReq.QuestionId equals question.qId
                                   join location in _context.Locations on anonReq.LocationId equals location.lId
                                   join area in _context.Areas on anonReq.AreaId equals area.aId
                                   join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
-                                  join answer in _context.Answer on anonReq.arId equals answer.AnonRequestId
+                                  //join answer in _context.Answer on anonReq.arId equals answer.AnonRequestId
                                   where location.lId == locationId //&& anonReq.StatusId != 4
                                   select new
                                   {
-                                      
+                                      // Datos del ticket
+                                      anonReq.arId,
+                                      anonReq.arEmployeeType,
+                                      anonReq.arCreationDate,
+                                      // Datos de la localidad
+                                      location.lId,
+                                      location.lName,
+                                      // Datos del usuario
+                                      /*user.uEmployeeNumber,
+                                      user.uName,*/
+                                      // Datos del tema
+                                      theme.tId,
+                                      theme.tName,
+                                      // Datos de la pregunta
+                                      question.qId,
+                                      question.qName,
+                                      // Datos del area
+                                      area.aId,
+                                      area.aName,
+                                      // Datos de la respuesta
+                                      /*answer.asId,
+                                      answer.asAnswer,
+                                      answer.asCreationDate,*/
+                                      // Datos del estatus
+                                      status.rsId,
+                                      status.rsStatus
                                   };
 
                 if ((tickets == null || tickets.Count() == 0) && (anonTickets == null || anonTickets.Count() == 0))
