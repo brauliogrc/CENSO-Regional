@@ -16,7 +16,7 @@
   <div class="ContendorPageAngular00">
     <div class="content-titulo">
       <div class="Content-btn-folio2">
-        <button class="btnIndexC1" type="submit">Crear folio</button>
+        <button (click)="addNewTicket()" class="btnIndexC1" type="submit">Crear folio</button>
       </div>
     </div>
     <!--</div>-->
@@ -48,7 +48,11 @@
             </div>
           </form>
 
-          <div class="ModalContenidoBusq" id="ModalContenidoBusq">
+          <table>
+            
+          </table>
+
+          <!-- <div class="ModalContenidoBusq" id="ModalContenidoBusq">
             <div class="ModalContenido1Busq">
               <div *ngIf="ticketStatus" class="tabalaAnonima1">
                 <div class="tituloFolioAnonimo">
@@ -131,7 +135,7 @@
                 </button>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { addAnonRequest } from 'src/app/interfaces/newInterfaces';
+import { addAnonRequest } from 'src/assets/ts/interfaces/newInterfaces';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

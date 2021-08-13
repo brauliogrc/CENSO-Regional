@@ -10,7 +10,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
-          "strict": true
+          "strict": false
         }
       },
       "root": "",
@@ -34,9 +34,7 @@
               "src/custom-theme.scss",
               "src/styles.css"
             ],
-            "scripts": [
-              "assets/js/popoupEdicion.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {

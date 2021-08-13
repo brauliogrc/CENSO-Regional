@@ -3,9 +3,9 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
-import { LocationValidate } from '../services/validations';
+import { LocationValidate } from '../../assets/ts/validations';
 import { AnswerService } from '../services/newServices/Answer/answer.service';
-import { searchData, User, ticketStatus } from '../interfaces/newInterfaces';
+import { searchData, User, ticketStatus } from '../../assets/ts/interfaces/newInterfaces';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { FormBuilder, Validators } from '@angular/forms';
 

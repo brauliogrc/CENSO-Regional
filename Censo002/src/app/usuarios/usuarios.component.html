@@ -1,5 +1,3 @@
-<script src="../../assets/js/popoupEdicion.js"></script>
-
 <div class="contenido1">
   <div class="buscar">
   <h1>Usuarios</h1>
@@ -86,9 +84,9 @@
               <td>{{ user.uStatus }}</td>
               <td>{{ user.lName }}</td>
                 <td>
-                  <button   onclick="mostrar()" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
+                  <button   (click)="mostrar()" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
                   <button (click)="deleteUser(user.uId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                  <button class="btn btn-success" onclick="mostrarTema()" type="submit">Añadir temas</button>
+                  <button class="btn btn-success" (click)="mostrarTema()" type="submit">Añadir temas</button>
                 </td>
             </tr>
           </ng-container>
@@ -105,7 +103,7 @@
                 <button   onclick="mostrar()" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
 
                 <button (click)="deleteUser(user[0].uId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                <button class="btn btn-success" onclick="mostrarTema()" type="submit">Añadir temas</button>
+                <button class="btn btn-success" (click)="mostrarTema()" type="submit">Añadir temas</button>
               </td>
             </tr>
           </ng-template>
@@ -192,7 +190,7 @@
       </form>
     </div>
     <div class="ModalBotonCerrar">
-      <button class="btn btn-danger" onclick="cerrar()" type="submit">Cerrar</button>
+      <button class="btn btn-danger" (click)="cerrar()" type="submit">Cerrar</button>
 
     </div>
   </div>
@@ -269,7 +267,7 @@
       </form>
     </div>
     <div class="ModalBotonCerrar">
-      <button class="btn btn-danger" onclick="cerrarTema()" type="submit">Cerrar</button>
+      <button class="btn btn-danger" (click)="cerrarTema()" type="submit">Cerrar</button>
 
     </div>
   </div>

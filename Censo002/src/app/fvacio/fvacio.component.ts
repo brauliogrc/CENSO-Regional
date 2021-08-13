@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
 
@@ -14,7 +15,8 @@ export class FvacioComponent implements OnInit {
 
   constructor(
     private _authService: AuthService,
-    private _ticketService: TicketService
+    private _ticketService: TicketService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -50,5 +52,10 @@ export class FvacioComponent implements OnInit {
   // Llamada al metodo de cerrar sesion
   logout() {
     this._authService.logout();
+  }
+
+  // Navegar al panel usuario
+  addNewTicket() {
+    this.router.navigate(['/panelusuario']);
   }
 }

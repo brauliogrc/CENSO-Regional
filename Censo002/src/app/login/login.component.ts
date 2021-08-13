@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { dataLogin, Token } from '../interfaces/newInterfaces';
+import { dataLogin, Token } from '../../assets/ts/interfaces/newInterfaces';
 
 const helper = new JwtHelperService();
 
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       usernumber: this.loginForm.get('usernumber')?.value,
       pass: this.loginForm.get('password')?.value,
     };
-    console.log(dataLogin);
+    // console.log(dataLogin);
 
     // Nos suscribimos al método del service, enviandole el objeto con los datos para validar si el usuario existe en la base de datos
     this._authService.Login(dataLogin).subscribe(
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           console.error('Usuario no encontrado en la base de datos');
         } else {
           this.dataToken = helper.decodeToken(data.token);
-          console.log(this.dataToken);
+          // console.log(this.dataToken);
 
           // this.loginForm.reset();
 

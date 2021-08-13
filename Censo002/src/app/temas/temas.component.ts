@@ -7,7 +7,7 @@ import {
   themeList,
   Location,
   searchData,
-} from '../interfaces/newInterfaces';
+} from '../../assets/ts/interfaces/newInterfaces';
 import { ThemeService } from '../services/newServices/Theme/theme.service';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { ListService } from '../services/newServices/List/list.service';

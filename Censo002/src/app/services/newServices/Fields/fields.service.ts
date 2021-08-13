@@ -6,7 +6,7 @@ import {
   searchData,
   User,
   ticketStatus,
-} from '../../../interfaces/newInterfaces';
+} from '../../../../assets/ts/interfaces/newInterfaces';
 
 @Injectable({
   providedIn: 'root',

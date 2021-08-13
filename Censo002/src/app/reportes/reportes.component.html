@@ -22,6 +22,8 @@
         </div>
         <div class="contentañadirTem">
             <button class="btnIndexC" type="submit">Buscar</button>
+            &nbsp;
+            <button (click)="exportToExcel()" class="btnIndexC" type="submit">Exportar</button>
         </div>
     </form>
     <hr>
@@ -29,24 +31,35 @@
     <table class="table table-dark table-sm">
         <thead>
             <tr>
-                <th>Folio</th>Q
-                <th>Planta</th>Q
-                <th>Tema</th>Q
-                <th>Area</th>Q
-                <th>Tipo de empleado</th>Q
-                <th>Num empleado</th>Q
+                <th>Folio</th>
+                <th>Planta</th>
+                <th>Tema</th>
+                <th>Area</th>
+                <th>Tipo de empleado</th>
+                <th>Num empleado</th>
                 <!-- <th>Num empleado lider</th>NA -->
-                <th>Status</th>Q
+                <th>Status</th>
                 <!-- <th>Ticket</th>            NA-->
-                <th>Num RH empleado</th>Q
-                <th>Respuesta</th>
-                <th>Fecha creacion</th>Q
+                <!-- <th>Num RH empleado</th> -->
+                <!-- <th>Respuesta</th> -->
+                <th>Fecha creacion</th>
                 <!-- <th>Fecha cierre</th>      NA -->
                 <!-- <th>Acciones</th>          NA
                 <th>Acciones</th>               NA -->
             </tr>
         </thead>
         <tbody>
+            <tr *ngFor="let ticket of ticketList">
+                <th>{{ ticket.ticketId }}</th>
+                <th>{{ ticket.location }}</th>
+                <th>{{ ticket.theme }}</th>
+                <th>{{ ticket.area }}</th>
+                <th>{{ ticket.employeeType }}</th>
+                <th>{{ ticket.userId }}</th>
+                <th>{{ ticket.status }}</th>
+                <!-- <th>{{ ticket. }}</th> -->
+                <th>{{ ticket.creationDate | date: "shortDate" }}</th>
+            </tr>
             <!-- <tr>
                 <td>{{area.aId}}</td>
                 <td>{{area.aName}}</td>

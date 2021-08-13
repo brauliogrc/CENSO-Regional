@@ -11,7 +11,7 @@ import {
   Location,
   searchData,
   addArea,
-} from '../interfaces/newInterfaces';
+} from '../../assets/ts/interfaces/newInterfaces';
 
 @Component({
   selector: 'app-areas',

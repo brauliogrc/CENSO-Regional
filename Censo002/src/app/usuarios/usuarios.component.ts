@@ -6,16 +6,17 @@ import { ListService } from '../services/newServices/List/list.service';
 import { UserService } from '../services/newServices/user/user.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
-import { userInformation } from '../interfaces/newInterfaces';
+import { userInformation } from '../../assets/ts/interfaces/newInterfaces';
 import {
   addUser,
   Location,
   Rol,
   userList,
   searchData,
-} from '../interfaces/newInterfaces';
+} from '../../assets/ts/interfaces/newInterfaces';
 
-import { CreateScriptsService } from '../services/newServices/CreateScripts/create-scripts.service';
+// import { CreateScriptsService } from '../services/newServices/CreateScripts/create-scripts.service';
+import { Popup } from '../../assets/ts/popup';
 
 @Component({
   selector: 'app-usuarios',
@@ -55,7 +56,7 @@ export class UsuariosComponent implements OnInit {
   });
 
   constructor(
-    private _createScript: CreateScriptsService,
+    // private _createScript: CreateScriptsService,
     private _listService: ListService,
     private _userSerice: UserService,
     private _searchService: SearchService,
@@ -64,7 +65,7 @@ export class UsuariosComponent implements OnInit {
     private _fb: FormBuilder,
     private router: Router
   ) {
-    this._createScript.CargaArchivos( [ "popoupEdicion" ] );
+    // this._createScript.CargaArchivos( [ "popoupEdicion" ] );
   }
 
   ngOnInit(): void {
@@ -244,5 +245,23 @@ export class UsuariosComponent implements OnInit {
         }
       );
     }
+  }
+
+  private popup = new Popup();
+  // Llamado de modals
+  mostrar() {
+    this.popup.mostrar();
+  }
+
+  mostrarTema() {
+    this.popup.mostrarTema();
+  }
+
+  cerrar() {
+    this.popup.cerrar();
+  }
+
+  cerrarTema() {
+    this.popup.cerrarTema();
   }
 }

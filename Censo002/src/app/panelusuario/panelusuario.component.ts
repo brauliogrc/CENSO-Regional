@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
-import { LocationValidate } from '../services/validations';
+import { LocationValidate } from '../../assets/ts/validations';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
-import { Theme, Question, Area, addRequest } from '../interfaces/newInterfaces';
+import { Theme, Question, Area, addRequest } from '../../assets/ts/interfaces/newInterfaces';
 import { AddRequestService } from '../services/newServices/Request/add-request.service';
 
 @Component({

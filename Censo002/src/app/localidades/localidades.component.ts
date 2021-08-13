@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/Auth/auth.service';
 import { Router } from '@angular/router';
-import { locationList, addLocation } from '../interfaces/newInterfaces';
+import { locationList, addLocation } from '../../assets/ts/interfaces/newInterfaces';
 import { ListService } from '../services/newServices/List/list.service';
 import { LocationService } from '../services/newServices/Location/location.service';
 import { SearchService } from '../services/newServices/Search/search.service';

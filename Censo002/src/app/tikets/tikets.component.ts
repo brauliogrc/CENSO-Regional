@@ -5,7 +5,7 @@ import {
   ticketList,
   anonTicketList,
   searchData,
-} from '../interfaces/newInterfaces';
+} from '../../assets/ts/interfaces/newInterfaces';
 import { ListService } from '../services/newServices/List/list.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
@@ -114,5 +114,10 @@ export class TiketsComponent implements OnInit {
   ticketResponse(ticketId: number) {
     this._ticketService.setTicket = ticketId;
     this.router.navigate(['/respuestafolio']);
+  }
+
+  // Navegar al panel usuario
+  addNewTicket() {
+    this.router.navigate(['/panelusuario']);
   }
 }

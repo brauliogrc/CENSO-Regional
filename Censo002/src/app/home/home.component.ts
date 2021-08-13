@@ -7,7 +7,7 @@ import {
   Question,
   Area,
   addAnonRequest,
-} from '../interfaces/newInterfaces';
+} from '../../assets/ts/interfaces/newInterfaces';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { AddAnonRequestService } from '../services/newServices/AnonRequest/add-anon-request.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
