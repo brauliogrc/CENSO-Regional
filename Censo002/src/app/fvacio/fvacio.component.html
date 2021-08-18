@@ -1,4 +1,4 @@
-<body class="BodyIndexC">
+<body class="BodyIndexC" style="overflow: auto">
   <header class="headermas">
     <div class="headerIndexC">
       <img
@@ -48,94 +48,121 @@
             </div>
           </form>
 
-          <table>
-            
+          <table class="table" *ngIf="!searchFlag">
+            <thead>
+              <tr>
+                <td scope="col">Folio</td>
+                <td scope="col">Contenido</td>
+                <td scope="col">Localidad</td>
+                <td scope="col">Tema</td>
+                <td scope="col">Pregunta</td>
+                <td scope="col">Estatus</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket of userTickets" (click)="getTicketStatus(ticket.rId)">
+                <td>{{ ticket.rId }}</td>
+                <td>{{ ticket.rIssue }}</td>
+                <td>{{ ticket.lName }}</td>
+                <td>{{ ticket.tName }}</td>
+                <td>{{ ticket.qName }}</td>
+                <td>{{ ticket.rsStatus }}</td>
+              </tr>
+            </tbody>
           </table>
 
-          <!-- <div class="ModalContenidoBusq" id="ModalContenidoBusq">
-            <div class="ModalContenido1Busq">
-              <div *ngIf="ticketStatus" class="tabalaAnonima1">
-                <div class="tituloFolioAnonimo">
-                  <P>STATUS</P>
+          <!-- <ng-template *ngIf="searchFlag"> -->
+            <div class="ModalContenidoBusq" id="ModalContenidoBusq">
+              <div class="ModalContenido1Busq">
+
+                <div *ngIf="searchFlag" class="tabalaAnonima1">
+                  <div class="tituloFolioAnonimo">
+                    <P>STATUS</P>
+                  </div>
+                  <div class="respTabla2">
+                    <div class="contenedores">
+                      <div class="titulos">
+                        <p>Empleado:</p>
+                      </div>
+                      <div class="textosContenido">
+                        <p>{{ ticketStatus.rUserId }}</p>
+                      </div>
+                    </div>
+                    <div class="contenedores">
+                      <div class="titulos">
+                        <p>Nombre:</p>
+                      </div>
+                      <div class="textosContenido">
+                        <p>{{ ticketStatus.rUserName }}</p>
+                      </div>
+                    </div>
+                    <div class="contenedores">
+                      <div class="titulos">
+                        <p>Caso:</p>
+                      </div>
+                      <div class="textosContenido">
+                        <p>{{ ticketStatus.rIssue }}</p>
+                      </div>
+                    </div>
+                    <div class="contenedores">
+                      <div class="titulos">
+                        <p>Status:</p>
+                      </div>
+                      <div class="textosContenido">
+                        <p>{{ ticketStatus.rsStatus }}</p>
+                      </div>
+                    </div>
+
+                    <ng-template *ngIf="answerFlag">
+                      <div class="contenedores">
+                        <div class="titulos">
+                          <p>Atiende:</p>
+                        </div>
+                        <div class="textosContenido">
+                          <p>{{ responsable.uName }}</p>
+                        </div>
+                      </div>
+                      <div class="contenedores">
+                        <div class="titulos">
+                          <p>Respuesta:</p>
+                        </div>
+                        <div class="textosContenido">
+                          <p>{{ responsable.request }}</p>
+                        </div>
+                      </div>
+                      <div class="contenedores">
+                        <div class="titulos">
+                          <p>Se respondio:</p>
+                        </div>
+                        <div class="textosContenido">
+                          <p>{{ responsable.asCreationDate }}</p>
+                        </div>
+                      </div>
+                      <div class="contenedores">
+                        <div class="titulos">
+                          <p>Archivo Adjunto:</p>
+                        </div>
+                        <div class="textosContenido">
+                          <p>{{ ticketStatus.asAttachement }}</p>
+                        </div>
+                      </div>
+                    </ng-template>
+                    
+                  </div>
+                  <button
+                    id="close"
+                    class="btn btn-outline-secondary"
+                    type="button"
+                    (click)="cerrarPopup()"
+                  >
+                    Cerrar
+                  </button>
                 </div>
-                <div class="respTabla2">
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Empleado:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ ticketStatus.rUserId }}</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Nombre:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ ticketStatus.rUserName }}</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Caso:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ ticketStatus.rIssue }}</p>
-                    </div>
-                  </div>
-                  <div class="contenedores">
-                    <div class="titulos">
-                      <p>Status:</p>
-                    </div>
-                    <div class="textosContenido">
-                      <p>{{ ticketStatus.rsStatus }}</p>
-                    </div>
-                  </div>
-                  <ng-template *ngIf="responsable">
-                    <div class="contenedores">
-                      <div class="titulos">
-                        <p>Atiende:</p>
-                      </div>
-                      <div class="textosContenido">
-                        <p>{{ responsable.uName }}</p>
-                      </div>
-                    </div>
-                    <div class="contenedores">
-                      <div class="titulos">
-                        <p>Respuesta:</p>
-                      </div>
-                      <div class="textosContenido">
-                        <p>{{ responsable.request }}</p>
-                      </div>
-                    </div>
-                    <div class="contenedores">
-                      <div class="titulos">
-                        <p>Se respondio:</p>
-                      </div>
-                      <div class="textosContenido">
-                        <p>{{ responsable.asCreationDate }}</p>
-                      </div>
-                    </div>
-                    <div class="contenedores">
-                      <div class="titulos">
-                        <p>Archivo Adjunto:</p>
-                      </div>
-                      <div class="textosContenido">
-                        <p>{{ ticketStatus.rAttachement }}</p>
-                      </div>
-                    </div>
-                  </ng-template>
-                </div>
-                <button
-                  id="close"
-                  class="btn btn-outline-secondary"
-                  type="button"
-                >
-                  Cerrar
-                </button>
               </div>
             </div>
-          </div> -->
+          <!-- </ng-template> -->
+          
+
         </div>
       </div>
     </div>

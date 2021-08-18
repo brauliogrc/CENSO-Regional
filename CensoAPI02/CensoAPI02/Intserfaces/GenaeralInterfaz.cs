@@ -191,4 +191,19 @@ namespace CensoAPI02.Intserfaces
 
         public int flag { get; set; }
     }
+
+    public class UserUpdate
+    {
+        public long employeeNumber { get; set; }
+
+        public string? uName { get; set; }
+
+        public string? uEmail { get; set; }
+
+        public bool? uStatus { get; set; }
+
+        public int? roleId { get; set; }
+
+        public int? LocationId { get; set; }
+    }
 }

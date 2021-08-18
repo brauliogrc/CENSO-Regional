@@ -93,9 +93,9 @@
           <td>{{ th.lName }}</td>
           <td>{{ th.tStatus }}</td>
           <td>
-            <!-- <button (click)="deleteTheme(th.tId)" class="btn btn-Dark">
+            <button (click)="mostrar()" class="btn btn-Dark">
               <img src="../../assets/img/BeditB.png" alt="" width="22px">
-            </button> -->
+            </button>
             <button (click)="deleteTheme(th.tId)" class="btn btn-Dark">
               <img src="../../assets/img/BbasuraB.png" alt="" width="22px">
             </button>
@@ -109,9 +109,9 @@
           <td>{{ th[0].lName }}</td>
           <td>{{ th[0].tStatus }}</td>
           <td>
-            <!-- <button (click)="deleteTheme(th[0].tId)" class="btn btn-Dark">
+            <button (click)="mostrar()" class="btn btn-Dark">
               <img src="../../assets/img/BeditB.png" alt="" width="22px">
-            </button> -->
+            </button>
             <button (click)="deleteTheme(th[0].tId)" class="btn btn-Dark">
               <img src="../../assets/img/BbasuraB.png" alt="" width="22px">
             </button>
@@ -179,7 +179,7 @@
         </form>
       </div>
       <div class="ModalBotonCerrar">
-        <button class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
+        <button (click)="cerrar()" class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
 
       </div>
     </div>

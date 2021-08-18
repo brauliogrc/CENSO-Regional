@@ -13,7 +13,8 @@ import { QuestionService } from '../services/newServices/Question/question.servi
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { ListService } from '../services/newServices/List/list.service';
 import { searchData } from '../../assets/ts/interfaces/newInterfaces';
-// import { CreateScriptsService } from '../services/newServices/CreateScripts/create-scripts.service';
+
+import { Popup } from 'src/assets/ts/popup';
 
 @Component({
   selector: 'app-preguntas',
@@ -166,5 +167,20 @@ export class PreguntasComponent implements OnInit {
         }
       );
     }
+  }
+
+  // Llamado de modals
+  private popup = new Popup();
+  mostrar() {
+    this.popup.mostrar();
+  }
+  cerrar() {
+    this.popup.cerrar();
+  }
+  mostrarTema() {
+    this.popup.mostrarTema();
+  }
+  cerrarTema() {
+    this.popup.cerrarTema();
   }
 }

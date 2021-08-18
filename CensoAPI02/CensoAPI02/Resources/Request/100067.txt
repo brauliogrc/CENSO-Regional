@@ -1,0 +1,104 @@
+tables controler
+return NotFound(new { message = $"Ninguna localidad encontrada en la base de datos" });
+return BadRequest(new { message = $"Ha ocuttido un error al obtener la lista de localidades. Error: {ex.Message}" });
+return NotFound(new { message = $"Ningun usuario se encuntra asociado a su localidad" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener la lista de usuarios. Error: {ex.Message}" });
+return NotFound(new { message = $"Ningun tema se encuentra asociado con tu localidad" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener la lista de temas. Error: {ex.Message}" });
+return NotFound(new { message = $"Ninguna pregunta se encuentra asociada con tu localidad" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener la lista de preguntas. Error: {ex.Message}" });
+return NotFound(new { message = $"Ningun ticket se encuentra asociado con tu localidad" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener la lista de tickets. Error: {ex.Message}" });
+return NotFound(new { message = $"Ninguna area se encuentra asociada a tu localidad" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener la lista de areas. Error: {ex.Message}" });
+
+searches controler
+return NotFound(new { message = $"La localidad no se encuentra en la base de datos" });
+return BadRequest(new { message = $"Ha ocuttido un error al obtener la localidad. Error: {ex.Message}" });
+return NotFound(new { message = $"El usuario no se encuentra en la localidad" });
+return BadRequest(new { message = $"Ha ocuttido un error al obtener el usuario. Error: {ex.Message}" });
+return NotFound(new { message = $"El tema no se encuentra en la localidad" });
+return BadRequest(new { message = $"Ha ocuttido un error al obtener el tema. Error: {ex.Message}" });
+return NotFound(new { message = $"La pregunta no se encuentra en la localidad" });
+return BadRequest(new { message = $"Ha ocuttido un error al obtener la Pregunta. Error: {ex.Message}" });
+return NotFound(new { message = $"El ticket no se encuentra en la localidad" });
+return BadRequest(new { message = $"Ha ocuttido un error al obtener el ticket. Error: {ex.Message}" });
+
+fields controler
+return NotFound(new { message = $"Ninguna localidad encontrada en la base de datos" });
+return BadRequest (new { message = $"Ha ocurrido un error al obtener las localidades. Error: {ex.Message}" });
+return NotFound(new { message = $"Ningun tema se encuentra relacionado con esta localidad" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener los temas. Error: {ex.Message}" });
+return NotFound(new { message = $"Nunguna pregunta se encuentra relacionada con este tema" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener las preguntas. Error: {ex.Message}" });
+return NotFound(new { message = $"Ninguna area se encuentra relacionada con est localidad" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener las areas. Error: {ex.Message}" });
+return NotFound(new { message = $"Ningun rol encontrado" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener los roles. Error: {ex.Message}" });
+
+anon request controler
+return Ok(new { addAnonRequest, message = $"Peticion {addAnonRequest.arId} registrada con exito" });
+return BadRequest(new { message = $"Ha ocurrido un error al registrar la peticion. Error: {ex.InnerException}" });
+return NotFound(new { message = $"La peticion {anonRequestId} no se encuentra en la base de datos" });
+return Ok(new { message = $"La peticion {query.arId}, fue eliminada con exito" });
+return BadRequest(new { message = $"Ha ocurrido un error al eliminar la peticion. Error: {ex.Message}" });
+
+answer controler
+return Ok(new { message = $"Respuesta {addAnswer.asId} del tiket {newAnswer.RequestId}, registrada correctamente" });
+return Ok(new { message = $"Respuesta {addAnswer.asId} del tiket {newAnswer.RequestId}, registrada correctamente" });
+return BadRequest(new { message = $"Ha ocurrido un error al registrar la respuesta. Error: {ex.InnerException.Message}" });
+return NotFound(new { message = $"El tiket no se encuentra en la localidad" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener la información del ticket. Error: {ex.InnerException.Message}" });
+
+hru controler
+return Conflict(new { message = $"El usuario ya se enceuntra registrado" });
+return Ok(new { message = $"Usuario {addUser.uName} con numero de empleado {addUser.uEmployeeNumber}, registrado correctamente" });
+return BadRequest(new { message = $"Ha ocurrido un error al registrar el usuario. Error: {ex.Message}" });
+return Conflict(new { message = $"El usuario ya se enceuntra registrado" });
+return NotFound(new { message = $"Usurio no ecnontrado en su localidad" });
+return BadRequest(new { message = $"Ha ocurrido un error al obtener la informacion del usuario. Error: {ex.Message}" });
+return NotFound(new {message = $"El usuario {userId}, no se encuentra en la base de datos" });
+return Ok(new { message = $"El usuario {userId}, ha sido eliminado con exito" });
+return BadRequest(new { message = $"Ha ocurido un error al eliminar el usuatio. Error: {ex.Message}" });
+return BadRequest(new { message = $"El usuario lo cuenta con una ocalidad" });
+
+locations controller
+return Ok(new { message = $"La localidad {addLocation.lName}, se ha registrado correctamente" });
+return BadRequest(new { message = $"Ha ocurrido un error al registrar la localidad. Error: {ex.Message}" });
+return NotFound(new { message = $"La localidad {locationId}, no se encuentra en la base de datos" });
+return Ok(new { message = $"La localidad {locationId}, ha sido eliminada correctamente" });
+return BadRequest(new { message = $"Ha ocurido un error al eliminar la localidad. Error: {ex.Message}" });
+
+question controller
+return Ok(new { message = $"La pregunta {addQuestion.qName}, se ha registrado correctamente" });
+return BadRequest(new { message = $"Ha ocurrido un error al registar la pregunta. Error: {ex.Message}" });
+return NotFound(new { message = $"La preginta {questionId}, no se encuentra en la bse de datos" });
+return Ok(new { message = $"La pregunta {questionId}, fue eliminada con exito" });
+return BadRequest(new { message = $"Ha ocurrido un error al eliminar la pregunta. Error: {ex.Message}" });
+
+request controller
+return Ok(new { addRequest, message = $"Peticion {addRequest.rId}, registrada con exito" });
+return BadRequest(new { message = $"Ha ocurrido un error al registrar la peticion. Error {ex.Message}" });
+return NotFound(new { message = $"La prticion {requestId}, no se encuentra en la base de datos" });
+return Ok(new { message = $"La peticion {requestId}, se ha eliminado con exito" });
+return BadRequest(new { message = $"Ha ocurrido un error el eliminar la peticion. Error: {ex.Message}" });
+
+theme controller
+return Ok(new { message = $"El tema {addTheme.tName}, se ha registrado correctamente" });
+return BadRequest(new { message = $"Ha ocurrido un error al registar el tema. Error: {ex.Message}" });
+return NotFound(new { message = $"El tema {themeId} no se encuentra en la base de datos" });
+return Ok(new { message = $"El tema {themeId}, fue eliminado con exito" });
+return BadRequest(new { message = $"Ha ocurrido un error al eliminar el tema. Error: {ex.Message}" }); 
+
+ticket controller
+return NotFound(new { message = $"Ticket o encontrado en la base de datos" });
+return BadRequest(new { message = $"Ha ocurrido un error en la obtencion de los datos del ticket. Error: {ex.Message}" });
+return Ok(new { message = $"Ticket eliminado correctamente" });
+return Ok(new { message = $"Ticket eliminado correctamente" });
+return BadRequest(new { message = $"Ha ocurrido un error al eliminar el ticket. Error: {ex.Message}" });
+return NotFound(new { message = $"Ticket no encontrado en la base de datos" });
+return Ok(new { anonTicket, message = $"El ticker no ha sido respondido aún" });
+return BadRequest(new { message = $"Ha ocurrido un error al consultar el estado del ticket. Error: {ex.Message}" });
+return NotFound(new { message = $"Ticket no encontrado en la base de datos" });
+return Ok(new { ticket, message = $"El ticker no ha sido respondido aún" });
+return BadRequest(new { message = $"Ha ocurrido un error al consultar es estado del ticket. Error: {ex.Message}" });

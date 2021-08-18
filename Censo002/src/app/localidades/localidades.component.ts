@@ -7,6 +7,8 @@ import { ListService } from '../services/newServices/List/list.service';
 import { LocationService } from '../services/newServices/Location/location.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 
+import { Popup } from 'src/assets/ts/popup';
+
 @Component({
   selector: 'app-localidades',
   templateUrl: './localidades.component.html',
@@ -108,5 +110,16 @@ export class LocalidadesComponent implements OnInit {
         console.error(error.error.message);
       }
     );
+  }
+
+  // Llamado de modals
+  private popup = new Popup();
+
+  mostrar() {
+    this.popup.mostrar();
+  }
+
+  cerrar() {
+    this.popup.cerrar();
   }
 }

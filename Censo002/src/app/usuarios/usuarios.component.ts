@@ -6,7 +6,11 @@ import { ListService } from '../services/newServices/List/list.service';
 import { UserService } from '../services/newServices/user/user.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
-import { userInformation } from '../../assets/ts/interfaces/newInterfaces';
+import {
+  userInformation,
+  existingUser,
+  userChanges,
+} from '../../assets/ts/interfaces/newInterfaces';
 import {
   addUser,
   Location,
@@ -15,8 +19,8 @@ import {
   searchData,
 } from '../../assets/ts/interfaces/newInterfaces';
 
-// import { CreateScriptsService } from '../services/newServices/CreateScripts/create-scripts.service';
 import { Popup } from '../../assets/ts/popup';
+import { Theme } from '../../assets/ts/interfaces/newInterfaces';
 
 @Component({
   selector: 'app-usuarios',
@@ -247,9 +251,15 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
+  // Llamado de modals y actualizacion del usuario
   private popup = new Popup();
-  // Llamado de modals
-  mostrar() {
+  editFlag: boolean = false;
+  userData: existingUser;
+  relatedTopics: Theme[] = [];
+
+  mostrar(employeeNumber: number) {
+    this.getUserData(employeeNumber);
+    this.getRelatedTopics(employeeNumber);
     this.popup.mostrar();
   }
 
@@ -258,10 +268,86 @@ export class UsuariosComponent implements OnInit {
   }
 
   cerrar() {
+    this.updateUser.reset();
+    this.editFlag = false;
     this.popup.cerrar();
   }
 
   cerrarTema() {
     this.popup.cerrarTema();
   }
+
+  // Obtencion de la información del usuario
+  getUserData(employeeNumber: number) {
+    this._searchService.getExistingUser(employeeNumber).subscribe(
+      (data) => {
+        this.userData = data[0];
+        this.editFlag = true;
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
+  }
+
+  // Obtención de los temas relacionados al usuario a editar
+  getRelatedTopics(employeeNumber: number) {
+    this._searchService.getRelatedTopics(employeeNumber).subscribe(
+      (data) => {
+        console.log(data);
+        this.relatedTopics = [...data];
+        console.log(this.relatedTopics);
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
+  }
+
+  updateUser = this._fb.group({
+    newName: ['', [Validators.maxLength(50)]],
+    newEmail: ['', [Validators.maxLength(80)]],
+    newRol: [''],
+    newStatus: [''],
+    newLocation: [''],
+  });
+
+  saveChanges(): void {
+    const saveChanges: userChanges = {
+      employeeNumber: this.userData.uEmployeeNumber,
+      uName: this.updateUser.get('newName').value,
+      uEmail: this.updateUser.get('newEmail').value,
+      uStatus: this.updateUser.get('newStatus').value,
+      roleId: this.updateUser.get('newRol').value,
+      LocationId: this.updateUser.get('newLocation').value,
+    };
+
+    // const formData = new FormData();
+    // formData.append('employeeNumber', String(this.userData.uEmployeeNumber));
+    // formData.append('uName', this.updateUser.get('newName')?.value);
+    // formData.append('uEmail', this.updateUser.get('newEmail')?.value);
+    // formData.append('uStatus', this.updateUser.get('newStatus')?.value);
+    // formData.append('roleId', this.updateUser.get('newRol')?.value);
+    // formData.append('LocationId', this.updateUser.get('LocationId')?.value);
+
+    // console.log(saveChanges);
+    // Llamada al método de actualización
+    this._userSerice.userUpdate(saveChanges).subscribe(
+      (data) => {
+        console.log('Usuario actualizado');
+        this.getUserList(); 
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
+  }
 }
+
+// newUser = this._fb.group({
+//   uName: ['', [Validators.required, Validators.maxLength(50)]],
+//   uEmail: ['', [Validators.required, Validators.maxLength(80)]],
+//   RolId: ['', [Validators.required]],
+//   uStatus: ['', [Validators.required]],
+//   EmployeeNumber: ['', [Validators.required]],
+// });
