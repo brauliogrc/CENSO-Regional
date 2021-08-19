@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {
   addUser,
   userInformation,
+  userTheme,
 } from 'src/assets/ts/interfaces/newInterfaces';
 import { environment } from 'src/environments/environment';
 import { LocationValidate } from '../../../../assets/ts/validations';
@@ -47,9 +48,28 @@ export class UserService {
 
   // Actualizacion de un usuario
   userUpdate(newUserData: userChanges): Observable<any> {
-    return this._http.post(
+    return this._http.patch(
       `${environment.API_URL}` + this.MyApiUrl + 'userUpdate',
       newUserData
+    );
+  }
+
+  // Eliminación de relación de un usuario con un tema
+  deleteRelatedTopic(employeenUmber: number, themeId: number): Observable<any> {
+    return this._http.delete(
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'deleteRelatedTopic/' +
+        employeenUmber +
+        '/' +
+        themeId
+    );
+  }
+
+  addRelatedTopic(relationship: userTheme): Observable<any> {
+    return this._http.post(
+      `${environment.API_URL}` + this.MyApiUrl + 'addRelatedTopic',
+      relationship
     );
   }
 }

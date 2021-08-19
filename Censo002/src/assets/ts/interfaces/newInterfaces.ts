@@ -247,3 +247,9 @@ export interface userTickets {
   rsId: number;
   rsStatus: string;
 }
+
+// Interface para añadir tema a un usuario
+export interface userTheme {
+  employeeNumber: number;
+  themeId: number;
+}

@@ -48,6 +48,13 @@ namespace CensoAPI02.Controllers.NewControllers
             }
         }
 
+        // Actualización de una localidad
+        [HttpPatch][Route("locationUpdate")][AllowAnonymous]
+        public async Task<IActionResult> locationUpdate()
+        {
+            return Ok();
+        }
+
         // Eliminación lógica de localidad
         [HttpDelete][Route("deleteLocation/{locationId}")][AllowAnonymous]
         public async Task<IActionResult> deleteLocation(int locationId)

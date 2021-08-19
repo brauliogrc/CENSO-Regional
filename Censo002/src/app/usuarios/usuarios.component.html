@@ -86,7 +86,7 @@
                 <td>
                   <button (click)="mostrar(user.uEmployeeNumber)" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
                   <button (click)="deleteUser(user.uId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                  <button class="btn btn-success" (click)="mostrarTema()" type="submit">Añadir temas</button>
+                  <button class="btn btn-success" (click)="mostrarTema(user.uEmployeeNumber)" type="submit">Añadir temas</button>
                 </td>
             </tr>
           </ng-container>
@@ -101,7 +101,7 @@
               <td>
                 <button (click)="mostrar(user[0].uEmployeeNumber)" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
                 <button (click)="deleteUser(user[0].uId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                <button class="btn btn-success" (click)="mostrarTema()" type="submit">Añadir temas</button>
+                <button class="btn btn-success" (click)="mostrarTema(user[0].uEmployeeNumber)" type="submit">Añadir temas</button>
               </td>
             </tr>
           </ng-template>
@@ -113,7 +113,7 @@
   <div class="ModalEditBack" id="ModalEditBack">
     <div class="ModalTituloEdit">
       <h1>Editar Usuario</h1>
-      <h4>numUsuario</h4>
+      <h4 *ngIf="userData">{{ userData.uEmployeeNumber }} - {{ userData.uName }}</h4>
     </div>
 
     <div class="ModalContenidoEdit" *ngIf="editFlag">
@@ -166,7 +166,7 @@
             <tbody>
               <tr *ngFor="let them of relatedTopics">
                 <td>{{ them.tName }}</td>
-                <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button></td>
+                <td><button type="button" (click)="getIdx(them.tId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button></td>
               </tr>
             </tbody>
           </table>
@@ -191,7 +191,7 @@
   <div class="ModalEditBackTemas" id="ModalEditBackTemas">
     <div class="ModalTituloEdit">
       <h1>Agregar Temas a</h1>
-      <h4>numUsuario</h4>
+      <h4 *ngIf="userData">{{ userData.uEmployeeNumber }} - {{ userData.uName }}</h4>
     </div>
 
     <div class="ModalContenidoEdit">
@@ -200,13 +200,12 @@
           <div class="moduloAgregar">
             <div class="moduloAgregar1">
               <h2>Agregar un topico</h2>
-              <button class="btnPregunta" type="submit">+</button>
+              <button (click)="addRelatedTopic(themeId.value)" class="btnPregunta" type="button">+</button>
             </div>
 
             <label for="inputState" class="form-label">Topico</label>
-            <select id="inputState" class="form-select">
-              <option>Topico 1</option>
-              <option>Topico 1</option>
+            <select #themeId id="inputState" class="form-select">
+              <option *ngFor="let addTheme of themeList" value="{{ addTheme.tId }}">{{ addTheme.tName }}</option>
             </select>
 
           </div>
@@ -223,24 +222,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit..</td>
-                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+                  <tr *ngFor="let theme of relatedTopics">
+                    <td>{{ theme.tName }}</td>
+                    <td><button (click)="getIdx(theme.tId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
                     </td>
                   </tr>
                 </tbody>
@@ -249,7 +233,7 @@
           </div>
         </div>
         <div class="col-12">
-          <button class="btnIndexC" type="submit">Agregar</button>
+          <!-- <button class="btnIndexC" type="submit">Agregar</button> -->
 
         </div>
       </form>

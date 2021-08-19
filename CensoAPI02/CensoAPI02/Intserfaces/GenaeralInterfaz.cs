@@ -206,4 +206,11 @@ namespace CensoAPI02.Intserfaces
 
         public int? LocationId { get; set; }
     }
+
+    public class AddTopicRelationship
+    {
+        public long employeeNumber { get; set; }
+
+        public int themeId { get; set; }
+    }
 }
