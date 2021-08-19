@@ -1,9 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { locationList, questionList } from 'src/assets/ts/interfaces/newInterfaces';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import {
+  existingUser,
+  locationList,
+  questionList,
+} from 'src/assets/ts/interfaces/newInterfaces';
 import { environment } from 'src/environments/environment';
-import { areaList } from '../../../../assets/ts/interfaces/newInterfaces';
+import { Theme } from '../../../../assets/ts/interfaces/newInterfaces';
+import {
+  areaList,
+  userTickets,
+} from '../../../../assets/ts/interfaces/newInterfaces';
 import {
   searchData,
   userList,
@@ -83,6 +92,35 @@ export class SearchService {
         searchData.locationId +
         '/' +
         searchData.itemId
+    );
+  }
+
+  // Busqueda de los tickets relacionados al usuario logueado
+  getUserTickets(employeeNumber: number): Observable<userTickets[]> {
+    return this._http.get<userTickets[]>(
+      `${environment.API_URL}` + this.MyApiUrl + 'userTickets/' + employeeNumber
+    );
+  }
+
+  // OBTENCION DE DATOS PARA LA ACTIAIZACIÓN DE CAMPOS
+
+  // Obtencion de los datos del usuario seleccionado
+  getExistingUser(employeeNumber: number): Observable<existingUser[]> {
+    return this._http.get<existingUser[]>(
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'existingUser/' +
+        employeeNumber
+    );
+  }
+
+  // Obtencion de los temas relacionados al usuario a actualizar
+  getRelatedTopics(employeeNumber: number): Observable<Theme[]> {
+    return this._http.get<Theme[]>(
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'relatedTopics/' +
+        employeeNumber
     );
   }
 }

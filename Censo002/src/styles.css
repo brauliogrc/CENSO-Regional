@@ -515,7 +515,7 @@ html {
   color: #cc9d38;
 }
 .content-titulo1 {
-  width: 100%;
+  width: 30%;
   margin: 40px auto;
   padding: 15px;
   border-radius: 1em;
@@ -523,11 +523,7 @@ html {
   font-weight: 400;
   color: white;
   justify-content: center;
-  align-items: center;
   text-align: center;
-}
-.hrbienve {
-  width: 30%;
 }
 
 /*      FIN Pagina Index         */
@@ -565,9 +561,7 @@ html {
   flex-wrap: wrap;
 }
 
-/*Actualizado*/
 .headerDash {
-  position: fixed;
   background: rgba(0, 0, 0, 0.726);
   width: 100%;
   height: 80px;
@@ -576,26 +570,18 @@ html {
   align-items: center;
   color: white;
 }
-.contentIMG {
-  background: rgb(255, 169, 0);
-  border-radius: 3px;
-  width: 10%;
-  height: 90%;
-}
 .imgLogoDash {
   display: block;
   margin-left: 15%;
   margin-top: 0%;
   width: 70%;
 }
-
 .leftDash {
   background: rgba(223, 223, 223, 0.822);
   width: 10%;
-  height: 108vh;
+  height: 108%;
   margin-top: -33px;
 }
-/*Actualizado*/
 .options {
   padding-top: 10px;
   margin-top: -10px;
@@ -1030,6 +1016,10 @@ body {
     display: none;
   }
   /*Panel admin*/
+  .headerDash {
+  }
+  .btnDash {
+  }
 
   /*Panel admin*/
 
@@ -1086,6 +1076,10 @@ body {
   .btnDashdiv .btnDash {
     display: flex;
     justify-content: center;
+  }
+
+  .imgLogoDash {
+    width: 150px;
   }
 
   /*PANEL ADMIN*/
@@ -1526,4 +1520,9 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Añadidos por Braulio */
+.current-data {
+  background-color: rgba(33, 136, 56, 0.5);
 }

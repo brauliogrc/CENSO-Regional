@@ -272,5 +272,131 @@ namespace CensoAPI02.Controllers.SearchesControllers
                 return BadRequest(new { message = $"Ha ocuttido un error al obtener el area. Error: {ex.Message}" });
             }
         }
+
+        // Busqueda de los tickets del usuario logueado
+        [HttpGet][Route("userTickets/{employeenumber}")][AllowAnonymous]
+        public async Task<ActionResult> getUserTickets( long employeenumber)
+        {
+            try
+            {
+                var userTickets = from request in _context.Requests
+                                  join location in _context.Locations on request.LocationId equals location.lId
+                                  join theme in _context.Theme on request.ThemeId equals theme.tId
+                                  join question in _context.Questions on request.QuestionId equals question.qId
+                                  join status in _context.RequestStatus on request.StatusId equals status.rsId
+                                  where request.StatusId != 4 && request.rUserId == employeenumber
+                                  select new
+                                  {
+                                      // Datos del ticket
+                                      request.rId,
+                                      request.rIssue,
+                                      //request.rUserName,
+                                      // Datos de la localidad
+                                      location.lId,
+                                      location.lName,
+                                      // Datos del tema
+                                      theme.tId,
+                                      theme.tName,
+                                      // Datos de la pregunta
+                                      question.qId,
+                                      question.qName,
+                                      // Datos del estatus
+                                      status.rsId,
+                                      status.rsStatus
+                                  };
+
+                if ( userTickets == null || userTickets.Count() == 0 )
+                {
+                    return NotFound(new { message = $"No se ha encontrado nungún ticket relacionado a su usuario" } );
+                }
+
+                return Ok( userTickets );
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { message = $" Haocurrido un error en la obtención de tus tickets" });
+            }
+        }
+
+        // OBTENCION DE DATOS PARA LA ACTIAIZACIÓN DE CAMPOS
+
+        // Obtención de la informacion a actualizar de un usuario (policity surh)
+        [HttpGet]
+        [Route("existingUser/{employeeNumber}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> getUpdateUserInformation(long employeeNumber)
+        {
+            try
+            {
+                var userInformation = from user in _context.HRU
+                                      join location in _context.Locations on user.LocationId equals location.lId
+                                      join role in _context.Roles on user.RoleId equals role.rolId
+                                      where user.uEmployeeNumber == employeeNumber
+                                      select new
+                                      {
+                                          // Daatos del usuario
+                                          user.uEmployeeNumber,
+                                          user.uName,
+                                          user.uEmail,
+                                          user.uStatus,
+                                          // Datos de la localidad
+                                          location.lId,
+                                          location.lName,
+                                          // Datos del rol
+                                          role.rolId,
+                                          role.rolName,
+                                      };
+
+                /*var temas = from ht in _context.HRUsersThemes
+                            join theme in _context.Theme on ht.ThemeId equals theme.tId
+                            where ht.UserId == employeeNumber && theme.tStatus == true
+                            select new
+                            {
+                                // Datos del tema
+                                theme.tId,
+                                theme.tName
+                            };*/
+
+                if (userInformation == null || userInformation.Count() == 0)
+                {
+                    return NotFound(new { message = $"El usuario no se encuentra en la base de datos" });
+                }
+
+                return Ok(userInformation);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al recuperar la infomación del usuario. Error: {ex.Message}" });
+            }
+        }
+
+        //Obtención de los temas relacionados al ursuario a actuaizar
+        [HttpGet][Route("relatedTopics/{employeeNumber}")][AllowAnonymous]
+        public async Task<ActionResult> getRelatedTopics(long employeeNumber)
+        {
+            try
+            {
+                var temas = from ht in _context.HRUsersThemes
+                            join theme in _context.Theme on ht.ThemeId equals theme.tId
+                            where ht.UserId == employeeNumber && theme.tStatus == true
+                            select new
+                            {
+                                // Datos del tema
+                                theme.tId,
+                                theme.tName
+                            };
+
+                if (temas == null || temas.Count() == 0)
+                {
+                    return NotFound(new { message = $"No se encuentra ningun tema relacionado con este usuario" });
+                }
+
+                return Ok(temas);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al recuperar la infomación del usuario. Error: {ex.Message}" });
+            }
+        }
     }
 }

@@ -108,7 +108,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
 
-        // Busqueda de informacion de un usuario (requiere policy surh)
+        // Busqueda de informacion de un usuario, para su registro (requiere policy surh)
         [HttpGet]
         [Route("userInformation/{location}/{employeeNumber}")]
         [AllowAnonymous]
@@ -165,6 +165,64 @@ namespace CensoAPI02.Controllers.NewControllers
             }
         }
 
+        // Actualización de un usuario (requiere policy surh)
+        [HttpPost][Route("userUpdate")][AllowAnonymous]
+        public async Task<IActionResult> userUpdate([FromBody] UserUpdate userUpdate)
+        {
+            bool flagUpdate = false;
+            try
+            {
+                var user = await _context.HRU.FindAsync(userUpdate.employeeNumber);
+
+                if ( userUpdate.uName != null && userUpdate.uName.Length != 0 && (userUpdate.uName != user.uName) )
+                {
+                    user.uName = userUpdate.uName;
+                    flagUpdate = true;
+                }
+
+                if ( userUpdate.uEmail != null && userUpdate.uEmail.Length != 0 && (userUpdate.uEmail != user.uEmail) )
+                {
+                    user.uEmail = userUpdate.uEmail;
+                    flagUpdate = true;
+                }
+
+                if ( userUpdate.LocationId != null && (user.LocationId != userUpdate.LocationId) )
+                {
+                    string newLocation = userUpdate.LocationId.ToString();
+                    user.LocationId = Int32.Parse(newLocation);
+                    flagUpdate = true;
+                }
+
+                if ( userUpdate.roleId != null && (user.RoleId != userUpdate.roleId) )
+                {
+                    string newRol = userUpdate.roleId.ToString();
+                    user.RoleId = Int32.Parse(newRol);
+                    flagUpdate = true;
+                }
+
+                if ( user.uStatus != userUpdate.uStatus && userUpdate.uStatus != null)
+                {
+                    string newStatus = userUpdate.uStatus.ToString();
+                    user.uStatus = Boolean.Parse(newStatus);
+                    flagUpdate = true;
+                }
+
+                if ( flagUpdate )
+                {
+                    _context.HRU.Update(user);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new { message = $"El ususario se actualizó correctamente." });
+                }
+
+                return Ok(new { message = $"Ningún cambio realizado" } );
+
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrio un error al actualizar el usuario. Error: {ex.Message}" });
+            }
+        }
 
         // Eliminacioón lógica de usuario
         [HttpDelete] [Route("deleteUser/{employeeNumber}")][AllowAnonymous]

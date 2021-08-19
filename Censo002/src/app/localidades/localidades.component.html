@@ -51,8 +51,8 @@
             <td>{{ location.lName }}</td>
             <td>{{ location.lStatus }}</td>
             <td>
-              <button id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
-                <button (click)="deleteLocation(location.lId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+              <button (click)="mostrar()" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
+              <button (click)="deleteLocation(location.lId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
             </td>
           </tr>
         </ng-container>
@@ -62,8 +62,8 @@
             <td>{{ location[0].lName }}</td>
             <td>{{ location[0].lStatus }}</td>
             <td>
-              <button id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
-                <button (click)="deleteLocation(location[0].lId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+              <button (click)="mostrar()" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
+              <button (click)="deleteLocation(location[0].lId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
             </td>
           </tr>
         </ng-template>
@@ -105,7 +105,7 @@
             </form>
           </div>
           <div class="ModalBotonCerrar">
-            <button class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
+            <button (click)="cerrar()" class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
 
           </div>
         </div>

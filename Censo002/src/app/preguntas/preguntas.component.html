@@ -117,8 +117,9 @@
           <td>{{ question.tName }}</td>
           <td>{{ question.qStatus }}</td>
           <td>
-            <button id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
+            <button (click)="mostrar()" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
             <button (click)="deleteQuestion(question.qId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+            <button class="btn btn-success" (click)="mostrarTema()" type="submit">Añadir temas</button>
           </td>
         </tr>
       </ng-container>
@@ -129,8 +130,9 @@
           <td>{{ question[0].tName }}</td>
           <td>{{ question[0].qStatus }}</td>
           <td>
-            <button id="quitarContenidoModalpopup"  class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
+            <button (click)="mostrar()" id="quitarContenidoModalpopup"  class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
             <button (click)="deleteQuestion(question[0].qId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+            <button class="btn btn-success" (click)="mostrarTema()" type="submit">Añadir temas</button>
           </td>
         </tr>
       </ng-template>
@@ -179,7 +181,7 @@
         </form>
       </div>
       <div class="ModalBotonCerrar">
-        <button class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
+        <button (click)="cerrar()" class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
 
       </div>
     </div>
@@ -256,7 +258,7 @@
         </form>
       </div>
       <div class="ModalBotonCerrar">
-        <button class="btn btn-danger" id="quitarContenidoModalpopupTemas" type="submit">Cerrar</button>
+        <button (click)="cerrarTema()" class="btn btn-danger" id="quitarContenidoModalpopupTemas" type="submit">Cerrar</button>
 
       </div>
     </div>

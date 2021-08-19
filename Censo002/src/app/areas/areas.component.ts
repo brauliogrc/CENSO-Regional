@@ -13,6 +13,8 @@ import {
   addArea,
 } from '../../assets/ts/interfaces/newInterfaces';
 
+import { Popup } from 'src/assets/ts/popup';
+
 @Component({
   selector: 'app-areas',
   templateUrl: './areas.component.html',
@@ -139,5 +141,14 @@ export class AreasComponent implements OnInit {
         }
       );
     }
+  }
+
+  // Llamado de modals
+  private popup = new Popup();
+  mostrar() {
+    this.popup.mostrar();
+  }
+  cerrar() {
+    this.popup.cerrar();
   }
 }

@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { addUser, userInformation } from 'src/assets/ts/interfaces/newInterfaces';
+import {
+  addUser,
+  userInformation,
+} from 'src/assets/ts/interfaces/newInterfaces';
 import { environment } from 'src/environments/environment';
 import { LocationValidate } from '../../../../assets/ts/validations';
+import { userChanges } from '../../../../assets/ts/interfaces/newInterfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +42,14 @@ export class UserService {
         locationValidate.localityNameValidation() +
         '/' +
         employeeNumber
+    );
+  }
+
+  // Actualizacion de un usuario
+  userUpdate(newUserData: userChanges): Observable<any> {
+    return this._http.post(
+      `${environment.API_URL}` + this.MyApiUrl + 'userUpdate',
+      newUserData
     );
   }
 }

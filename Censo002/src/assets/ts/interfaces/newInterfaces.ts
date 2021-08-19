@@ -208,7 +208,42 @@ export interface addAnswer {
 // Interface de la informacion del usuario
 export interface userInformation {
   employeeNumber: number;
-  location: string;
+  location: string | null;
   name: string;
   email: string | null;
+}
+
+export interface existingUser {
+  uEmployeeNumber: number;
+  uName: string;
+  uEmail: string;
+  uStatus: boolean;
+  lId: number;
+  lName: string;
+  rolId: number;
+  rolName: string;
+}
+
+export interface userChanges {
+  employeeNumber: number;
+  uName: string;
+  uEmail: string;
+  uStatus: boolean;
+  roleId: number;
+  LocationId: number;
+}
+
+// Interface de los tickets relacionados con el usuario logueado
+export interface userTickets {
+  rId: number;
+  rIssue: string;
+  // rUserName: string;
+  lId: number;
+  lName: string;
+  tId: number;
+  tName: string;
+  qId: number;
+  qName: string;
+  rsId: number;
+  rsStatus: string;
 }

@@ -11,10 +11,10 @@ export class TicketService {
 
   // Ticketid es necesario para realizar la consulta de los datos en el "respuesta-folio.component"
   private ticket: number = 0;
-  set setTicket(ticketId : number) {
+  set setTicket(ticketId: number) {
     this.ticket = ticketId;
   }
-  get getTicket() : number {
+  get getTicket(): number {
     return this.ticket;
   }
 

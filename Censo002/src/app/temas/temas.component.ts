@@ -13,6 +13,8 @@ import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { ListService } from '../services/newServices/List/list.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 
+import { Popup } from 'src/assets/ts/popup';
+
 @Component({
   selector: 'app-temas',
   templateUrl: './temas.component.html',
@@ -142,5 +144,16 @@ export class TemasComponent implements OnInit {
         }
       );
     }
+  }
+
+  // Llamado de modals
+  private popup = new Popup();
+
+  mostrar() {
+    this.popup.mostrar();
+  }
+  
+  cerrar() {
+    this.popup.cerrar();
   }
 }
