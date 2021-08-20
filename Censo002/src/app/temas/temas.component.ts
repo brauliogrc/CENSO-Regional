@@ -14,6 +14,10 @@ import { ListService } from '../services/newServices/List/list.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 
 import { Popup } from 'src/assets/ts/popup';
+import {
+  existingTheme,
+  itemChanges,
+} from '../../assets/ts/interfaces/newInterfaces';
 
 @Component({
   selector: 'app-temas',
@@ -146,14 +150,56 @@ export class TemasComponent implements OnInit {
     }
   }
 
-  // Llamado de modals
+  // Llamado de modals y actualizacion del tema
   private popup = new Popup();
+  themeData: existingTheme;
+  editFlag: boolean = false;
 
-  mostrar() {
+  mostrar(themeId: number) {
+    this.getExistingTheme(themeId);
     this.popup.mostrar();
   }
-  
+
   cerrar() {
+    this.editFlag = false;
     this.popup.cerrar();
+  }
+
+  getExistingTheme(themeId: number): void {
+    this._searchService.getExistingTheme(themeId).subscribe(
+      (data) => {
+        this.themeData = data[0];
+        console.log(this.themeData);
+        this.editFlag = true;
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
+  }
+
+  updateTheme = this._fb.group({
+    newName: ['', [Validators.maxLength(50)]],
+    newStatus: [''],
+  });
+
+  saveChanges() {
+    const saveChanges: itemChanges = {
+      itemId: this.themeData.tId,
+      itemName: this.updateTheme.get('newName').value,
+      itemStatus: this.updateTheme.get('newStatus').value,
+    };
+
+    console.log(saveChanges);
+
+    this._themeService.themeUpdate(saveChanges).subscribe(
+      (data) => {
+        console.log(data.message);
+        this.getThemeList();
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
   }
 }

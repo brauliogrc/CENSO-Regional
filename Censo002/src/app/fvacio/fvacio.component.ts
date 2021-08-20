@@ -92,7 +92,7 @@ export class FvacioComponent implements OnInit {
     this.router.navigate(['/panelusuario']);
   }
 
-  // Cerrar popup quemuestra el contenido de la infoamción del ticket
+  // Cerrar popup que muestra el contenido de la infoamción del ticket
   cerrarPopup(): void {
     this.app.cerrarbusq();
     this.searchFlag = false;

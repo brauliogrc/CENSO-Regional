@@ -387,7 +387,7 @@ export class UsuariosComponent implements OnInit {
   // Añadiendo un tema aun usuario
   addRelatedTopic(themeId: number): void {
     console.log(themeId);
-    
+
     const newRelation: userTheme = {
       employeeNumber: this.userData.uEmployeeNumber,
       themeId: themeId,
@@ -403,7 +403,7 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-  // Añadir relacion entre tema y usuario
+  // Obtención de los temas disponibles
   getThemeList(locationId: number): void {
     this.themeList = [];
     this._fieldsService.getThme(locationId).subscribe(
@@ -417,6 +417,4 @@ export class UsuariosComponent implements OnInit {
       }
     );
   }
-
-  addTopic() {}
 }

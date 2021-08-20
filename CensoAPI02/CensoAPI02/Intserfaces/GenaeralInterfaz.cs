@@ -207,6 +207,24 @@ namespace CensoAPI02.Intserfaces
         public int? LocationId { get; set; }
     }
 
+    public class LocationUpdate
+    {
+        public int LocationId { get; set; }
+
+        public string? lName { get; set; }
+
+        public bool? lStatus { get; set; }
+    }
+
+    public class ItemUpdate
+    {
+        public int itemId { get; set; }
+
+        public string? itemName { get; set; }
+
+        public bool? itemStatus { get; set; }
+    }
+
     public class AddTopicRelationship
     {
         public long employeeNumber { get; set; }

@@ -25,10 +25,10 @@ namespace CENSO.Models
         [Required]
         public int tCreationUser { get; set; }
 
-        public DateTime tModificationDate { get; set; }
+        public DateTime? tModificationDate { get; set; }
 
         [MaxLength(50)]
-        public int tModificationUser { get; set; }
+        public int? tModificationUser { get; set; }
 
         [Required]
         public bool tStatus { get; set; }

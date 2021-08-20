@@ -347,16 +347,6 @@ namespace CensoAPI02.Controllers.SearchesControllers
                                           role.rolName,
                                       };
 
-                /*var temas = from ht in _context.HRUsersThemes
-                            join theme in _context.Theme on ht.ThemeId equals theme.tId
-                            where ht.UserId == employeeNumber && theme.tStatus == true
-                            select new
-                            {
-                                // Datos del tema
-                                theme.tId,
-                                theme.tName
-                            };*/
-
                 if (userInformation == null || userInformation.Count() == 0)
                 {
                     return NotFound(new { message = $"El usuario no se encuentra en la base de datos" });
@@ -396,6 +386,64 @@ namespace CensoAPI02.Controllers.SearchesControllers
             catch (Exception ex)
             {
                 return BadRequest(new { message = $"Ha ocurrido un error al recuperar la infomación del usuario. Error: {ex.Message}" });
+            }
+        }
+
+        // Obtencion de la información a actualizar de una localidad
+        [HttpGet][Route("existingLocation/{locationId}")][AllowAnonymous]
+        public async Task<ActionResult> existingLocation(int locationId)
+        {
+            try
+            {
+                var locationInformation = from location in _context.Locations
+                                          where location.lId == locationId
+                                          select new
+                                          {
+                                              // Datos de la localidad
+                                              location.lId,
+                                              location.lName,
+                                              location.lStatus
+                                          };
+
+                if ( locationInformation == null )
+                {
+                    return NotFound(new { message = $"La localidad no fue encontrada en la base de datos" });
+                }
+
+                return Ok(locationInformation);
+            }
+            catch ( Exception ex )
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al recuperar la información de la localidad. Error: {ex.Message}" });
+            }
+        }
+
+        // Obtención de la información a actualizar de un tema
+        [HttpGet][Route("existingTheme/{themeId}")][AllowAnonymous]
+        public async Task<ActionResult> existingTheme(int themeId )
+        {
+            try
+            {
+                var themeInformation = from theme in _context.Theme
+                                       where theme.tId == themeId
+                                       select new
+                                       {
+                                           // Datos del tema
+                                           theme.tId,
+                                           theme.tName,
+                                           theme.tStatus
+                                       };
+
+                if ( themeInformation == null )
+                {
+                    return NotFound(new { message = $"El tema no se encuentra en la base datos" });
+                }
+
+                return Ok(themeInformation);
+            }
+            catch( Exception ex )
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al recuperar la información del tema. Error: {ex.Message}" });
             }
         }
     }

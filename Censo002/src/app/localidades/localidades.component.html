@@ -51,7 +51,7 @@
             <td>{{ location.lName }}</td>
             <td>{{ location.lStatus }}</td>
             <td>
-              <button (click)="mostrar()" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
+              <button (click)="mostrar(location.lId)" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
               <button (click)="deleteLocation(location.lId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
             </td>
           </tr>
@@ -62,7 +62,7 @@
             <td>{{ location[0].lName }}</td>
             <td>{{ location[0].lStatus }}</td>
             <td>
-              <button (click)="mostrar()" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
+              <button (click)="mostrar(location[0].lId)" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
               <button (click)="deleteLocation(location[0].lId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
             </td>
           </tr>
@@ -75,22 +75,23 @@
         <div class="ModalEditBack" id="ModalEditBack">
           <div class="ModalTituloEdit">
             <h1>Editar Localidad</h1>
-            <h4>Nombre localidad</h4>
+            <h4 *ngIf="locationData">{{ locationData.lName }}</h4>
           </div>
 
-          <div class="ModalContenidoEdit">
-            <form class="row g-3">
+          <div class="ModalContenidoEdit" *ngIf="editFlag">
+            <form [formGroup]="updateLocation" (ngSubmit)="saveChanges()" class="row g-3">
               <!--Todo contenido del form -->
 
               <div class="col-md-6">
                 <label for="inputEmail4" class="form-label">Nombre</label>
-                <input type="email" class="form-control" id="inputEmail4">
+                <input formControlName="newName" placeholder="{{locationData.lName}}" type="email" class="form-control" id="inputEmail4">
               </div>
               <div class="col-md-6">
                 <label for="inputState" class="form-label">Estatus</label>
-                <select id="inputState" class="form-select">
-                  <option selected>Activo</option>
-                  <option>Inactivo</option>
+                <select formControlName="newStatus" id="inputState" class="form-select">
+                  <option class="current-data" value="{{ locationData.lStatus }}">Estatus actual</option>
+                  <option value=true>Activo</option>
+                  <option value=false>Inactivo</option>
                 </select>
               </div>
 

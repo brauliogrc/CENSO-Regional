@@ -85,5 +85,48 @@ namespace CensoAPI02.Controllers.NewControllers
                 return BadRequest(new { message = $"Ha ocurrido un error al eliminar el tema. Error: {ex.Message}" });
             }
         }
+
+        // Actualizacion de un tema
+        [HttpPatch][Route("themeUpdate")][AllowAnonymous]
+        public async Task<IActionResult> themeUpdate([FromBody] ItemUpdate item)
+        {
+            bool flagUpdate = false;
+            try
+            {
+                var theme = await _context.Theme.FindAsync(item.itemId);
+
+                if ( theme == null)
+                {
+                    return NotFound(new { message = $"No se ha encontrado el tema en la base de datos." });
+                }
+
+                if ( item.itemName != null && item.itemName.Length != 0 && theme.tName != item.itemName)
+                {
+                    theme.tName = item.itemName;
+                    flagUpdate = true;
+                }
+
+                if ( item.itemStatus != null && theme.tStatus != item.itemStatus)
+                {
+                    string newStatus = item.itemStatus.ToString();
+                    theme.tStatus = Boolean.Parse(newStatus);
+                    flagUpdate = true;
+                }
+
+                if ( flagUpdate )
+                {
+                    _context.Theme.Update(theme);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new { message = $"El tema ha sido actualizado con exito" });
+                }
+
+                return Ok(new { message = $"Ningun cambio realizado" });
+            }
+            catch ( Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrio un error al actualizar el tema. Error: {ex.Message}" });
+            }
+        }
     }
 }

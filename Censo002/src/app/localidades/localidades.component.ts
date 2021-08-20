@@ -2,12 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../services/Auth/auth.service';
 import { Router } from '@angular/router';
-import { locationList, addLocation } from '../../assets/ts/interfaces/newInterfaces';
+import {
+  locationList,
+  addLocation,
+  existingLocation,
+} from '../../assets/ts/interfaces/newInterfaces';
 import { ListService } from '../services/newServices/List/list.service';
 import { LocationService } from '../services/newServices/Location/location.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 
 import { Popup } from 'src/assets/ts/popup';
+import { locationChanges } from '../../assets/ts/interfaces/newInterfaces';
 
 @Component({
   selector: 'app-localidades',
@@ -112,14 +117,56 @@ export class LocalidadesComponent implements OnInit {
     );
   }
 
-  // Llamado de modals
+  // Llamado de modals y actualización de la localidad.
   private popup = new Popup();
+  locationData: existingLocation;
+  editFlag: boolean = false;
 
-  mostrar() {
+  mostrar(locationId: number) {
+    this.getLocationData(locationId);
     this.popup.mostrar();
   }
 
   cerrar() {
+    this.editFlag = false;
     this.popup.cerrar();
+  }
+
+  getLocationData(locationId: number): void {
+    this._searchService.getExistingLocation(locationId).subscribe(
+      (data) => {
+        this.locationData = data[0];
+        this.editFlag = true;
+        console.log(this.locationData);
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
+  }
+
+  updateLocation = this._fb.group({
+    newName: ['', [Validators.maxLength(50)]],
+    newStatus: [''],
+  });
+
+  // Método de modificación de los campos de la localidad
+  saveChanges(): void {
+    const saveChanges: locationChanges = {
+      locationId: this.locationData.lId,
+      lName: this.updateLocation.get('newName').value,
+      lStatus: this.updateLocation.get('newStatus').value,
+    };
+    console.log(saveChanges);
+
+    this._locationService.locatinoUpdate(saveChanges).subscribe(
+      (data) => {
+        console.log(data.message);
+        this.getLocationList();
+      },
+      (error) => {
+        console.error(error.error.message);
+      }
+    );
   }
 }

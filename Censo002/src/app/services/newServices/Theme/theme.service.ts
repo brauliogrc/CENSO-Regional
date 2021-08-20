@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { addTheme } from '../../../../assets/ts/interfaces/newInterfaces';
+import {
+  addTheme,
+  itemChanges,
+} from '../../../../assets/ts/interfaces/newInterfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +27,14 @@ export class ThemeService {
   deleteTheme(themeId: number): Observable<any> {
     return this._http.delete(
       `${environment.API_URL}` + this.MyApiUrl + 'deleteTheme/' + themeId
+    );
+  }
+
+  // Actualizacion del tema
+  themeUpdate(newThemeData: itemChanges): Observable<any> {
+    return this._http.patch(
+      `${environment.API_URL}` + this.MyApiUrl + 'themeUpdate',
+      newThemeData
     );
   }
 }

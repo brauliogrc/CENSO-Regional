@@ -8,7 +8,7 @@ import {
   questionList,
 } from 'src/assets/ts/interfaces/newInterfaces';
 import { environment } from 'src/environments/environment';
-import { Theme } from '../../../../assets/ts/interfaces/newInterfaces';
+import { Theme, existingLocation, existingTheme } from '../../../../assets/ts/interfaces/newInterfaces';
 import {
   areaList,
   userTickets,
@@ -121,6 +121,23 @@ export class SearchService {
         this.MyApiUrl +
         'relatedTopics/' +
         employeeNumber
+    );
+  }
+
+  // Obtención de los datos de la localidad seleccionado
+  getExistingLocation(locationId: number): Observable<existingLocation[]> {
+    return this._http.get<existingLocation[]>(
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'existingLocation/' +
+        locationId
+    );
+  }
+
+  // Obtencion de los datos del tema seleccionado
+  getExistingTheme(themeId: number): Observable<existingTheme[]> {
+    return this._http.get<existingTheme[]>(
+      `${environment.API_URL}` + this.MyApiUrl + 'existingTheme/' + themeId
     );
   }
 }

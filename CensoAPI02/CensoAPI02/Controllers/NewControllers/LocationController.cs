@@ -48,13 +48,6 @@ namespace CensoAPI02.Controllers.NewControllers
             }
         }
 
-        // Actualización de una localidad
-        [HttpPatch][Route("locationUpdate")][AllowAnonymous]
-        public async Task<IActionResult> locationUpdate()
-        {
-            return Ok();
-        }
-
         // Eliminación lógica de localidad
         [HttpDelete][Route("deleteLocation/{locationId}")][AllowAnonymous]
         public async Task<IActionResult> deleteLocation(int locationId)
@@ -78,6 +71,50 @@ namespace CensoAPI02.Controllers.NewControllers
             }catch(Exception ex)
             {
                 return BadRequest(new { message = $"Ha ocurido un error al eliminar la localidad. Error: {ex.Message}" });
+            }
+        }
+
+        // Actualización de una localidad (requiere polici admin)
+        [HttpPatch][Route("locationUpdate")][AllowAnonymous]
+        public async Task<IActionResult> locationUpdate([FromBody] LocationUpdate locationUpdate)
+        {
+            bool flagUpdate = false;
+            try
+            {
+                var location = await _context.Locations.FindAsync(locationUpdate.LocationId);
+
+                if (location == null)
+                {
+                    return NotFound(new { message = $"La localidad no fue encontrada" });
+                }
+
+                if ( locationUpdate.lName != null && locationUpdate.lName.Length != 0 && location.lName != locationUpdate.lName)
+                {
+                    location.lName = locationUpdate.lName;
+                    flagUpdate = true;
+
+                }
+
+                if ( locationUpdate.lStatus != null && location.lStatus != locationUpdate.lStatus )
+                {
+                    string newStatus = locationUpdate.lStatus.ToString();
+                    location.lStatus = Boolean.Parse(newStatus);
+                    flagUpdate = true;
+                }
+
+                if ( flagUpdate )
+                {
+                    _context.Locations.Update(location);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new { message = $"La localidad ha sido actualizada correctamete." });
+                }
+
+                return Ok(new { messgae = $"Ningun cambio realizado" });
+            }
+            catch( Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al actualizar la localidad. Error: {ex.Message}" });
             }
         }
     }

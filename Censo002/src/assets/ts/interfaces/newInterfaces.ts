@@ -224,6 +224,18 @@ export interface existingUser {
   rolName: string;
 }
 
+export interface existingLocation {
+  lId:number;
+  lName: string;
+  lStatus: boolean;
+}
+
+export interface existingTheme {
+  tId: number;
+  tName: string;
+  ttStatus: boolean;
+}
+
 export interface userChanges {
   employeeNumber: number;
   uName: string;
@@ -231,6 +243,18 @@ export interface userChanges {
   uStatus: boolean;
   roleId: number;
   LocationId: number;
+}
+
+export interface locationChanges {
+  locationId: number;
+  lName: string;
+  lStatus: boolean;
+}
+
+export interface itemChanges {
+  itemId: number,
+  itemName: string;
+  itemStatus: boolean;
 }
 
 // Interface de los tickets relacionados con el usuario logueado
