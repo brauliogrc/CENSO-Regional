@@ -16,8 +16,7 @@ namespace CensoAPI02.Intserfaces
 {
     public class EmailHandler
     {
-        private static string emailOrigen = "brauliogrc95@gmail.com";
-        private static string pass = "Cuchao101710";
+        private static string emailOrigen = "CENSO_Regional@continental-corporation.com";
         private static string displayName = "CENSO Test";
 
         // Obtencion del nombre del tema que se encuentra relacionado con el ticket
@@ -71,11 +70,11 @@ namespace CensoAPI02.Intserfaces
                     mailMessage.Body = $"<p>Sea ha generado una nueva solicitud relacionada al tema {mailData.themeName}, con numero de folio {mailData.ticketId} </p>";
                     mailMessage.IsBodyHtml = true;
 
-                    SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                    smtp.EnableSsl = true;
+                    SmtpClient smtp = new SmtpClient("smtphub07.conti.de");
+                    //smtp.EnableSsl = true;
                     smtp.UseDefaultCredentials = false;
-                    smtp.Port = 587;
-                    smtp.Credentials = new NetworkCredential(emailOrigen, pass);
+                    smtp.Port = 25;
+                    //smtp.Credentials = new NetworkCredential(emailOrigen, pass);
                     smtp.Send(mailMessage);
                     smtp.Dispose();
                 }

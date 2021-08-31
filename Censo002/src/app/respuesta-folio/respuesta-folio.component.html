@@ -187,7 +187,7 @@
           </div>
           <div class="textosContenido">
             <select formControlName="asUserId" id="employee" class="form-select">
-              <option selected value="{{ getCurrentUser }}" ></option>
+              <option class="current-data" selected value="{{ getCurrentUser }}" >Usuario actual</option>
               <option
                 *ngFor="let user of availableUsers"
                 value="{{ user.uEmployeeNumber }}"
@@ -215,7 +215,7 @@
           </div>
           <div class="textosContenido">
             <select formControlName="requestStatus" class="form-select" id="validationCustom04" required>
-              <option value="1"></option>
+              <option class="current-data" value="{{currentStatusValue}}">{{currentStatusName}}</option>
               <option *ngFor="let status of ticketStatus" value="{{status.rsId}}">{{status.rsStatus}}</option>
             </select>
             <div class="invalid-feedback">Selecciona una opción.</div>
@@ -255,7 +255,7 @@
         </div>
       </form>
       <div class="contBotonCerrar">
-        <button class="BotonRespuesta">Cerrar</button>
+        <button (click)="cerrarRespuesta()" class="BotonRespuesta">Cerrar</button>
       </div>
     </div>
   </div>

@@ -22,7 +22,8 @@ namespace CensoAPI02.Controllers.TablesControllers
         }
 
         // Listado de localidades (requiere policy administrator)
-        [HttpGet][Route("locationList")][AllowAnonymous]
+        [HttpGet][Route("locationList")]
+        [Authorize(Policy = "Administrador")]
         public async Task<ActionResult> getLocationsList()
         {
             try
@@ -52,7 +53,8 @@ namespace CensoAPI02.Controllers.TablesControllers
         }
 
         // Listado de usuarios (requiere policy SUHR)
-        [HttpGet][Route("userList/{locationId}")][AllowAnonymous]
+        [HttpGet][Route("userList/{locationId}")]
+        [Authorize(Policy = "SURH")]
         public async Task<ActionResult> getUserList(int locationId)
         {
             try
@@ -92,7 +94,8 @@ namespace CensoAPI02.Controllers.TablesControllers
 
 
         // Listado de temas (requiere policy SUHR)
-        [HttpGet][Route("themeList/{locationId}")][AllowAnonymous]
+        [HttpGet][Route("themeList/{locationId}")]
+        [Authorize(Policy = "SURH")]
         public async Task<ActionResult> getThemeList(int locationId)
         {
             try
@@ -125,7 +128,8 @@ namespace CensoAPI02.Controllers.TablesControllers
         }
 
         // Listado de preguntas (requiere policy SUHR)
-        [HttpGet][Route("questionList/{locationId}")][AllowAnonymous]
+        [HttpGet][Route("questionList/{locationId}")]
+        [Authorize(Policy = "SURH")]
         public async Task<ActionResult> getQuestionList(int locationId)
         {
             try
@@ -161,13 +165,16 @@ namespace CensoAPI02.Controllers.TablesControllers
         }
 
         // Listado de tikets
-        [HttpGet][Route("ticketList/{locationId}")][AllowAnonymous]
+        [HttpGet][Route("ticketList/{locationId}")]
+        [Authorize(Policy = "StaffRH")]
         public async Task<ActionResult> getTiketList(int locationId)
         {
             try
             {
                 var tickets = from request in _context.Requests
                               join theme in _context.Theme on request.ThemeId equals theme.tId
+                              join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
+                              join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
                               join question in _context.Questions on request.QuestionId equals question.qId
                               join location in _context.Locations on request.LocationId equals location.lId
                               join area in _context.Areas on request.AreaId equals area.aId
@@ -195,6 +202,8 @@ namespace CensoAPI02.Controllers.TablesControllers
 
                 var anonTickets = from anonReq in _context.AnonRequests
                                   join theme in _context.Theme on anonReq.ThemeId equals theme.tId
+                                  join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
+                                  join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
                                   join question in _context.Questions on anonReq.QuestionId equals question.qId
                                   join location in _context.Locations on anonReq.LocationId equals location.lId
                                   join area in _context.Areas on anonReq.AreaId equals area.aId
@@ -233,7 +242,8 @@ namespace CensoAPI02.Controllers.TablesControllers
         }
 
         // Listado de areas(requiere policy SUHR)
-        [HttpGet][Route("areaList/{locationId}")][AllowAnonymous]
+        [HttpGet][Route("areaList/{locationId}")]
+        [Authorize(Policy = "SURH")]
         public async Task<ActionResult> getAreaList(int locationId)
         {
             try

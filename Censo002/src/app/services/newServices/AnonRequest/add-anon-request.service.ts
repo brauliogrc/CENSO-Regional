@@ -44,7 +44,8 @@ export class AddAnonRequestService {
       `${environment.API_URL}` +
         this.MyApiUrl +
         'deleteAnonRequest/' +
-        requestId
+        requestId,
+        { headers: this.headers }
     );
   }
 }

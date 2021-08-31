@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -7,7 +7,8 @@ import { environment } from 'src/environments/environment';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 
-const EXCEL_TYPE: string = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+const EXCEL_TYPE: string =
+  'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
 const EXCEL_EXT: string = '.xlsx';
 
 @Injectable({
@@ -15,13 +16,18 @@ const EXCEL_EXT: string = '.xlsx';
 })
 export class CreateReportService {
   private MyApiUrl: string = 'Report/ticketsReport/';
+  private headers = new HttpHeaders({
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+  });
 
-  constructor( private _http: HttpClient ) {}
+  constructor(private _http: HttpClient) {}
 
   // Obtención de la información de los ticket para e reporte
   getReportData(locationId: number): Observable<any> {
     return this._http
-      .get(`${environment.API_URL}` + this.MyApiUrl + locationId)
+      .get(`${environment.API_URL}` + this.MyApiUrl + locationId, {
+        headers: this.headers,
+      })
       .pipe(
         catchError((err: any) => {
           console.warn(
@@ -41,12 +47,18 @@ export class CreateReportService {
       Sheets: { data: worksheet },
       SheetNames: ['data'],
     };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    const excelBuffer: any = XLSX.write(workbook, {
+      bookType: 'xlsx',
+      type: 'array',
+    });
     this.saveAsExcelFile(excelBuffer, excelFileName);
   }
 
-  private saveAsExcelFile( buffer: any, fileName: string ): void {
-    const data: Blob = new Blob([buffer], {type: EXCEL_TYPE});
-    FileSaver.saveAs( data, fileName + '_export_' + new Date().getTime() + EXCEL_EXT );
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+    const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
+    FileSaver.saveAs(
+      data,
+      fileName + '_export_' + new Date().getTime() + EXCEL_EXT
+    );
   }
 }

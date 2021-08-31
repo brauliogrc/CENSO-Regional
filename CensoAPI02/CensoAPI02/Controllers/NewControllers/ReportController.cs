@@ -20,11 +20,41 @@ namespace CensoAPI02.Controllers.NewControllers
             _context = context;
         }
 
-        [HttpGet][Route("ticketsReport/{locationId}")][AllowAnonymous]
+        [HttpGet][Route("ticketsReport/{locationId}")]
         public async Task<ActionResult> getTicketReport(int locationId)
         {
             try
             {
+                /*var lftJoin = from request in _context.Requests
+                              join theme in _context.Theme
+                                on request.ThemeId equals theme.tId into themeGroup
+                              from themeG in themeGroup.DefaultIfEmpty()
+                              join question in _context.Questions
+                               on request.QuestionId equals question.qId into questionGroup
+                              from questionG in questionGroup.DefaultIfEmpty()
+                              join location in _context.Locations
+                               on request.LocationId equals location.lId into locationGroup
+                              from locationG in locationGroup.DefaultIfEmpty()
+                              join area in _context.Areas
+                               on request.AreaId equals area.aId into areaGroup
+                              from areaG in areaGroup.DefaultIfEmpty()
+                              join status in _context.RequestStatus
+                               on request.StatusId equals status.rsId into statusGroup
+                              from statusG in statusGroup.DefaultIfEmpty()
+                              join answer in _context.Answer
+                               on request.rId equals answer.RequestId into answerGroup
+                              from answerG in answerGroup.DefaultIfEmpty()
+                              join user in _context.HRU
+                               on answerG.UserId equals user.uEmployeeNumber into userGroup
+                              from userG in userGroup.DefaultIfEmpty()
+                              where request.rId == answerG.RequestId  answerG.RequestId = null
+                              select new
+                              {
+
+                              };*/
+
+                                
+
                 var tickets = from request in _context.Requests
                               //join user in _context.HRU on request.rUserId equals user.uEmployeeNumber
                               join theme in _context.Theme on request.ThemeId equals theme.tId

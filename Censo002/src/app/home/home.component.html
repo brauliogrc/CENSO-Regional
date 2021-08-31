@@ -288,7 +288,7 @@
                               <p>Respuesta:</p>
                             </div>
                             <div class="textosContenido">
-                              <p>{{ responsable.request }}</p>
+                              <p>{{ responsable.asAnswer }}</p>
                             </div>
                           </div>
                           <div class="contenedores">
@@ -296,7 +296,7 @@
                               <p>Se respondio:</p>
                             </div>
                             <div class="textosContenido">
-                              <p>{{ responsable.asCreationDate }}</p>
+                              <p>{{ responsable.asCreationDate | date: "mediumDate" }}</p>
                             </div>
                           </div>
                           <div class="contenedores">
@@ -332,6 +332,6 @@
   </div>
 
   <footer class="footerIndexC">
-    <img src="../../assets/img/imgJalisco.png" alt="" class="imgJaliscoC" />
+    <img src="assets/img/imgJalisco.png" alt="" class="imgJaliscoC" />
   </footer>
 </body>

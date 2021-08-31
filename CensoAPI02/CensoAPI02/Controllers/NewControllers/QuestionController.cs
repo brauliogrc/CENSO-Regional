@@ -23,7 +23,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Registro de una nueva pregunta
-        [HttpPost][Route("newQuestion")][AllowAnonymous]
+        [HttpPost][Route("newQuestion")]
         public async Task<IActionResult> addNewQuestion([FromBody] AddQuestionInterface newQuestion)
         {
             try
@@ -61,7 +61,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Eliminacion logica de pregunta
-        [HttpDelete][Route("deleteQuestion/{questionId}")][AllowAnonymous]
+        [HttpDelete][Route("deleteQuestion/{questionId}")]
         public async Task<IActionResult> deleteQuestion(int questionId)
         {
             try
@@ -83,6 +83,111 @@ namespace CensoAPI02.Controllers.NewControllers
             }catch(Exception ex)
             {
                 return BadRequest(new { message = $"Ha ocurrido un error al eliminar la pregunta. Error: {ex.Message}" });
+            }
+        }
+
+        // Acualización de la pregunta
+        [HttpPatch][Route("questionUpdate")]
+        public async Task<IActionResult> questionUpdate([FromBody] ItemUpdate item)
+        {
+            bool flagUpdate = false;
+            try
+            {
+                var question = await _context.Questions.FindAsync(item.itemId);
+
+                if ( question == null)
+                {
+                    return NotFound(new { message = $"No se ha encontrado la pregunta en la base de datos" });
+                }
+
+                if ( item.itemName != null && item.itemName.Length != 0 && question.qName != item.itemName )
+                {
+                    question.qName = item.itemName;
+                    flagUpdate = true;
+                }
+
+                if ( item.itemStatus != null && question.qStatus != item.itemStatus )
+                {
+                    string newStatus = item.itemStatus.ToString();
+                    question.qStatus = Boolean.Parse(newStatus);
+                    flagUpdate = true;
+                }
+
+                if ( flagUpdate )
+                {
+                    question.qModificationUser = item.modificationUser;
+                    question.qModificationDate = DateTime.Now;
+
+                    _context.Questions.Update(question);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new { message = $"La pregunta se ha actualizado con exito." });
+                }
+
+                return Ok(new { message = $"Ningun cambio realizado" });
+            }
+            catch ( Exception ex )
+            {
+                return BadRequest(new { message = $"Ha ocurrio un error al actualizar el usuario" });
+            }
+        }
+
+        // Añadir relación entre una pregunta y un tema
+        [HttpPost][Route("addRelatedTheme")]
+        public async Task<IActionResult> addRelatedTheme([FromBody] AddThemeRelationship themeRelationship)
+        {
+            try
+            {
+                var search = (from qt in _context.QuestionsThemes
+                              where qt.QuestionId == themeRelationship.itemId && qt.ThemeId == themeRelationship.themeId
+                              select qt).FirstOrDefault();
+
+                if ( search != null)
+                {
+                    return Ok(new { message = $"La pregunta ya se encuentra relacionada con este tema." });
+                }
+
+                var newRelationship = new QuestionsTheme()
+                {
+                    QuestionId = themeRelationship.itemId,
+                    ThemeId = themeRelationship.themeId
+                };
+
+                _context.QuestionsThemes.Add(newRelationship);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = $"Relación añadida correctamente." });
+            }
+            catch ( Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al agregar la relación de la pregunta con el tema. Error: {ex.Message}" });
+            }
+        }
+
+        // Eliminación de relación entre una pregunta y un tema
+        [HttpDelete][Route("deleteRelatedTheme/{themeId}/{questionId}")]
+        public async Task<ActionResult> deleteRelatedTheme(int themeId, int questionId)
+        {
+            try
+            {
+                var relatedTheme = (from qt in _context.QuestionsThemes
+                                    where qt.ThemeId == themeId && qt.QuestionId == questionId
+                                    select qt).FirstOrDefault();
+
+                if ( relatedTheme == null )
+                {
+                    return NotFound(new { message = $"No se ha encontrado la relación entre la pregunta y el tema" });
+                }
+
+                _context.QuestionsThemes.Remove(relatedTheme);
+                await _context.SaveChangesAsync();
+
+                return Ok( new { message = $"La relación se eliminó corectamente" });
+
+            }
+            catch ( Exception ex )
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al eliminar la relación con el tema. Error {ex.Message}" });
             }
         }
     }

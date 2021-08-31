@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { dataLogin, Token } from '../../assets/ts/interfaces/newInterfaces';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 const helper = new JwtHelperService();
 
@@ -25,9 +27,10 @@ export class LoginComponent implements OnInit {
   dataToken: any;
 
   constructor(
+    private router: Router,
     private _fb: FormBuilder,
     private _authService: AuthService,
-    private router: Router
+    private _showError:ShowErrorService,
   ) {}
 
   ngOnInit(): void {}
@@ -47,6 +50,7 @@ export class LoginComponent implements OnInit {
       (data: Token) => {
         if (!data) {
           console.error('Usuario no encontrado en la base de datos');
+          this._showError.LoginError();
         } else {
           this.dataToken = helper.decodeToken(data.token);
           // console.log(this.dataToken);
@@ -73,8 +77,9 @@ export class LoginComponent implements OnInit {
         }
         // console.log(dataLogin);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error);
+        this._showError.statusCode(error);
       }
     );
   }

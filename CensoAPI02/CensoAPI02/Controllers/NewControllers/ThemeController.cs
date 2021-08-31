@@ -23,7 +23,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Registro de un nuevo tema
-        [HttpPost][Route("newTheme")][AllowAnonymous]
+        [HttpPost][Route("newTheme")]
         public async Task<IActionResult> addNewTheme([FromBody] AddThemeInterface newTheme)
         {
             try
@@ -60,7 +60,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Eliminación lógica de tema
-        [HttpDelete][Route("deleteTheme/{themeId}")][AllowAnonymous]
+        [HttpDelete][Route("deleteTheme/{themeId}")]
         public async Task<IActionResult> deleteTheme(int themeId)
         {
             try
@@ -87,7 +87,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Actualizacion de un tema
-        [HttpPatch][Route("themeUpdate")][AllowAnonymous]
+        [HttpPatch][Route("themeUpdate")]
         public async Task<IActionResult> themeUpdate([FromBody] ItemUpdate item)
         {
             bool flagUpdate = false;
@@ -115,6 +115,9 @@ namespace CensoAPI02.Controllers.NewControllers
 
                 if ( flagUpdate )
                 {
+                    theme.tModificationUser = item.modificationUser;
+                    theme.tModificationDate = DateTime.Now;
+
                     _context.Theme.Update(theme);
                     await _context.SaveChangesAsync();
 
@@ -125,7 +128,65 @@ namespace CensoAPI02.Controllers.NewControllers
             }
             catch ( Exception ex)
             {
-                return BadRequest(new { message = $"Ha ocurrio un error al actualizar el tema. Error: {ex.Message}" });
+                return BadRequest(new { message = $"Ha ocurrio un error al actualizar el tema. Error: {ex.InnerException}" });
+            }
+        }
+
+        // Eliminación de una relación entre un tema y una localidad
+        [HttpDelete][Route("deleteRelatedLocation/{locationId}/{themeId}")]
+        public async Task<ActionResult> deleteRelatedLocation(int locationId, int themeId)
+        {
+            try
+            {
+                var relationLocation = (from lt in _context.LocationsThemes
+                                        where lt.LocationId == locationId && lt.ThemeId == themeId
+                                        select lt).FirstOrDefault();
+
+                if ( relationLocation ==  null)
+                {
+                    return NotFound(new { message = $"No se ha encontrado la relación entre el tema y la localidad" });
+                }
+
+                _context.LocationsThemes.Remove(relationLocation);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = $"La relación se eliminó correctamente" });
+            }
+            catch ( Exception ex )
+            {
+                return BadRequest(new { message = $"Ha ocrrido un error al eliminar la relación con la localidad. Error: {ex.Message}" });
+            }
+        }
+
+        // Añadir relación entre un tema y una localidad
+        [HttpPost][Route("addRelatedLocation")]
+        public async Task<IActionResult> addRelatedLocation([FromBody] AddThemeRelationship themeRelationship)
+        {
+            try
+            {
+                var search = (from lt in _context.LocationsThemes
+                              where lt.LocationId == themeRelationship.itemId && lt.ThemeId == themeRelationship.themeId
+                              select lt).FirstOrDefault();
+
+                if ( search != null)
+                {
+                    return Ok(new { message = $"El tema ya se encuentra relacionado con esta localidad" });
+                }
+
+                var newRelationShip = new LocationsTheme()
+                {
+                    LocationId = themeRelationship.itemId,
+                    ThemeId = themeRelationship.themeId
+                };
+
+                _context.LocationsThemes.Add(newRelationShip);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = $"Relación añadida correctamente" });
+            }
+            catch( Exception ex )
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al agregar la relación del tema con la localidad. Error {ex.Message}" });
             }
         }
     }

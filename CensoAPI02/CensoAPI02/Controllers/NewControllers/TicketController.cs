@@ -25,7 +25,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Busqueda de los datos del ticket a responder (requiere policy staff rh)
-        [HttpGet][Route("ticketData/{ticketId}")][AllowAnonymous]
+        [HttpGet][Route("ticketData/{ticketId}")]
         public async Task<ActionResult> getTicketData(int ticketId)
         {
 
@@ -97,7 +97,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
                     if (anonTicketData == null || anonTicketData.Count() == 0)
                     {
-                        return NotFound(new { message = $"Ticket o encontrado en la base de datos" });
+                        return NotFound(new { message = $"Ticket no encontrado en la base de datos" });
                     }
 
                     daysPassed = Convert.ToInt32((DateTime.Now - anonTicketData.First().arCreationDate).TotalDays);
@@ -127,7 +127,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
 
         // Borrado logico de un ticket (requiere policy staff rh)
-        [HttpDelete][Route("deleteTicket/{ticketId}")][AllowAnonymous]
+        [HttpDelete][Route("deleteTicket/{ticketId}")]
         public async Task<IActionResult> deleteTicket(int ticketId)
         {
             try
@@ -214,7 +214,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
 
         // Consulta del status de un ticket (requiere policy staff rh)
-        [HttpGet][Route("ticketStatus/{employeeNumber}/{ticketId}")][AllowAnonymous]
+        [HttpGet][Route("ticketStatus/{employeeNumber}/{ticketId}")][Authorize]
         public async Task<ActionResult> getTicketStatus(int employeeNumber, int ticketId)
         {
             try

@@ -4,8 +4,15 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { LocationValidate } from '../../assets/ts/validations';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
-import { Theme, Question, Area, addRequest } from '../../assets/ts/interfaces/newInterfaces';
+import {
+  Theme,
+  Question,
+  Area,
+  addRequest,
+} from '../../assets/ts/interfaces/newInterfaces';
 import { AddRequestService } from '../services/newServices/Request/add-request.service';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-panelusuario',
@@ -37,11 +44,12 @@ export class PanelusuarioComponent implements OnInit {
   });
 
   constructor(
+    private router: Router,
     private _fb: FormBuilder,
-    private _requestService: AddRequestService,
-    private _authService: AuthService,
     private _fields: FieldsService,
-    private router: Router
+    private _authService: AuthService,
+    private _showError: ShowErrorService,
+    private _requestService: AddRequestService
   ) {}
 
   ngOnInit(): void {
@@ -85,8 +93,9 @@ export class PanelusuarioComponent implements OnInit {
         this.Theme = [...data];
         console.log(this.Theme);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -99,8 +108,9 @@ export class PanelusuarioComponent implements OnInit {
         this.Questions = [...data];
         console.log(this.Questions);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -113,8 +123,9 @@ export class PanelusuarioComponent implements OnInit {
         this.Areas = [...data];
         console.log(this.Areas);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -139,26 +150,36 @@ export class PanelusuarioComponent implements OnInit {
     // console.log(req);
 
     const formData = new FormData();
-    formData.append('rUserId',          String(sessionStorage.getItem('employeeNumber')));
-    formData.append('rUserName',        String(sessionStorage.getItem('username')));
-    formData.append('rEmployeeType',    this.bodyRequest.get('rEmployeeType')?.value);
-    formData.append('rEmployeeLeader',  String(sessionStorage.getItem('supervisorNumber')));
-    formData.append('QuestionId',       this.bodyRequest.get('QuestionId')?.value);
-    formData.append('AreaId',           this.bodyRequest.get('AreaId')?.value);
-    formData.append('ThemeId',          this.bodyRequest.get('ThemeId')?.value);
-    formData.append('LocationId',       String(this.location));
-    formData.append('rIssue',           this.bodyRequest.get('rIssue')?.value);
-    formData.append('rAttachement',     this.file);
-
+    formData.append(
+      'rUserId',
+      String(sessionStorage.getItem('employeeNumber'))
+    );
+    formData.append('rUserName', String(sessionStorage.getItem('username')));
+    formData.append(
+      'rEmployeeType',
+      this.bodyRequest.get('rEmployeeType')?.value
+    );
+    formData.append(
+      'rEmployeeLeader',
+      String(sessionStorage.getItem('supervisorNumber'))
+    );
+    formData.append('QuestionId', this.bodyRequest.get('QuestionId')?.value);
+    formData.append('AreaId', this.bodyRequest.get('AreaId')?.value);
+    formData.append('ThemeId', this.bodyRequest.get('ThemeId')?.value);
+    formData.append('LocationId', String(this.location));
+    formData.append('rIssue', this.bodyRequest.get('rIssue')?.value);
+    formData.append('rAttachement', this.file);
 
     // Registro de la peticion en la base de datos
     this._requestService.addNewRequest(formData).subscribe(
       (data) => {
         console.log(data);
+        this._showError.success(data.message);
         this.bodyRequest.reset();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }

@@ -12,7 +12,9 @@ import { LocationService } from '../services/newServices/Location/location.servi
 import { SearchService } from '../services/newServices/Search/search.service';
 
 import { Popup } from 'src/assets/ts/popup';
-import { locationChanges } from '../../assets/ts/interfaces/newInterfaces';
+import { itemChanges } from '../../assets/ts/interfaces/newInterfaces';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-localidades',
@@ -32,12 +34,13 @@ export class LocalidadesComponent implements OnInit {
   });
 
   constructor(
-    private _listService: ListService,
-    private _locationService: LocationService,
+    private router: Router,
     private _fb: FormBuilder,
-    private _searchService: SearchService,
+    private _listService: ListService,
     private _authService: AuthService,
-    private router: Router
+    private _showError: ShowErrorService,
+    private _searchService: SearchService,
+    private _locationService: LocationService
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +51,7 @@ export class LocalidadesComponent implements OnInit {
   validRole(): void {
     if (Number(sessionStorage.getItem('role')) != 1) {
       console.error('Sección no accesible');
+      this._showError.NotAccessible();
       sessionStorage.clear();
       this.router.navigate(['/login']);
       console.clear();
@@ -62,8 +66,9 @@ export class LocalidadesComponent implements OnInit {
       (data) => {
         this.Locations = [...data];
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -80,12 +85,14 @@ export class LocalidadesComponent implements OnInit {
     this._locationService.addNewLocation(newLocation).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.getLocationList();
         this.newLocation.reset();
         this.location = null;
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -95,11 +102,13 @@ export class LocalidadesComponent implements OnInit {
     this._locationService.deleteLocaion(locationId).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.location = null;
         this.getLocationList();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -111,8 +120,9 @@ export class LocalidadesComponent implements OnInit {
         this.location = data;
         this.Locations = [];
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -129,6 +139,7 @@ export class LocalidadesComponent implements OnInit {
 
   cerrar() {
     this.editFlag = false;
+    this.updateLocation.reset();
     this.popup.cerrar();
   }
 
@@ -139,8 +150,9 @@ export class LocalidadesComponent implements OnInit {
         this.editFlag = true;
         console.log(this.locationData);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -152,20 +164,25 @@ export class LocalidadesComponent implements OnInit {
 
   // Método de modificación de los campos de la localidad
   saveChanges(): void {
-    const saveChanges: locationChanges = {
-      locationId: this.locationData.lId,
-      lName: this.updateLocation.get('newName').value,
-      lStatus: this.updateLocation.get('newStatus').value,
+    const saveChanges: itemChanges = {
+      modificationUser: Number(sessionStorage.getItem('employeeNumber')),
+      itemId: this.locationData.lId,
+      itemName: this.updateLocation.get('newName').value,
+      itemStatus: this.updateLocation.get('newStatus').value,
+      locationId: null
     };
     console.log(saveChanges);
 
     this._locationService.locatinoUpdate(saveChanges).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.getLocationList();
+        this.updateLocation.reset();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }

@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CreateReportService } from '../services/newServices/CreateReport/create-report.service';
 import { ConverToObjectArray } from 'src/assets/ts/exportDataFormat';
 import { ExportData } from '../../assets/ts/interfaces/exportData';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-reportes',
@@ -10,11 +12,10 @@ import { ExportData } from '../../assets/ts/interfaces/exportData';
   styleUrls: ['./reportes.component.css'],
 })
 export class ReportesComponent implements OnInit {
-
-
   constructor(
-    private _createReport: CreateReportService,
-    private router: Router
+    private router: Router,
+    private _showError: ShowErrorService,
+    private _createReport: CreateReportService
   ) {}
 
   ngOnInit(): void {
@@ -28,6 +29,7 @@ export class ReportesComponent implements OnInit {
       Number(sessionStorage.getItem('role')) != 2
     ) {
       console.error('Sección no accesible');
+      this._showError.NotAccessible();
       sessionStorage.clear();
       this.router.navigate(['/login']);
       console.clear();
@@ -43,11 +45,16 @@ export class ReportesComponent implements OnInit {
   getReportData(): void {
     this._createReport
       .getReportData(Number(sessionStorage.getItem('location')))
-      .subscribe((data: any) => {
-        this.tickets(data);
-        this.anonTickets(data);
-        this.getList();
-      });
+      .subscribe(
+        (data: any) => {
+          this.tickets(data);
+          this.anonTickets(data);
+          this.getList();
+        },
+        (error: HttpErrorResponse) => {
+          this._showError.statusCode(error);
+        }
+      );
   }
 
   tickets(data: any) {

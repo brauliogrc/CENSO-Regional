@@ -10,22 +10,19 @@ import {
   userInformation,
   existingUser,
   userChanges,
-} from '../../assets/ts/interfaces/newInterfaces';
-import {
   addUser,
   Location,
   Rol,
   userList,
   searchData,
+  Theme,
+  userTheme,
 } from '../../assets/ts/interfaces/newInterfaces';
 
 import { Popup } from '../../assets/ts/popup';
-import {
-  Theme,
-  themeList,
-  userTheme,
-} from '../../assets/ts/interfaces/newInterfaces';
-import { ThemeList } from '../../assets/ts/theme-list';
+// import { ThemeList } from '../../assets/ts/theme-list';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-usuarios',
@@ -66,13 +63,14 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     // private _createScript: CreateScriptsService,
-    private _listService: ListService,
-    private _userSerice: UserService,
-    private _searchService: SearchService,
-    private _authService: AuthService,
-    private _fieldsService: FieldsService,
+    private router: Router,
     private _fb: FormBuilder,
-    private router: Router
+    private _userSerice: UserService,
+    private _listService: ListService,
+    private _authService: AuthService,
+    private _showError: ShowErrorService,
+    private _searchService: SearchService,
+    private _fieldsService: FieldsService
   ) {
     // this._createScript.CargaArchivos( [ "popoupEdicion" ] );
   }
@@ -87,6 +85,7 @@ export class UsuariosComponent implements OnInit {
       Number(sessionStorage.getItem('role')) != 2
     ) {
       console.error('Sección no accesible');
+      this._showError.NotAccessible();
       sessionStorage.clear();
       this.router.navigate(['/login']);
       console.clear();
@@ -104,8 +103,9 @@ export class UsuariosComponent implements OnInit {
       (data) => {
         this.Locations = [...data];
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -116,8 +116,9 @@ export class UsuariosComponent implements OnInit {
       (data) => {
         this.Roles = [...data];
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -130,8 +131,9 @@ export class UsuariosComponent implements OnInit {
         (data) => {
           this.Users = [...data];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
   }
@@ -151,8 +153,9 @@ export class UsuariosComponent implements OnInit {
           this.userInformation.location = data.location;
           console.log(this.userInformation);
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     }
@@ -160,7 +163,7 @@ export class UsuariosComponent implements OnInit {
 
   // Muestra el nombre del usuario
   getUserName = (): string => {
-    if (this.userInformation.name.length > 4) {
+    if (this.userInformation.name.length != 0) {
       this.flag = true;
     }
     return this.userInformation.name;
@@ -168,15 +171,7 @@ export class UsuariosComponent implements OnInit {
 
   // Muestra el correo del usuario
   getEmail = (): string | null => {
-    // console.log(this.newUser.get('uEmail')?.value);
-    // this.userInformation.email?.split(" ").join("");
-    if (this.userInformation.email?.length != 0) {
-      // console.log(this.userInformation.email);
-      return this.userInformation.email;
-    }
-    // console.log(this.newUser.get('uEmail')?.value);
-
-    return this.newUser.get('uEmail')?.value;
+    return this.userInformation.email;
   };
 
   // Muestra la localidad del ususario
@@ -193,23 +188,36 @@ export class UsuariosComponent implements OnInit {
       // TODO
       const dataNewUser: addUser = {
         uName: this.getUserName(),
-        uEmail: this.newUser.get('uEmail')?.value,
+        uEmail: this.getEmail(),
         RolId: this.newUser.get('RolId')?.value,
         uStatus: this.newUser.get('uStatus')?.value,
         EmployeeNumber: this.newUser.get('EmployeeNumber')?.value,
         uCreationUser: Number(sessionStorage.getItem('userId')),
       };
+
+      const name: string = this.newUser.get('uName').value;
+      const email: string = this.newUser.get('uEmail').value;
+
+      if ( name.length != 0 && name != this.getUserName() ) {
+        dataNewUser.uName = name;
+      }
+      if ( email.length != 0 && email != this.getEmail() ) {
+        dataNewUser.uEmail = email;
+      }
+
       console.log(dataNewUser);
 
       // Registro del nuevo usuario en la tabla HRU
       this._userSerice.addNewUser(dataNewUser).subscribe(
         (data) => {
           console.log(data.message);
+          this._showError.success(data.message);
           this.getUserList();
           this.newUser.reset();
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     } else {
@@ -219,16 +227,18 @@ export class UsuariosComponent implements OnInit {
 
   // Borrado logico del usuario
   deleteUser(userId: number): void {
-    // console.log(userId);
+    console.log(userId);
 
     this._userSerice.deleteUser(userId).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.user = null;
         this.getUserList();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -249,8 +259,9 @@ export class UsuariosComponent implements OnInit {
           this.user = data;
           this.Locations = [];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     }
@@ -299,8 +310,9 @@ export class UsuariosComponent implements OnInit {
         this.userData = data[0];
         this.editFlag = true;
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -313,8 +325,9 @@ export class UsuariosComponent implements OnInit {
         this.relatedTopics = [...data];
         console.log(this.relatedTopics);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -338,6 +351,7 @@ export class UsuariosComponent implements OnInit {
   // Método de modificació de campos del usuario
   saveChanges(): void {
     const saveChanges: userChanges = {
+      modificationUser: Number(sessionStorage.getItem('employeeNumber')),
       employeeNumber: this.userData.uEmployeeNumber,
       uName: this.updateUser.get('newName').value,
       uEmail: this.updateUser.get('newEmail').value,
@@ -350,10 +364,12 @@ export class UsuariosComponent implements OnInit {
     this._userSerice.userUpdate(saveChanges).subscribe(
       (data) => {
         console.log('Usuario actualizado');
+        this._showError.success(data.message);
         this.getUserList();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -376,10 +392,12 @@ export class UsuariosComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data.message);
+          this._showError.success(data.message);
           this.getRelatedTopics(this.userData.uEmployeeNumber);
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
   }
@@ -395,10 +413,12 @@ export class UsuariosComponent implements OnInit {
     this._userSerice.addRelatedTopic(newRelation).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.getRelatedTopics(this.userData.uEmployeeNumber);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -412,8 +432,9 @@ export class UsuariosComponent implements OnInit {
 
         this.themeList = [...data];
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }

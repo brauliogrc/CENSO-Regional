@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 const helper = new JwtHelperService();
 
@@ -11,22 +12,22 @@ const helper = new JwtHelperService();
   providedIn: 'root',
 })
 export class AuthService {
-  private MyAppUrl: string = 'https://localhost:44358/';
-  private MyApiUrl: string = 'api/Login';
+  // private MyAppUrl: string = 'https://localhost:44358/';
+  private MyApiUrl: string = 'Login';
 
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   get isLogged(): Observable<boolean> {
     return this.loggedIn.asObservable();
   }
-  
+
   constructor(private _http: HttpClient, private router: Router) {
     this.checkToken();
   }
 
   // Llamamos al controlador del login de la API, le enviamos los datos obtenidos en el formulario de login.component
   Login(authData: any): Observable<any> {
-    return this._http.post(this.MyAppUrl + this.MyApiUrl, authData);
+    return this._http.post(`${environment.API_URL}` + this.MyApiUrl, authData);
   }
 
   //////////////////////////////////////////////////////////
@@ -51,7 +52,7 @@ export class AuthService {
     sessionStorage.clear();
     console.clear();
     this.loggedIn.next(false);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 
   private checkToken(): void {

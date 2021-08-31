@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'https://localhost:91/api/',
+  API_URL: 'http://glas822a:91/api/',
 };

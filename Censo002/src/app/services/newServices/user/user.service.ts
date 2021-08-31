@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
@@ -15,6 +15,9 @@ import { userChanges } from '../../../../assets/ts/interfaces/newInterfaces';
 })
 export class UserService {
   private MyApiUrl: string = 'HRU/';
+  private headers = new HttpHeaders({
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+  });
 
   constructor(private _http: HttpClient) {}
 
@@ -22,14 +25,16 @@ export class UserService {
   addNewUser(newUser: addUser): Observable<any> {
     return this._http.post(
       `${environment.API_URL}` + this.MyApiUrl + 'newUser',
-      newUser
+      newUser,
+      { headers: this.headers }
     );
   }
 
   // Borrado logico de un usuario
   deleteUser(userId: number): Observable<any> {
     return this._http.delete(
-      `${environment.API_URL}` + this.MyApiUrl + 'deleteUser/' + userId
+      `${environment.API_URL}` + this.MyApiUrl + 'deleteUser/' + userId,
+      { headers: this.headers }
     );
   }
 
@@ -42,7 +47,8 @@ export class UserService {
         'userInformation/' +
         locationValidate.localityNameValidation() +
         '/' +
-        employeeNumber
+        employeeNumber,
+      { headers: this.headers }
     );
   }
 
@@ -50,7 +56,8 @@ export class UserService {
   userUpdate(newUserData: userChanges): Observable<any> {
     return this._http.patch(
       `${environment.API_URL}` + this.MyApiUrl + 'userUpdate',
-      newUserData
+      newUserData,
+      { headers: this.headers }
     );
   }
 
@@ -62,14 +69,17 @@ export class UserService {
         'deleteRelatedTopic/' +
         employeenUmber +
         '/' +
-        themeId
+        themeId,
+      { headers: this.headers }
     );
   }
 
+  // Añadir una relacion entre un usuario y una localidad
   addRelatedTopic(relationship: userTheme): Observable<any> {
     return this._http.post(
       `${environment.API_URL}` + this.MyApiUrl + 'addRelatedTopic',
-      relationship
+      relationship,
+      { headers: this.headers }
     );
   }
 }

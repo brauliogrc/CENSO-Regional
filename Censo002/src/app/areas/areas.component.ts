@@ -11,9 +11,13 @@ import {
   Location,
   searchData,
   addArea,
+  existingArea,
+  itemChanges,
 } from '../../assets/ts/interfaces/newInterfaces';
 
 import { Popup } from 'src/assets/ts/popup';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-areas',
@@ -27,6 +31,7 @@ export class AreasComponent implements OnInit {
   Locations: Location[] = [];
 
   constructor(
+    private _showError: ShowErrorService,
     private _authService: AuthService,
     private _areaService: AreaService,
     private _listService: ListService,
@@ -52,6 +57,7 @@ export class AreasComponent implements OnInit {
       Number(sessionStorage.getItem('role')) != 2
     ) {
       console.error('Sección no accesible');
+      this._showError.NotAccessible();
       sessionStorage.clear();
       this.router.navigate(['/login']);
       console.clear();
@@ -68,8 +74,9 @@ export class AreasComponent implements OnInit {
         this.Locations = [...data];
         console.log(this.Locations);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -83,8 +90,9 @@ export class AreasComponent implements OnInit {
           this.Areas = [...data];
           console.log(this.Areas);
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
   }
@@ -96,14 +104,18 @@ export class AreasComponent implements OnInit {
       aStatus: this.newArea.get('aStatus')?.value,
     };
 
+    console.log(dataNewArea);
+
     this._areaService.addNewArea(dataNewArea).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.getAreasList();
         this.newArea.reset();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -113,11 +125,13 @@ export class AreasComponent implements OnInit {
     this._areaService.deleteArea(areaId).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.area = null;
         this.getAreasList();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -136,19 +150,69 @@ export class AreasComponent implements OnInit {
           this.Areas = [];
           console.log(this.area);
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message + ' ddd');
+          this._showError.statusCode(error);
         }
       );
     }
   }
 
-  // Llamado de modals
+  // Llamado de modals y actualizacion de areas
   private popup = new Popup();
-  mostrar() {
+  areaData: existingArea;
+  editFlag: boolean = false;
+  mostrar(areaId: number) {
+    this.getExistingArea(areaId);
     this.popup.mostrar();
   }
   cerrar() {
+    this.updateArea.reset();
+    this.editFlag = false;
     this.popup.cerrar();
+  }
+
+  // Obtención de los datos del area a actualizar
+  getExistingArea(areaId: number): void {
+    this._searchService.getExistingArea(areaId).subscribe(
+      (data) => {
+        this.areaData = data[0];
+        this.editFlag = true;
+        console.log(this.areaData);
+      },
+      (error: HttpErrorResponse) => {
+        this._showError.statusCode(error);
+      }
+    );
+  }
+
+  updateArea = this._fb.group({
+    newName: [''],
+    newStatus: [''],
+    newLocation: [''],
+  });
+
+  // Guardado de los cambios en el area
+  saveChanges() {
+    const saveChanges: itemChanges = {
+      modificationUser: Number(sessionStorage.getItem('employeeNumber')),
+      itemId: this.areaData.aId,
+      itemName: this.updateArea.get('newName').value,
+      itemStatus: this.updateArea.get('newStatus').value,
+      locationId: this.updateArea.get('newLocation').value,
+    };
+
+    console.log(saveChanges);
+
+    this._areaService.areaUpdate(saveChanges).subscribe(
+      (data) => {
+        this._showError.success(data.message);
+        this.getAreasList();
+        this.updateArea.reset();
+      },
+      (error: HttpErrorResponse) => {
+        this._showError.statusCode(error);
+      }
+    );
   }
 }

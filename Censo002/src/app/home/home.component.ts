@@ -12,7 +12,7 @@ import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { AddAnonRequestService } from '../services/newServices/AnonRequest/add-anon-request.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
 import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { App2 } from '../../assets/ts/app2';
 
 @Component({
@@ -161,7 +161,8 @@ export class HomeComponent implements OnInit {
     // Registro de la peticion anonima en la base de datos
     this._anonRequestService.addNewAnonRequest(formData).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
+        this._showError.success(data.message);
         this.bodyRequest.reset();
         let fileName = data[0];
       },
@@ -207,11 +208,13 @@ export class HomeComponent implements OnInit {
           console.log(this.responsable);
         } else {
           console.log(data.message);
+          this._showError.success(data.message);
         }
         this.app.mostrarbusq();
       },
       (error: HttpErrorResponse) => {
         console.error(error.message);
+        this._showError.statusCode(error);
         this._showError.statusCode(error);
       }
     );

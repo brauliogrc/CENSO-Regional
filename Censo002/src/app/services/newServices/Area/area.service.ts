@@ -1,14 +1,20 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { addArea } from '../../../../assets/ts/interfaces/newInterfaces';
+import {
+  addArea,
+  itemChanges,
+} from '../../../../assets/ts/interfaces/newInterfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AreaService {
   private MyApiUrl: string = 'Area/';
+  private headers = new HttpHeaders({
+    Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+  });
 
   constructor(private _http: HttpClient) {}
 
@@ -16,14 +22,24 @@ export class AreaService {
   addNewArea(newArea: addArea): Observable<any> {
     return this._http.post(
       `${environment.API_URL}` + this.MyApiUrl + 'newArea/',
-      newArea
+      newArea,
+      { headers: this.headers }
     );
   }
 
   // Borrado lógico de un area
   deleteArea(areaId: number): Observable<any> {
     return this._http.delete(
-      `${environment.API_URL}` + this.MyApiUrl + 'deleteArea/' + areaId
+      `${environment.API_URL}` + this.MyApiUrl + 'deleteArea/' + areaId,
+      { headers: this.headers }
+    );
+  }
+
+  areaUpdate(newAreaData: itemChanges): Observable<any> {
+    return this._http.post(
+      `${environment.API_URL}` + this.MyApiUrl + 'areaUpdate',
+      newAreaData,
+      { headers: this.headers }
     );
   }
 }

@@ -43,9 +43,9 @@
         <button [disabled]="newQuestion.invalid" class="btnIndexC" type="submit">Añadir</button>
       </div>
     </form>
-    <div class="contentañadirTem">
+    <!-- <div class="contentañadirTem">
       <button id="open" class="btnIndexC" type="submit">Añadir temas</button>
-    </div>
+    </div> -->
     <!--Para el modal-->
     <div class="ModalContenido" id="ModalContenido">
       <div class="ModalContenido1">
@@ -117,9 +117,9 @@
           <td>{{ question.tName }}</td>
           <td>{{ question.qStatus }}</td>
           <td>
-            <button (click)="mostrar()" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
-            <button (click)="deleteQuestion(question.qId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-            <button class="btn btn-success" (click)="mostrarTema()" type="submit">Añadir temas</button>
+            <button (click)="mostrar(question.qId)" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="assets/img/BeditB.png" alt="" width="22px"></button>
+            <button (click)="deleteQuestion(question.qId)" class="btn btn-Dark"><img src="assets/img/BbasuraB.png" alt="" width="22px"></button>
+            <button class="btn btn-success" (click)="mostrarTema(question.qId)" type="submit">Añadir temas</button>
           </td>
         </tr>
       </ng-container>
@@ -130,9 +130,9 @@
           <td>{{ question[0].tName }}</td>
           <td>{{ question[0].qStatus }}</td>
           <td>
-            <button (click)="mostrar()" id="quitarContenidoModalpopup"  class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
-            <button (click)="deleteQuestion(question[0].qId)" class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-            <button class="btn btn-success" (click)="mostrarTema()" type="submit">Añadir temas</button>
+            <button (click)="mostrar(question[0].qId)" id="quitarContenidoModalpopup"  class="btn btn-Dark"><img src="assets/img/BeditB.png" alt="" width="22px"></button>
+            <button (click)="deleteQuestion(question[0].qId)" class="btn btn-Dark"><img src="assets/img/BbasuraB.png" alt="" width="22px"></button>
+            <button class="btn btn-success" (click)="mostrarTema(question[0].qId)" type="submit">Añadir temas</button>
           </td>
         </tr>
       </ng-template>
@@ -144,29 +144,30 @@
     <div class="ModalEditBack" id="ModalEditBack">
       <div class="ModalTituloEdit">
         <h1>Editar Pregunta</h1>
-        <h4>Nombre Preguunta</h4>
+        <h4 *ngIf="questionData">{{ questionData.qName }}</h4>
       </div>
 
-      <div class="ModalContenidoEdit">
-        <form class="row g-3">
+      <div class="ModalContenidoEdit" *ngIf="editFlag">
+        <form [formGroup]="updateQuestion" (ngSubmit)="saveChanges()" class="row g-3">
           <!--Todo contenido del form -->
 
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Pregunta</label>
-            <input type="email" class="form-control" id="inputEmail4">
+            <input formControlName="newName" placeholder="{{ questionData.qName }}" type="email" class="form-control" id="inputEmail4">
           </div>
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label for="inputState" class="form-label">Ubicación</label>
             <select id="inputState" class="form-select">
               <option selected>Tijera</option>
               <option>tijera</option>
             </select>
-          </div>
+          </div> -->
           <div class="col-md-6">
             <label for="inputState" class="form-label">Estatus</label>
-            <select id="inputState" class="form-select">
-              <option selected>Activo</option>
-              <option>Inactivo</option>
+            <select formControlName="newStatus" id="inputState" class="form-select">
+              <option class="current-data" value="{{ questionData.qStatus }}">Estatus actual</option>
+              <option value=true>Activo</option>
+              <option value=false>Inactivo</option>
             </select>
           </div>
 
@@ -194,7 +195,7 @@
     <div class="ModalEditBackTemas" id="ModalEditBackTemas">
       <div class="ModalTituloEdit">
         <h1>Agregar Temas a</h1>
-        <h4>Pregunta</h4>
+        <h4 *ngIf="questionData">{{ questionData.qName }}</h4>
       </div>
 
       <div class="ModalContenidoEdit">
@@ -203,13 +204,12 @@
             <div class="moduloAgregar">
               <div class="moduloAgregar1">
                 <h2>Agregar un tema</h2>
-                <button class="btnPregunta" type="submit">+</button>
+                <button class="btnPregunta" type="button" (click)="addRelatedTheme(themeId.value)">+</button>
               </div>
 
               <label for="inputState" class="form-label">Topico</label>
-              <select id="inputState" class="form-select">
-                <option>Topico 1</option>
-                <option>Topico 1</option>
+              <select #themeId id="inputState" class="form-select">
+                <option *ngFor="let addTheme of Theme" value="{{ addTheme.tId }}">{{ addTheme.tName }}</option>
               </select>
 
             </div>
@@ -226,24 +226,9 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit..</td>
-                      <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                      <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                      <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                      <td><button class="btn btn-Dark"><img src="img/BbasuraB.png" alt="" width="22px"></button>
+                    <tr *ngFor="let theme of relatedTheme">
+                      <td>{{ theme.tName }}</td>
+                      <td><button (click)="getIdx(theme.tId)" class="btn btn-Dark"><img src="assets/img/BbasuraB.png" alt="" width="22px"></button>
                       </td>
                     </tr>
                   </tbody>
@@ -252,7 +237,7 @@
             </div>
           </div>
           <div class="col-12">
-            <button class="btnIndexC" type="submit">Agregar</button>
+            <!-- <button class="btnIndexC" type="submit">Agregar</button> -->
 
           </div>
         </form>

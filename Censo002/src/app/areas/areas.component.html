@@ -62,8 +62,8 @@
           <td>{{ area.lName }}</td>
           <td>{{ area.aStatus }}</td>
           <td>
-            <button (click)="mostrar()" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
-            <button class="btn btn-Dark" (click)="deleteArea(area.aId)"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+            <button (click)="mostrar(area.aId)" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="assets/img/BeditB.png" alt="" width="22px"></button>
+            <button class="btn btn-Dark" (click)="deleteArea(area.aId)"><img src="assets/img/BbasuraB.png" alt="" width="22px"></button>
           </td>
         </tr>
       </ng-container>
@@ -74,8 +74,8 @@
           <td>{{ area[0].lName }}</td>
           <td>{{ area[0].aStatus }}</td>
           <td>
-            <button (click)="mostrar()" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="../../assets/img/BeditB.png" alt="" width="22px"></button>
-            <button class="btn btn-Dark" (click)="deleteArea(area[0].aId)"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+            <button (click)="mostrar(area[0].aId)" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="assets/img/BeditB.png" alt="" width="22px"></button>
+            <button class="btn btn-Dark" (click)="deleteArea(area[0].aId)"><img src="assets/img/BbasuraB.png" alt="" width="22px"></button>
           </td>
         </tr>
       </ng-template>
@@ -90,29 +90,30 @@
     <div class="ModalEditBack" id="ModalEditBack">
       <div class="ModalTituloEdit">
         <h1>Editar Area</h1>
-        <h4>Nombre area</h4>
+        <h4 *ngIf=""areaData>{{ areaData.aName }}</h4>
       </div>
 
-      <div class="ModalContenidoEdit">
-        <form class="row g-3">
+      <div class="ModalContenidoEdit" *ngIf="editFlag">
+        <form [formGroup]="updateArea" (ngSubmit)="saveChanges()" class="row g-3">
 
 
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Nombre Área</label>
-            <input type="email" class="form-control" id="inputEmail4">
+            <input formControlName="newName" placeholder="{{ areaData.aName }}" type="email" class="form-control" id="inputEmail4">
           </div>
           <div class="col-md-6">
             <label for="inputState" class="form-label">Ubicación</label>
-            <select id="inputState" class="form-select">
-              <option selected>Tijera</option>
-              <option>tijera</option>
+            <select formControlName="newLocation" id="inputState" class="form-select">
+              <option class="current-data" value="{{ areaData.lId }}">{{ areaData.lName }}</option>
+              <option *ngFor="let location of Locations" value="{{ location.lId }}">{{ location.lName }}</option>
             </select>
           </div>
           <div class="col-md-6">
             <label for="inputState" class="form-label">Estatus</label>
-            <select id="inputState" class="form-select">
-              <option selected>Activo</option>
-              <option>Inactivo</option>
+            <select formControlName="newStatus" id="inputState" class="form-select">
+              <option class="current-data" value="{{ areaData.aStatus }}">Estatus actual</option>
+              <option value=true>Activo</option>
+              <option value=false>Inactivo</option>
             </select>
           </div>
 

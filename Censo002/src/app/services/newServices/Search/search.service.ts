@@ -1,37 +1,40 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import {
   existingUser,
   locationList,
   questionList,
-} from 'src/assets/ts/interfaces/newInterfaces';
-import { environment } from 'src/environments/environment';
-import { Theme, existingLocation, existingTheme } from '../../../../assets/ts/interfaces/newInterfaces';
-import {
+  Theme,
+  existingLocation,
+  existingTheme,
+  Location,
   areaList,
   userTickets,
-} from '../../../../assets/ts/interfaces/newInterfaces';
-import {
   searchData,
   userList,
   themeList,
-  ticketList,
-} from '../../../../assets/ts/interfaces/newInterfaces';
+  existingQuestion,
+  searchData2,
+} from 'src/assets/ts/interfaces/newInterfaces';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
   private MyApiUrl: string = 'Search/';
+  private headers = new HttpHeaders({
+    Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+  });
 
   constructor(private _http: HttpClient) {}
 
   // Busqueda de una localidad especifica
   searchLocation(locationId: number): Observable<locationList> {
     return this._http.get<locationList>(
-      `${environment.API_URL}` + this.MyApiUrl + 'locationSearch/' + locationId
+      `${environment.API_URL}` + this.MyApiUrl + 'locationSearch/' + locationId,
+      { headers: this.headers }
     );
   }
 
@@ -43,7 +46,8 @@ export class SearchService {
         'userSearch/' +
         searchData.locationId +
         '/' +
-        searchData.itemId
+        searchData.itemId,
+      { headers: this.headers }
     );
   }
 
@@ -55,7 +59,8 @@ export class SearchService {
         'themeSearch/' +
         searchData.locationId +
         '/' +
-        searchData.itemId
+        searchData.itemId,
+      { headers: this.headers }
     );
   }
 
@@ -67,19 +72,21 @@ export class SearchService {
         'questionSearch/' +
         searchData.locationId +
         '/' +
-        searchData.itemId
+        searchData.itemId,
+      { headers: this.headers }
     );
   }
 
   // Busqueda de un ticket en una localidad
-  searchTicket(searchData: searchData): Observable<any> {
+  searchTicket(searchData: searchData2): Observable<any> {
     return this._http.get(
       `${environment.API_URL}` +
         this.MyApiUrl +
         'ticketSearch/' +
         searchData.locationId +
         '/' +
-        searchData.itemId
+        searchData.itemId,
+      { headers: this.headers }
     );
   }
 
@@ -91,14 +98,19 @@ export class SearchService {
         'areaSearch/' +
         searchData.locationId +
         '/' +
-        searchData.itemId
+        searchData.itemId,
+      { headers: this.headers }
     );
   }
 
   // Busqueda de los tickets relacionados al usuario logueado
   getUserTickets(employeeNumber: number): Observable<userTickets[]> {
     return this._http.get<userTickets[]>(
-      `${environment.API_URL}` + this.MyApiUrl + 'userTickets/' + employeeNumber
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'userTickets/' +
+        employeeNumber,
+      { headers: this.headers }
     );
   }
 
@@ -110,7 +122,8 @@ export class SearchService {
       `${environment.API_URL}` +
         this.MyApiUrl +
         'existingUser/' +
-        employeeNumber
+        employeeNumber,
+      { headers: this.headers }
     );
   }
 
@@ -119,8 +132,31 @@ export class SearchService {
     return this._http.get<Theme[]>(
       `${environment.API_URL}` +
         this.MyApiUrl +
-        'relatedTopics/' +
-        employeeNumber
+        'relatedUserTopics/' +
+        employeeNumber,
+      { headers: this.headers }
+    );
+  }
+
+  // Obtención de los temas relacionados a la pregunta a actualizar
+  getRelatedTopicsQ(questionId: number): Observable<Theme[]> {
+    return this._http.get<Theme[]>(
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'relatedQuestionTopics/' +
+        questionId,
+      { headers: this.headers }
+    );
+  }
+
+  // Obtencion de las localidades relacionadas con el tema a actualizar
+  getRelatedLocations(themeId: number): Observable<Location[]> {
+    return this._http.get<Location[]>(
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'relatedThemeLocations/' +
+        themeId,
+      { headers: this.headers }
     );
   }
 
@@ -130,14 +166,35 @@ export class SearchService {
       `${environment.API_URL}` +
         this.MyApiUrl +
         'existingLocation/' +
-        locationId
+        locationId,
+      { headers: this.headers }
     );
   }
 
   // Obtencion de los datos del tema seleccionado
   getExistingTheme(themeId: number): Observable<existingTheme[]> {
     return this._http.get<existingTheme[]>(
-      `${environment.API_URL}` + this.MyApiUrl + 'existingTheme/' + themeId
+      `${environment.API_URL}` + this.MyApiUrl + 'existingTheme/' + themeId,
+      { headers: this.headers }
+    );
+  }
+
+  // Obención de los datos de la pregunta seleccionada
+  getExistingQuestion(questionId: number): Observable<existingQuestion[]> {
+    return this._http.get<existingQuestion[]>(
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'existingQuestion/' +
+        questionId,
+      { headers: this.headers }
+    );
+  }
+
+  // Obtencion de los datos del area seleccionada
+  getExistingArea(areaId: number): Observable<any> {
+    return this._http.get(
+      `${environment.API_URL}` + this.MyApiUrl + 'existingArea/' + areaId,
+      { headers: this.headers }
     );
   }
 }

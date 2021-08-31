@@ -7,6 +7,9 @@ import {
   themeList,
   Location,
   searchData,
+  addThemeRelationship,
+  existingTheme,
+  itemChanges,
 } from '../../assets/ts/interfaces/newInterfaces';
 import { ThemeService } from '../services/newServices/Theme/theme.service';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
@@ -14,10 +17,8 @@ import { ListService } from '../services/newServices/List/list.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 
 import { Popup } from 'src/assets/ts/popup';
-import {
-  existingTheme,
-  itemChanges,
-} from '../../assets/ts/interfaces/newInterfaces';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-temas',
@@ -40,13 +41,14 @@ export class TemasComponent implements OnInit {
   });
 
   constructor(
+    private router: Router,
     private _fb: FormBuilder,
-    private _themeService: ThemeService,
-    private _fieldsService: FieldsService,
     private _listService: ListService,
-    private _searchService: SearchService,
     private _authService: AuthService,
-    private router: Router
+    private _themeService: ThemeService,
+    private _showErrors: ShowErrorService,
+    private _fieldsService: FieldsService,
+    private _searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +61,7 @@ export class TemasComponent implements OnInit {
       Number(sessionStorage.getItem('role')) != 2
     ) {
       console.error('Sección no accesible');
+      this._showErrors.NotAccessible();
       sessionStorage.clear();
       this.router.navigate(['/login']);
       console.clear();
@@ -74,8 +77,9 @@ export class TemasComponent implements OnInit {
       (data) => {
         this.Locations = [...data];
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showErrors.statusCode(error);
       }
     );
   }
@@ -87,9 +91,12 @@ export class TemasComponent implements OnInit {
       .subscribe(
         (data) => {
           this.Theme = [...data];
+          console.log(this.Theme);
+          
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showErrors.statusCode(error);
         }
       );
   }
@@ -106,11 +113,13 @@ export class TemasComponent implements OnInit {
     this._themeService.addNewTheme(dataNewTheme).subscribe(
       (data) => {
         console.log(data.message);
+        this._showErrors.success(data.message);
         this.getThemeList();
         this.newTheme.reset();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showErrors.statusCode(error);
       }
     );
   }
@@ -120,11 +129,13 @@ export class TemasComponent implements OnInit {
     this._themeService.deleteTheme(themeId).subscribe(
       (data) => {
         console.log(data.message);
+        this._showErrors.success(data.message);
         this.th = null;
         this.getThemeList();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showErrors.statusCode(error);
       }
     );
   }
@@ -143,8 +154,9 @@ export class TemasComponent implements OnInit {
           this.th = data;
           this.Theme = [];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.messae);
+          this._showErrors.statusCode(error);
         }
       );
     }
@@ -153,6 +165,7 @@ export class TemasComponent implements OnInit {
   // Llamado de modals y actualizacion del tema
   private popup = new Popup();
   themeData: existingTheme;
+  relatedLocations: Location[] = [];
   editFlag: boolean = false;
 
   mostrar(themeId: number) {
@@ -161,10 +174,22 @@ export class TemasComponent implements OnInit {
   }
 
   cerrar() {
+    this.updateTheme.reset();
     this.editFlag = false;
     this.popup.cerrar();
   }
 
+  mostrarTema(themeId: number) {
+    this.getExistingTheme(themeId);
+    this.getRelatedLocations(themeId);
+    this.popup.mostrarTema();
+  }
+
+  cerrarTema() {
+    this.popup.cerrarTema();
+  }
+
+  // Obtencion de los datos a modificar del tema
   getExistingTheme(themeId: number): void {
     this._searchService.getExistingTheme(themeId).subscribe(
       (data) => {
@@ -172,8 +197,9 @@ export class TemasComponent implements OnInit {
         console.log(this.themeData);
         this.editFlag = true;
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showErrors.statusCode(error);
       }
     );
   }
@@ -183,21 +209,91 @@ export class TemasComponent implements OnInit {
     newStatus: [''],
   });
 
+  // Guardado de los cambios en el tema
   saveChanges() {
     const saveChanges: itemChanges = {
+      modificationUser: Number(sessionStorage.getItem('employeeNumber')),
       itemId: this.themeData.tId,
       itemName: this.updateTheme.get('newName').value,
       itemStatus: this.updateTheme.get('newStatus').value,
+      locationId: null
     };
 
     console.log(saveChanges);
+    
 
     this._themeService.themeUpdate(saveChanges).subscribe(
       (data) => {
         console.log(data.message);
+        this._showErrors.success(data.message);
         this.getThemeList();
+        this.updateTheme.reset();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
+        console.error(error.error.message);
+        this._showErrors.statusCode(error);
+      }
+    );
+  }
+
+  // Obtencion de las localidades relaciondad al tema
+  getRelatedLocations(themeId: number) {
+    this._searchService.getRelatedLocations(themeId).subscribe(
+      (data) => {
+        this.relatedLocations = [...data];
+        console.log(this.relatedLocations);
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error.error.message);
+        this._showErrors.statusCode(error);
+      }
+    );
+  }
+
+  // Obtencion del idex de la localidad e eliminar
+  getIdx(locationId: number) {
+    this.relatedLocations.find((item, idx) => {
+      if (item.lId === locationId) {
+        // console.log(item, idx);
+        // console.log(locationId);
+        
+        this.deleteRelatedLocation(locationId);
+      }
+    });
+  }
+
+  // Borrado de una relacion entre el tema y la localidad
+  deleteRelatedLocation(locationId: number) {
+    this._themeService
+      .deleteRelatedLocation(locationId, this.themeData.tId)
+      .subscribe(
+        (data) => {
+          console.log(data.message);
+          this._showErrors.success(data.message);
+          this.getRelatedLocations(this.themeData.tId);
+        },
+        (error: HttpErrorResponse) => {
+          console.error(error.error.message);
+          this._showErrors.statusCode(error);
+        }
+      );
+  }
+
+  // Añadir una relacion entre el tema y la localidad
+  addRelatedLocation(locationId: number): void {
+    const newRelationship: addThemeRelationship = {
+      itemId: locationId,
+      themeId: this.themeData.tId,
+    };
+
+    this._themeService.addRelatedLocation(newRelationship).subscribe(
+      (data) => {
+        console.log(data.message);
+        this._showErrors.success(data.message);
+        this.getRelatedLocations(this.themeData.tId);
+      },
+      (error: HttpErrorResponse) => {
+        this._showErrors.statusCode(error);
         console.error(error.error.message);
       }
     );

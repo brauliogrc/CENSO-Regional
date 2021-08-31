@@ -29,7 +29,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Registro de un nuevo usuario
-        [HttpPost][Route("newUser")][AllowAnonymous]
+        [HttpPost][Route("newUser")]
         public async Task<IActionResult> addNewUser([FromBody] AddUserInterface newUser)
         {
             try
@@ -112,7 +112,6 @@ namespace CensoAPI02.Controllers.NewControllers
         // Busqueda de informacion de un usuario, para su registro (requiere policy surh)
         [HttpGet]
         [Route("userInformation/{location}/{employeeNumber}")]
-        [AllowAnonymous]
         public async Task<ActionResult> getUserInformation(string location, int employeeNumber)
         {
             try
@@ -167,7 +166,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Actualización de un usuario (requiere policy surh)
-        [HttpPatch][Route("userUpdate")][AllowAnonymous]
+        [HttpPatch][Route("userUpdate")]
         public async Task<IActionResult> userUpdate([FromBody] UserUpdate userUpdate)
         {
             bool flagUpdate = false;
@@ -210,10 +209,13 @@ namespace CensoAPI02.Controllers.NewControllers
 
                 if ( flagUpdate )
                 {
+                    user.uModificationUser = userUpdate.modificationUser;
+                    user.uModificationDate = DateTime.Now;
+
                     _context.HRU.Update(user);
                     await _context.SaveChangesAsync();
 
-                    return Ok(new { message = $"El ususario se actualizó correctamente." });
+                    return Ok(new { message = $"El usuario se actualizó correctamente." });
                 }
 
                 return Ok(new { message = $"Ningún cambio realizado" } );
@@ -226,7 +228,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Eliminacioón lógica de usuario
-        [HttpDelete] [Route("deleteUser/{employeeNumber}")][AllowAnonymous]
+        [HttpDelete] [Route("deleteUser/{employeeNumber}")]
         public async Task<IActionResult> deleteUser(long employeeNumber)
         {
             try
@@ -252,7 +254,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Eliminar relacion de un usuario con un tema (requiere policy su)
-        [HttpDelete][Route("deleteRelatedTopic/{employeeNumber}/{themeId}")][AllowAnonymous]
+        [HttpDelete][Route("deleteRelatedTopic/{employeeNumber}/{themeId}")]
         public async Task<ActionResult> deleteRelatedTeme(long employeeNumber, int themeId)
         {
             try
@@ -269,7 +271,7 @@ namespace CensoAPI02.Controllers.NewControllers
                 _context.HRUsersThemes.Remove(relatedTeme);
                 await _context.SaveChangesAsync();
 
-                return Ok(new { message = $"La relación de eliminó correctamente" });
+                return Ok(new { message = $"La relación se eliminó correctamente" });
             }
             catch(Exception ex)
             {
@@ -278,8 +280,8 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Añadir relación entre un usuario y un tema ( requiere policy surh)
-        [HttpPost][Route("addRelatedTopic")][AllowAnonymous]
-        public async Task<IActionResult> addRelatedTopic([FromBody] AddTopicRelationship addTopic)
+        [HttpPost][Route("addRelatedTopic")]
+        public async Task<IActionResult> addRelatedTopic([FromBody] AddUserTopicRelationship addTopic)
         {
             try
             {
