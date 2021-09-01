@@ -61,7 +61,7 @@ namespace CensoAPI02
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Administrador", pol => pol.RequireClaim("Role", new string[] {"1"}));
-                options.AddPolicy("SURH", pol => pol.RequireClaim("Role", new String[] { "1", "2" }));
+                options.AddPolicy("SURH", pol => pol.RequireClaim("Role", new string[] { "1", "2" }));
                 options.AddPolicy("StaffRH", pol => pol.RequireClaim("Role", new string[] { "1", "2", "3" }));
             });
 
@@ -75,7 +75,7 @@ namespace CensoAPI02
             });
 
             services.AddDbContext<CDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("CensoLocal")));
+            options.UseSqlServer(Configuration.GetConnectionString("Censo")));
 
             //Configuración del Cors
             services.AddCors(options => {

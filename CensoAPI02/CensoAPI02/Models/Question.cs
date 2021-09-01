@@ -24,9 +24,9 @@ namespace CENSO.Models
         [Required]
         public int     qCreationUser { get; set; } // Usuario creador
 
-        public DateTime qModificationDate { get; set; } // Fecha de modificación
+        public DateTime? qModificationDate { get; set; } // Fecha de modificación
 
-        public int     qModificationUser { get; set; } // Usuario que realizó la modificación
+        public int?     qModificationUser { get; set; } // Usuario que realizó la modificación
 
         [Required]
         public bool     qStatus { get; set; }

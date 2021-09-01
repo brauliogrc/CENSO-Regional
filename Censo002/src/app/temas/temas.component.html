@@ -93,13 +93,13 @@
           <td>{{ th.lName }}</td>
           <td>{{ th.tStatus }}</td>
           <td>
-            <button (click)="mostrar()" class="btn btn-Dark">
-              <img src="../../assets/img/BeditB.png" alt="" width="22px">
+            <button (click)="mostrar(th.tId)" class="btn btn-Dark">
+              <img src="assets/img/BeditB.png" alt="" width="22px">
             </button>
             <button (click)="deleteTheme(th.tId)" class="btn btn-Dark">
-              <img src="../../assets/img/BbasuraB.png" alt="" width="22px">
+              <img src="assets/img/BbasuraB.png" alt="" width="22px">
             </button>
-            <button class="btn btn-success" onclick="mostrarTema()" type="submit">Añadir Localidad</button>
+            <button class="btn btn-success" (click)="mostrarTema(th.tId)" type="submit">Añadir Localidad</button>
           </td>
         </tr>
       </ng-container>
@@ -110,13 +110,13 @@
           <td>{{ th[0].lName }}</td>
           <td>{{ th[0].tStatus }}</td>
           <td>
-            <button (click)="mostrar()" class="btn btn-Dark">
-              <img src="../../assets/img/BeditB.png" alt="" width="22px">
+            <button (click)="mostrar(th[0].tId)" class="btn btn-Dark">
+              <img src="assets/img/BeditB.png" alt="" width="22px">
             </button>
             <button (click)="deleteTheme(th[0].tId)" class="btn btn-Dark">
-              <img src="../../assets/img/BbasuraB.png" alt="" width="22px">
+              <img src="assets/img/BbasuraB.png" alt="" width="22px">
             </button>
-            <button class="btn btn-success" onclick="mostrarTema()" type="submit">Añadir Localidad</button>
+            <button class="btn btn-success" (click)="mostrarTema(th[0].tId)" type="submit">Añadir Localidad</button>
           </td>
         </tr>
       </ng-template>
@@ -128,47 +128,48 @@
     <div class="ModalEditBack" id="ModalEditBack">
       <div class="ModalTituloEdit">
         <h1>Editar Tema</h1>
-        <h4>Tema</h4>
+        <h4 *ngIf="themeData">{{ themeData.tName }}</h4>
       </div>
 
-      <div class="ModalContenidoEdit">
-        <form class="row g-3">
+      <div class="ModalContenidoEdit" *ngIf="editFlag">
+        <form [formGroup]="updateTheme" (ngSubmit)="saveChanges()" class="row g-3">
           <!--Todo contenido del form -->
 
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Nombre del tema</label>
-            <input type="email" class="form-control" id="inputEmail4">
+            <input formControlName="newName" placeholder="{{ themeData.tName }}" type="email" class="form-control" id="inputEmail4">
           </div>
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <label for="inputState" class="form-label">Ubicación</label>
             <select id="inputState" class="form-select">
               <option selected>Activo</option>
               <option>Inactivo</option>
             </select>
-          </div>
+          </div> -->
           <div class="col-md-4">
             <label for="inputState" class="form-label">Estatus</label>
-            <select id="inputState" class="form-select">
-              <option selected>Activo</option>
-              <option>Inactivo</option>
+            <select formControlName="newStatus" id="inputState" class="form-select">
+              <option class="current-data" value="{{ themeData.tStatus }}">Estatus actual</option>
+              <option value=true>Activo</option>
+              <option value=false>Inactivo</option>
             </select>
           </div>
 
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <label for="inputState" class="form-label">Preguntas</label>
             <select id="inputState" class="form-select">
               <option selected>pregunta 1</option>
               <option>pregunta 2</option>
             </select>
-          </div>
+          </div> -->
 
-          <div class="col-md-4">
+          <!-- <div class="col-md-4">
             <label for="inputState" class="form-label">Localidades</label>
             <select id="inputState" class="form-select">
               <option selected>pregunta 1</option>
               <option>pregunta 2</option>
             </select>
-          </div>
+          </div> -->
 
           <!--Todo contenido del form -->
 
@@ -194,7 +195,7 @@
   <div class="ModalEditBackTemas" id="ModalEditBackTemas">
     <div class="ModalTituloEdit">
       <h1>Agregar Localidad a</h1>
-      <h4>Tema</h4>
+      <h4 *ngIf="themeData">{{ themeData.tName }}</h4>
     </div>
 
     <div class="ModalContenidoEdit">
@@ -203,13 +204,12 @@
           <div class="moduloAgregar">
             <div class="moduloAgregar1">
               <h2>Agregar un Localidades</h2>
-              <button class="btnPregunta" type="submit">+</button>
+              <button class="btnPregunta" type="button" (click)="addRelatedLocation(locationRelation.value)">+</button>
             </div>
 
             <label for="inputState" class="form-label">Localidad</label>
-            <select id="inputState" class="form-select">
-              <option>Localidad 1</option>
-              <option>Localidad 2</option>
+            <select #locationRelation id="inputState" class="form-select">
+              <option *ngFor="let addLocation of Locations" value="{{ addLocation.lId }}">{{ addLocation.lName }}</option>
             </select>
 
           </div>
@@ -226,24 +226,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit..</td>
-                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</td>
-                    <td><button class="btn btn-Dark"><img src="../../assets/img/BbasuraB.png" alt="" width="22px"></button>
+                  <tr *ngFor="let location of relatedLocations">
+                    <td>{{ location.lName }}</td>
+                    <td><button (click)="getIdx(location.lId)" class="btn btn-Dark"><img src="assets/img/BbasuraB.png" alt="" width="22px"></button>
                     </td>
                   </tr>
                 </tbody>
@@ -252,7 +237,7 @@
           </div>
         </div>
         <div class="col-12">
-          <button class="btnIndexC" type="submit">Agregar</button>
+          <!-- <button class="btnIndexC" type="submit">Agregar</button> -->
 
         </div>
       </form>

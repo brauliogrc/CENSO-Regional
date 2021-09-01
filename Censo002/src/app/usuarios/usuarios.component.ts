@@ -10,17 +10,19 @@ import {
   userInformation,
   existingUser,
   userChanges,
-} from '../../assets/ts/interfaces/newInterfaces';
-import {
   addUser,
   Location,
   Rol,
   userList,
   searchData,
+  Theme,
+  userTheme,
 } from '../../assets/ts/interfaces/newInterfaces';
 
 import { Popup } from '../../assets/ts/popup';
-import { Theme } from '../../assets/ts/interfaces/newInterfaces';
+// import { ThemeList } from '../../assets/ts/theme-list';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-usuarios',
@@ -61,13 +63,14 @@ export class UsuariosComponent implements OnInit {
 
   constructor(
     // private _createScript: CreateScriptsService,
-    private _listService: ListService,
-    private _userSerice: UserService,
-    private _searchService: SearchService,
-    private _authService: AuthService,
-    private _fieldsService: FieldsService,
+    private router: Router,
     private _fb: FormBuilder,
-    private router: Router
+    private _userSerice: UserService,
+    private _listService: ListService,
+    private _authService: AuthService,
+    private _showError: ShowErrorService,
+    private _searchService: SearchService,
+    private _fieldsService: FieldsService
   ) {
     // this._createScript.CargaArchivos( [ "popoupEdicion" ] );
   }
@@ -82,6 +85,7 @@ export class UsuariosComponent implements OnInit {
       Number(sessionStorage.getItem('role')) != 2
     ) {
       console.error('Sección no accesible');
+      this._showError.NotAccessible();
       sessionStorage.clear();
       this.router.navigate(['/login']);
       console.clear();
@@ -99,8 +103,9 @@ export class UsuariosComponent implements OnInit {
       (data) => {
         this.Locations = [...data];
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -111,8 +116,9 @@ export class UsuariosComponent implements OnInit {
       (data) => {
         this.Roles = [...data];
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -125,8 +131,9 @@ export class UsuariosComponent implements OnInit {
         (data) => {
           this.Users = [...data];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
   }
@@ -146,8 +153,9 @@ export class UsuariosComponent implements OnInit {
           this.userInformation.location = data.location;
           console.log(this.userInformation);
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     }
@@ -155,7 +163,7 @@ export class UsuariosComponent implements OnInit {
 
   // Muestra el nombre del usuario
   getUserName = (): string => {
-    if (this.userInformation.name.length > 4) {
+    if (this.userInformation.name.length != 0) {
       this.flag = true;
     }
     return this.userInformation.name;
@@ -163,15 +171,7 @@ export class UsuariosComponent implements OnInit {
 
   // Muestra el correo del usuario
   getEmail = (): string | null => {
-    // console.log(this.newUser.get('uEmail')?.value);
-    // this.userInformation.email?.split(" ").join("");
-    if (this.userInformation.email?.length != 0) {
-      // console.log(this.userInformation.email);
-      return this.userInformation.email;
-    }
-    // console.log(this.newUser.get('uEmail')?.value);
-
-    return this.newUser.get('uEmail')?.value;
+    return this.userInformation.email;
   };
 
   // Muestra la localidad del ususario
@@ -188,23 +188,36 @@ export class UsuariosComponent implements OnInit {
       // TODO
       const dataNewUser: addUser = {
         uName: this.getUserName(),
-        uEmail: this.newUser.get('uEmail')?.value,
+        uEmail: this.getEmail(),
         RolId: this.newUser.get('RolId')?.value,
         uStatus: this.newUser.get('uStatus')?.value,
         EmployeeNumber: this.newUser.get('EmployeeNumber')?.value,
         uCreationUser: Number(sessionStorage.getItem('userId')),
       };
+
+      const name: string = this.newUser.get('uName').value;
+      const email: string = this.newUser.get('uEmail').value;
+
+      if ( name.length != 0 && name != this.getUserName() ) {
+        dataNewUser.uName = name;
+      }
+      if ( email.length != 0 && email != this.getEmail() ) {
+        dataNewUser.uEmail = email;
+      }
+
       console.log(dataNewUser);
 
       // Registro del nuevo usuario en la tabla HRU
       this._userSerice.addNewUser(dataNewUser).subscribe(
         (data) => {
           console.log(data.message);
+          this._showError.success(data.message);
           this.getUserList();
           this.newUser.reset();
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     } else {
@@ -214,16 +227,18 @@ export class UsuariosComponent implements OnInit {
 
   // Borrado logico del usuario
   deleteUser(userId: number): void {
-    // console.log(userId);
+    console.log(userId);
 
     this._userSerice.deleteUser(userId).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.user = null;
         this.getUserList();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -244,8 +259,9 @@ export class UsuariosComponent implements OnInit {
           this.user = data;
           this.Locations = [];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     }
@@ -253,24 +269,34 @@ export class UsuariosComponent implements OnInit {
 
   // Llamado de modals y actualizacion del usuario
   private popup = new Popup();
+  // themeList = new ThemeList();
   editFlag: boolean = false;
-  userData: existingUser;
-  relatedTopics: Theme[] = [];
+  userData: existingUser; // Información antual del usuario
+  relatedTopics: Theme[] = []; // Listado de los temas del usuario
+  themeList: Theme[] = []; // Listado de los temas diponibles
 
   mostrar(employeeNumber: number) {
+    // this.userData = null;
+    this.relatedTopics = [];
+    this.getlocations();
     this.getUserData(employeeNumber);
     this.getRelatedTopics(employeeNumber);
     this.popup.mostrar();
-  }
-
-  mostrarTema() {
-    this.popup.mostrarTema();
   }
 
   cerrar() {
     this.updateUser.reset();
     this.editFlag = false;
     this.popup.cerrar();
+  }
+
+  mostrarTema(employeeNumber: number) {
+    // this.userData = null;
+    this.relatedTopics = [];
+    this.getUserData(employeeNumber);
+    this.getRelatedTopics(employeeNumber);
+    this.getThemeList(Number(sessionStorage.getItem('location')));
+    this.popup.mostrarTema();
   }
 
   cerrarTema() {
@@ -284,8 +310,9 @@ export class UsuariosComponent implements OnInit {
         this.userData = data[0];
         this.editFlag = true;
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -294,15 +321,24 @@ export class UsuariosComponent implements OnInit {
   getRelatedTopics(employeeNumber: number) {
     this._searchService.getRelatedTopics(employeeNumber).subscribe(
       (data) => {
-        console.log(data);
+        // this.setTheme([...data]);
         this.relatedTopics = [...data];
         console.log(this.relatedTopics);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
+
+  // Seteo de los temas
+  // setTheme(data): void {
+  //   for (let theme of data) {
+  //     this.themeList.addNewTheme(theme);
+  //   }
+  //   console.log(this.themeList.getThemeList);
+  // }
 
   updateUser = this._fb.group({
     newName: ['', [Validators.maxLength(50)]],
@@ -312,8 +348,10 @@ export class UsuariosComponent implements OnInit {
     newLocation: [''],
   });
 
+  // Método de modificació de campos del usuario
   saveChanges(): void {
     const saveChanges: userChanges = {
+      modificationUser: Number(sessionStorage.getItem('employeeNumber')),
       employeeNumber: this.userData.uEmployeeNumber,
       uName: this.updateUser.get('newName').value,
       uEmail: this.updateUser.get('newEmail').value,
@@ -322,32 +360,82 @@ export class UsuariosComponent implements OnInit {
       LocationId: this.updateUser.get('newLocation').value,
     };
 
-    // const formData = new FormData();
-    // formData.append('employeeNumber', String(this.userData.uEmployeeNumber));
-    // formData.append('uName', this.updateUser.get('newName')?.value);
-    // formData.append('uEmail', this.updateUser.get('newEmail')?.value);
-    // formData.append('uStatus', this.updateUser.get('newStatus')?.value);
-    // formData.append('roleId', this.updateUser.get('newRol')?.value);
-    // formData.append('LocationId', this.updateUser.get('LocationId')?.value);
-
-    // console.log(saveChanges);
     // Llamada al método de actualización
     this._userSerice.userUpdate(saveChanges).subscribe(
       (data) => {
         console.log('Usuario actualizado');
-        this.getUserList(); 
+        this._showError.success(data.message);
+        this.getUserList();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
+      }
+    );
+  }
+
+  // Optención del index del tema a eliminar
+  getIdx(themeId: number) {
+    this.relatedTopics.find((item, idx) => {
+      if (item.tId === themeId) {
+        console.log(idx);
+        this.deleteRelatedTopics(item.tId);
+      }
+    });
+  }
+
+  // Borrado de una relación entre un usuario y un tema
+  deleteRelatedTopics(themeId: number): void {
+    // Llamada al método de eliminacion de la relacion entre el usuario y el tema
+    this._userSerice
+      .deleteRelatedTopic(this.userData.uEmployeeNumber, themeId)
+      .subscribe(
+        (data) => {
+          console.log(data.message);
+          this._showError.success(data.message);
+          this.getRelatedTopics(this.userData.uEmployeeNumber);
+        },
+        (error: HttpErrorResponse) => {
+          console.error(error.error.message);
+          this._showError.statusCode(error);
+        }
+      );
+  }
+
+  // Añadiendo un tema aun usuario
+  addRelatedTopic(themeId: number): void {
+    console.log(themeId);
+
+    const newRelation: userTheme = {
+      employeeNumber: this.userData.uEmployeeNumber,
+      themeId: themeId,
+    };
+    this._userSerice.addRelatedTopic(newRelation).subscribe(
+      (data) => {
+        console.log(data.message);
+        this._showError.success(data.message);
+        this.getRelatedTopics(this.userData.uEmployeeNumber);
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error.error.message);
+        this._showError.statusCode(error);
+      }
+    );
+  }
+
+  // Obtención de los temas disponibles
+  getThemeList(locationId: number): void {
+    this.themeList = [];
+    this._fieldsService.getThme(locationId).subscribe(
+      (data) => {
+        console.log(data);
+
+        this.themeList = [...data];
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
 }
-
-// newUser = this._fb.group({
-//   uName: ['', [Validators.required, Validators.maxLength(50)]],
-//   uEmail: ['', [Validators.required, Validators.maxLength(80)]],
-//   RolId: ['', [Validators.required]],
-//   uStatus: ['', [Validators.required]],
-//   EmployeeNumber: ['', [Validators.required]],
-// });

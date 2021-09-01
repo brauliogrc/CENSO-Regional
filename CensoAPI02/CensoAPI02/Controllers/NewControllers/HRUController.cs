@@ -1,6 +1,7 @@
 ﻿using CENSO.Models;
 using CensoAPI02.Intserfaces;
 using CensoAPI02.Models;
+using CensoAPI02.Models.UnionTables;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Registro de un nuevo usuario
-        [HttpPost][Route("newUser")][AllowAnonymous]
+        [HttpPost][Route("newUser")]
         public async Task<IActionResult> addNewUser([FromBody] AddUserInterface newUser)
         {
             try
@@ -111,7 +112,6 @@ namespace CensoAPI02.Controllers.NewControllers
         // Busqueda de informacion de un usuario, para su registro (requiere policy surh)
         [HttpGet]
         [Route("userInformation/{location}/{employeeNumber}")]
-        [AllowAnonymous]
         public async Task<ActionResult> getUserInformation(string location, int employeeNumber)
         {
             try
@@ -166,7 +166,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Actualización de un usuario (requiere policy surh)
-        [HttpPost][Route("userUpdate")][AllowAnonymous]
+        [HttpPatch][Route("userUpdate")]
         public async Task<IActionResult> userUpdate([FromBody] UserUpdate userUpdate)
         {
             bool flagUpdate = false;
@@ -209,10 +209,13 @@ namespace CensoAPI02.Controllers.NewControllers
 
                 if ( flagUpdate )
                 {
+                    user.uModificationUser = userUpdate.modificationUser;
+                    user.uModificationDate = DateTime.Now;
+
                     _context.HRU.Update(user);
                     await _context.SaveChangesAsync();
 
-                    return Ok(new { message = $"El ususario se actualizó correctamente." });
+                    return Ok(new { message = $"El usuario se actualizó correctamente." });
                 }
 
                 return Ok(new { message = $"Ningún cambio realizado" } );
@@ -225,7 +228,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Eliminacioón lógica de usuario
-        [HttpDelete] [Route("deleteUser/{employeeNumber}")][AllowAnonymous]
+        [HttpDelete] [Route("deleteUser/{employeeNumber}")]
         public async Task<IActionResult> deleteUser(long employeeNumber)
         {
             try
@@ -248,6 +251,64 @@ namespace CensoAPI02.Controllers.NewControllers
             {
                 return BadRequest(new { message = $"Ha ocurido un error al eliminar el usuatio. Error: {ex.Message}" });
             }
-        }        
+        }
+
+        // Eliminar relacion de un usuario con un tema (requiere policy su)
+        [HttpDelete][Route("deleteRelatedTopic/{employeeNumber}/{themeId}")]
+        public async Task<ActionResult> deleteRelatedTeme(long employeeNumber, int themeId)
+        {
+            try
+            {
+                var relatedTeme = (from ht in _context.HRUsersThemes
+                                   where ht.UserId == employeeNumber && ht.ThemeId == themeId
+                                   select ht).FirstOrDefault();
+
+                if ( relatedTeme == null)
+                {
+                    return NotFound(new { message = $"No se ha encontrado la relación entre el usuatio y el tema especificado" });
+                }
+
+                _context.HRUsersThemes.Remove(relatedTeme);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = $"La relación se eliminó correctamente" });
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al eliminar la relación con el tema. Error: {ex.Message}" });
+            }
+        }
+
+        // Añadir relación entre un usuario y un tema ( requiere policy surh)
+        [HttpPost][Route("addRelatedTopic")]
+        public async Task<IActionResult> addRelatedTopic([FromBody] AddUserTopicRelationship addTopic)
+        {
+            try
+            {
+                var search = (from ht in _context.HRUsersThemes
+                              where ht.UserId == addTopic.employeeNumber && ht.ThemeId == addTopic.themeId
+                              select ht).FirstOrDefault();
+
+                if ( search != null )
+                {
+                    return Ok(new { message = $"El usuario ya se encuentra relacionado con este tema." } );
+                }
+
+                var newRelationship = new HRUsersTheme()
+                {
+                    UserId = addTopic.employeeNumber,
+                    ThemeId = addTopic.themeId,
+                };
+
+                _context.HRUsersThemes.Add(newRelationship);
+                await _context.SaveChangesAsync();
+
+                return Ok(new { message = $"Relación añadida correctamente." });
+            }
+            catch( Exception ex )
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al añadir el tema al usuario. Error:{ex.Message}" });
+            }
+        }
     }
 }

@@ -194,6 +194,8 @@ namespace CensoAPI02.Intserfaces
 
     public class UserUpdate
     {
+        public int modificationUser { get; set; }
+
         public long employeeNumber { get; set; }
 
         public string? uName { get; set; }
@@ -205,5 +207,32 @@ namespace CensoAPI02.Intserfaces
         public int? roleId { get; set; }
 
         public int? LocationId { get; set; }
+    }
+
+    public class ItemUpdate
+    {
+        public int modificationUser { get; set; }
+
+        public int itemId { get; set; }
+
+        public string? itemName { get; set; }
+
+        public bool? itemStatus { get; set; }
+
+        public int? locationId { get; set; }
+    }
+
+    public class AddUserTopicRelationship
+    {
+        public long employeeNumber { get; set; }
+
+        public int themeId { get; set; }
+    }
+
+    public class AddThemeRelationship
+    {
+        public int themeId { get; set; }
+
+        public int itemId { get; set; }
     }
 }

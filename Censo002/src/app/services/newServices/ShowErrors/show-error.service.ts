@@ -1,3 +1,4 @@
+import { NumberSymbol } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
@@ -9,10 +10,37 @@ export class ShowErrorService {
   constructor() {}
 
   statusCode = (error: HttpErrorResponse) => {
-    if (Number(error.status) === 0) this.ConnectionReused(String(error.message));
-    else if (Number(error.status) === 404) this.NotFound(String(error.error.message));
-    else if (Number(error.status) === 400) this.BadRequest(String(error.error.message));
+    if (Number(error.status) === 0)
+      this.ConnectionReused(String(error.message));
+    else if (Number(error.status) === 404)
+      this.NotFound(String(error.error.message));
+    else if (Number(error.status) === 400)
+      this.BadRequest(String(error.error.message));
+    else if (Number(error.status) === 401)
+      this.Unauthorized(String(error.message));
+    else if (Number(error.status) === 409)
+      this.Conflict(String(error.error.message));
     else this.UnconrolledError(String(error.message));
+  };
+
+  success = (message: string) => {
+    Swal.fire({
+      // title: '404. Not Found',
+      text: message,
+      icon: 'success',
+      backdrop: false,
+      position: 'top',
+    });
+  };
+
+  NotAccessible = () => {
+    Swal.fire(
+      'Sección no accesible.\n Usted no cuenta con el rol necesario para\n ingresar a esta sección'
+    );
+  };
+
+  LoginError = () => {
+    Swal.fire('Usuario no encontrado en la base de datos');
   };
 
   private NotFound = (error: string) => {
@@ -45,6 +73,16 @@ export class ShowErrorService {
     });
   };
 
+  private Unauthorized = (error: string) => {
+    Swal.fire({
+      // title: '401 Unauthorized',
+      text: `No autorizado. Error: ${error}`,
+      icon: 'question',
+      backdrop: false,
+      position: 'top',
+    });
+  };
+
   private UnconrolledError = (error: string) => {
     Swal.fire({
       title: 'Uncontrolled error',
@@ -54,4 +92,14 @@ export class ShowErrorService {
       position: 'top',
     });
   };
+
+  private Conflict = ( error: string ) => {
+    Swal.fire({
+      // title: 'Uncontrolled error',
+      text: `${error}`,
+      icon: 'info',
+      backdrop: false,
+      position: 'top',
+    });
+  }
 }

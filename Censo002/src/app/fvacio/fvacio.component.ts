@@ -5,6 +5,8 @@ import { TicketService } from '../services/newServices/Ticket/ticket.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 import { userTickets } from '../../assets/ts/interfaces/newInterfaces';
 import { App2 } from '../../assets/ts/app2';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
 
 @Component({
   selector: 'app-fvacio',
@@ -25,6 +27,7 @@ export class FvacioComponent implements OnInit {
     private router: Router,
     private _search: SearchService,
     private _authService: AuthService,
+    private _showError: ShowErrorService,
     private _ticketService: TicketService
   ) {}
 
@@ -38,11 +41,10 @@ export class FvacioComponent implements OnInit {
   // Consulta el estado del folio
   getTicketStatus(ticketId: any): void {
     if (ticketId) {
-      
       this._ticketService
-      .getTicketStatus(
-        Number(sessionStorage.getItem('employeeNumber')),
-        Number(ticketId)
+        .getTicketStatus(
+          Number(sessionStorage.getItem('employeeNumber')),
+          Number(ticketId)
         )
         .subscribe(
           (data) => {
@@ -56,12 +58,14 @@ export class FvacioComponent implements OnInit {
               this.responsable = data.answer;
             } else {
               console.log(data.message);
+              this._showError.success(data.message);
             }
 
             this.flag = true;
           },
-          (error) => {
+          (error: HttpErrorResponse) => {
             console.error(error.error.message);
+            this._showError.statusCode(error);
           }
         );
     }
@@ -76,8 +80,9 @@ export class FvacioComponent implements OnInit {
           this.userTickets = [...data];
           console.log(data);
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
   }
@@ -92,7 +97,7 @@ export class FvacioComponent implements OnInit {
     this.router.navigate(['/panelusuario']);
   }
 
-  // Cerrar popup quemuestra el contenido de la infoamción del ticket
+  // Cerrar popup que muestra el contenido de la infoamción del ticket
   cerrarPopup(): void {
     this.app.cerrarbusq();
     this.searchFlag = false;

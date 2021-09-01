@@ -26,7 +26,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Registrar una nueva peticion (requiere autorize)
-        [HttpPost][Route("newRequest")][AllowAnonymous]
+        [HttpPost][Route("newRequest")]
         public async Task<IActionResult> addNewRequest([FromForm] AddRequestInterface newRequest)
         {
             try
@@ -122,7 +122,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         //Eliminacion ogica de la peticion (requiere policy staff rh)
-        [HttpDelete][Route("deleteRequest/{requestId}")][AllowAnonymous]
+        [HttpDelete][Route("deleteRequest/{requestId}")][Authorize(Policy = "StaffRH")]
         public async Task<IActionResult> deleteRequest(int requestId)
         {
             try

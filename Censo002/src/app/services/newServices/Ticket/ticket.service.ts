@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -8,6 +8,9 @@ import { environment } from 'src/environments/environment';
 })
 export class TicketService {
   private MyApiUrl: string = 'Ticket/';
+  private headers = new HttpHeaders({
+    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+  });
 
   // Ticketid es necesario para realizar la consulta de los datos en el "respuesta-folio.component"
   private ticket: number = 0;
@@ -23,14 +26,16 @@ export class TicketService {
   // Obtencion de los datos para la respuesta del ticket
   getTicketData(ticketId: number): Observable<any> {
     return this._http.get(
-      `${environment.API_URL}` + this.MyApiUrl + 'ticketData/' + ticketId
+      `${environment.API_URL}` + this.MyApiUrl + 'ticketData/' + ticketId,
+      { headers: this.headers }
     );
   }
 
   // Borrado logico de un ticket
   deleteTicket(ticketId: number): Observable<any> {
     return this._http.delete(
-      `${environment.API_URL}` + this.MyApiUrl + 'deleteTicket/' + ticketId
+      `${environment.API_URL}` + this.MyApiUrl + 'deleteTicket/' + ticketId,
+      { headers: this.headers }
     );
   }
 
@@ -42,7 +47,8 @@ export class TicketService {
         'ticketStatus/' +
         employeeNumber +
         '/' +
-        ticketId
+        ticketId,
+      { headers: this.headers }
     );
   }
 

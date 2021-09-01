@@ -1,13 +1,19 @@
-import { Component, Input, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/Auth/auth.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
 import { LocationValidate } from '../../assets/ts/validations';
 import { AnswerService } from '../services/newServices/Answer/answer.service';
-import { searchData, User, ticketStatus } from '../../assets/ts/interfaces/newInterfaces';
+import {
+  searchData,
+  User,
+  ticketStatus,
+} from '../../assets/ts/interfaces/newInterfaces';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-respuesta-folio',
@@ -20,9 +26,11 @@ export class RespuestaFolioComponent implements OnInit {
 
   daysPassed: number = 0; // Dias transcurridos desde la creación del Ticket
   answer: string | null = null; // Almacenamiento de la respuesta actual
-  currentStatus: string = ''; // Almacenamiento de estado actual
+  currentStatusName: string = ''; // Almacenamiento nombre del estado actual
+  currentStatusValue: number = 0; // Almacenamiento valor del estado actual
 
   flag: boolean = false;
+  answerFlag: boolean = false;
   private ticketId: number = 0;
 
   availableUsers: User[] = [];
@@ -41,6 +49,7 @@ export class RespuestaFolioComponent implements OnInit {
     private _auth: AuthService,
     private _fields: FieldsService,
     private _sanitizer: DomSanitizer,
+    private _showError: ShowErrorService,
     private _answerService: AnswerService,
     private _ticketService: TicketService
   ) {}
@@ -66,13 +75,17 @@ export class RespuestaFolioComponent implements OnInit {
       Number(sessionStorage.getItem('role')) != 3
     ) {
       console.error('Sección no accesible');
+      this._showError.NotAccessible();
       sessionStorage.clear();
       this.router.navigate(['/login']);
       console.clear();
       return;
     }
     this.flag = false;
+    this.answerFlag = false;
     this.ticketId = this._ticketService.getTicket;
+    console.log(this.ticketId);
+
     // console.log(this.ticketId);
     this.getTicketStatus();
     this.getTicketData();
@@ -90,12 +103,13 @@ export class RespuestaFolioComponent implements OnInit {
             data.anonTicketData[0].arEmployeeType
           );
 
-          console.log(this.anonTicketData.tId);
+          console.log(this.anonTicketData);
 
           this.flag = true;
           this.getAvailableUsers(this.anonTicketData.tId);
 
-          this.currentStatus = data.anonTicketData[0].rsStatus;
+          this.currentStatusValue = data.anonTicketData[0].rsId;
+          this.currentStatusName = data.anonTicketData[0].rsStatus;
         } else {
           this.ticketData = data.ticketData[0];
 
@@ -104,17 +118,20 @@ export class RespuestaFolioComponent implements OnInit {
           );
 
           console.log(this.ticketData);
+
           this.flag = true;
           this.getAvailableUsers(this.ticketData.tId);
 
-          this.currentStatus = data.ticketData[0].rsStatus;
+          this.currentStatusValue = data.ticketData[0].rsId;
+          this.currentStatusName = data.ticketData[0].rsStatus;
         }
         this.daysPassed = data.daysPassed;
-        if (data.answer.asAnswer) this.answer = data.answer.asAnswer;
-        console.log(this.currentStatus);
+        if (data.answer) this.answer = data.answer.asAnswer;
+        console.log(this.currentStatusValue + ' - ' + this.currentStatusName);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -126,13 +143,17 @@ export class RespuestaFolioComponent implements OnInit {
         locationId: Number(sessionStorage.getItem('location')),
         itemId: themeId,
       };
+
+      console.log(searchData);
+
       this._fields.getAvailableUsers(searchData).subscribe(
         (data) => {
           this.availableUsers = [...data];
-          // console.log(this.availableUsers);
+          console.log(this.availableUsers);
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     }
@@ -143,10 +164,11 @@ export class RespuestaFolioComponent implements OnInit {
     this._fields.getTicketStatus().subscribe(
       (data) => {
         this.ticketStatus = [...data];
-        // console.log(this.ticketStatus);
+        console.log(this.ticketStatus);
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -165,15 +187,18 @@ export class RespuestaFolioComponent implements OnInit {
 
     console.log(this.newAnswer.get('asUserId')?.value);
 
+    console.log(formData.get('requestStatus'));
+
     this._answerService.addNewAnswer(formData).subscribe(
       (data) => {
         console.log('Registro exitoso de la respuesta');
-        console.log(data.message);
+        this._showError.success(data.message);
         this.newAnswer.reset();
         this.ticketId = 0;
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.log(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -193,5 +218,9 @@ export class RespuestaFolioComponent implements OnInit {
   getEmployeeType(employeeType: number): string | null {
     const locationValidate = new LocationValidate();
     return locationValidate.employeeTypeValidation(employeeType);
+  }
+
+  cerrarRespuesta() {
+    this.router.navigate(['/paneladmin/tikets']);
   }
 }

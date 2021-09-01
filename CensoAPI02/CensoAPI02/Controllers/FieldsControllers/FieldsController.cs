@@ -23,7 +23,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
         }
 
         // Obtencnion de localidades
-        [HttpGet][Route("getLocations")]
+        [HttpGet][Route("getLocations")][AllowAnonymous]
         public async Task<ActionResult> getLocations()
         {
             try
@@ -46,7 +46,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
         }
 
         // Obtencion de temas segun la locaidad
-        [HttpGet][Route("getTheme/{locationId}")]
+        [HttpGet][Route("getTheme/{locationId}")][AllowAnonymous]
         public async Task<ActionResult> getTheme(int locationId)
         {
             try
@@ -75,7 +75,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
         }
 
         // Obtencion de preguntas segun el tema
-        [HttpGet][Route("getQuestions/{themeId}")]
+        [HttpGet][Route("getQuestions/{themeId}")][AllowAnonymous]
         public async Task<ActionResult> getQuestions(int themeId)
         {
             try
@@ -104,7 +104,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
         }
 
         // Obtencion de las areas segun la localidad
-        [HttpGet][Route("getAreas/{locationId}")]
+        [HttpGet][Route("getAreas/{locationId}")][AllowAnonymous]
         public async Task<ActionResult> getAreas(int locationId)
         {
             try
@@ -133,7 +133,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
         }
 
         // Obtencion de los roles disponibles (requiere policy SUHR)
-        [HttpGet][Route("getRoles")] [AllowAnonymous]
+        [HttpGet][Route("getRoles")][Authorize(Policy = "SURH")]
         public async Task<ActionResult> getRoles()
         {
             try
@@ -157,8 +157,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
 
         // Obtención de informacion de las personas asociadas al tema del ticket (requiere policy staff rh)
         [HttpGet]
-        [Route("userAssignment/{locationId}/{itemId}")]
-        [AllowAnonymous]
+        [Route("userAssignment/{locationId}/{itemId}")][Authorize(Policy = "SURH")]
         public async Task<ActionResult> userAssignment(int locationId, int itemId)
         {
             try
@@ -194,7 +193,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
         }
 
         // Obtención de los estado de los tickets (requiere policy staff rh)
-        [HttpGet][Route("getTicketStatus")][AllowAnonymous]
+        [HttpGet][Route("getTicketStatus")][Authorize(Policy = "StaffRH")]
         public async Task<ActionResult> getTicketStatus()
         {
             try

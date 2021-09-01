@@ -119,7 +119,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Eliminación lógica de la peticion anonima
-        [HttpDelete][Route("deleteAnonRequest/{anonRequestId}")][AllowAnonymous]
+        [HttpDelete][Route("deleteAnonRequest/{anonRequestId}")][Authorize(Policy = "StaffRH")]
         public async Task<IActionResult> deleteAnonRequest(int anonRequestId)
         {
             try

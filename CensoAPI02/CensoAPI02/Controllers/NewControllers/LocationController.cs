@@ -22,7 +22,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Registro de una nueva localidad
-        [HttpPost][Route("newLocation")][AllowAnonymous]
+        [HttpPost][Route("newLocation")]
         public async Task<IActionResult> addNewLocation([FromBody] AddLocationsInterface newLocation)
         {
             try
@@ -49,7 +49,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Eliminación lógica de localidad
-        [HttpDelete][Route("deleteLocation/{locationId}")][AllowAnonymous]
+        [HttpDelete][Route("deleteLocation/{locationId}")]
         public async Task<IActionResult> deleteLocation(int locationId)
         {
             try
@@ -71,6 +71,53 @@ namespace CensoAPI02.Controllers.NewControllers
             }catch(Exception ex)
             {
                 return BadRequest(new { message = $"Ha ocurido un error al eliminar la localidad. Error: {ex.Message}" });
+            }
+        }
+
+        // Actualización de una localidad (requiere polici admin)
+        [HttpPatch][Route("locationUpdate")]
+        public async Task<IActionResult> locationUpdate([FromBody] ItemUpdate locationUpdate)
+        {
+            bool flagUpdate = false;
+            try
+            {
+                var location = await _context.Locations.FindAsync(locationUpdate.itemId);
+
+                if (location == null)
+                {
+                    return NotFound(new { message = $"La localidad no fue encontrada" });
+                }
+
+                if ( locationUpdate.itemName != null && locationUpdate.itemName.Length != 0 && location.lName != locationUpdate.itemName)
+                {
+                    location.lName = locationUpdate.itemName;
+                    flagUpdate = true;
+
+                }
+
+                if ( locationUpdate.itemStatus != null && location.lStatus != locationUpdate.itemStatus )
+                {
+                    string newStatus = locationUpdate.itemStatus.ToString();
+                    location.lStatus = Boolean.Parse(newStatus);
+                    flagUpdate = true;
+                }
+
+                if ( flagUpdate )
+                {
+                    location.lModificationUser = locationUpdate.modificationUser;
+                    location.lModificationDate = DateTime.Now;
+
+                    _context.Locations.Update(location);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new { message = $"La localidad ha sido actualizada correctamete." });
+                }
+
+                return Ok(new { messgae = $"Ningun cambio realizado" });
+            }
+            catch( Exception ex)
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al actualizar la localidad. Error: {ex.Message}" });
             }
         }
     }

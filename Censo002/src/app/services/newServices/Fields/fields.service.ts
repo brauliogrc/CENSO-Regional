@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,6 +13,9 @@ import {
 })
 export class FieldsService {
   private MyApiUrl: string = 'Fields/';
+  private headers = new HttpHeaders({
+    Authorization: `Bearer ${sessionStorage.getItem('token')}`,
+  });
 
   constructor(private _http: HttpClient) {}
 
@@ -47,7 +50,8 @@ export class FieldsService {
   // Obtencion de los roles
   getRoles(): Observable<any> {
     return this._http.get(
-      `${environment.API_URL}` + this.MyApiUrl + 'getRoles'
+      `${environment.API_URL}` + this.MyApiUrl + 'getRoles',
+      { headers: this.headers }
     );
   }
 
@@ -59,14 +63,16 @@ export class FieldsService {
         'userAssignment/' +
         availableUser.locationId +
         '/' +
-        availableUser.itemId
+        availableUser.itemId,
+      { headers: this.headers }
     );
   }
 
   // Obtencion de los estado que puede tener un ticket
   getTicketStatus(): Observable<ticketStatus[]> {
     return this._http.get<ticketStatus[]>(
-      `${environment.API_URL}` + this.MyApiUrl + 'getTicketStatus'
+      `${environment.API_URL}` + this.MyApiUrl + 'getTicketStatus',
+      { headers: this.headers }
     );
   }
 }

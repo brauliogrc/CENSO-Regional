@@ -273,46 +273,50 @@
                         </div>
                       </div>
 
-                      <ng-template *ngIf="responsable">
-                        <div class="contenedores">
-                          <div class="titulos">
-                            <p>Atiende:</p>
+                      <!-- <ng-template *ngIf="answerFlag"> -->
+                        <div *ngIf="answerFlag">
+                          <div class="contenedores">
+                            <div class="titulos">
+                              <p>Atiende:</p>
+                            </div>
+                            <div class="textosContenido">
+                              <p>{{ responsable.uName }}</p>
+                            </div>
                           </div>
-                          <div class="textosContenido">
-                            <p>{{ responsable.uName }}</p>
+                          <div class="contenedores">
+                            <div class="titulos">
+                              <p>Respuesta:</p>
+                            </div>
+                            <div class="textosContenido">
+                              <p>{{ responsable.asAnswer }}</p>
+                            </div>
                           </div>
+                          <div class="contenedores">
+                            <div class="titulos">
+                              <p>Se respondio:</p>
+                            </div>
+                            <div class="textosContenido">
+                              <p>{{ responsable.asCreationDate | date: "mediumDate" }}</p>
+                            </div>
+                          </div>
+                          <div class="contenedores">
+                            <div class="titulos">
+                              <p>Archivo Adjunto:</p>
+                            </div>
+                            <div class="textosContenido">
+                              <p>{{ responsable.asAttachement }}</p>
+                            </div>
+                          </div>
+
                         </div>
-                        <div class="contenedores">
-                          <div class="titulos">
-                            <p>Respuesta:</p>
-                          </div>
-                          <div class="textosContenido">
-                            <p>{{ responsable.request }}</p>
-                          </div>
-                        </div>
-                        <div class="contenedores">
-                          <div class="titulos">
-                            <p>Se respondio:</p>
-                          </div>
-                          <div class="textosContenido">
-                            <p>{{ responsable.asCreationDate }}</p>
-                          </div>
-                        </div>
-                        <div class="contenedores">
-                          <div class="titulos">
-                            <p>Archivo Adjunto:</p>
-                          </div>
-                          <div class="textosContenido">
-                            <p>{{ folio.arAttachement }}</p>
-                          </div>
-                        </div>
-                      </ng-template>
+                      <!-- </ng-template> -->
                     </div>
                   </div>
                   <button
                     id="close"
                     class="btn btn-outline-secondary"
                     type="button"
+                    (click)="cerrarPopup()"
                   >
                     Cerrar
                   </button>
@@ -328,6 +332,6 @@
   </div>
 
   <footer class="footerIndexC">
-    <img src="../../assets/img/imgJalisco.png" alt="" class="imgJaliscoC" />
+    <img src="assets/img/imgJalisco.png" alt="" class="imgJaliscoC" />
   </footer>
 </body>

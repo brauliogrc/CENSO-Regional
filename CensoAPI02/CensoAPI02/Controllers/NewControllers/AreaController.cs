@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace CensoAPI02.Controllers.NewControllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController][Authorize(Policy = "SURH")]
     public class AreaController : ControllerBase
     {
         private readonly CDBContext _context;
@@ -24,7 +24,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Registro de una nueva area (requiere policy SURh)
-        [HttpPost][Route("newArea")][AllowAnonymous]
+        [HttpPost][Route("newArea")]
         public async Task<IActionResult> addNewArea([FromBody]AddAreaInterface newArea)
         {
             try
@@ -60,7 +60,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
 
         // Eliminación loógica del area
-        [HttpDelete][Route("deleteArea/{areaId}")][AllowAnonymous]
+        [HttpDelete][Route("deleteArea/{areaId}")]
         public async Task<IActionResult> deleteArea(int areaId)
         {
             try
@@ -84,5 +84,65 @@ namespace CensoAPI02.Controllers.NewControllers
             }
         }
 
+        // Actualización de un area
+        [HttpPost][Route("areaUpdate")]
+        public async Task<IActionResult> areaUpdate([FromBody] ItemUpdate item)
+        {
+            bool flagUpdate = false;
+            try
+            {
+                var area = await _context.Areas.FindAsync(item.itemId);
+
+                if ( area == null )
+                {
+                    return NotFound(new { message = $"No se ha encontrado el area en la base de datos" });
+                }
+
+                if ( item.itemName != null && item.itemName.Length != 0 && area.aName != item.itemName )
+                {
+                    area.aName = item.itemName;
+                    flagUpdate = true;
+                }
+
+                if ( item.itemStatus != null && area.aStatus != item.itemStatus )
+                {
+                    string newStatus = item.itemStatus.ToString();
+                    area.aStatus = Boolean.Parse(newStatus);
+                    flagUpdate = true;
+                }
+
+                if ( item.locationId != null && item.locationId != 0 )
+                {
+                    var search = (from al in _context.AreasLocations
+                                  where al.AreaId == area.aId
+                                  select al).FirstOrDefault();
+
+                    if ( search != null )
+                    {
+                        string newLocation = item.locationId.ToString();
+                        search.LocationId = Int32.Parse(newLocation);
+
+                        _context.AreasLocations.Update(search);
+                        await _context.SaveChangesAsync();
+
+                        flagUpdate = true;
+                    }
+                }
+
+                if ( flagUpdate )
+                {
+                    _context.Areas.Update(area);
+                    await _context.SaveChangesAsync();
+
+                    return Ok(new { message = $"El area se ha actualizado con exito." });
+                }
+
+                return Ok(new { message = $"Ningun cambio realizado." });
+            }
+            catch ( Exception ex )
+            {
+                return BadRequest(new { message = $"Ha ocurrido un error al actualizar el area. Error: {ex.Message}" });
+            }
+        }
     }
 }

@@ -7,14 +7,20 @@ import {
   Location,
   Theme,
   addQuestion,
+  searchData,
+  existingQuestion,
 } from '../../assets/ts/interfaces/newInterfaces';
 import { SearchService } from '../services/newServices/Search/search.service';
 import { QuestionService } from '../services/newServices/Question/question.service';
 import { FieldsService } from '../services/newServices/Fields/fields.service';
 import { ListService } from '../services/newServices/List/list.service';
-import { searchData } from '../../assets/ts/interfaces/newInterfaces';
-
 import { Popup } from 'src/assets/ts/popup';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import {
+  itemChanges,
+  addThemeRelationship,
+} from '../../assets/ts/interfaces/newInterfaces';
 
 @Component({
   selector: 'app-preguntas',
@@ -41,13 +47,14 @@ export class PreguntasComponent implements OnInit {
 
   constructor(
     // private _createScripts: CreateScriptsService,
+    private router: Router,
     private _fb: FormBuilder,
-    private _searchService: SearchService,
-    private _questionService: QuestionService,
-    private _fieldsService: FieldsService,
     private _listService: ListService,
     private _authService: AuthService,
-    private router: Router
+    private _showError: ShowErrorService,
+    private _fieldsService: FieldsService,
+    private _searchService: SearchService,
+    private _questionService: QuestionService
   ) {
     // this._createScripts.CargaArchivos( ["popoupEdicion"] );
   }
@@ -62,6 +69,7 @@ export class PreguntasComponent implements OnInit {
       Number(sessionStorage.getItem('role')) != 2
     ) {
       console.error('Sección no accesible');
+      this._showError.NotAccessible();
       sessionStorage.clear();
       this.router.navigate(['/login']);
       console.clear();
@@ -77,8 +85,9 @@ export class PreguntasComponent implements OnInit {
       (data) => {
         this.Locations = [...data];
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -91,8 +100,9 @@ export class PreguntasComponent implements OnInit {
         (data) => {
           this.Theme = [...data];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     }
@@ -106,8 +116,9 @@ export class PreguntasComponent implements OnInit {
         (data) => {
           this.Questions = [...data];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
   }
@@ -125,11 +136,13 @@ export class PreguntasComponent implements OnInit {
     this._questionService.addNewQuestion(dataNewQuestion).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.getQuestionList();
         this.newQuestion.reset();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -139,11 +152,13 @@ export class PreguntasComponent implements OnInit {
     this._questionService.deleteQuestion(questionId).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.question = null;
         this.getQuestionList();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -162,25 +177,135 @@ export class PreguntasComponent implements OnInit {
           this.question = data;
           this.Questions = [];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     }
   }
 
-  // Llamado de modals
+  // Llamado de modals y actualización de preguntas
   private popup = new Popup();
-  mostrar() {
+  questionData: existingQuestion;
+  relatedTheme: Theme[];
+  editFlag: boolean = false;
+
+  mostrar(questionId: number) {
+    this.getExistingQuestion(questionId);
     this.popup.mostrar();
   }
   cerrar() {
+    this.editFlag = false;
+    this.updateQuestion.reset();
     this.popup.cerrar();
   }
-  mostrarTema() {
+  mostrarTema(questionId: number) {
+    this.getTheme(sessionStorage.getItem('location'));
+    this.getExistingQuestion(questionId);
+    this.getRelatedTopics(questionId);
     this.popup.mostrarTema();
   }
   cerrarTema() {
     this.popup.cerrarTema();
+  }
+
+  // Obtención de los datos a modificar de la pregunta
+  getExistingQuestion(questionId: number): void {
+    this._searchService.getExistingQuestion(questionId).subscribe(
+      (data) => {
+        this.questionData = data[0];
+        console.log(this.questionData);
+        this.editFlag = true;
+      },
+      (error: HttpErrorResponse) => {
+        this._showError.statusCode(error);
+      }
+    );
+  }
+
+  updateQuestion = this._fb.group({
+    newName: [''],
+    newStatus: [''],
+  });
+
+  // Guardado de los cambios de la pregunta
+  saveChanges(): void {
+    const saveChanges: itemChanges = {
+      modificationUser: Number(sessionStorage.getItem('employeeNumber')),
+      itemId: this.questionData.qId,
+      itemName: this.updateQuestion.get('newName').value,
+      itemStatus: this.updateQuestion.get('newStatus').value,
+      locationId: null
+    };
+
+    console.log(saveChanges);
+
+    this._questionService.questionUpdate(saveChanges).subscribe(
+      (data) => {
+        console.log(data.message);
+        this._showError.success(data.message);
+        this.updateQuestion.reset();
+        this.getQuestionList();
+      },
+      (error: HttpErrorResponse) => {
+        this._showError.statusCode(error);
+      }
+    );
+  }
+
+  // Obtención de los temas con los que se relaciona la pregunta
+  getRelatedTopics(questionId: number): void {
+    this._searchService.getRelatedTopicsQ(questionId).subscribe(
+      (data) => {
+        this.relatedTheme = [...data];
+        console.log(this.relatedTheme);
+      },
+      (error: HttpErrorResponse) => {
+        this._showError.statusCode(error);
+      }
+    );
+  }
+
+  // Añaddir una relación entre la pregunta y el tema
+  addRelatedTheme(themeId: number): void {
+    const newRelationship: addThemeRelationship = {
+      itemId: this.questionData.qId,
+      themeId: themeId,
+    };
+
+    this._questionService.addRelatedTheme(newRelationship).subscribe(
+      (data) => {
+        this._showError.success(data.message);
+        this.getRelatedTopics(this.questionData.qId);
+      },
+      (error: HttpErrorResponse) => {
+        this._showError.statusCode(error);
+      }
+    );
+  }
+
+  // Obtención del index del tema a eliminar
+  getIdx(themeId: number): void {
+    this.relatedTheme.find((item, idx) => {
+      if (item.tId === themeId) {
+        this.deleteRelatedTopic(themeId);
+      }
+    });
+  }
+
+  // Borrado de una relación entre la pregunta y el tema
+  deleteRelatedTopic(themeId: number): void {
+    this._questionService
+      .deleteRelatedTopic(themeId, this.questionData.qId)
+      .subscribe(
+        (data) => {
+          this._showError.success(data.message);
+          this.getRelatedTopics(this.questionData.qId);
+        },
+        (error: HttpErrorResponse) => {
+          this._showError.statusCode(error);
+        }
+      );
   }
 }

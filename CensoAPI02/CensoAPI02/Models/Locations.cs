@@ -24,9 +24,9 @@ namespace CENSO.Models
         [Required]
         public int      lCreationUser { get; set; }
 
-        public DateTime lModificationDate { get; set; }
+        public DateTime? lModificationDate { get; set; }
 
-        public int      lModificationUser { get; set; }
+        public int?      lModificationUser { get; set; }
 
         [Required]
         public bool     lStatus { get; set; }

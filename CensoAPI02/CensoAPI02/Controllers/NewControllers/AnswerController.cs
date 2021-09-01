@@ -32,7 +32,6 @@ namespace CensoAPI02.Controllers.NewControllers
         // Registro de una nueva respuesta de tiket y actualizacion del tiket respondido
         [HttpPost]
         [Route("newAnswer")]
-        [AllowAnonymous]
         public async Task<IActionResult> addNewAnswer([FromForm] AddAnswerInterface newAnswer)
         {
             int RequestId = Int32.Parse(newAnswer.RequestId);

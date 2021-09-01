@@ -5,10 +5,13 @@ import {
   ticketList,
   anonTicketList,
   searchData,
+  searchData2,
 } from '../../assets/ts/interfaces/newInterfaces';
 import { ListService } from '../services/newServices/List/list.service';
 import { SearchService } from '../services/newServices/Search/search.service';
 import { TicketService } from '../services/newServices/Ticket/ticket.service';
+import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-tikets',
@@ -25,11 +28,12 @@ export class TiketsComponent implements OnInit {
   flag: boolean = false;
 
   constructor(
+    private router: Router,
+    private _auth: AuthService,
     private _listService: ListService,
+    private _showError: ShowErrorService,
     private _searchService: SearchService,
     private _ticketService: TicketService,
-    private _auth: AuthService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -43,6 +47,7 @@ export class TiketsComponent implements OnInit {
       Number(sessionStorage.getItem('role')) != 3
     ) {
       console.error('Sección no accesible');
+      this._showError.NotAccessible();
       sessionStorage.clear();
       this.router.navigate(['/login']);
       console.clear();
@@ -61,8 +66,9 @@ export class TiketsComponent implements OnInit {
           this.Tikets = [...data.tickets];
           this.AnonTikets = [...data.anonTickets];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
   }
@@ -72,10 +78,12 @@ export class TiketsComponent implements OnInit {
     this._ticketService.deleteTicket(ticketId).subscribe(
       (data) => {
         console.log(data.message);
+        this._showError.success(data.message);
         this.getTiketsList();
       },
-      (error) => {
+      (error: HttpErrorResponse) => {
         console.error(error.error.message);
+        this._showError.statusCode(error);
       }
     );
   }
@@ -83,28 +91,41 @@ export class TiketsComponent implements OnInit {
   // Busqueda de un tiket mediante su id
   search(ticketId: string) {
     if (ticketId) {
-      let ticketSearch: searchData = {
+      let ticketSearch: searchData2 = {
         locationId: Number(sessionStorage.getItem('location')),
-        itemId: Number(ticketId),
+        itemId: ticketId,
       };
 
       this._searchService.searchTicket(ticketSearch).subscribe(
         (data) => {
-          this.flag = true;
-          if (data.rUserName[0] != null) {
-            this.tiket = data;
-            this.anonTicket = null;
-            console.log(this.tiket[0]);
-          } else {
-            this.anonTicket = data;
-            this.tiket = null;
-            console.log(this.anonTicket[0]);
-          }
+          console.log(data);
           this.Tikets = [];
           this.AnonTikets = [];
+
+          this.flag = true;
+          if ( data.ticket != null ) {
+            this.Tikets = [... data.ticket];
+            console.log(this.Tikets);
+          }
+          if ( data.anonTicket != null ) {
+            this.AnonTikets = [...data.anonTicket];
+            console.log(this.AnonTikets);
+          }
+          // if (data[0].rUserName != null) {
+          //   this.tiket = data;
+          //   this.anonTicket = null;
+          //   console.log(this.tiket[0]);
+          // } else {
+          //   this.anonTicket = data;
+          //   this.tiket = null;
+          //   console.log(this.anonTicket[0]);
+          // }
+          // this.Tikets = [];
+          // this.AnonTikets = [];
         },
-        (error) => {
+        (error: HttpErrorResponse) => {
           console.error(error.error.message);
+          this._showError.statusCode(error);
         }
       );
     }

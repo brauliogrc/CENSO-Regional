@@ -9,7 +9,7 @@
     <input
       #tiketId
       class="Search1"
-      type="number"
+      type="text"
       placeholder="Buscar"
       aria-label="Search"
     />
@@ -44,10 +44,10 @@
           <td>{{ tiket.rsStatus }}</td>
           <td>
             <button (click)="ticketResponse(tiket.rId)" class="btn btn-Dark">
-              <img src="../../assets/img/BeditB.png" alt="" width="22px">
+              <img src="assets/img/BeditB.png" alt="" width="22px">
             </button>
             <button (click)="deleteTicket(tiket.rId)" class="btn btn-Dark">
-              <img src="../../assets/img/BbasuraB.png" alt="" width="22px">
+              <img src="assets/img/BbasuraB.png" alt="" width="22px">
             </button>
           </td>
         </tr>
@@ -65,69 +65,65 @@
               (click)="ticketResponse(anonTiket.arId)"
               class="btn btn-Dark"
             >
-            <img src="../../assets/img/BeditB.png" alt="" width="22px">
+            <img src="assets/img/BeditB.png" alt="" width="22px">
             </button>
             <button
               (click)="deleteTicket(anonTiket.arId)"
               class="btn btn-Dark"
             >
-            <img src="../../assets/img/BbasuraB.png" alt="" width="22px">
+            <img src="assets/img/BbasuraB.png" alt="" width="22px">
             </button>
           </td>
         </tr>
       </ng-container>
       <ng-template #elseTemplate>
-        <ng-container *ngIf="!anonTicket; else elseTemplate">
-          <tr>
-            <td>{{ tiket[0].rId }}</td>
-            <td>{{ tiket[0].tName }}</td>
-            <td>{{ tiket[0].qName }}</td>
-            <td>{{ tiket[0].rUserName }}</td>
-            <td>{{ tiket[0].rIssue }}</td>
-            <td>{{ tiket[0].aName }}</td>
-            <td>{{ tiket[0].rsStatus }}</td>
+          <tr *ngFor="let tiket of Tikets">
+            <td>{{ tiket.rId }}</td>
+            <td>{{ tiket.tName }}</td>
+            <td>{{ tiket.qName }}</td>
+            <td>{{ tiket.rUserName }}</td>
+            <td>{{ tiket.rIssue }}</td>
+            <td>{{ tiket.aName }}</td>
+            <td>{{ tiket.rsStatus }}</td>
             <td>
-              <!-- <button
-                (click)="ticketResponse(tiket[0].rId)"
-                class="btn btn-Dark"
-              >
-              <img src="../../assets/img/BeditB.png" alt="" width="22px">
-              </button> -->
               <button
-                (click)="deleteTicket(tiket[0].rId)"
+                (click)="ticketResponse(tiket.rId)"
                 class="btn btn-Dark"
               >
-              <img src="../../assets/img/BbasuraB.png" alt="" width="22px">
+              <img src="assets/img/BeditB.png" alt="" width="22px">
+              </button>
+              <button
+                (click)="deleteTicket(tiket.rId)"
+                class="btn btn-Dark"
+              >
+              <img src="assets/img/BbasuraB.png" alt="" width="22px">
               </button>
             </td>
           </tr>
-        </ng-container>
-        <ng-template #elseTemplate>
-          <tr>
-            <td>{{ anonTicket[0].arId }}</td>
-            <td>{{ anonTicket[0].tName }}</td>
-            <td>{{ anonTicket[0].qName }}</td>
+          <tr *ngFor="let anonTicket of AnonTikets">
+            <td>{{ anonTicket.arId }}</td>
+            <td>{{ anonTicket.tName }}</td>
+            <td>{{ anonTicket.qName }}</td>
             <td></td>
-            <td>{{ anonTicket[0].arIssue }}</td>
-            <td>{{ anonTicket[0].aName }}</td>
-            <td>{{ anonTicket[0].rsStatus }}</td>
+            <td>{{ anonTicket.arIssue }}</td>
+            <td>{{ anonTicket.aName }}</td>
+            <td>{{ anonTicket.rsStatus }}</td>
             <td>
               <button
-                (click)="ticketResponse(anonTicket[0].arId)"
+                (click)="ticketResponse(anonTicket.arId)"
                 class="btn btn-Dark"
               >
-              <img src="../../assets/img/BeditB.png" alt="" width="22px">
+              <img src="assets/img/BeditB.png" alt="" width="22px">
               </button>
               <button
-                (click)="deleteTicket(anonTicket[0].arId)"
+                (click)="deleteTicket(anonTicket.arId)"
                 class="btn btn-Dark"
               >
-              <img src="../../assets/img/BbasuraB.png" alt="" width="22px">
+              <img src="assets/img/BbasuraB.png" alt="" width="22px">
               </button>
             </td>
           </tr>
         </ng-template>
-      </ng-template>
     </tbody>
   </table>
 </div>
