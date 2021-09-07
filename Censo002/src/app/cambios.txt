@@ -257,3 +257,14 @@ version 3.7.0
 
 ~Alexis~
 ======================================================================================================================
+fecha actualizacion: 09-09-2021
+
+version 0.0.5
+        
+    Modificación de la consulta del componente reportes
+    Actualización de tabla reportes
+    Correción de bugs detectados en las sesiones de pruebas
+    Correción de visualización de imágenes
+
+~Braulio~
+======================================================================================================================

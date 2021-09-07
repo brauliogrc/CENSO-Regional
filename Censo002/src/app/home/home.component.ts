@@ -157,6 +157,7 @@ export class HomeComponent implements OnInit {
     formData.append('LocationId', this.bodyRequest.get('LocationId')?.value);
     formData.append('arIssue', this.bodyRequest.get('arIssue')?.value);
     formData.append('arAttachement', this.file);
+    
 
     // Registro de la peticion anonima en la base de datos
     this._anonRequestService.addNewAnonRequest(formData).subscribe(

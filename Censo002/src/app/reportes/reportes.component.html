@@ -32,55 +32,50 @@
         <thead>
             <tr>
                 <th>Folio</th>
-                <th>Planta</th>
-                <th>Tema</th>
-                <th>Area</th>
+                <th>Numero de empleado</th>
+                <th>Nombre empleado</th>
+                <th>Contenido</th>
+                <th>Archivo adjunto</th>
+                <th>Numero de supervisor</th>
                 <th>Tipo de empleado</th>
-                <th>Num empleado</th>
-                <!-- <th>Num empleado lider</th>NA -->
-                <th>Status</th>
-                <!-- <th>Ticket</th>            NA-->
-                <!-- <th>Num RH empleado</th> -->
-                <!-- <th>Respuesta</th> -->
-                <th>Fecha creacion</th>
-                <!-- <th>Fecha cierre</th>      NA -->
-                <!-- <th>Acciones</th>          NA
-                <th>Acciones</th>               NA -->
+                <th>Fecha de creación</th>
+                <th>Localidad</th>
+                <th>Tema</th>
+                <th>Pregunta</th>
+                <th>Área</th>
+                <th>Estatus</th>
+                <th>Folio de respuesta</th>
+                <th>Respuesta</th>
+                <th>Archivo adjunto</th>
+                <th>Fecha de respuesta</th>
+                <th>Numero de empleado asignado</th>
+                <th>Nombre de empleado asignado</th>
+                <th>Email de empleado asignado</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let ticket of ticketList">
                 <th>{{ ticket.ticketId }}</th>
+                <th>{{ ticket.userId }}</th>
+                <th>{{ ticket.userName }}</th>
+                <th>{{ ticket.Issue }}</th>
+                <th>{{ ticket.Attachement }}</th>
+                <th>{{ ticket.enployeeLeader }}</th>
+                <th>{{ ticket.employeeType }}</th>
+                <th>{{ ticket.creationDate | date: "shortDate" }}</th>
                 <th>{{ ticket.location }}</th>
                 <th>{{ ticket.theme }}</th>
+                <th>{{ ticket.question }}</th>
                 <th>{{ ticket.area }}</th>
-                <th>{{ ticket.employeeType }}</th>
-                <th>{{ ticket.userId }}</th>
                 <th>{{ ticket.status }}</th>
-                <!-- <th>{{ ticket. }}</th> -->
-                <th>{{ ticket.creationDate | date: "shortDate" }}</th>
+                <th>{{ ticket.asId }}</th>
+                <th>{{ ticket.asAnswer }}</th>
+                <th>{{ ticket.asAttachement }}</th>
+                <th>{{ ticket.asCreationDate | date: "shortDate" }}</th>
+                <th>{{ ticket.uEmployeeNumber }}</th>
+                <th>{{ ticket.uName }}</th>
+                <th>{{ ticket.uEmail }}</th>
             </tr>
-            <!-- <tr>
-                <td>{{area.aId}}</td>
-                <td>{{area.aName}}</td>
-                <td>{{area.lName}}</td>
-                <td>{{area.aId}}</td>
-                <td>{{area.aName}}</td>
-                <td>{{area.lName}}</td>
-                <td>{{area.aId}}</td>
-                <td>{{area.aName}}</td>
-                <td>{{area.lName}}</td>
-                <td>{{area.aId}}</td>
-                <td>{{area.aName}}</td>
-                <td>{{area.lName}}</td>
-                <td>{{area.lName}}</td>
-                <td>
-                    <button class="btn btn-danger">Editar</button>
-                </td>
-                <td>
-                    <button class="btn btn-danger">Eliminar</button>
-                </td>
-            </tr> -->
         </tbody>
     </table>
 

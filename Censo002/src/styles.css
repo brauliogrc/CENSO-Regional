@@ -658,6 +658,7 @@ html {
   width: 85%;
   height: 104%;
   overflow-y: scroll;
+  overflow-x: scroll;
 }
 
 .contenido1 {

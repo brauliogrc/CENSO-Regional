@@ -48,5 +48,38 @@ namespace CensoAPI02.Intserfaces
 
             return 0;
         }
+
+        // Try parce to Int32
+        public int? tryParseToInt32(string value)
+        {
+            int result;
+            if (Int32.TryParse(value, out result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        // Try parce to Int64
+        public long? tryParseToInt64(string value)
+        {
+            long result;
+            if (Int64.TryParse(value, out result))
+            {
+                return result;
+            }
+            return null;
+        }
+
+        // Try parce to DateTime
+        public DateTime? tryParseToDateTime(string value)
+        {
+            DateTime result;
+            if (DateTime.TryParse(value, out result))
+            {
+                return result;
+            }
+            return null;
+        }
     }
 }

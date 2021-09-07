@@ -112,13 +112,19 @@ export class UsuariosComponent implements OnInit {
 
   // Obtencion de los roles disponibles
   getRoles(): void {
+    let retryRequest: number = 0;
     this._fieldsService.getRoles().subscribe(
       (data) => {
         this.Roles = [...data];
       },
       (error: HttpErrorResponse) => {
-        console.error(error.error.message);
-        this._showError.statusCode(error);
+        retryRequest += 1;
+        if (retryRequest < 2) {
+          this.getRoles();
+        } else {
+          console.error(error.error.message);
+          this._showError.statusCode(error);
+        }
       }
     );
   }
@@ -198,10 +204,10 @@ export class UsuariosComponent implements OnInit {
       const name: string = this.newUser.get('uName').value;
       const email: string = this.newUser.get('uEmail').value;
 
-      if ( name.length != 0 && name != this.getUserName() ) {
+      if (name.length != 0 && name != this.getUserName()) {
         dataNewUser.uName = name;
       }
-      if ( email.length != 0 && email != this.getEmail() ) {
+      if (email.length != 0 && email != this.getEmail()) {
         dataNewUser.uEmail = email;
       }
 

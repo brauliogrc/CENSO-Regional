@@ -56,7 +56,7 @@ export class ShowErrorService {
   private BadRequest = (error: string) => {
     Swal.fire({
       // title: '400. Bad Request',
-      text: `Por favor pongase en contacto con soporte. Error: ${error}`,
+      text: `Por favor pongase en contacto con soporte (400). Error: ${error}`,
       icon: 'question',
       backdrop: false,
       position: 'top',
@@ -66,7 +66,7 @@ export class ShowErrorService {
   private ConnectionReused = (error: string) => {
     Swal.fire({
       // title: '0. Error Connection Refused',
-      text: `Por favor pongase en contacto con soporte. Error: ${error}`,
+      text: `Por favor pongase en contacto con soporte (ConnectionReused). Error: ${error}`,
       icon: 'question',
       backdrop: false,
       position: 'top',
@@ -86,7 +86,7 @@ export class ShowErrorService {
   private UnconrolledError = (error: string) => {
     Swal.fire({
       title: 'Uncontrolled error',
-      text: `Por favor pongase en contacto con soporte. Error: ${error}`,
+      text: `Por favor pongase en contacto con soporte (UnconrolledError). Error: ${error}`,
       icon: 'question',
       backdrop: false,
       position: 'top',
