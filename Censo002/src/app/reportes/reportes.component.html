@@ -4,20 +4,19 @@
     </div>
 
     <hr>
-    <form class="row g-3 needs-validation" action="">
+    <form [formGroup]="filterBy" (ngSubmit)=filter() class="row g-3 needs-validation" action="">
         <div class="col-md-4 position-relative">
             <label for="validationTooltip01" class="form-label">Desde :</label>
-            <input type="date" class="form-control" required>
+            <input formControlName="from" type="date" class="form-control" >
         </div>
         <div class="col-md-4 position-relative">
             <label for="validationTooltip01" class="form-label">Hasta :</label>
-            <input type="date" class="form-control" required>
+            <input formControlName="to" type="date" class="form-control" >
         </div>
         <div class="col-md-4 position-relative">
-            <label for="validationTooltip01" class="form-label">Tipo :</label>
-            <select id="inputState" class="form-select">
-                <option selected>Todos</option>
-                <option>Inactivo</option>
+            <label for="validationTooltip01" class="form-label">Tema :</label>
+            <select formControlName=theme id="inputState" class="form-select">
+                <option *ngFor="let theme of Theme" value="{{ theme.tName }}">{{ theme.tName }}</option>
             </select>
         </div>
         <div class="contentañadirTem">
