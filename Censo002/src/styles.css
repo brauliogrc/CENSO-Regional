@@ -271,7 +271,7 @@ html {
 }
 .imgLogoIndexC {
   background-image: url(img/LogoConti.png);
-  width: 9.5%;
+  width: 10%;
 }
 .headerIndexC button[type="submit"]:hover {
   background: none;
@@ -1118,9 +1118,6 @@ body {
 
 @media (max-width: 961px) {
   /*  home    */
-  .imgLogoIndexC {
-    width: 150px;
-  }
 
   .ContendorPageAngular1 {
     width: 95%;
@@ -1263,10 +1260,6 @@ body {
 }
 @media (max-width: 671px) {
   /*  home    */
-  .imgLogoIndexC {
-    padding-left: 0;
-    width: 100px;
-  }
 
   .h1CensoB {
     font-size: 20px;
@@ -1287,10 +1280,6 @@ body {
 
 @media (max-width: 515px) {
   /*  home    */
-  .imgLogoIndexC {
-    padding-left: 0;
-    width: 100px;
-  }
 
   .h1CensoB {
     font-size: 15px;
