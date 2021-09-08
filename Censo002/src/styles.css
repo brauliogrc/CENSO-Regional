@@ -165,8 +165,6 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-
-  font-family: "Starg Sans";
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -271,7 +269,8 @@ html {
 }
 .imgLogoIndexC {
   background-image: url(img/LogoConti.png);
-  width: 10%;
+  border-radius: 10px;
+  width: 9%;
 }
 .headerIndexC button[type="submit"]:hover {
   background: none;
@@ -364,6 +363,7 @@ html {
   align-items: center;
 }
 .btnIndexOPC {
+  margin: 10px;
   border: 0;
   background: #e2ae3e;
   border-radius: 0.5;
@@ -658,7 +658,6 @@ html {
   width: 85%;
   height: 104%;
   overflow-y: scroll;
-  overflow-x: scroll;
 }
 
 .contenido1 {
@@ -666,6 +665,11 @@ html {
   width: 85%;
   margin: 40px auto;
   margin-top: 80px;
+}
+.tablaReporte {
+  width: 100%;
+  height: 500px;
+  overflow-x: scroll;
 }
 
 .buscar {
