@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="MailingWebService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MailingWebService" />
+      <xsd:import schemaLocation="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IMailingWebService_SendEmailWithSimpleFileWValidity_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithSimpleFileWValidity" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmailWithSimpleFileWValidity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithSimpleFileWValidityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmailWValidity_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWValidity" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmailWValidity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWValidityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmailWithSimpleFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithSimpleFile" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmailWithSimpleFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithSimpleFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmail" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmailWithMultipleFiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithMultipleFiles" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmailWithMultipleFiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithMultipleFilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmailWithMultipleFilesWValidity_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithMultipleFilesWValidity" />
+  </wsdl:message>
+  <wsdl:message name="IMailingWebService_SendEmailWithMultipleFilesWValidity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEmailWithMultipleFilesWValidityResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IMailingWebService">
+    <wsdl:operation name="SendEmailWithSimpleFileWValidity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWithSimpleFileWValidity" message="tns:IMailingWebService_SendEmailWithSimpleFileWValidity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWithSimpleFileWValidityResponse" message="tns:IMailingWebService_SendEmailWithSimpleFileWValidity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWValidity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWValidity" message="tns:IMailingWebService_SendEmailWValidity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWValidityResponse" message="tns:IMailingWebService_SendEmailWValidity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithSimpleFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWithSimpleFile" message="tns:IMailingWebService_SendEmailWithSimpleFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWithSimpleFileResponse" message="tns:IMailingWebService_SendEmailWithSimpleFile_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMailingWebService/SendEmail" message="tns:IMailingWebService_SendEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailResponse" message="tns:IMailingWebService_SendEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithMultipleFiles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWithMultipleFiles" message="tns:IMailingWebService_SendEmailWithMultipleFiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWithMultipleFilesResponse" message="tns:IMailingWebService_SendEmailWithMultipleFiles_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithMultipleFilesWValidity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWithMultipleFilesWValidity" message="tns:IMailingWebService_SendEmailWithMultipleFilesWValidity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMailingWebService/SendEmailWithMultipleFilesWValidityResponse" message="tns:IMailingWebService_SendEmailWithMultipleFilesWValidity_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IMailingWebService" type="tns:IMailingWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SendEmailWithSimpleFileWValidity">
+      <soap:operation soapAction="http://tempuri.org/IMailingWebService/SendEmailWithSimpleFileWValidity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWValidity">
+      <soap:operation soapAction="http://tempuri.org/IMailingWebService/SendEmailWValidity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithSimpleFile">
+      <soap:operation soapAction="http://tempuri.org/IMailingWebService/SendEmailWithSimpleFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmail">
+      <soap:operation soapAction="http://tempuri.org/IMailingWebService/SendEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithMultipleFiles">
+      <soap:operation soapAction="http://tempuri.org/IMailingWebService/SendEmailWithMultipleFiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEmailWithMultipleFilesWValidity">
+      <soap:operation soapAction="http://tempuri.org/IMailingWebService/SendEmailWithMultipleFilesWValidity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MailingWebService">
+    <wsdl:port name="BasicHttpBinding_IMailingWebService" binding="tns:BasicHttpBinding_IMailingWebService">
+      <soap:address location="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

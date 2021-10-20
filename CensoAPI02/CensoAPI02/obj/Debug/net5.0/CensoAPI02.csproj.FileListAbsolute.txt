@@ -130,18 +130,9 @@ C:\Users\uib44927\Desktop\CensoApp\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debu
 C:\Users\uib44927\Desktop\CensoApp\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\ref\CensoAPI02.dll
 C:\Users\uib44927\Desktop\CensoApp\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.pdb
 C:\Users\uib44927\Desktop\CensoApp\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.genruntimeconfig.cache
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.AssemblyReference.cache
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.AssemblyInfoInputs.cache
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.AssemblyInfo.cs
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.CoreCompileInputs.cache
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.dll
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\ref\CensoAPI02.dll
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.pdb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\appsettings.json
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Connected Services\MailingWebservice\ConnectedService.json
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Connected Services\Microsoft WCF Web Service Reference Provider\ConnectedService.json
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Connected Services\UserAuth\ConnectedService.json
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\CensoAPI02.exe
@@ -151,7 +142,15 @@ C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Deb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\CensoAPI02.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\ref\CensoAPI02.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\CensoAPI02.pdb
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Google.Protobuf.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Grpc.AspNetCore.Server.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Grpc.AspNetCore.Server.ClientFactory.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Grpc.Core.Api.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Grpc.Net.Client.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Grpc.Net.ClientFactory.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Grpc.Net.Common.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Humanizer.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Microsoft.Data.SqlClient.dll
@@ -176,8 +175,15 @@ C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Deb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.Configuration.ConfigurationManager.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.Private.ServiceModel.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.Runtime.Caching.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.ServiceModel.Duplex.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.ServiceModel.Http.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.ServiceModel.NetTcp.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.ServiceModel.Primitives.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.ServiceModel.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\System.ServiceModel.Security.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
@@ -190,10 +196,22 @@ C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Deb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\WebMailServiceDLL.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\WebMailServiceDLL.pdb
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\WebMailServiceDLL.dll.config
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.AssemblyReference.cache
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.AssemblyInfoInputs.cache
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.AssemblyInfo.cs
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.CoreCompileInputs.cache
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\staticwebassets\CensoAPI02.StaticWebAssets.Manifest.cache
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\staticwebassets\CensoAPI02.StaticWebAssets.xml
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\scopedcss\bundle\CensoAPI02.styles.css
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.RazorTargetAssemblyInfo.cache
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.CopyComplete
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\ref\CensoAPI02.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.pdb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.genruntimeconfig.cache
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

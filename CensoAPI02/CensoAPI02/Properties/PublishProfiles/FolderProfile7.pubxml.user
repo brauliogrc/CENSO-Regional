@@ -5,6 +5,6 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\Prod\CENSO_API</_PublishTargetUrl>
-    <History>True|2021-09-02T15:33:38.0209507Z;True|2021-08-30T10:20:39.5660030-05:00;True|2021-08-30T10:09:18.7636163-05:00;True|2021-08-23T13:11:05.9991524-05:00;</History>
+    <History>True|2021-10-06T13:53:56.2763827Z;True|2021-09-13T09:31:34.0770201-05:00;True|2021-09-10T11:34:20.6913999-05:00;True|2021-09-09T12:25:19.9058358-05:00;True|2021-09-09T12:15:47.1847507-05:00;True|2021-09-09T08:55:13.8261132-05:00;True|2021-09-09T08:45:55.6460026-05:00;True|2021-09-08T11:02:36.1781525-05:00;True|2021-09-02T10:33:38.0209507-05:00;True|2021-08-30T10:20:39.5660030-05:00;True|2021-08-30T10:09:18.7636163-05:00;True|2021-08-23T13:11:05.9991524-05:00;</History>
   </PropertyGroup>
 </Project>

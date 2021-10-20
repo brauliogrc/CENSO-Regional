@@ -165,59 +165,39 @@ namespace CensoAPI02.Controllers.TablesControllers
         }
 
         // Listado de tikets
-        [HttpGet][Route("ticketList/{locationId}")]
+        [HttpGet][Route("ticketList/{locationId}/{employeeNumber}")]
         [Authorize(Policy = "StaffRH")]
-        public async Task<ActionResult> getTiketList(int locationId)
+        public async Task<ActionResult> getTiketList(int locationId, long employeeNumber)
         {
             try
             {
-                var tickets = from request in _context.Requests
-                              join theme in _context.Theme on request.ThemeId equals theme.tId
-                              join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
-                              join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
-                              join question in _context.Questions on request.QuestionId equals question.qId
-                              join location in _context.Locations on request.LocationId equals location.lId
-                              join area in _context.Areas on request.AreaId equals area.aId
-                              join status in _context.RequestStatus on request.StatusId equals status.rsId
-                              where location.lId == locationId //&& request.StatusId != 4
-                              select new
-                              {
-                                  // Datos del ticket
-                                  request.rId,
-                                  request.rUserName,
-                                  request.rIssue,
-                                  // Datos del tema
-                                  theme.tId,
-                                  theme.tName,
-                                  // Datos de la pregunta 
-                                  question.qId,
-                                  question.qName,
-                                  // Datos del area
-                                  area.aId,
-                                  area.aName,
-                                  // Datos del status
-                                  status.rsId,
-                                  status.rsStatus
-                              };
+                // Validación de rol de usuario
+                int rol;
+                var isAdmin = await _context.HRU.FindAsync(employeeNumber);
+                rol = isAdmin.RoleId;
 
-                var anonTickets = from anonReq in _context.AnonRequests
-                                  join theme in _context.Theme on anonReq.ThemeId equals theme.tId
+                // Si es admin entonces
+                if ( rol == 1)
+                {
+                    var tickets = from request in _context.Requests
+                                  join theme in _context.Theme on request.ThemeId equals theme.tId
                                   join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
                                   join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
-                                  join question in _context.Questions on anonReq.QuestionId equals question.qId
-                                  join location in _context.Locations on anonReq.LocationId equals location.lId
-                                  join area in _context.Areas on anonReq.AreaId equals area.aId
-                                  join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
-                                  where location.lId == locationId //&& anonReq.StatusId != 4
+                                  join question in _context.Questions on request.QuestionId equals question.qId
+                                  join location in _context.Locations on request.LocationId equals location.lId
+                                  join area in _context.Areas on request.AreaId equals area.aId
+                                  join status in _context.RequestStatus on request.StatusId equals status.rsId
+                                  where location.lId == locationId
                                   select new
                                   {
                                       // Datos del ticket
-                                      anonReq.arId,
-                                      anonReq.arIssue,
+                                      request.rId,
+                                      request.rUserName,
+                                      request.rIssue,
                                       // Datos del tema
                                       theme.tId,
                                       theme.tName,
-                                      // Datos de la pregunta
+                                      // Datos de la pregunta 
                                       question.qId,
                                       question.qName,
                                       // Datos del area
@@ -227,13 +207,114 @@ namespace CensoAPI02.Controllers.TablesControllers
                                       status.rsId,
                                       status.rsStatus
                                   };
-                
-                if ((tickets == null || tickets.Count() == 0) && (anonTickets == null || anonTickets.Count() == 0))
+
+                    var anonTickets = from anonReq in _context.AnonRequests
+                                      join theme in _context.Theme on anonReq.ThemeId equals theme.tId
+                                      join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
+                                      join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
+                                      join question in _context.Questions on anonReq.QuestionId equals question.qId
+                                      join location in _context.Locations on anonReq.LocationId equals location.lId
+                                      join area in _context.Areas on anonReq.AreaId equals area.aId
+                                      join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
+                                      where location.lId == locationId
+                                      select new
+                                      {
+                                          // Datos del ticket
+                                          anonReq.arId,
+                                          anonReq.arIssue,
+                                          // Datos del tema
+                                          theme.tId,
+                                          theme.tName,
+                                          // Datos de la pregunta
+                                          question.qId,
+                                          question.qName,
+                                          // Datos del area
+                                          area.aId,
+                                          area.aName,
+                                          // Datos del status
+                                          status.rsId,
+                                          status.rsStatus
+                                      };
+
+                    if ((tickets == null || tickets.Count() == 0) && (anonTickets == null || anonTickets.Count() == 0))
+                    {
+                        return NotFound(new { message = $"Ningun ticket se encuentra asociado con tu localidad" });
+                    }
+
+                    return Ok(new { tickets, anonTickets });
+                }
+                // Si es caulquier otro tipo de rol entonces
+                else
                 {
-                    return NotFound(new { message = $"Ningun ticket se encuentra asociado con tu localidad" });
+                    var tickets = from request in _context.Requests
+                                  join theme in _context.Theme on request.ThemeId equals theme.tId
+                                  join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
+                                  join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
+                                  join question in _context.Questions on request.QuestionId equals question.qId
+                                  join location in _context.Locations on request.LocationId equals location.lId
+                                  join area in _context.Areas on request.AreaId equals area.aId
+                                  join status in _context.RequestStatus on request.StatusId equals status.rsId
+                                  where location.lId == locationId &&
+                                        (from ut in _context.HRUsersThemes where ut.UserId == employeeNumber select ut.ThemeId).Contains(theme.tId) &&
+                                        user.uEmployeeNumber == employeeNumber
+                                  select new
+                                  {
+                                      // Datos del ticket
+                                      request.rId,
+                                      request.rUserName,
+                                      request.rIssue,
+                                      // Datos del tema
+                                      theme.tId,
+                                      theme.tName,
+                                      // Datos de la pregunta 
+                                      question.qId,
+                                      question.qName,
+                                      // Datos del area
+                                      area.aId,
+                                      area.aName,
+                                      // Datos del status
+                                      status.rsId,
+                                      status.rsStatus
+                                  };
+
+                    var anonTickets = from anonReq in _context.AnonRequests
+                                      join theme in _context.Theme on anonReq.ThemeId equals theme.tId
+                                      join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
+                                      join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
+                                      join question in _context.Questions on anonReq.QuestionId equals question.qId
+                                      join location in _context.Locations on anonReq.LocationId equals location.lId
+                                      join area in _context.Areas on anonReq.AreaId equals area.aId
+                                      join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
+                                      where location.lId == locationId &&
+                                            (from ut in _context.HRUsersThemes where ut.UserId == employeeNumber select ut.ThemeId).Contains(theme.tId) &&
+                                            user.uEmployeeNumber == employeeNumber
+                                      select new
+                                      {
+                                          // Datos del ticket
+                                          anonReq.arId,
+                                          anonReq.arIssue,
+                                          // Datos del tema
+                                          theme.tId,
+                                          theme.tName,
+                                          // Datos de la pregunta
+                                          question.qId,
+                                          question.qName,
+                                          // Datos del area
+                                          area.aId,
+                                          area.aName,
+                                          // Datos del status
+                                          status.rsId,
+                                          status.rsStatus
+                                      };
+                
+                    if ((tickets == null || tickets.Count() == 0) && (anonTickets == null || anonTickets.Count() == 0))
+                    {
+                        return NotFound(new { message = $"Ningun ticket se encuentra asociado con tu localidad" });
+                    }
+
+                    return Ok(new { tickets, anonTickets });
                 }
 
-                return Ok(new { tickets, anonTickets });
             }
             catch (Exception ex)
             {

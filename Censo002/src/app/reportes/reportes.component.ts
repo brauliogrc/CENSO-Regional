@@ -5,12 +5,10 @@ import { ConverToObjectArray } from 'src/assets/ts/exportDataFormat';
 import { ExportData } from '../../assets/ts/interfaces/exportData';
 import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  Theme,
-  ticketList,
-} from '../../../productivo/assets/ts/interfaces/newInterfaces';
+
 import { FieldsService } from '../services/newServices/Fields/fields.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { Theme } from 'src/assets/ts/interfaces/newInterfaces';
 
 @Component({
   selector: 'app-reportes',
@@ -124,7 +122,7 @@ export class ReportesComponent implements OnInit {
     }
     if (this.filterBy.value.to != '') {
       this.ticketList = this.ticketList.filter(
-        (newList) => newList.creationDate <= new Date(this.filterBy.value.to)
+        (newList) => newList.creationDate < new Date(this.filterBy.value.to)
       );
     }
     if (this.filterBy.value.theme != '') {

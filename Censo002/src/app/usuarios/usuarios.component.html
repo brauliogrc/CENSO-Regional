@@ -13,37 +13,19 @@
       <h1>Añadir Usuario</h1>
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Numero de empleado</label>
-        <input
-          #employeeNumber
-          (keypress)="eventHandler($event, employeeNumber.value)"
-          formControlName="EmployeeNumber"
-          type="number"
-          class="form-control"
-          id="inputEmail4"
-        />
+        <input #employeeNumber (keypress)="eventHandler($event, employeeNumber.value)" formControlName="EmployeeNumber"
+          type="number" class="form-control" id="inputEmail4" />
       </div>
       <!-- Name -->
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Nombre</label>
-        <input
-          formControlName="uName"
-          type="text"
-          class="form-control"
-          id="inputEmail4"
-          id="email"
-          value="{{ getUserName() }}"
-        />
+        <input formControlName="uName" type="text" class="form-control" id="inputEmail4" id="email"
+          value="{{ getUserName() }}" />
       </div>
       <!-- Email -->
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Email</label>
-        <input
-          formControlName="uEmail"
-          type="email"
-          class="form-control"
-          id="inputEmail4"
-          value="{{ getEmail() }}"
-        />
+        <input formControlName="uEmail" type="email" class="form-control" id="inputEmail4" value="{{ getEmail() }}" />
       </div>
       <!-- Rol -->
       <div class="col-md-6">
@@ -65,20 +47,14 @@
       <!-- Location -->
       <div class="col-md-4">
         <label for="inputState" class="form-label">Localidad</label>
-        <input
-          disabled
-          type="text"
-          class="form-control"
-          id="inputEmail4"
-          value="{{ getLocation() }}"
-        />
+        <input disabled type="text" class="form-control" id="inputEmail4" value="{{ getLocation() }}" />
         <!-- <select formControlName="LocationId" id="inputState" class="form-select">
       <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
     </select> -->
       </div>
       <!-- Bonton registro -->
       <div class="col-12">
-        <button *ngIf="flag" class="btnIndexC" type="submit">Añadir</button>
+        <button class="btnIndexC" type="submit">Añadir</button>
       </div>
       <!-- Fin del Form -->
     </form>
@@ -86,13 +62,7 @@
     <hr />
   </div>
   <form class="form-search">
-    <input
-      #number
-      class="Search1"
-      type="number"
-      placeholder="Buscar"
-      aria-label="Search"
-    />
+    <input #number class="Search1" type="number" placeholder="Buscar" aria-label="Search" />
     <button (click)="search(number.value)" class="btnIndexC" type="submit">
       Buscar
     </button>
@@ -120,23 +90,13 @@
           <td>{{ user.uStatus }}</td>
           <td>{{ user.lName }}</td>
           <td>
-            <button
-              (click)="mostrar(user.uEmployeeNumber)"
-              class="btn btn-Dark"
-            >
+            <button (click)="mostrar(user.uEmployeeNumber)" class="btn btn-Dark">
               <img src="assets/img/BeditB.png" alt="" width="22px" />
             </button>
-            <button
-              (click)="deleteUser(user.uEmployeeNumber)"
-              class="btn btn-Dark"
-            >
+            <button (click)="deleteUser(user.uEmployeeNumber)" class="btn btn-Dark">
               <img src="assets/img/BbasuraB.png" alt="" width="22px" />
             </button>
-            <button
-              class="btn btn-success"
-              (click)="mostrarTema(user.uEmployeeNumber)"
-              type="submit"
-            >
+            <button class="btn btn-success" (click)="mostrarTema(user.uEmployeeNumber)" type="submit">
               Añadir temas
             </button>
           </td>
@@ -151,23 +111,13 @@
           <td>{{ user[0].uStatus }}</td>
           <td>{{ user[0].lName }}</td>
           <td>
-            <button
-              (click)="mostrar(user[0].uEmployeeNumber)"
-              class="btn btn-Dark"
-            >
+            <button (click)="mostrar(user[0].uEmployeeNumber)" class="btn btn-Dark">
               <img src="assets/img/BeditB.png" alt="" width="22px" />
             </button>
-            <button
-              (click)="deleteUser(user[0].uEmployeeNumber)"
-              class="btn btn-Dark"
-            >
+            <button (click)="deleteUser(user[0].uEmployeeNumber)" class="btn btn-Dark">
               <img src="assets/img/BbasuraB.png" alt="" width="22px" />
             </button>
-            <button
-              class="btn btn-success"
-              (click)="mostrarTema(user[0].uEmployeeNumber)"
-              type="submit"
-            >
+            <button class="btn btn-success" (click)="mostrarTema(user[0].uEmployeeNumber)" type="submit">
               Añadir temas
             </button>
           </td>
@@ -187,41 +137,19 @@
       </div>
 
       <div class="ModalContenidoEdit" *ngIf="editFlag">
-        <form
-          [formGroup]="updateUser"
-          (ngSubmit)="saveChanges()"
-          class="row g-3"
-        >
+        <form [formGroup]="updateUser" (ngSubmit)="saveChanges()" class="row g-3">
           <div class="col-md-6">
             <label for="text" class="form-label">Nombre</label>
-            <input
-              formControlName="newName"
-              type="text"
-              class="form-control"
-              placeholder="{{ userData.uName }}"
-            />
+            <input formControlName="newName" type="text" class="form-control" placeholder="{{ userData.uName }}" />
           </div>
           <div class="col-md-6">
             <label for="text" class="form-label">Email</label>
-            <input
-              formControlName="newEmail"
-              type="text"
-              class="form-control"
-              placeholder="{{ userData.uEmail }}"
-            />
+            <input formControlName="newEmail" type="text" class="form-control" placeholder="{{ userData.uEmail }}" />
           </div>
           <div class="col-md-6">
             <label for="inputState" class="form-label">Rol</label>
-            <select
-              formControlName="newRol"
-              id="inputState"
-              class="form-select"
-            >
-              <option
-                class="current-data"
-                value="{{ userData.rolId }}"
-                selected
-              >
+            <select formControlName="newRol" id="inputState" class="form-select">
+              <option class="current-data" value="{{ userData.rolId }}" selected>
                 {{ userData.rolName }}
               </option>
               <option *ngFor="let rol of Roles" value="{{ rol.rolId }}">
@@ -231,11 +159,7 @@
           </div>
           <div class="col-md-4">
             <label for="inputState" class="form-label">Estatus</label>
-            <select
-              formControlName="newStatus"
-              id="inputState"
-              class="form-select"
-            >
+            <select formControlName="newStatus" id="inputState" class="form-select">
               <option class="current-data" value="{{ userData.uStatus }}">
                 Estatus actual
               </option>
@@ -245,18 +169,11 @@
           </div>
           <div class="col-md-4">
             <label for="inputState" class="form-label">Ubicación</label>
-            <select
-              formControlName="newLocation"
-              id="inputState"
-              class="form-select"
-            >
+            <select formControlName="newLocation" id="inputState" class="form-select">
               <option class="current-data" value="{{ userData.lId }}" selected>
                 {{ userData.lName }}
               </option>
-              <option
-                *ngFor="let location of Locations"
-                value="{{ location.lId }}"
-              >
+              <option *ngFor="let location of Locations" value="{{ location.lId }}">
                 {{ location.lName }}
               </option>
             </select>
@@ -280,16 +197,8 @@
                 <tr *ngFor="let them of relatedTopics">
                   <td>{{ them.tName }}</td>
                   <td>
-                    <button
-                      type="button"
-                      (click)="getIdx(them.tId)"
-                      class="btn btn-Dark"
-                    >
-                      <img
-                        src="assets/img/BbasuraB.png"
-                        alt=""
-                        width="22px"
-                      />
+                    <button type="button" (click)="getIdx(them.tId)" class="btn btn-Dark">
+                      <img src="assets/img/BbasuraB.png" alt="" width="22px" />
                     </button>
                   </td>
                 </tr>
@@ -326,21 +235,14 @@
             <div class="moduloAgregar">
               <div class="moduloAgregar1">
                 <h2>Agregar un topico</h2>
-                <button
-                  (click)="addRelatedTopic(themeId.value)"
-                  class="btnPregunta"
-                  type="button"
-                >
+                <button (click)="addRelatedTopic(themeId.value)" class="btnPregunta" type="button">
                   +
                 </button>
               </div>
 
               <label for="inputState" class="form-label">Topico</label>
               <select #themeId id="inputState" class="form-select">
-                <option
-                  *ngFor="let addTheme of themeList"
-                  value="{{ addTheme.tId }}"
-                >
+                <option *ngFor="let addTheme of themeList" value="{{ addTheme.tId }}">
                   {{ addTheme.tName }}
                 </option>
               </select>
@@ -360,15 +262,8 @@
                     <tr *ngFor="let theme of relatedTopics">
                       <td>{{ theme.tName }}</td>
                       <td>
-                        <button
-                          (click)="getIdx(theme.tId)"
-                          class="btn btn-Dark"
-                        >
-                          <img
-                            src="assets/img/BbasuraB.png"
-                            alt=""
-                            width="22px"
-                          />
+                        <button (click)="getIdx(theme.tId)" class="btn btn-Dark">
+                          <img src="assets/img/BbasuraB.png" alt="" width="22px" />
                         </button>
                       </td>
                     </tr>

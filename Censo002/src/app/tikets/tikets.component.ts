@@ -60,7 +60,7 @@ export class TiketsComponent implements OnInit {
   // Obtencion de listado de tikets (tanto anonimos como con datos)
   getTiketsList(): void {
     this._listService
-      .getTicketList(Number(sessionStorage.getItem('location')))
+      .getTicketList( Number(sessionStorage.getItem('location')), Number(sessionStorage.getItem('employeeNumber')) )
       .subscribe(
         (data) => {
           this.Tikets = [...data.tickets];

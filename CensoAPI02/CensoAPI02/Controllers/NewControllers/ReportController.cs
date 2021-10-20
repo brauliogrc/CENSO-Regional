@@ -122,10 +122,11 @@ namespace CensoAPI02.Controllers.NewControllers
                 return Ok(new { tickets, anonTickets });*/
                 
                 List<ReportTicket> tickets = new List<ReportTicket>();
-                SqlConnection connectionString = new SqlConnection(_config.GetConnectionString("CensoLocal"));
+                SqlConnection connectionString = new SqlConnection(_config.GetConnectionString("Censo"));
                 using ( SqlCommand command = new SqlCommand("sp_Report_Tickets", connectionString))
                 {
                     command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@locationId", locationId);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataTable table = new DataTable();
@@ -178,6 +179,7 @@ namespace CensoAPI02.Controllers.NewControllers
                 using( SqlCommand command = new SqlCommand("sp_Report_AnonTicket", connectionString))
                 {
                     command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@locationId", locationId);
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataTable table = new DataTable();

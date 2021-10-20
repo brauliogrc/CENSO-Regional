@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e9621f4c-34b2-4f4f-b18a-defa4e660d9a" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="MailingWebService.xsd" MetadataType="Schema" ID="3c212fa9-9f69-4307-9da5-f287b1f4ab7f" SourceId="1" SourceUrl="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd0" />
+    <MetadataFile FileName="MailingWebService1.xsd" MetadataType="Schema" ID="b2ccdb76-e55d-41a4-b20d-540c4187e1b9" SourceId="1" SourceUrl="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd2" />
+    <MetadataFile FileName="MailingWebService2.xsd" MetadataType="Schema" ID="1c085797-01ed-49c6-9969-74986019ed25" SourceId="1" SourceUrl="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd1" />
+    <MetadataFile FileName="MailingWebService.disco" MetadataType="Disco" ID="0cf6c7ac-fd62-4acf-bc32-17fe07afd2b8" SourceId="1" SourceUrl="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?disco" />
+    <MetadataFile FileName="MailingWebService3.xsd" MetadataType="Schema" ID="2974e4e1-44cd-4b49-99f8-0db639405557" SourceId="1" SourceUrl="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd3" />
+    <MetadataFile FileName="MailingWebService.wsdl" MetadataType="Wsdl" ID="d9f90723-e842-46ca-9146-363b0f652b35" SourceId="1" SourceUrl="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -10,7 +10,7 @@ import { areaList } from '../../../../assets/ts/interfaces/newInterfaces';
 export class ListService {
   private MyApiUrl: string = 'Table/';
   private headers = new HttpHeaders({
-    'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
+    Authorization: `Bearer ${sessionStorage.getItem('token')}`,
   });
 
   constructor(private _http: HttpClient) {}
@@ -48,9 +48,14 @@ export class ListService {
   }
 
   // Obtencion del listado de tickets en una localidad
-  getTicketList(locationId: number): Observable<any> {
+  getTicketList(locationId: number, employeeNumber: number): Observable<any> {
     return this._http.get(
-      `${environment.API_URL}` + this.MyApiUrl + 'ticketList/' + locationId,
+      `${environment.API_URL}` +
+        this.MyApiUrl +
+        'ticketList/' +
+        locationId +
+        '/' +
+        employeeNumber,
       { headers: this.headers }
     );
   }

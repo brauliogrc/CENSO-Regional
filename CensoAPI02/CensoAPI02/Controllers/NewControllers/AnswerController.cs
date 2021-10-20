@@ -96,10 +96,16 @@ namespace CensoAPI02.Controllers.NewControllers
                     return Ok(new { message = $"Se ha actualizado la respuesta del ticket." });
                 }
 
-
+                int countAnswer = (from answer in _context.Answer select answer.asId).Count();
+                string year = DateTime.Now.Year.ToString();
+                string month = DateTime.Now.Month.ToString();
+                string day = DateTime.Now.Day.ToString();
+                int date = Int32.Parse(year + month + day);
+                int asId = date + countAnswer;
                 // Registro de la nueva respuesta
                 var addAnswer = new AnswerStatus()
                 {
+                    asId = asId,
                     UserId = newAnswer.asUserId,
                     asAnswer = newAnswer.asAnswer,
                     asCreationDate = DateTime.Now,

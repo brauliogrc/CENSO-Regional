@@ -84,7 +84,7 @@ export class RespuestaFolioComponent implements OnInit {
     this.flag = false;
     this.answerFlag = false;
     this.ticketId = this._ticketService.getTicket;
-    console.log(this.ticketId);
+    console.log('ticket id: ', this.ticketId);
 
     // console.log(this.ticketId);
     this.getTicketStatus();

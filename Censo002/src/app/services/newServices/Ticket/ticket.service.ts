@@ -21,7 +21,7 @@ export class TicketService {
     return this.ticket;
   }
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient) { }
 
   // Obtencion de los datos para la respuesta del ticket
   getTicketData(ticketId: number): Observable<any> {
@@ -43,11 +43,11 @@ export class TicketService {
   getTicketStatus(employeeNumber: number, ticketId: number): Observable<any> {
     return this._http.get(
       `${environment.API_URL}` +
-        this.MyApiUrl +
-        'ticketStatus/' +
-        employeeNumber +
-        '/' +
-        ticketId,
+      this.MyApiUrl +
+      'ticketStatus/' +
+      employeeNumber +
+      '/' +
+      ticketId,
       { headers: this.headers }
     );
   }

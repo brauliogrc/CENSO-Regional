@@ -9,6 +9,12 @@ using System.Net.Mail;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.ServiceModel;
+
+//using WebMailServiceDLL.WSMailing;
+//using WebMailServiceDLL;
+//using WSMailingSend;
+using MailingWebservice;
 
 
 
@@ -16,7 +22,7 @@ namespace CensoAPI02.Intserfaces
 {
     public class EmailHandler
     {
-        private static string emailOrigen = "CENSO_Regional@continental-corporation.com";
+        private static string emailOrigen = "au_gl_sm_gl_local_apps@continental.com";
         private static string displayName = "CENSO Test";
 
         // Obtencion del nombre del tema que se encuentra relacionado con el ticket
@@ -66,17 +72,26 @@ namespace CensoAPI02.Intserfaces
                 foreach (string email in mailData.emails)
                 {
                     MailMessage mailMessage = new MailMessage(emailOrigen, email);
-                    mailMessage.Subject = "CENSO RH";
+                    mailMessage.Subject = "CENSO Regional";
                     mailMessage.Body = $"<p>Sea ha generado una nueva solicitud relacionada al tema {mailData.themeName}, con numero de folio {mailData.ticketId} </p>";
                     mailMessage.IsBodyHtml = true;
 
-                    SmtpClient smtp = new SmtpClient("smtphub07.conti.de");
+                    //MS.SendEmailAsync("CENSO", email, "", mailMessage.Subject, mailMessage.Body, TypeOfMail.HTML);
+
+                    // Implementación del mailing service
+                    MailingWebServiceClient client = new MailingWebServiceClient();
+                    SendEmailRequest request = new SendEmailRequest("CENSO", email, "", mailMessage.Subject, mailMessage.Body, TypeOfMail.HTML);
+                    client.SendEmail(request);
+
+                    /*
+                    SmtpClient smtp = new SmtpClient("SMTPHubEU.contiwan.com");
                     //smtp.EnableSsl = true;
                     smtp.UseDefaultCredentials = false;
-                    smtp.Port = 25;
+                    smtp.Port = 2525;
                     //smtp.Credentials = new NetworkCredential(emailOrigen, pass);
                     smtp.Send(mailMessage);
                     smtp.Dispose();
+                    */
                 }
 
             }

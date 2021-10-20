@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <OpenApiReference Include="OpenAPIs\MailingWebService.svc" CodeGenerator="NSwagCSharp">
+      <SourceUri>http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc</SourceUri>
+    </OpenApiReference>
     <OpenApiReference Include="OpenAPIs\UserAuthenticate.svc" CodeGenerator="NSwagCSharp" Namespace="UserAuth" ClassName="UserAuth">
       <SourceUri>http://webapps3.cw01.contiwan.com:8080/UserAuthenticateSAPLDAP/UserAuthenticate.svc</SourceUri>
     </OpenApiReference>
@@ -19,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.32.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.7" />
@@ -38,10 +42,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.ServiceModel" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.8.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.8.*" />
   </ItemGroup>
 
   <ItemGroup>
@@ -51,6 +55,10 @@
   <ItemGroup>
     <Folder Include="Models\prueba\" />
     <Folder Include="Resources\Answer\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WebMailServiceDLL\WebMailServiceDLL.csproj" />
   </ItemGroup>
 
 </Project>

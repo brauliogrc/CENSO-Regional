@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/MailingWebService" />
+  <xs:import schemaLocation="http://webapps1.cw01.contiwan.com:8080/MailingWeb/MailingWebService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="SendEmailWithSimpleFileWValidity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Application" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CC" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="BodyMessage" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/MailingWebService" minOccurs="0" name="Type" type="q1:TypeOfMail" />
+        <xs:element minOccurs="0" name="DaysValidity" type="xs:int" />
+        <xs:element minOccurs="0" name="strFilePath" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWithSimpleFileWValidityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendEmailWithSimpleFileWValidityResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWValidity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Application" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CC" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="BodyMessage" nillable="true" type="xs:string" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/MailingWebService" minOccurs="0" name="Type" type="q2:TypeOfMail" />
+        <xs:element minOccurs="0" name="DaysValidity" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWValidityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendEmailWValidityResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWithSimpleFile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Application" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CC" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="BodyMessage" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/MailingWebService" minOccurs="0" name="Type" type="q3:TypeOfMail" />
+        <xs:element minOccurs="0" name="strFilePath" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWithSimpleFileResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendEmailWithSimpleFileResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Application" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CC" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="BodyMessage" nillable="true" type="xs:string" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/MailingWebService" minOccurs="0" name="Type" type="q4:TypeOfMail" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendEmailResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWithMultipleFiles">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Application" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CC" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="BodyMessage" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/MailingWebService" minOccurs="0" name="Type" type="q5:TypeOfMail" />
+        <xs:element minOccurs="0" name="DaysValidity" type="xs:int" />
+        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="strFilePaths" nillable="true" type="q6:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWithMultipleFilesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendEmailWithMultipleFilesResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWithMultipleFilesWValidity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Application" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="To" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CC" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="BodyMessage" nillable="true" type="xs:string" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/MailingWebService" minOccurs="0" name="Type" type="q7:TypeOfMail" />
+        <xs:element minOccurs="0" name="DaysValidity" type="xs:int" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="strFilePaths" nillable="true" type="q8:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendEmailWithMultipleFilesWValidityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SendEmailWithMultipleFilesWValidityResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

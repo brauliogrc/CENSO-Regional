@@ -65,3 +65,10 @@ C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Rel
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\ref\CensoAPI02.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\CensoAPI02.pdb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\CensoAPI02.genruntimeconfig.cache
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Release\net5.0\Google.Protobuf.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Release\net5.0\Grpc.AspNetCore.Server.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Release\net5.0\Grpc.AspNetCore.Server.ClientFactory.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Release\net5.0\Grpc.Core.Api.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Release\net5.0\Grpc.Net.Client.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Release\net5.0\Grpc.Net.ClientFactory.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\bin\Release\net5.0\Grpc.Net.Common.dll

@@ -32,9 +32,17 @@ namespace CensoAPI02.Controllers.NewControllers
         {
             try
             {
+                int countRequest = (from reuqest in _context.Requests select reuqest.rId).Count();
+                int countAnonRequest = (from anonRequest in _context.AnonRequests select anonRequest.arId).Count();
+                string year = DateTime.Now.Year.ToString();
+                string month = DateTime.Now.Month.ToString();
+                string day = DateTime.Now.Day.ToString();
+                int date = Int32.Parse(year + month + day);
+                int arId = date + countRequest + countAnonRequest;
                 // Asignacion de valores a los campos de la tabla AnonRequest
                 var addAnonRequest = new AnonRequest()
                 {
+                    arId = arId,
                     arEmployeeType = newAnonRequest.arEmployeeType,
                     arIssue = newAnonRequest.arIssue,
                     arCreationDate = DateTime.Now,

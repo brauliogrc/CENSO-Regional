@@ -118,9 +118,10 @@ export class UsuariosComponent implements OnInit {
         this.Roles = [...data];
       },
       (error: HttpErrorResponse) => {
-        retryRequest += 1;
+        retryRequest = retryRequest + 1;
         if (retryRequest < 2) {
-          this.getRoles();
+          // this.getRoles();
+          window.location.reload();
         } else {
           console.error(error.error.message);
           this._showError.statusCode(error);
@@ -186,7 +187,7 @@ export class UsuariosComponent implements OnInit {
   };
 
   addNewUser(): void {
-    if (this.flag) {
+    // if (this.flag) {
       /**
        * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
        */
@@ -226,9 +227,13 @@ export class UsuariosComponent implements OnInit {
           this._showError.statusCode(error);
         }
       );
-    } else {
-      console.log('Datos invalidos');
-    }
+    // } else {
+      // console.log('Datos invalidos');
+    // }
+  }
+
+  formVlidate() {
+    
   }
 
   // Borrado logico del usuario

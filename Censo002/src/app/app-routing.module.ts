@@ -43,7 +43,7 @@ const routes: Routes = [
       { path: 'tikets', component: TiketsComponent },
       { path: 'reportes', component: ReportesComponent }, 
       { path: '**', pathMatch: 'full', redirectTo: 'bienvenido' },
-    ],
+    ],  
   }, //
   { path: 'panelusuario', component: PanelusuarioComponent }, // Funcionalidad completa
   { path: 'panelusuariobusq', component: PanelusuariobusqComponent }, //
