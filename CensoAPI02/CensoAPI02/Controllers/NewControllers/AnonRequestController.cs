@@ -58,8 +58,8 @@ namespace CensoAPI02.Controllers.NewControllers
                 };
 
                 // Registro de la nueva peticion anonima en la tabla AnonRequest
-                _context.AnonRequests.Add(addAnonRequest);
-                await _context.SaveChangesAsync();
+                //_context.AnonRequests.Add(addAnonRequest);
+                //await _context.SaveChangesAsync();
 
                 // Guardado del archivio adjunto del ticket
                 string path = imageManager.saveTicketImage(newAnonRequest.arAttachement, addAnonRequest.arId);
@@ -67,8 +67,8 @@ namespace CensoAPI02.Controllers.NewControllers
                 if (path != null)
                 {
                     addAnonRequest.arAttachement = path;
-                    _context.AnonRequests.Update(addAnonRequest);
-                    await _context.SaveChangesAsync();
+                    //_context.AnonRequests.Update(addAnonRequest);
+                    //await _context.SaveChangesAsync();
                 }
 
                 /*// Guardado del archivo adjunto
@@ -110,7 +110,7 @@ namespace CensoAPI02.Controllers.NewControllers
                 // Envio de correo electronico
                 MailData mailData = new MailData(addAnonRequest.arId, addAnonRequest.ThemeId, addAnonRequest.arIssue);
                 mailData.themeName = handler.getThemeName(_context, mailData.themeId);
-                mailData.emails = handler.getUserEmails(_context, mailData.themeId);
+                mailData.emails = handler.getUserEmails(_context, mailData.themeId, newAnonRequest.LocationId);
 
                 if (mailData.themeName == null || mailData.emails == null)
                 {

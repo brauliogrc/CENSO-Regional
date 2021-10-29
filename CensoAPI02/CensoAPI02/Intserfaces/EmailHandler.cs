@@ -41,12 +41,12 @@ namespace CensoAPI02.Intserfaces
         }
 
         // Obtencion del correo de los usuarios relacionados al tema
-        public List<string> getUserEmails(CDBContext _context, int themeId)
+        public List<string> getUserEmails(CDBContext _context, int themeId, int locationId)
         {
             var mails = from user in _context.HRU
                          join ut in _context.HRUsersThemes on user.uEmployeeNumber equals ut.UserId
                          join theme in _context.Theme on ut.ThemeId equals theme.tId
-                         where user.uStatus == true && theme.tId == themeId
+                         where user.LocationId == locationId && user.uStatus == true && theme.tId == themeId
                          select new { user.uEmail };
 
             if (mails == null || mails.Count() == 0)

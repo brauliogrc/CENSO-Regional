@@ -114,7 +114,7 @@ namespace CensoAPI02.Controllers.NewControllers
                 // Envio de correo electronico
                 MailData mailData = new MailData(addRequest.rId, addRequest.ThemeId, addRequest.rIssue);
                 mailData.themeName = handler.getThemeName(_context, mailData.themeId);
-                mailData.emails = handler.getUserEmails(_context, mailData.themeId);
+                mailData.emails = handler.getUserEmails(_context, mailData.themeId, newRequest.LocationId);
 
                 if (mailData.themeName == null || mailData.emails == null)
                 {
