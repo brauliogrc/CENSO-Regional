@@ -75,7 +75,7 @@ namespace CensoAPI02
             });
 
             services.AddDbContext<CDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("CensoLocal")));
+            options.UseSqlServer(Configuration.GetConnectionString("Censo")));
 
             //Configuración del Cors
             services.AddCors(options => {

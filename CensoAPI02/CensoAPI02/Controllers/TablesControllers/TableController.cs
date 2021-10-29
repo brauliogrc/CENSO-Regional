@@ -181,8 +181,6 @@ namespace CensoAPI02.Controllers.TablesControllers
                 {
                     var tickets = from request in _context.Requests
                                   join theme in _context.Theme on request.ThemeId equals theme.tId
-                                  join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
-                                  join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
                                   join question in _context.Questions on request.QuestionId equals question.qId
                                   join location in _context.Locations on request.LocationId equals location.lId
                                   join area in _context.Areas on request.AreaId equals area.aId
@@ -210,8 +208,6 @@ namespace CensoAPI02.Controllers.TablesControllers
 
                     var anonTickets = from anonReq in _context.AnonRequests
                                       join theme in _context.Theme on anonReq.ThemeId equals theme.tId
-                                      join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
-                                      join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
                                       join question in _context.Questions on anonReq.QuestionId equals question.qId
                                       join location in _context.Locations on anonReq.LocationId equals location.lId
                                       join area in _context.Areas on anonReq.AreaId equals area.aId

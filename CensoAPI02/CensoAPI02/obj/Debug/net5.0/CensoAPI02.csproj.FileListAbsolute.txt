@@ -210,8 +210,9 @@ C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Deb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\staticwebassets\CensoAPI02.StaticWebAssets.xml
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\scopedcss\bundle\CensoAPI02.styles.css
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.RazorTargetAssemblyInfo.cache
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.CopyComplete
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\ref\CensoAPI02.dll
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.pdb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.genruntimeconfig.cache
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.Properties.Resources.resources
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.GenerateResource.cache

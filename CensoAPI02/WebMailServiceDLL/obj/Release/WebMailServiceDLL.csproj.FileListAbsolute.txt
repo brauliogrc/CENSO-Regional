@@ -1,0 +1,7 @@
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\WebMailServiceDLL\bin\Release\WebMailServiceDLL.dll.config
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\WebMailServiceDLL\bin\Release\WebMailServiceDLL.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\WebMailServiceDLL\bin\Release\WebMailServiceDLL.pdb
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\WebMailServiceDLL\obj\Release\WebMailServiceDLL.csproj.AssemblyReference.cache
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\WebMailServiceDLL\obj\Release\WebMailServiceDLL.csproj.CoreCompileInputs.cache
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\WebMailServiceDLL\obj\Release\WebMailServiceDLL.dll
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\WebMailServiceDLL\obj\Release\WebMailServiceDLL.pdb
