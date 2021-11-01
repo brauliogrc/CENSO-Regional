@@ -157,7 +157,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
 
         // Obtención de informacion de las personas asociadas al tema del ticket (requiere policy staff rh)
         [HttpGet]
-        [Route("userAssignment/{locationId}/{itemId}")][Authorize(Policy = "SURH")]
+        [Route("userAssignment/{locationId}/{itemId}")][Authorize(Policy = "StaffRH")]
         public async Task<ActionResult> userAssignment(int locationId, int itemId)
         {
             try
@@ -167,10 +167,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
                                      join location in _context.Locations on lt.LocationId equals location.lId
                                      join ut in _context.HRUsersThemes on theme.tId equals ut.ThemeId
                                      join user in _context.HRU on ut.UserId equals user.uEmployeeNumber
-                                     where user.uStatus == true &&
-                                                location.lId == locationId &&
-                                                location.lStatus == true &&
-                                                theme.tId == itemId
+                                     where user.LocationId == locationId && lt.LocationId == locationId && lt.ThemeId == itemId
                                      select new
                                      {
                                          // Datos del usuario

@@ -12,11 +12,12 @@ namespace CensoAPI02.Intserfaces
     {
         public string saveTicketImage(IFormFile image, int requestId)
         {
-            // Guardado del archivo adjunto
+            // Guardado del archivo adjunto  Answer
             var file = image;
-            var folderName = Path.Combine("Resources", "Request");
-            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-            string newPath;
+            var folderName = Path.Combine("StaticFiles", "Request");
+            var folderNameTosAVE = Path.Combine("Resources", "Request");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderNameTosAVE);
+            string newPath, newAuxPath;
 
             if (file != null)
             {
@@ -30,6 +31,7 @@ namespace CensoAPI02.Intserfaces
                     var extencion = Path.GetExtension(file.FileName).Substring(1);
                     var newName = requestId;
                     newPath = pathToSave + '\\' + newName + '.' + extencion;
+                    newAuxPath = folderName + '\\' + newName + '.' + extencion;
 
                     using (var fileStream = new FileStream(newPath, FileMode.Create))
                     {
@@ -37,7 +39,7 @@ namespace CensoAPI02.Intserfaces
                     }
 
                     Console.WriteLine($"Full Path: {fullPath}\ndbPath: {dbPath}");
-                    return newPath;
+                    return newAuxPath;
                 }
 
                 return null;
@@ -52,11 +54,12 @@ namespace CensoAPI02.Intserfaces
 
         public string saveAnswerImage(IFormFile image, int answerId)
         {
-            // Guardado del archivo adjunto
+            // Guardado del archivo adjunto  Answer
             var file = image;
-            var folderName = Path.Combine("Resources", "Answer");
-            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-            string newPath;
+            var folderName = Path.Combine("StaticFiles", "Answer");
+            var folderNameTosAVE = Path.Combine("Resources", "Answer");
+            var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderNameTosAVE);
+            string newPath, newAuxPath;
 
             if (file != null)
             {
@@ -70,6 +73,7 @@ namespace CensoAPI02.Intserfaces
                     var extencion = Path.GetExtension(file.FileName).Substring(1);
                     var newName = answerId;
                     newPath = pathToSave + '\\' + newName + '.' + extencion;
+                    newAuxPath = folderName + '\\' + newName + '.' + extencion;
 
                     using (var fileStream = new FileStream(newPath, FileMode.Create))
                     {
@@ -77,7 +81,7 @@ namespace CensoAPI02.Intserfaces
                     }
 
                     Console.WriteLine($"Full Path: {fullPath}\ndbPath: {dbPath}");
-                    return newPath;
+                    return newAuxPath;
                 }
 
                 return null;
@@ -88,6 +92,6 @@ namespace CensoAPI02.Intserfaces
             {
                 return null;
             }
-        }
+        }        
     }
 }

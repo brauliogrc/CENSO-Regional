@@ -25,7 +25,7 @@ namespace CensoAPI02.Controllers.NewControllers
         }
 
         // Busqueda de los datos del ticket a responder (requiere policy staff rh)
-        [HttpGet][Route("ticketData/{ticketId}")]
+        [HttpGet][Route("ticketData/{ticketId}")][AllowAnonymous]
         public async Task<ActionResult> getTicketData(int ticketId)
         {
 

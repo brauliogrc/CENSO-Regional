@@ -14,6 +14,7 @@ import { TicketService } from '../services/newServices/Ticket/ticket.service';
 import { ShowErrorService } from '../services/newServices/ShowErrors/show-error.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { App2 } from '../../assets/ts/app2';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-home',
@@ -205,6 +206,7 @@ export class HomeComponent implements OnInit {
         console.log(this.folio);
         if (data.answer) {
           this.responsable = data.answer[0];
+          this.responsable.asAttachement = environment.FileRoute + this.responsable.asAttachement;
           this.answerFlag = true;
           console.log(this.responsable);
         } else {
@@ -215,7 +217,6 @@ export class HomeComponent implements OnInit {
       },
       (error: HttpErrorResponse) => {
         console.error(error.message);
-        this._showError.statusCode(error);
         this._showError.statusCode(error);
       }
     );

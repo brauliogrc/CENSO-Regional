@@ -74,11 +74,15 @@ namespace CensoAPI02.Controllers.NewControllers
                         anonTicket.StatusId = newAnswer.requestStatus;
                         anonTicket.arModificationUser = newAnswer.asUserId;
 
+                        this.path = imageManager.saveAnswerImage(newAnswer.asAttachement, anonTicket.arId);
+                        actualizaRespuesta.asAttachement = this.path;
+
                         _context.AnonRequests.Update(anonTicket);
                         await _context.SaveChangesAsync();
 
                         _context.Answer.Update(actualizaRespuesta);
                         await _context.SaveChangesAsync();
+
 
                         return Ok(new { message = $"Se ha actualizado la respuesta del ticket." });
                     }
@@ -87,11 +91,15 @@ namespace CensoAPI02.Controllers.NewControllers
                     ticket.StatusId = newAnswer.requestStatus;
                     ticket.rModificationUser = newAnswer.asUserId;
 
+                    this.path = imageManager.saveAnswerImage(newAnswer.asAttachement, ticket.rId);
+                    actualizaRespuesta.asAttachement = this.path;
+
                     _context.Requests.Update(ticket);
                     await _context.SaveChangesAsync();
 
                     _context.Answer.Update(actualizaRespuesta);
                     await _context.SaveChangesAsync();
+
 
                     return Ok(new { message = $"Se ha actualizado la respuesta del ticket." });
                 }
@@ -120,8 +128,8 @@ namespace CensoAPI02.Controllers.NewControllers
 
                     addAnswer.AnonRequestId = RequestId;
                     addAnswer.RequestId = null;
-                    anonTicketModification.arModificationDate = DateTime.Now;
-                    anonTicketModification.arModificationUser = newAnswer.asUserId;
+                    anonTicketModification.arModificationDate = DateTime.Parse( DateTime.Now.ToString() );
+                    anonTicketModification.arModificationUser = Int64.Parse( newAnswer.asUserId.ToString() );
                     anonTicketModification.StatusId = newAnswer.requestStatus;
 
                     // Regsitr de la moficacion el ticket anonimo

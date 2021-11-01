@@ -58,8 +58,8 @@ namespace CensoAPI02.Controllers.NewControllers
                 };
 
                 // Registro de la nueva peticion anonima en la tabla AnonRequest
-                //_context.AnonRequests.Add(addAnonRequest);
-                //await _context.SaveChangesAsync();
+                _context.AnonRequests.Add(addAnonRequest);
+                await _context.SaveChangesAsync();
 
                 // Guardado del archivio adjunto del ticket
                 string path = imageManager.saveTicketImage(newAnonRequest.arAttachement, addAnonRequest.arId);
@@ -67,8 +67,8 @@ namespace CensoAPI02.Controllers.NewControllers
                 if (path != null)
                 {
                     addAnonRequest.arAttachement = path;
-                    //_context.AnonRequests.Update(addAnonRequest);
-                    //await _context.SaveChangesAsync();
+                    _context.AnonRequests.Update(addAnonRequest);
+                    await _context.SaveChangesAsync();
                 }
 
                 /*// Guardado del archivo adjunto
@@ -94,7 +94,7 @@ namespace CensoAPI02.Controllers.NewControllers
                             file.CopyTo(fileStream);
                         }
 
-                        Console.WriteLine($"Full Path: {fullPath}\ndbPath: {dbPath}");
+                        Console.WriteLine($"Full Path: {fullPath}\ndb  Path: {dbPath}");
                         addAnonRequest.arAttachement = newPath;
                     }
 

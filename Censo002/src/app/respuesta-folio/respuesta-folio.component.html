@@ -96,10 +96,14 @@
           <p>Evidencia:</p>
         </div>
         <div class="textosContenido">
-          <p>{{ ticketData.rAttachement }}</p>
+          <p>
+            <a target="_blank" href="{{ ticketData.rAttachement }}">Archivo adjunto</a>
+          </p>
+          <!-- <p>{{ ticketData.rAttachement }}</p> -->
         </div>
       </div>
     </ng-container>
+
     <ng-template #elseTemplate>
       <div class="contenedores">
         <div class="titulos">
@@ -169,9 +173,7 @@
         </div>
         <div class="textosContenido">
           <p>
-            <a target="_blank" href="{{ anonTicketData.arAttachement }}">{{
-              anonTicketData.arAttachement
-            }}</a>
+            <a target="_blank" href="{{ anonTicketData.arAttachement }}">Archivo adjunto</a>
           </p>
           <!-- <a href="file:///{{value}}">e ver si esta si</a> -->
 
