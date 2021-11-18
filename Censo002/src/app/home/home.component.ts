@@ -150,7 +150,6 @@ export class HomeComponent implements OnInit {
     //   arAttachemen: this.file,
     // };
 
-    // TODO: Descomentar (Es la funcionalidad de restro de ticket)
     const formData = new FormData();
     formData.append(
       'arEmployeeType',
@@ -202,6 +201,7 @@ export class HomeComponent implements OnInit {
 
   folio: any;
   responsable: any;
+  public haveAttachement: boolean = false;
 
   private app = new App2();
   answerFlag: boolean = false;
@@ -214,7 +214,16 @@ export class HomeComponent implements OnInit {
         console.log(this.folio);
         if (data.answer) {
           this.responsable = data.answer[0];
-          this.responsable.asAttachement = environment.FileRoute + this.responsable.asAttachement;
+
+          // Validación si la respuesta tiene archivo adjunto o no
+          if ( this.responsable.asAttachement == null ) {
+            this.haveAttachement = false;
+          }
+          else {
+            this.haveAttachement = true;
+            this.responsable.asAttachement = environment.FileRoute + this.responsable.asAttachement;
+          }
+          
           this.answerFlag = true;
           console.log(this.responsable);
         } else {
@@ -235,3 +244,11 @@ export class HomeComponent implements OnInit {
     this.answerFlag = false;
   }
 }
+
+// if ( this.anonTicketData.arAttachement == null ) {
+//   this.haveAttachement = false;
+// }
+// else {
+//   this.haveAttachement = true;
+//   this.anonTicketData.arAttachement = environment.FileRoute + this.anonTicketData.arAttachement;
+// }

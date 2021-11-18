@@ -97,7 +97,7 @@
         </div>
         <div class="textosContenido">
           <p>
-            <a target="_blank" href="{{ ticketData.rAttachement }}">Archivo adjunto</a>
+            <a *ngIf="haveAttachement" target="_blank" href="{{ ticketData.rAttachement }}">Archivo adjunto</a>
           </p>
           <!-- <p>{{ ticketData.rAttachement }}</p> -->
         </div>
@@ -173,7 +173,7 @@
         </div>
         <div class="textosContenido">
           <p>
-            <a target="_blank" href="{{ anonTicketData.arAttachement }}">Archivo adjunto</a>
+            <a *ngIf="haveAttachement" target="_blank" href="{{ anonTicketData.arAttachement }}">Archivo adjunto</a>
           </p>
           <!-- <a href="file:///{{value}}">e ver si esta si</a> -->
 

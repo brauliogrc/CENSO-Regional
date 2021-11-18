@@ -37,7 +37,7 @@ export class RespuestaFolioComponent implements OnInit {
   availableUsers: User[] = [];
   ticketStatus: ticketStatus[] = [];
 
-  valorNul = null;
+  public haveAttachement: boolean = false;
 
   private currentUser: any = sessionStorage.getItem('employeeNumber');
   get getCurrentUser() {
@@ -99,7 +99,14 @@ export class RespuestaFolioComponent implements OnInit {
       (data) => {
         if (data.anonTicketData) {
           this.anonTicketData = data.anonTicketData[0];
-          this.anonTicketData.arAttachement = environment.FileRoute + this.anonTicketData.arAttachement;
+          // Validando si contiene o no archivo adjunto
+          if ( this.anonTicketData.arAttachement == null ) {
+            this.haveAttachement = false;
+          }
+          else {
+            this.haveAttachement = true;
+            this.anonTicketData.arAttachement = environment.FileRoute + this.anonTicketData.arAttachement;
+          }
 
           data.anonTicketData[0].arEmployeeType = this.getEmployeeType(
             data.anonTicketData[0].arEmployeeType
@@ -114,7 +121,15 @@ export class RespuestaFolioComponent implements OnInit {
           this.currentStatusName = data.anonTicketData[0].rsStatus;
         } else {
           this.ticketData = data.ticketData[0];
-          this.ticketData.rAttachement = environment.FileRoute + this.ticketData.rAttachement;
+          // Validando si contiene o no archivo adjunto
+          if ( this.ticketData.rAttachement == null ) {
+            this.haveAttachement = false;
+          }
+          else {
+            this.haveAttachement = true;
+            this.ticketData.rAttachement = environment.FileRoute + this.ticketData.rAttachement;
+          }
+
           data.ticketData[0].rEmployeeType = this.getEmployeeType(
             data.ticketData[0].rEmployeeType
           );

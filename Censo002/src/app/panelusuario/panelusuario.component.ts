@@ -134,6 +134,7 @@ export class PanelusuarioComponent implements OnInit {
 
   // Registro de la pticion en la base de datos
   registerRequest(): void {
+    this.folioSent = false;
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
