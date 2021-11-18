@@ -18,6 +18,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using CensoAPI02.Intserfaces.AuthorizePolicity;
 
 
 namespace CensoAPI02
@@ -61,12 +62,28 @@ namespace CensoAPI02
                 };
             });
 
+            // Agregando policities creadas en "AuthorizePolicity"
+            // Authorización de Admin
+            /*services.AddAuthorization( options =>
+                options.AddPolicy( "AdminRoleAuth", policy =>
+                    policy.Requirements.Add( new AdminRoleAuthorize( 1 ) ) ) );
+            // Authorización de SURH
+            services.AddAuthorization(options =>
+              options.AddPolicy("SurhAuth", policy =>
+                 policy.Requirements.Add( new SUHRRoleAuthorize( 1, 2 ) ) ) );
+            // Authorización de StaffRH
+            services.AddAuthorization(options =>
+               options.AddPolicy("StaffRhAuth", policy =>
+                policy.Requirements.Add( new StaffRhRoleAuthorization( 1, 2, 3 ) ) ) );*/
+
+            
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("Administrador", pol => pol.RequireClaim("Role", new string[] {"1"}));
                 options.AddPolicy("SURH", pol => pol.RequireClaim("Role", new string[] { "1", "2" }));
                 options.AddPolicy("StaffRH", pol => pol.RequireClaim("Role", new string[] { "1", "2", "3" }));
             });
+            
 
             services.AddControllers().AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
@@ -78,7 +95,7 @@ namespace CensoAPI02
             });
 
             services.AddDbContext<CDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("Censo")));
+            options.UseSqlServer(Configuration.GetConnectionString("CensoLocal")));
 
             //Configuración del Cors
             services.AddCors(options => {

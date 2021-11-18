@@ -37,6 +37,8 @@ export class HomeComponent implements OnInit {
   // Id de la localidad
   private location: number = 0;
 
+  public folioSent: boolean = true;
+
   /* Definimos los campos del formulario y agregamos validaciones sobre su contenido
    *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
    */
@@ -58,7 +60,7 @@ export class HomeComponent implements OnInit {
     private _anonRequestService: AddAnonRequestService,
     private _showError: ShowErrorService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getLocations();
@@ -134,6 +136,7 @@ export class HomeComponent implements OnInit {
 
   // Registro de la peticion en la base de datos
   registerAnonRequest(): void {
+    this.folioSent = false;
     /**
      * Obtenermos el valor de cada uno de los campos del Form y lo asignamos a un objeto
      */
@@ -147,6 +150,7 @@ export class HomeComponent implements OnInit {
     //   arAttachemen: this.file,
     // };
 
+    // TODO: Descomentar (Es la funcionalidad de restro de ticket)
     const formData = new FormData();
     formData.append(
       'arEmployeeType',
@@ -158,7 +162,10 @@ export class HomeComponent implements OnInit {
     formData.append('LocationId', this.bodyRequest.get('LocationId')?.value);
     formData.append('arIssue', this.bodyRequest.get('arIssue')?.value);
     formData.append('arAttachement', this.file);
-    
+
+    setTimeout( () => {
+      this.folioSent = true;
+    }, 3000 );
 
     // Registro de la peticion anonima en la base de datos
     this._anonRequestService.addNewAnonRequest(formData).subscribe(
@@ -173,6 +180,7 @@ export class HomeComponent implements OnInit {
         this._showError.statusCode(error);
       }
     );
+
   }
 
   // Upload selected file

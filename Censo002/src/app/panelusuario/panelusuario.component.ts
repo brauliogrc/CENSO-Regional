@@ -30,6 +30,8 @@ export class PanelusuarioComponent implements OnInit {
   // Id de la localidad
   private location: number = 0;
 
+  public folioSent: boolean = true;
+
   /* Definimos los campos del formulario y agregamos validaciones sobre su contenido
    *  Campo en el Form tiene una propiedad "formControlName" que debe coincidir el nombre de las variables a continuación
    */
@@ -169,6 +171,10 @@ export class PanelusuarioComponent implements OnInit {
     formData.append('LocationId', String(this.location));
     formData.append('rIssue', this.bodyRequest.get('rIssue')?.value);
     formData.append('rAttachement', this.file);
+    
+    setTimeout( () => {
+      this.folioSent = true;
+    }, 3000 );
 
     // Registro de la peticion en la base de datos
     this._requestService.addNewRequest(formData).subscribe(
@@ -182,6 +188,7 @@ export class PanelusuarioComponent implements OnInit {
         this._showError.statusCode(error);
       }
     );
+
   }
 
   // Upload selected file

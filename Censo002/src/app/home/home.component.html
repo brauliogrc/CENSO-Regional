@@ -1,5 +1,4 @@
 <body class="BodyIndexC" style="overflow: auto">
-  Test Version
   <header>
     <div class="headerIndexC">
       <img
@@ -190,7 +189,7 @@
             <!-- **************** botón de envio del formulario **************** -->
             <div class="col-12">
               <!-- validacion de contenido de formulario valido -->
-              <button
+              <button *ngIf="folioSent"
                 [disabled]="bodyRequest.invalid"
                 class="btnIndexC1"
                 type="submit"

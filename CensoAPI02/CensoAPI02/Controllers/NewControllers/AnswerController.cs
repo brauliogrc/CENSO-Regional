@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace CensoAPI02.Controllers.NewControllers
 {
     [Route("api/[controller]")]
-    [ApiController][Authorize(Policy = "StaffRH")]
+    [ApiController][Authorize(Policy = "StaffRH")] // cambiar a solo authorize
     public class AnswerController : ControllerBase
     {
         private readonly CDBContext _context;
