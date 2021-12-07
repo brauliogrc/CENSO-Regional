@@ -1,0 +1,288 @@
+<div class="contenido1">
+  <div class="buscar">
+    <h1>Usuarios</h1>
+    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">
+      Añadir Usuario
+    </button>
+  </div>
+  <hr />
+
+  <div id="contenido">
+    <!-- Inicio del Form -->
+    <form [formGroup]="newUser" (ngSubmit)="addNewUser()" class="row g-3">
+      <h1>Añadir Usuario</h1>
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Numero de empleado</label>
+        <input #employeeNumber (keypress)="eventHandler($event, employeeNumber.value)" formControlName="EmployeeNumber"
+          type="number" class="form-control" id="inputEmail4" />
+      </div>
+      <!-- Name -->
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Nombre</label>
+        <input formControlName="uName" type="text" class="form-control" id="inputEmail4" id="email"
+          value="{{ getUserName() }}" />
+      </div>
+      <!-- Email -->
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input formControlName="uEmail" type="email" class="form-control" id="inputEmail4" value="{{ getEmail() }}" />
+      </div>
+      <!-- Rol -->
+      <div class="col-md-6">
+        <label for="inputState" class="form-label">Rol</label>
+        <select formControlName="RolId" id="inputState" class="form-select">
+          <option *ngFor="let rol of Roles" value="{{ rol.rolId }}">
+            {{ rol.rolName }}
+          </option>
+        </select>
+      </div>
+      <!-- Estatus -->
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">Estatus</label>
+        <select formControlName="uStatus" id="inputState" class="form-select">
+          <option value="true">Activo</option>
+          <option value="false">Inactivo</option>
+        </select>
+      </div>
+      <!-- Location -->
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">Localidad</label>
+        <input disabled type="text" class="form-control" id="inputEmail4" value="{{ getLocation() }}" />
+        <!-- <select formControlName="LocationId" id="inputState" class="form-select">
+      <option *ngFor="let location of Locations" value="{{location.lId}}">{{location.lName}}</option>
+    </select> -->
+      </div>
+      <!-- Bonton registro -->
+      <div class="col-12">
+        <button class="btnIndexC" type="submit">Añadir</button>
+      </div>
+      <!-- Fin del Form -->
+    </form>
+
+    <hr />
+  </div>
+  <form class="form-search">
+    <input #number class="Search1" type="number" placeholder="Buscar" aria-label="Search" />
+    <button (click)="search(number.value)" class="btnIndexC" type="submit">
+      Buscar
+    </button>
+  </form>
+  <hr />
+  <table class="table table-dark table-sm">
+    <thead>
+      <tr>
+        <th>Numero de empleado</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Rol</th>
+        <th>Estatus</th>
+        <th>Ubicación</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="!user; else elseTemplate">
+        <tr *ngFor="let user of Users">
+          <td>{{ user.uEmployeeNumber }}</td>
+          <td>{{ user.uName }}</td>
+          <td>{{ user.uEmail }}</td>
+          <td>{{ user.rolName }}</td>
+          <td>{{ user.uStatus }}</td>
+          <td>{{ user.lName }}</td>
+          <td>
+            <button (click)="mostrar(user.uEmployeeNumber)" class="btn btn-Dark">
+              <img src="assets/img/BeditB.png" alt="" width="22px" />
+            </button>
+            <button (click)="deleteUser(user.uEmployeeNumber)" class="btn btn-Dark">
+              <img src="assets/img/BbasuraB.png" alt="" width="22px" />
+            </button>
+            <button class="btn btn-success" (click)="mostrarTema(user.uEmployeeNumber)" type="submit">
+              Añadir temas
+            </button>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <tr>
+          <td>{{ user[0].uEmployeeNumber }}</td>
+          <td>{{ user[0].uName }}</td>
+          <td>{{ user[0].uEmail }}</td>
+          <td>{{ user[0].rolName }}</td>
+          <td>{{ user[0].uStatus }}</td>
+          <td>{{ user[0].lName }}</td>
+          <td>
+            <button (click)="mostrar(user[0].uEmployeeNumber)" class="btn btn-Dark">
+              <img src="assets/img/BeditB.png" alt="" width="22px" />
+            </button>
+            <button (click)="deleteUser(user[0].uEmployeeNumber)" class="btn btn-Dark">
+              <img src="assets/img/BbasuraB.png" alt="" width="22px" />
+            </button>
+            <button class="btn btn-success" (click)="mostrarTema(user[0].uEmployeeNumber)" type="submit">
+              Añadir temas
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+
+  <!--Modal para la edicion de formularios: ACTUALIZAIÓN DE USUARIO -->
+  <div class="ModalEdit" id="ModalEdit">
+    <div class="ModalEditBack" id="ModalEditBack">
+      <div class="ModalTituloEdit">
+        <h1>Editar Usuario</h1>
+        <h4 *ngIf="userData">
+          {{ userData.uEmployeeNumber }} - {{ userData.uName }}
+        </h4>
+      </div>
+
+      <div class="ModalContenidoEdit" *ngIf="editFlag">
+        <form [formGroup]="updateUser" (ngSubmit)="saveChanges()" class="row g-3">
+          <div class="col-md-6">
+            <label for="text" class="form-label">Nombre</label>
+            <input formControlName="newName" type="text" class="form-control" placeholder="{{ userData.uName }}" />
+          </div>
+          <div class="col-md-6">
+            <label for="text" class="form-label">Email</label>
+            <input formControlName="newEmail" type="text" class="form-control" placeholder="{{ userData.uEmail }}" />
+          </div>
+          <div class="col-md-6">
+            <label for="inputState" class="form-label">Rol</label>
+            <select formControlName="newRol" id="inputState" class="form-select">
+              <option class="current-data" value="{{ userData.rolId }}" selected>
+                {{ userData.rolName }}
+              </option>
+              <option *ngFor="let rol of Roles" value="{{ rol.rolId }}">
+                {{ rol.rolName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">Estatus</label>
+            <select formControlName="newStatus" id="inputState" class="form-select">
+              <option class="current-data" value="{{ userData.uStatus }}">
+                Estatus actual
+              </option>
+              <option value="true">Activo</option>
+              <option value="false">Inactivo</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">Ubicación</label>
+            <select formControlName="newLocation" id="inputState" class="form-select">
+              <option class="current-data" value="{{ userData.lId }}" selected>
+                {{ userData.lName }}
+              </option>
+              <option *ngFor="let location of Locations" value="{{ location.lId }}">
+                {{ location.lName }}
+              </option>
+            </select>
+          </div>
+          <!-- <div class="col-md-4">
+          <label for="inputState" class="form-label">Tema</label>
+          <select id="inputState" class="form-select">
+            <option selected>Tijera</option>
+            <option>tijera</option>
+          </select>
+        </div> -->
+          <div class="TablaTemasUsuarios">
+            <table class="table table-striped table-dark">
+              <thead>
+                <tr>
+                  <th>Temas del usuario</th>
+                  <th>Eliminar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let them of relatedTopics">
+                  <td>{{ them.tName }}</td>
+                  <td>
+                    <button type="button" (click)="getIdx(them.tId)" class="btn btn-Dark">
+                      <img src="assets/img/BbasuraB.png" alt="" width="22px" />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-12">
+            <button class="btnIndexC" type="submit">Actualizar</button>
+          </div>
+        </form>
+      </div>
+      <div class="ModalBotonCerrar">
+        <button class="btn btn-danger" (click)="cerrar()" type="submit">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--Modal para la edicion de formularios -->
+
+  <!--Modal para agregar temas -->
+  <div class="ModalEditTemas" id="ModalEditTemas">
+    <div class="ModalEditBackTemas" id="ModalEditBackTemas">
+      <div class="ModalTituloEdit">
+        <h1>Agregar Temas a</h1>
+        <h4 *ngIf="userData">
+          {{ userData.uEmployeeNumber }} - {{ userData.uName }}
+        </h4>
+      </div>
+
+      <div class="ModalContenidoEdit">
+        <form class="row g-3">
+          <div class="ModuloAgregar0">
+            <div class="moduloAgregar">
+              <div class="moduloAgregar1">
+                <h2>Agregar un topico</h2>
+                <button (click)="addRelatedTopic(themeId.value)" class="btnPregunta" type="button">
+                  +
+                </button>
+              </div>
+
+              <label for="inputState" class="form-label">Topico</label>
+              <select #themeId id="inputState" class="form-select">
+                <option *ngFor="let addTheme of themeList" value="{{ addTheme.tId }}">
+                  {{ addTheme.tName }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="ModuloAgregar0">
+            <div class="moduloAgregar">
+              <div class="TablaTemasUsuarios">
+                <div class="moduloAgregar1">
+                  <h2>Temas del usuario</h2>
+                </div>
+                <table class="table table-striped table-dark">
+                  <thead>
+                    <tr></tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let theme of relatedTopics">
+                      <td>{{ theme.tName }}</td>
+                      <td>
+                        <button (click)="getIdx(theme.tId)" class="btn btn-Dark">
+                          <img src="assets/img/BbasuraB.png" alt="" width="22px" />
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <!-- <button class="btnIndexC" type="submit">Agregar</button> -->
+          </div>
+        </form>
+      </div>
+      <div class="ModalBotonCerrar">
+        <button class="btn btn-danger" (click)="cerrarTema()" type="submit">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+  <!--Modal para agregar temas -->
+</div>

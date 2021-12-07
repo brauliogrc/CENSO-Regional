@@ -73,7 +73,10 @@ namespace CensoAPI02.Intserfaces
                 {
                     MailMessage mailMessage = new MailMessage(emailOrigen, email);
                     mailMessage.Subject = "CENSO Regional";
-                    mailMessage.Body = $"<p>Sea ha generado una nueva solicitud relacionada al tema {mailData.themeName}, con numero de folio {mailData.ticketId} </p>";
+                    mailMessage.Body = $"<p>Sea ha generado una nueva solicitud relacionada al tema {mailData.themeName}, con numero de folio {mailData.ticketId} </p>" +
+                        $"<p>Puedes acceder y dar seguimiento a tus tickets desde el siguentee enlace: : " +
+                            $"<a href=\"http://10.198.128.34/CENSO\">CENSO</a>" +
+                        $"</p>";
                     mailMessage.IsBodyHtml = true;
 
                     //MS.SendEmailAsync("CENSO", email, "", mailMessage.Subject, mailMessage.Body, TypeOfMail.HTML);

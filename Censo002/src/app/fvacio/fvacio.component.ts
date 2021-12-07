@@ -51,9 +51,9 @@ export class FvacioComponent implements OnInit {
             this.app.mostrarbusq();
             this.searchFlag = true;
             this.ticketStatus = data.ticket[0];
-            console.log(this.ticketStatus);
+            console.log(this.ticketStatus); 
 
-            if (data.answer) {
+            if (data.answer != null) {
               this.answerFlag = true;
               this.responsable = data.answer;
             } else {

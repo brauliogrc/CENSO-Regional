@@ -122,7 +122,7 @@ namespace CensoAPI02.Controllers.NewControllers
                 return Ok(new { tickets, anonTickets });*/
                 
                 List<ReportTicket> tickets = new List<ReportTicket>();
-                SqlConnection connectionString = new SqlConnection(_config.GetConnectionString("Censo"));
+                SqlConnection connectionString = new SqlConnection(_config.GetConnectionString("CensoProd"));
                 using ( SqlCommand command = new SqlCommand("sp_Report_Tickets", connectionString))
                 {
                     command.CommandType = CommandType.StoredProcedure;

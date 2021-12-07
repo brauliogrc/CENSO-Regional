@@ -1,0 +1,264 @@
+<div class="contenidoResp">
+  <div class="tituloresp">
+    <h1>Respuesta de folio</h1>
+  </div>
+
+  <div *ngIf="flag" class="respTabla" style="overflow: auto">
+    <ng-container *ngIf="!anonTicketData; else elseTemplate">
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Folio:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rId }}</p>
+        </div>
+        <div class="titulos">
+          <p>Fecha creacion :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rCreationDate |date:"medium" }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Nombre supervisor:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rEmployeeLeader }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Tipo Empleado:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rEmployeeType }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Nombre Empleado:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rUserName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Numero Empleado:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rUserId }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Nave:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.aName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Dias Transcurridos:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ daysPassed }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Tema :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.tName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Pregunta :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.qName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Contenido:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ ticketData.rIssue }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Evidencia:</p>
+        </div>
+        <div class="textosContenido">
+          <p>
+            <a *ngIf="haveAttachement" target="_blank" href="{{ ticketData.rAttachement }}">Archivo adjunto</a>
+          </p>
+          <!-- <p>{{ ticketData.rAttachement }}</p> -->
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #elseTemplate>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Folio:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.arId }}</p>
+        </div>
+        <div class="titulos">
+          <p>Fecha creacion :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.arCreationDate |date:"medium" }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Tipo Empleado:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.arEmployeeType }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Nave:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.aName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Dias Transcurridos:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ daysPassed }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Tema :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.tName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Pregunta :</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.qName }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Contenido:</p>
+        </div>
+        <div class="textosContenido">
+          <p>{{ anonTicketData.arIssue }}</p>
+        </div>
+      </div>
+      <div class="contenedores">
+        <div class="titulos">
+          <p>Evidencia:</p>
+        </div>
+        <div class="textosContenido">
+          <p>
+            <a *ngIf="haveAttachement" target="_blank" href="{{ anonTicketData.arAttachement }}">Archivo adjunto</a>
+          </p>
+          <!-- <a href="file:///{{value}}">e ver si esta si</a> -->
+
+          <!-- <img src="{{ anonTicketData.arAttachement }}" alt="Evicendia" /> -->
+        </div>
+      </div>
+    </ng-template>
+    <div class="respTabla1">
+      <form [formGroup]="newAnswer" (ngSubmit)="registerAnswer()">
+        <div class="contenedores">
+          <div class="titulos1">
+            <p>Numero de empleado del encargado:</p>
+          </div>
+          <div class="textosContenido">
+            <select formControlName="asUserId" id="employee" class="form-select">
+              <option class="current-data" selected value="{{ getCurrentUser }}" >Usuario actual</option>
+              <option
+                *ngFor="let user of availableUsers"
+                value="{{ user.uEmployeeNumber }}"
+              >
+                {{ user.uEmployeeNumber }} - {{ user.uName }}
+              </option>
+            </select>
+            <div class="invalid-feedback">Selecciona una opción.</div>
+          </div>
+        </div>
+
+        <div class="contenedores">
+          <div class="titulos">
+            <p>Estatus actual:</p>
+          </div>
+          <div class="textosContenido">
+            <p>{{currentStatus}}</p>
+            <div class="invalid-feedback">Selecciona una opción.</div>
+          </div>
+        </div>
+
+        <div class="contenedores">
+          <div class="titulos">
+            <p>Status:</p>
+          </div>
+          <div class="textosContenido">
+            <select formControlName="requestStatus" class="form-select" id="validationCustom04" required>
+              <option class="current-data" value="{{currentStatusValue}}">{{currentStatusName}}</option>
+              <option *ngFor="let status of ticketStatus" value="{{status.rsId}}">{{status.rsStatus}}</option>
+            </select>
+            <div class="invalid-feedback">Selecciona una opción.</div>
+          </div>
+        </div>
+
+        <div class="contenedores">
+          <div class="titulos">
+            <p>Respuesta:</p>
+          </div>
+          <div class="textosContenido">
+            <textarea formControlName="asAnswer"
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder="{{answer}}"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="contenedores">
+          <div class="titulos">
+            <p>Adjunto:</p>
+          </div>
+          <div class="textosContenido">
+            <input formControlName="asAttachement"
+              class="form-control form-control-lg"
+              id="formFileLg"
+              (change)="onFileSelected($event)"
+              type="file"
+            />
+          </div>
+        </div>
+
+        <div class="contenedores">
+          <button [disabled]="newAnswer.invalid" class="BotonRespuesta" type="submit">Guardar</button>
+        </div>
+      </form>
+      <div class="contBotonCerrar">
+        <button (click)="cerrarRespuesta()" class="BotonRespuesta">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

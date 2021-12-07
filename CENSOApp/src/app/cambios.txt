@@ -1,0 +1,272 @@
+Empiezo actualizacion: 16/06/2021
+
+Version 3.5.1
+
+que onda braulio puse este archivo para que vallamos anotadon la version que llevamos y los cambion que hagamos
+lo que hice en esta version fue:
+-en panel de ususario agregue el campo de tema
+-en los demas archivos corregi el tema de la imagen que no se veia del logo de conti 
+-actualice el panelusuariobusq
+-paneladmin solo la imagen que no se veia la corregi
+-folioanonimoindex agregue el tema y area 
+-folioanonimo yo reo que
+-fvacio agregue la busqueda de folios que son de el usuario anonimo.
+
+~Alexis~
+======================================================================================================================
+
+Fecha ctualizacion: 22/06/2021
+
+Version 3.5.2
+
+-Botones "delete" funcionando en componentes localidades, usuarios, temas y preguntas.
+-Sección de busqueda funcionando en componentes localidades, usuarios, temas y preguntas.
+-Implementacion de campo "EmployeeNumber" en el componente "usuarios.component.html".
+-Implementacionde cambion de la version 3.5.1
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 23/06/2021
+
+version 3.5.3
+
+-Componente home esta la vista del index la pagina principal junto con la tabla de busqueda y con el CRUD para agregr un folio anonimo
+-CRUD componente home se le añadio la localidd al registro anonimo
+-Componente Usuario se agrego script para que el crud este oculto
+-Componente Temas se agrego script para que el crud este oculto
+-Componente preguntas se agrego script para que el crud este oculto
+-Componente Localidades se agrego script para que el crud este oculto
+
+~Alexis~
+======================================================================================================================
+
+fecha actualizacion: 24/06/2021
+
+version 3.5.4
+
+-CRUD de folio anonimo funcionando
+-Servicio de angular dedicado solo a la obtencion de los datos necesarios en los "select" de folio
+-Controlador en la api dedicado solo a la obtencion de los datos necesarios en los "select" de folio
+-Eliminación de metodos repetidos en la api
+
+Version 3.5.4 plus
+
+-Panel de busueda en componente "home" funcionando
+-Servicio de angular dedicado a la busqueda de folio
+-Controlador de api dedicado a la busqueda de los folios
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 28/06/2021
+
+version 3.5.7
+-CRUD de panel usuario funcionando
+-Login funcionando
+-Modificacion de interface de datos para el folio anonimo
+-Controlador de angular dedicado solo a las busquedas especificas por id de los component localidades, usuarios, temas, preguntas y tikets
+-Controlador en la api dedicado solo a la obtencion del elemento bucado en los component localidades, usuarios, temas, preguntas y tikets
+-Funcionalidad de panel de busqueda en componen home modificada
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 30/06/2021
+
+version 3.5.8
+-Busqueda folio anoimo completado
+-Relacion one-to-may etre tablas Locations-Request y Locations-AnonRequest en la api
+-Modificacion del contexto de la base de datos
+-Componen tikets funcionando (solucionada la obtencnion de datos)
+
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 01/07/2021
+
+version 3.5.9
+    -ruteo de ventanas de panel usuario para que nos lleve al panel de busqueda del folio
+    -ruteo de ventanas del panel admin para que nos lleve a las ventas siquentes desntro del mismo panel
+            -usuarios
+            -localidades
+            -temas
+            -tikets
+            -area
+            -preguntas
+
+    -ruteo de ventana home para que nos lleve al Login
+    -se agrego un componente bienvenido (en ese no se trabajar nada solo es para dar la bienvenida al usuario)
+    
+
+~Alexis~
+======================================================================================================================
+
+fecha actualizacion: 07/07/2021
+
+version 3.6.0
+    -Generación de token JWT desde la api
+    -Validación del token en eL FrontEnd
+    -Validacion de usuarios por merido del token
+    -Vodulos disponibles dependiendo del rol del usuario
+    -Almacenamiento del token en el sessionStorage
+    -Modificación del valor devuelto desde la API al realizar logueo
+    -Funcionalidad de botón "cerrar sesión"
+
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 09/07/2021
+
+version 3.6.1
+    -Se agrego componente respuestafolio
+        -ahi se mostrara el folio creado del empleado 
+        -se mostrara una pequeña tabla para la respuesta al empleado
+    -Se agrego la version completa con estilos del modal del folio anonimo en el componente home
+    -Se agrego el boton de respuesta en el componente preguntas
+
+~Alexis~
+======================================================================================================================
+
+fecha actualizacion: 14/07/2021
+
+version 3.6.2
+    -Implementacion el Login
+        -Validacion de usuario en la base de datos de HRPortal
+        -Acceso por medio de numero de usuario y contraseña del HRPortal
+        -Generacion de token para los dos tipos de usuario
+    -Tabala RequestStatus añadido
+    -Campo Status añadido a la tabla AnonRequest y Request
+
+varsion 3.6.2 plus
+    -Validacion de locaciones al infresar al panel usuario
+    -36 Localidades ingresadas en la base de datos
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 19/07/2021
+
+version 3.6.3
+    -Se agregaron estilos de web responsive design
+    -Se agrego panelusuariobuq completo 
+    -se agrego tabla nueva del folio en el home
+    -se agrego cambios en panel admin junto con sus respectivos nuevos estilos
+    -se agregaron estilos nuevos en login (sin ningun cambio interno)
+
+~Alexis~
+======================================================================================================================
+
+fecha actualizacion: 20/07/2021
+
+version 3.6.4 beta
+    -Modificacion de controladores en la api
+    -Nuevos servicios añadidos en la carpeta serivices
+    -Nuevas interfaces generadas
+    -Consustas a la base de datos mejoradas
+
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 02/08/2021
+
+version 3.6.5 beta
+    -Se agrego tabla de areas
+    -Usuarios se agrego boton y nuevo modal
+    -preguntas se agrego boton con nuevo modal
+    -se implemento reportes en el menu y como componente
+
+~Alexis~
+======================================================================================================================
+
+fecha actualizacion: 04/08/2021
+
+version 3.6.6
+    -Guardado de archivos en las peticiones de los componetes home y panel usuarios
+    -Manejador de envio de correos electronicos
+    -Aligeramiento de los metodos de registro de peticiones
+
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 05/08/2021
+
+version 3.6.7
+   -Se agrego en el componente usuario dos botones con imagenes
+   -Se agrego en el componente Tikets dos botones con imagenes
+   -Se agrego en el componente Temas dos botones con imagenes
+   -Se agrego en el componente Preguntas dos botones con imagenes
+   -Se agrego en el componente Localidades dos botones con imagenes
+   -Se agrego en el componente areas dos botones con imagenes
+
+
+~Alexis~
+======================================================================================================================
+
+fecha actualizacion: 05/08/2021
+
+version 3.6.6
+    -Separación de la lógica para el enviio de correos
+    -Creacion del sercio "show-errors" para el manejo de errores y muestra de alertas
+    -Manejo de errores en el componente home
+
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 09/08/2021
+
+version 3.6.8
+    -Funcionamiento del componente de respuesta de folios
+    -Actualizacion de la respuesta de un folio
+    -Actializacion del estado de un ticket
+    -Modificación del controlador de registr de una repuesta para que compruebe si
+        si el ticket ya fue respondido
+    
+
+~Braulio~
+======================================================================================================================
+
+fecha actualizacion: 10/08/2021
+
+version 3.6.8
+
+    -se agregaron modals de edicion de componentes
+        -usuario
+        -temas
+        -localidades
+        -preguntas
+        
+
+
+~Alexis~
+======================================================================================================================
+fecha actualizacion: 12/08/2021
+
+version 3.7.0
+
+    -se agregaron modals de edicion de componentes
+        -usuario
+    -se actualizo popupEdicion.js
+        
+
+
+~Alexis~
+======================================================================================================================
+fecha actualizacion: 09-09-2021
+
+version 0.0.6
+        
+    Modificación de la consulta del componente reportes
+    Actualización de tabla reportes
+    Correción de bugs detectados en las sesiones de pruebas
+    Correción de visualización de imágenes
+    Fltrado de datos en el modulo de reportes
+        -esportado de los datos filtrados
+
+~Braulio~
+======================================================================================================================

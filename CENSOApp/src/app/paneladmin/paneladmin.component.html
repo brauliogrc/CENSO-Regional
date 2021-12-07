@@ -1,0 +1,116 @@
+<body class="Bodydashboard">
+
+  <header class="headerDash">
+    <div class="contentIMG">
+      <img src="assets/img/LogoConti.png" alt="" class="imgLogoDash">
+    </div>
+    <div class="h1CensoBsep">
+      <h1 class="h1CensoB">CENSO Panel</h1>
+    </div>
+    <div class="cerrarSesion">
+      <button (click)="logout()" class="btnIndexC" type="submit">Cerrar Sesion</button>
+    </div>
+  </header>
+
+
+  <div class="contenedorFlex">
+    <div class="leftDash">
+      <div class="NomUsuario">
+        <h3>Bienvenido</h3>
+        <div class="textUsuario">
+          <p>{{getName()}}</p>
+        </div>
+        <hr>
+      </div>
+      <hr class="hrAdmin">
+      <!-- ADMINISTRADOR -->
+      <div *ngIf="getRole() == 1" class="options">
+
+        <ul>
+
+          <li><button id="_1" type="submit" (click)="navegarUsuarios()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/usuario.png" alt="" width="15px">
+              <div class="textNavbar">Usuarios</div>
+            </button></li>
+          <li><button id="_2" type="submit" (click)="navegarLocalidades()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/localidad.png" alt="" width="15px">
+              <div class="textNavbar">Ubicaciones</div>
+            </button></li>
+          <li><button id="_3" type="submit" (click)="navegarTemas()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/tema.png" alt="" width="15px">
+              <div class="textNavbar">Temas</div>
+            </button></li>
+          <li><button id="_4" type="submit" (click)="navegarTikets()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/ticket.png" alt="" width="15px">
+              <div class="textNavbar">Tickets</div>
+            </button></li>
+          <li><button id="_5" type="submit" (click)="navegarAreas()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/area.png" alt="" width="15px">
+              <div class="textNavbar">Áreas</div>
+            </button></li>
+          <li><button id="_6" type="submit" (click)="navegarPreguntas()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/pregunta.png" alt="" width="15px">
+              <div class="textNavbar">Preguntas</div>
+            </button></li>
+          <li><button id="_6" type="submit" (click)="navegarReportes()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/ticket.png" alt="" width="15px">
+              <div class="textNavbar">Reportes</div>
+            </button></li>
+        </ul>
+      </div>
+
+      <!-- SURH -->
+
+      <div *ngIf="getRole() == 2" class="options">
+
+        <ul>
+
+          <li><button id="_1" type="submit" (click)="navegarUsuarios()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/usuario.png" alt="" width="15px">
+              <div class="textNavbar">Usuarios</div>
+            </button></li>
+          <li><button id="_3" type="submit" (click)="navegarTemas()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/tema.png" alt="" width="15px">
+              <div class="textNavbar">Temas</div>
+            </button></li>
+          <li><button id="_4" type="submit" (click)="navegarTikets()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/ticket.png" alt="" width="15px">
+              <div class="textNavbar">Tickets</div>
+            </button></li>
+          <li><button id="_5" type="submit" (click)="navegarAreas()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/area.png" alt="" width="15px">
+              <div class="textNavbar">Áreas</div>
+            </button></li>
+          <li><button id="_6" type="submit" (click)="navegarPreguntas()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/pregunta.png" alt="" width="15px">
+              <div class="textNavbar">Preguntas</div>
+            </button></li>
+            <li><button id="_6" type="submit" (click)="navegarReportes()" onclick="noMostrar()" class="btnDash"><img
+              class="imgMenu" src="assets/img/ticket.png" alt="" width="15px">
+            <div class="textNavbar">Reportes</div>
+          </button></li>
+        </ul>
+      </div>
+
+
+      <!-- Staff RH -->
+      <div *ngIf="getRole() == 3" class="options">
+        <ul>
+          <li><button id="_4" type="submit" (click)="navegarTikets()" onclick="noMostrar()" class="btnDash"><img
+                class="imgMenu" src="assets/img/ticket.png" alt="" width="15px">
+              <div class="textNavbar">Tickets</div>
+            </button></li>
+            <li><button id="_6" type="submit" (click)="navegarReportes()" onclick="noMostrar()" class="btnDash"><img
+              class="imgMenu" src="assets/img/ticket.png" alt="" width="15px">
+            <div class="textNavbar">Reportes</div>
+          </button></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="Contenido">
+      <!--poner contenido aqui-->
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</body>

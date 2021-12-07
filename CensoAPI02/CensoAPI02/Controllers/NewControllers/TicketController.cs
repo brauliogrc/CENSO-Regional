@@ -214,7 +214,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
 
         // Consulta del status de un ticket (requiere policy staff rh)
-        [HttpGet][Route("ticketStatus/{employeeNumber}/{ticketId}")][Authorize]
+        [HttpGet][Route("ticketStatus/{employeeNumber}/{ticketId}")][Authorize]//[AllowAnonymous]
         public async Task<ActionResult> getTicketStatus(int employeeNumber, int ticketId)
         {
             try
@@ -244,7 +244,7 @@ namespace CensoAPI02.Controllers.NewControllers
                              {
                                  // Datos de la respuesta
                                  answerStatus.asId,
-                                 answerStatus.request,
+                                 answerStatus.asAnswer,
                                  answerStatus.asCreationDate,
                                  answerStatus.asAttachement,
                                  // Datos del usuario
@@ -260,7 +260,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
                 if (answer == null || answer.Count() == 0)
                 {
-                    return Ok(new { ticket, message = $"El ticker no ha sido respondido aún" });
+                    return Ok(new { ticket, message = $"El ticket no ha sido respondido aún" });
                 }
 
                 return Ok(new { ticket, answer });

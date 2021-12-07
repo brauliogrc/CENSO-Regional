@@ -1,0 +1,117 @@
+<div class="contenido1">
+    <div class="buscar">
+    <h1>Ubicación</h1>
+    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">Añadir Ubicación</button>
+  </div>
+  
+  <hr>
+  <div id="contenido">
+  <!-- Inifio del Form -->
+  <form [formGroup]="newLocation" (ngSubmit)="addNewLocation()" class="row g-3">
+    <h1>Añadir Ubicación</h1>
+    
+    <div class="col-md-6">
+      <label for="inputEmail4" class="form-label">Nombre</label>
+      <input formControlName="lName" type="email" class="form-control" id="inputEmail4">
+    </div>
+    <div class="col-md-6">
+      <label for="inputState" class="form-label">Estatus</label>
+      <select formControlName="lStatus" id="inputState" class="form-select">
+        <option value=true >Activo</option>
+        <option value=false >Inactivo</option>
+      </select>
+    </div>
+    
+    
+    <div class="col-12">
+      <button [disabled]="newLocation.invalid" class="btnIndexC" type="submit">Añadir</button>
+    </div>
+  </form>
+  <!-- Fin del Form -->
+    <hr>
+  </div>
+      <form class="form-search">
+        <input #locationId class="Search1" type="number" placeholder="Id location" aria-label="Search">
+        <button (click)="search(locationId.value)" class="btnIndexC" type="submit">Buscar</button>
+      </form>
+      <hr>
+      <table class="table table-dark table-sm">
+        <thead>
+          <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Estatus</th>
+              <th>Acciones</th>
+          </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="!location; else elseTemplate">
+          <tr *ngFor="let location of Locations">
+            <td>{{ location.lId }}</td>
+            <td>{{ location.lName }}</td>
+            <td>{{ location.lStatus }}</td>
+            <td>
+              <!-- <button (click)="mostrar(location.lId)" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="assets/img/BeditB.png" alt="" width="22px"></button>
+              <button (click)="deleteLocation(location.lId)" class="btn btn-Dark"><img src="assets/img/BbasuraB.png" alt="" width="22px"></button> -->
+            </td>
+          </tr>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <tr>
+            <td>{{ location[0].lId }}</td>
+            <td>{{ location[0].lName }}</td>
+            <td>{{ location[0].lStatus }}</td>
+            <td>
+              <!-- <button (click)="mostrar(location[0].lId)" id="mostrarContenidoModalpopup" class="btn btn-Dark"><img src="assets/img/BeditB.png" alt="" width="22px"></button>
+              <button (click)="deleteLocation(location[0].lId)" class="btn btn-Dark"><img src="assets/img/BbasuraB.png" alt="" width="22px"></button> -->
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
+      </table>
+
+      <!--Modal para la edicion de formularios -->
+      <div class="ModalEdit" id="ModalEdit">
+        <div class="ModalEditBack" id="ModalEditBack">
+          <div class="ModalTituloEdit">
+            <h1>Editar Localidad</h1>
+            <h4 *ngIf="locationData">{{ locationData.lName }}</h4>
+          </div>
+
+          <div class="ModalContenidoEdit" *ngIf="editFlag">
+            <form [formGroup]="updateLocation" (ngSubmit)="saveChanges()" class="row g-3">
+              <!--Todo contenido del form -->
+
+              <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Nombre</label>
+                <input formControlName="newName" placeholder="{{locationData.lName}}" type="email" class="form-control" id="inputEmail4">
+              </div>
+              <div class="col-md-6">
+                <label for="inputState" class="form-label">Estatus</label>
+                <select formControlName="newStatus" id="inputState" class="form-select">
+                  <option class="current-data" value="{{ locationData.lStatus }}">Estatus actual</option>
+                  <option value=true>Activo</option>
+                  <option value=false>Inactivo</option>
+                </select>
+              </div>
+
+              <!--Todo contenido del form -->
+
+              <!--Boton de actualizar-->
+              <div class="col-12">
+                <button class="btnIndexC" type="submit">Actualizar</button>
+
+              </div>
+              <!--Boton de actualizar-->
+            </form>
+          </div>
+          <div class="ModalBotonCerrar">
+            <button (click)="cerrar()" class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
+
+          </div>
+        </div>
+
+      </div>
+      <!--Modal para la edicion de formularios -->
+
+</div>

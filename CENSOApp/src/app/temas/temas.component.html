@@ -1,0 +1,254 @@
+<div class="contenido1">
+  <div class="buscar">
+    <h1>Tema</h1>
+    <button class="btnIndexC" type="submit" onclick="mostrarContenido()">
+      Añadir tema
+    </button>
+  </div>
+
+<hr>
+
+  <div id="contenido">
+    <!-- Inicio Form -->
+    <form [formGroup]="newTheme" (ngSubmit)="addNewTheme()" class="row g-3">
+      <h1>Añadir tema</h1>
+      <!-- Name -->
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Nombre del tema</label>
+        <input
+          formControlName="tName"
+          type="email"
+          class="form-control"
+          id="inputEmail4"
+        />
+      </div>
+      <!-- Location -->
+      <div class="col-md-6">
+        <label for="inputState" class="form-label">Ubicación</label>
+        <select
+          formControlName="LocationId"
+          id="inputState"
+          class="form-select"
+        >
+          <option *ngFor="let location of Locations" value="{{ location.lId }}">
+            {{ location.lName }}
+          </option>
+        </select>
+      </div>
+      <!-- Estatus -->
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">Estatus</label>
+        <select formControlName="tStatus" id="inputState" class="form-select">
+          <option value="true" selected>Activo</option>
+          <option value="false">Inactivo</option>
+        </select>
+      </div>
+      <!-- <div class="col-md-4">
+      <label for="inputState" class="form-label">Preguntas</label>
+      <select id="inputState" class="form-select">
+        <option selected>pregunta 1</option>
+        <option>pregunta 2</option>
+      </select>
+    </div> -->
+
+      <!-- Boton registro -->
+      <div class="col-12">
+        <button [disabled]="newTheme.invalid" class="btnIndexC" type="submit">
+          Añadir
+        </button>
+      </div>
+    </form>
+    <!-- Fin Form -->
+    <hr />
+  </div>
+  <form class="form-search">
+    <input
+      #idTheme
+      class="Search1"
+      type="number"
+      placeholder="Buscar"
+      aria-label="Search"
+    />
+    <button (click)="search(idTheme.value)" class="btnIndexC" type="submit">
+      Buscar
+    </button>
+  </form>
+  <hr />
+  <table class="table table-dark table-sm">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Localidad</th>
+        <th>Estatus</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="!th; else elseTemplate">
+        <tr *ngFor="let th of Theme">
+
+          <td>{{ th.tId }}</td>
+          <td>{{ th.tName }}</td>
+          <td>{{ th.lName }}</td>
+          <td>{{ th.tStatus }}</td>
+          <td>
+            <button (click)="mostrar(th.tId)" class="btn btn-Dark">
+              <img src="assets/img/BeditB.png" alt="" width="22px">
+            </button>
+            <button (click)="deleteTheme(th.tId)" class="btn btn-Dark">
+              <img src="assets/img/BbasuraB.png" alt="" width="22px">
+            </button>
+            <button class="btn btn-success" (click)="mostrarTema(th.tId)" type="submit">Añadir Localidad</button>
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <tr>
+          <td>{{ th[0].tId }}</td>
+          <td>{{ th[0].tName }}</td>
+          <td>{{ th[0].lName }}</td>
+          <td>{{ th[0].tStatus }}</td>
+          <td>
+            <button (click)="mostrar(th[0].tId)" class="btn btn-Dark">
+              <img src="assets/img/BeditB.png" alt="" width="22px">
+            </button>
+            <button (click)="deleteTheme(th[0].tId)" class="btn btn-Dark">
+              <img src="assets/img/BbasuraB.png" alt="" width="22px">
+            </button>
+            <button class="btn btn-success" (click)="mostrarTema(th[0].tId)" type="submit">Añadir Localidad</button>
+          </td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+
+  <!--Modal para la edicion de formularios -->
+  <div class="ModalEdit" id="ModalEdit">
+    <div class="ModalEditBack" id="ModalEditBack">
+      <div class="ModalTituloEdit">
+        <h1>Editar Tema</h1>
+        <h4 *ngIf="themeData">{{ themeData.tName }}</h4>
+      </div>
+
+      <div class="ModalContenidoEdit" *ngIf="editFlag">
+        <form [formGroup]="updateTheme" (ngSubmit)="saveChanges()" class="row g-3">
+          <!--Todo contenido del form -->
+
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Nombre del tema</label>
+            <input formControlName="newName" placeholder="{{ themeData.tName }}" type="email" class="form-control" id="inputEmail4">
+          </div>
+          <!-- <div class="col-md-6">
+            <label for="inputState" class="form-label">Ubicación</label>
+            <select id="inputState" class="form-select">
+              <option selected>Activo</option>
+              <option>Inactivo</option>
+            </select>
+          </div> -->
+          <div class="col-md-4">
+            <label for="inputState" class="form-label">Estatus</label>
+            <select formControlName="newStatus" id="inputState" class="form-select">
+              <option class="current-data" value="{{ themeData.tStatus }}">Estatus actual</option>
+              <option value=true>Activo</option>
+              <option value=false>Inactivo</option>
+            </select>
+          </div>
+
+          <!-- <div class="col-md-4">
+            <label for="inputState" class="form-label">Preguntas</label>
+            <select id="inputState" class="form-select">
+              <option selected>pregunta 1</option>
+              <option>pregunta 2</option>
+            </select>
+          </div> -->
+
+          <!-- <div class="col-md-4">
+            <label for="inputState" class="form-label">Localidades</label>
+            <select id="inputState" class="form-select">
+              <option selected>pregunta 1</option>
+              <option>pregunta 2</option>
+            </select>
+          </div> -->
+
+          <!--Todo contenido del form -->
+
+          <!--Boton de actualizar-->
+          <div class="col-12">
+            <button class="btnIndexC" type="submit">Actualizar</button>
+
+          </div>
+          <!--Boton de actualizar-->
+        </form>
+      </div>
+      <div class="ModalBotonCerrar">
+        <button (click)="cerrar()" class="btn btn-danger" id="quitarContenidoModalpopup" type="submit">Cerrar</button>
+
+      </div>
+    </div>
+
+  </div>
+  <!--Modal para la edicion de formularios -->
+
+<!--Modal para agregar temas -->
+<div class="ModalEditTemas" id="ModalEditTemas">
+  <div class="ModalEditBackTemas" id="ModalEditBackTemas">
+    <div class="ModalTituloEdit">
+      <h1>Agregar Localidad a</h1>
+      <h4 *ngIf="themeData">{{ themeData.tName }}</h4>
+    </div>
+
+    <div class="ModalContenidoEdit">
+      <form class="row g-3">
+        <div class="ModuloAgregar0">
+          <div class="moduloAgregar">
+            <div class="moduloAgregar1">
+              <h2>Agregar un Localidades</h2>
+              <button class="btnPregunta" type="button" (click)="addRelatedLocation(locationRelation.value)">+</button>
+            </div>
+
+            <label for="inputState" class="form-label">Localidad</label>
+            <select #locationRelation id="inputState" class="form-select">
+              <option *ngFor="let addLocation of Locations" value="{{ addLocation.lId }}">{{ addLocation.lName }}</option>
+            </select>
+
+          </div>
+        </div>
+        <div class="ModuloAgregar0">
+          <div class="moduloAgregar">
+            <div class="TablaTemasUsuarios">
+              <div class="moduloAgregar1">
+                <h2>Localidad del tema</h2>
+              </div>
+              <table class="table table-striped table-dark">
+                <thead>
+                  <tr>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let location of relatedLocations">
+                    <td>{{ location.lName }}</td>
+                    <td><button (click)="getIdx(location.lId)" class="btn btn-Dark"><img src="assets/img/BbasuraB.png" alt="" width="22px"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <!-- <button class="btnIndexC" type="submit">Agregar</button> -->
+
+        </div>
+      </form>
+    </div>
+    <div class="ModalBotonCerrar">
+      <button class="btn btn-danger" (click)="cerrarTema()" type="submit">Cerrar</button>
+
+    </div>
+  </div>
+
+</div>
+<!--Modal para agregar temas -->
+
+</div>
