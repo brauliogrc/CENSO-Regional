@@ -216,3 +216,4 @@ C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Deb
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.genruntimeconfig.cache
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.Properties.Resources.resources
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.GenerateResource.cache
+C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Debug\net5.0\CensoAPI02.csproj.CopyComplete

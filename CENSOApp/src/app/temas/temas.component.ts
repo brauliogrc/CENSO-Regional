@@ -91,7 +91,7 @@ export class TemasComponent implements OnInit {
       .subscribe(
         (data) => {
           this.Theme = [...data];
-          console.log(this.Theme);
+          // console.log(this.Theme);
           
         },
         (error: HttpErrorResponse) => {
@@ -112,7 +112,7 @@ export class TemasComponent implements OnInit {
 
     this._themeService.addNewTheme(dataNewTheme).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showErrors.success(data.message);
         this.getThemeList();
         this.newTheme.reset();
@@ -128,7 +128,7 @@ export class TemasComponent implements OnInit {
   deleteTheme(themeId: number): void {
     this._themeService.deleteTheme(themeId).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showErrors.success(data.message);
         this.th = null;
         this.getThemeList();
@@ -194,7 +194,7 @@ export class TemasComponent implements OnInit {
     this._searchService.getExistingTheme(themeId).subscribe(
       (data) => {
         this.themeData = data[0];
-        console.log(this.themeData);
+        // console.log(this.themeData);
         this.editFlag = true;
       },
       (error: HttpErrorResponse) => {
@@ -219,12 +219,12 @@ export class TemasComponent implements OnInit {
       locationId: null
     };
 
-    console.log(saveChanges);
+    // console.log(saveChanges);
     
 
     this._themeService.themeUpdate(saveChanges).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showErrors.success(data.message);
         this.getThemeList();
         this.updateTheme.reset();
@@ -241,7 +241,7 @@ export class TemasComponent implements OnInit {
     this._searchService.getRelatedLocations(themeId).subscribe(
       (data) => {
         this.relatedLocations = [...data];
-        console.log(this.relatedLocations);
+        // console.log(this.relatedLocations);
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -268,7 +268,7 @@ export class TemasComponent implements OnInit {
       .deleteRelatedLocation(locationId, this.themeData.tId)
       .subscribe(
         (data) => {
-          console.log(data.message);
+          // console.log(data.message);
           this._showErrors.success(data.message);
           this.getRelatedLocations(this.themeData.tId);
         },
@@ -288,7 +288,7 @@ export class TemasComponent implements OnInit {
 
     this._themeService.addRelatedLocation(newRelationship).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showErrors.success(data.message);
         this.getRelatedLocations(this.themeData.tId);
       },

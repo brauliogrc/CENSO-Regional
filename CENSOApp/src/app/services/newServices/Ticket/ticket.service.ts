@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TicketService {
   private MyApiUrl: string = 'Ticket/';
+  
   private headers = new HttpHeaders({
     'Authorization': `Bearer ${sessionStorage.getItem('token')}`,
   });

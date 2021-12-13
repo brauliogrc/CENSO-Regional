@@ -4,7 +4,7 @@ export class LocationValidate {
   localityValidation(locationName: string | null): number | null {
     if (locationName == 'AIS SLP')                       return 1;
     if (locationName == 'Benecke Kaliko')                return 2;
-    if (locationName == 'Cuautla')                       return 3;
+    if (locationName == 'Cauutla')                       return 3;
     if (locationName == 'Cuautla GDL')                   return 4;
     if (locationName == 'Federal Distr')                 return 5;
     if (locationName == 'Finance Center')                return 6;
@@ -38,6 +38,7 @@ export class LocationValidate {
     if (locationName == 'Tlaquepaque')                   return 34;
     if (locationName == 'Vib. Control')                  return 35;
     if (locationName == 'Zapopan')                       return 36;
+    if (locationName == 'CT Fluid Mexicana')             return 37;
 
     return null;
   }
@@ -81,6 +82,7 @@ export class LocationValidate {
     if (locationId ==  34)    return 'Tlaquepaque';
     if (locationId ==  35)    return 'Vib. Control';
     if (locationId ==  36)    return 'Zapopan';
+    if (locationId ==  37)    return 'CT Fluid Mexicana';
 
     return null;
   }

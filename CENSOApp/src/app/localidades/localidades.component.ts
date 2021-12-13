@@ -80,11 +80,11 @@ export class LocalidadesComponent implements OnInit {
       lCreationUser: Number(sessionStorage.getItem('userId')),
       lStatus: this.newLocation.get('lStatus')?.value,
     };
-    console.log(newLocation);
+    // console.log(newLocation);
 
     this._locationService.addNewLocation(newLocation).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.getLocationList();
         this.newLocation.reset();
@@ -101,7 +101,7 @@ export class LocalidadesComponent implements OnInit {
   deleteLocation(locationId: number): void {
     this._locationService.deleteLocaion(locationId).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.location = null;
         this.getLocationList();
@@ -148,7 +148,7 @@ export class LocalidadesComponent implements OnInit {
       (data) => {
         this.locationData = data[0];
         this.editFlag = true;
-        console.log(this.locationData);
+        // console.log(this.locationData);
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -171,11 +171,11 @@ export class LocalidadesComponent implements OnInit {
       itemStatus: this.updateLocation.get('newStatus').value,
       locationId: null
     };
-    console.log(saveChanges);
+    // console.log(saveChanges);
 
     this._locationService.locatinoUpdate(saveChanges).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.getLocationList();
         this.updateLocation.reset();

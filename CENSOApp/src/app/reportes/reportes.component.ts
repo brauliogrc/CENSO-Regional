@@ -28,7 +28,7 @@ export class ReportesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('Iniciadno');
+    // console.log('Iniciadno');
     this.validRole();
   }
 
@@ -95,7 +95,7 @@ export class ReportesComponent implements OnInit {
   getList() {
     this.ticketList = this.objectArray.ticketList;
     this.back = this.objectArray.ticketList;
-    console.log(this.objectArray.ticketList);
+    // console.log(this.objectArray.ticketList);
   }
 
   exportToExcel() {
@@ -112,7 +112,7 @@ export class ReportesComponent implements OnInit {
   filter(): void {
     this.ticketList = [...this.back];
 
-    console.log(this.filterBy.value.theme);
+    // console.log(this.filterBy.value.theme);
     
 
     if (this.filterBy.value.from != '') {
@@ -131,7 +131,7 @@ export class ReportesComponent implements OnInit {
       );
     }
 
-    console.log(this.ticketList);
+    // console.log(this.ticketList);
   }
 
   today(): string {
@@ -143,7 +143,7 @@ export class ReportesComponent implements OnInit {
     month < 10 ? (month = '0' + month) : month;
 
     const fullDate: string = year + '-' + month + '-' + day;
-    console.log(fullDate);
+    // console.log(fullDate);
 
     return fullDate;
   }

@@ -131,11 +131,11 @@ export class PreguntasComponent implements OnInit {
       qCreationUser: Number(sessionStorage.getItem('userId')),
       ThemeId: this.newQuestion.get('ThemeId')?.value,
     };
-    console.log(dataNewQuestion);
+    // console.log(dataNewQuestion);
 
     this._questionService.addNewQuestion(dataNewQuestion).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.getQuestionList();
         this.newQuestion.reset();
@@ -151,7 +151,7 @@ export class PreguntasComponent implements OnInit {
   deleteQuestion(questionId: number) {
     this._questionService.deleteQuestion(questionId).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.question = null;
         this.getQuestionList();
@@ -215,7 +215,7 @@ export class PreguntasComponent implements OnInit {
     this._searchService.getExistingQuestion(questionId).subscribe(
       (data) => {
         this.questionData = data[0];
-        console.log(this.questionData);
+        // console.log(this.questionData);
         this.editFlag = true;
       },
       (error: HttpErrorResponse) => {
@@ -239,11 +239,11 @@ export class PreguntasComponent implements OnInit {
       locationId: null
     };
 
-    console.log(saveChanges);
+    // console.log(saveChanges);
 
     this._questionService.questionUpdate(saveChanges).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.updateQuestion.reset();
         this.getQuestionList();
@@ -259,7 +259,7 @@ export class PreguntasComponent implements OnInit {
     this._searchService.getRelatedTopicsQ(questionId).subscribe(
       (data) => {
         this.relatedTheme = [...data];
-        console.log(this.relatedTheme);
+        // console.log(this.relatedTheme);
       },
       (error: HttpErrorResponse) => {
         this._showError.statusCode(error);

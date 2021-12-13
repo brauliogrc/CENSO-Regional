@@ -53,7 +53,7 @@ export class FvacioComponent implements OnInit {
             this.app.mostrarbusq();
             this.searchFlag = true;
             this.ticketStatus = data.ticket[0];
-            console.log(this.ticketStatus);
+            // console.log(this.ticketStatus);
 
             if (data.answer) {
               this.haveAnswer = true;
@@ -61,10 +61,10 @@ export class FvacioComponent implements OnInit {
               if ( data.answer[0].asAttachement != null ) {
                 this.haveAttachement = true;
               }
-              console.log(this.responsable);
+              // console.log(this.responsable);
               
             } else {
-              console.log(data.message);
+              // console.log(data.message);
               this._showError.success(data.message);
             }
 
@@ -85,7 +85,7 @@ export class FvacioComponent implements OnInit {
       .subscribe(
         (data) => {
           this.userTickets = [...data];
-          console.log(data);
+          // console.log(data);
         },
         (error: HttpErrorResponse) => {
           console.error(error.error.message);

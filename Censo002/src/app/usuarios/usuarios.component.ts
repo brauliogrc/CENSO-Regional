@@ -150,7 +150,7 @@ export class UsuariosComponent implements OnInit {
     // console.log(event, event.keyCode, event.keyIdentifier);
     // console.log(event.keyCode, event.keyIdentifier);
     let keyCode: number = event.keyCode;
-    console.log(keyCode);
+    // console.log(keyCode);
     if (keyCode === 32) {
       this._userSerice.getUserInformation(Number(employeeNumber)).subscribe(
         (data) => {
@@ -158,7 +158,7 @@ export class UsuariosComponent implements OnInit {
           this.userInformation.employeeNumber = data.employeeNumber;
           this.userInformation.name = data.name;
           this.userInformation.location = data.location;
-          console.log(this.userInformation);
+          // console.log(this.userInformation);
         },
         (error: HttpErrorResponse) => {
           console.error(error.error.message);
@@ -212,12 +212,12 @@ export class UsuariosComponent implements OnInit {
         dataNewUser.uEmail = email;
       }
 
-      console.log(dataNewUser);
+      // console.log(dataNewUser);
 
       // Registro del nuevo usuario en la tabla HRU
       this._userSerice.addNewUser(dataNewUser).subscribe(
         (data) => {
-          console.log(data.message);
+          // console.log(data.message);
           this._showError.success(data.message);
           this.getUserList();
           this.newUser.reset();
@@ -238,11 +238,11 @@ export class UsuariosComponent implements OnInit {
 
   // Borrado logico del usuario
   deleteUser(userId: number): void {
-    console.log(userId);
+    // console.log(userId);
 
     this._userSerice.deleteUser(userId).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.user = null;
         this.getUserList();
@@ -334,7 +334,7 @@ export class UsuariosComponent implements OnInit {
       (data) => {
         // this.setTheme([...data]);
         this.relatedTopics = [...data];
-        console.log(this.relatedTopics);
+        // console.log(this.relatedTopics);
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -374,7 +374,7 @@ export class UsuariosComponent implements OnInit {
     // Llamada al método de actualización
     this._userSerice.userUpdate(saveChanges).subscribe(
       (data) => {
-        console.log('Usuario actualizado');
+        // console.log('Usuario actualizado');
         this._showError.success(data.message);
         this.getUserList();
       },
@@ -389,7 +389,7 @@ export class UsuariosComponent implements OnInit {
   getIdx(themeId: number) {
     this.relatedTopics.find((item, idx) => {
       if (item.tId === themeId) {
-        console.log(idx);
+        // console.log(idx);
         this.deleteRelatedTopics(item.tId);
       }
     });
@@ -402,7 +402,7 @@ export class UsuariosComponent implements OnInit {
       .deleteRelatedTopic(this.userData.uEmployeeNumber, themeId)
       .subscribe(
         (data) => {
-          console.log(data.message);
+          // console.log(data.message);
           this._showError.success(data.message);
           this.getRelatedTopics(this.userData.uEmployeeNumber);
         },
@@ -415,7 +415,7 @@ export class UsuariosComponent implements OnInit {
 
   // Añadiendo un tema aun usuario
   addRelatedTopic(themeId: number): void {
-    console.log(themeId);
+    // console.log(themeId);
 
     const newRelation: userTheme = {
       employeeNumber: this.userData.uEmployeeNumber,
@@ -423,7 +423,7 @@ export class UsuariosComponent implements OnInit {
     };
     this._userSerice.addRelatedTopic(newRelation).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.getRelatedTopics(this.userData.uEmployeeNumber);
       },
@@ -439,7 +439,7 @@ export class UsuariosComponent implements OnInit {
     this.themeList = [];
     this._fieldsService.getThme(locationId).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
 
         this.themeList = [...data];
       },

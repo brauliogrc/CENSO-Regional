@@ -72,7 +72,7 @@ export class AreasComponent implements OnInit {
     this._fieldsService.getLocations().subscribe(
       (data) => {
         this.Locations = [...data];
-        console.log(this.Locations);
+        // console.log(this.Locations);
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -88,7 +88,7 @@ export class AreasComponent implements OnInit {
       .subscribe(
         (data) => {
           this.Areas = [...data];
-          console.log(this.Areas);
+          // console.log(this.Areas);
         },
         (error: HttpErrorResponse) => {
           console.error(error.error.message);
@@ -104,11 +104,11 @@ export class AreasComponent implements OnInit {
       aStatus: this.newArea.get('aStatus')?.value,
     };
 
-    console.log(dataNewArea);
+    // console.log(dataNewArea);
 
     this._areaService.addNewArea(dataNewArea).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.getAreasList();
         this.newArea.reset();
@@ -124,7 +124,7 @@ export class AreasComponent implements OnInit {
   deleteArea(areaId: number): void {
     this._areaService.deleteArea(areaId).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.area = null;
         this.getAreasList();
@@ -148,7 +148,7 @@ export class AreasComponent implements OnInit {
         (data) => {
           this.area = data;
           this.Areas = [];
-          console.log(this.area);
+          // console.log(this.area);
         },
         (error: HttpErrorResponse) => {
           console.error(error.error.message + ' ddd');
@@ -178,7 +178,7 @@ export class AreasComponent implements OnInit {
       (data) => {
         this.areaData = data[0];
         this.editFlag = true;
-        console.log(this.areaData);
+        // console.log(this.areaData);
       },
       (error: HttpErrorResponse) => {
         this._showError.statusCode(error);
@@ -202,7 +202,7 @@ export class AreasComponent implements OnInit {
       locationId: this.updateArea.get('newLocation').value,
     };
 
-    console.log(saveChanges);
+    // console.log(saveChanges);
 
     this._areaService.areaUpdate(saveChanges).subscribe(
       (data) => {

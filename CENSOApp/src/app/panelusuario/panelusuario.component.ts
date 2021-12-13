@@ -93,7 +93,7 @@ export class PanelusuarioComponent implements OnInit {
     this._fields.getThme(this.location).subscribe(
       (data) => {
         this.Theme = [...data];
-        console.log(this.Theme);
+        // console.log(this.Theme);
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -108,7 +108,7 @@ export class PanelusuarioComponent implements OnInit {
     this._fields.getQuestions(Number(themeId)).subscribe(
       (data) => {
         this.Questions = [...data];
-        console.log(this.Questions);
+        // console.log(this.Questions);
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -123,7 +123,7 @@ export class PanelusuarioComponent implements OnInit {
     this._fields.getAreas(this.location).subscribe(
       (data) => {
         this.Areas = [...data];
-        console.log(this.Areas);
+        // console.log(this.Areas);
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -180,7 +180,7 @@ export class PanelusuarioComponent implements OnInit {
     // Registro de la peticion en la base de datos
     this._requestService.addNewRequest(formData).subscribe(
       (data) => {
-        console.log(data);
+        // console.log(data);
         this._showError.success(data.message);
         this.bodyRequest.reset();
       },
@@ -200,7 +200,7 @@ export class PanelusuarioComponent implements OnInit {
 
     if (file) {
       this.file = file;
-      console.log(file + 'asamclskmx');
+      // console.log(file + 'asamclskmx');
     }
   };
 

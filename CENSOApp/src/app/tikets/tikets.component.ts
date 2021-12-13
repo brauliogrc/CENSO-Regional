@@ -77,7 +77,7 @@ export class TiketsComponent implements OnInit {
   deleteTicket(ticketId: number): void {
     this._ticketService.deleteTicket(ticketId).subscribe(
       (data) => {
-        console.log(data.message);
+        // console.log(data.message);
         this._showError.success(data.message);
         this.getTiketsList();
       },
@@ -98,18 +98,18 @@ export class TiketsComponent implements OnInit {
 
       this._searchService.searchTicket(ticketSearch).subscribe(
         (data) => {
-          console.log(data);
+          // console.log(data);
           this.Tikets = [];
           this.AnonTikets = [];
 
           this.flag = true;
           if ( data.ticket != null ) {
             this.Tikets = [... data.ticket];
-            console.log(this.Tikets);
+            // console.log(this.Tikets);
           }
           if ( data.anonTicket != null ) {
             this.AnonTikets = [...data.anonTicket];
-            console.log(this.AnonTikets);
+            // console.log(this.AnonTikets);
           }
           // if (data[0].rUserName != null) {
           //   this.tiket = data;

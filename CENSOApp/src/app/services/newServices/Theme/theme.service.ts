@@ -38,7 +38,7 @@ export class ThemeService {
 
   // Actualizacion del tema
   themeUpdate(newThemeData: itemChanges): Observable<any> {
-    console.log( 'Service: ', newThemeData);
+    // console.log( 'Service: ', newThemeData);
     
 
     return this._http.patch(
@@ -63,7 +63,7 @@ export class ThemeService {
 
   // Añadir una relacion entre el tema y la localidad
   addRelatedLocation(relationship: addThemeRelationship): Observable<any> {
-    console.log(relationship);
+    // console.log(relationship);
 
     return this._http.post(
       `${environment.API_URL}` + this.MyApiUrl + 'addRelatedLocation',

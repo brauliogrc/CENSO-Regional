@@ -85,7 +85,7 @@ export class RespuestaFolioComponent implements OnInit {
     this.flag = false;
     this.answerFlag = false;
     this.ticketId = this._ticketService.getTicket;
-    console.log('ticket id: ', this.ticketId);
+    // console.log('ticket id: ', this.ticketId);
 
     // console.log(this.ticketId);
     this.getTicketStatus();
@@ -112,7 +112,7 @@ export class RespuestaFolioComponent implements OnInit {
             data.anonTicketData[0].arEmployeeType
           );
 
-          console.log(this.anonTicketData);
+          // console.log(this.anonTicketData);
 
           this.flag = true;
           this.getAvailableUsers(this.anonTicketData.tId);
@@ -134,7 +134,7 @@ export class RespuestaFolioComponent implements OnInit {
             data.ticketData[0].rEmployeeType
           );
 
-          console.log(this.ticketData);
+          // console.log(this.ticketData);
 
           this.flag = true;
           this.getAvailableUsers(this.ticketData.tId);
@@ -144,7 +144,7 @@ export class RespuestaFolioComponent implements OnInit {
         }
         this.daysPassed = data.daysPassed;
         if (data.answer) this.answer = data.answer.asAnswer;
-        console.log(this.currentStatusValue + ' - ' + this.currentStatusName);
+        // console.log(this.currentStatusValue + ' - ' + this.currentStatusName);
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -161,12 +161,12 @@ export class RespuestaFolioComponent implements OnInit {
         itemId: themeId,
       };
 
-      console.log(searchData);
+      // console.log(searchData);
 
       this._fields.getAvailableUsers(searchData).subscribe(
         (data) => {
           this.availableUsers = [...data];
-          console.log(this.availableUsers);
+          // console.log(this.availableUsers);
         },
         (error: HttpErrorResponse) => {
           console.error(error.error.message);
@@ -181,7 +181,7 @@ export class RespuestaFolioComponent implements OnInit {
     this._fields.getTicketStatus().subscribe(
       (data) => {
         this.ticketStatus = [...data];
-        console.log(this.ticketStatus);
+        // console.log(this.ticketStatus);
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -202,19 +202,19 @@ export class RespuestaFolioComponent implements OnInit {
     );
     formData.append('asAttachement', this.file);
 
-    console.log(this.newAnswer.get('asUserId')?.value);
+    // console.log(this.newAnswer.get('asUserId')?.value);
 
-    console.log(formData.get('requestStatus'));
+    // console.log(formData.get('requestStatus'));
 
     this._answerService.addNewAnswer(formData).subscribe(
       (data) => {
-        console.log('Registro exitoso de la respuesta');
+        // console.log('Registro exitoso de la respuesta');
         this._showError.success(data.message);
         this.newAnswer.reset();
         this.ticketId = 0;
       },
       (error: HttpErrorResponse) => {
-        console.log(error.error.message);
+        // console.log(error.error.message);
         this._showError.statusCode(error);
       }
     );
@@ -227,7 +227,7 @@ export class RespuestaFolioComponent implements OnInit {
 
     if (file) {
       this.file = file;
-      console.log(file);
+      // console.log(file);
     }
   };
 

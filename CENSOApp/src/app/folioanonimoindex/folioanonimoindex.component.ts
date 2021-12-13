@@ -56,7 +56,7 @@ export class FolioanonimoindexComponent implements OnInit {
       ThemeId: this.bodyRequest.get('ThemeId')?.value,
       LocationId: this.bodyRequest.get('ThemeId')?.value,
     };
-    console.log(anonReq);
+    // console.log(anonReq);
 
     // Nos suscribimos al método del service, enviandole el objeto con los datos a registrar en la base de datos
     // this._reqService.saveAnonRequest(anonReq).subscribe(data => {

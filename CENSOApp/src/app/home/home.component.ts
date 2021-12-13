@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
     this._fields.getLocations().subscribe(
       (data) => {
         this.Locations = [...data];
-        console.log(this.Locations);
+        // console.log(this.Locations);
       },
       (error: HttpErrorResponse) => {
         console.error(error);
@@ -191,7 +191,7 @@ export class HomeComponent implements OnInit {
     if (file) {
       this.file = file;
 
-      console.log(file);
+      // console.log(file);
     }
   };
 
@@ -211,7 +211,7 @@ export class HomeComponent implements OnInit {
     this._ticketService.getAnonTicketStatus(Number(folioId)).subscribe(
       (data) => {
         this.folio = data.anonTicket[0];
-        console.log(this.folio);
+        // console.log(this.folio);
         if (data.answer) {
           this.responsable = data.answer[0];
 
@@ -225,9 +225,9 @@ export class HomeComponent implements OnInit {
           }
           
           this.answerFlag = true;
-          console.log(this.responsable);
+          // console.log(this.responsable);
         } else {
-          console.log(data.message);
+          // console.log(data.message);
           this._showError.success(data.message);
         }
         this.app.mostrarbusq();

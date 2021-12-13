@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace CensoAPI02.Controllers.NewControllers
 {
     [Route("api/[controller]")]
-    [ApiController][Authorize(Policy = "StaffRH")]
+    [ApiController]//[Authorize(Policy = "StaffRH")]
     public class TicketController : ControllerBase
     {
 
@@ -214,7 +214,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
 
         // Consulta del status de un ticket (requiere policy staff rh)
-        [HttpGet][Route("ticketStatus/{employeeNumber}/{ticketId}")][Authorize]//[AllowAnonymous]
+        [HttpGet][Route("ticketStatus/{employeeNumber}/{ticketId}")][AllowAnonymous]
         public async Task<ActionResult> getTicketStatus(int employeeNumber, int ticketId)
         {
             try
