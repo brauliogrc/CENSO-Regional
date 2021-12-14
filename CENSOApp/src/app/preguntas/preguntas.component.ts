@@ -30,6 +30,7 @@ import {
 export class PreguntasComponent implements OnInit {
   // Array que contiene loa datos de las preguntas para ser mostrados en la tabla
   Questions: questionList[] = [];
+  private respaldo: questionList[] = [];
 
   question: any;
 
@@ -115,6 +116,7 @@ export class PreguntasComponent implements OnInit {
       .subscribe(
         (data) => {
           this.Questions = [...data];
+          this.respaldo = [...data];
         },
         (error: HttpErrorResponse) => {
           console.error(error.error.message);
@@ -182,6 +184,10 @@ export class PreguntasComponent implements OnInit {
         }
       );
     }
+  }
+  // Limpiado del filtrado de la tabla
+  public clearFilter(): void {
+    this.Questions = [...this.respaldo];
   }
 
   // Llamado de modals y actualización de preguntas

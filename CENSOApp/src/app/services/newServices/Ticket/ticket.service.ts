@@ -35,8 +35,7 @@ export class TicketService {
   // Borrado logico de un ticket
   deleteTicket(ticketId: number): Observable<any> {
     return this._http.delete(
-      `${environment.API_URL}` + this.MyApiUrl + 'deleteTicket/' + ticketId,
-      { headers: this.headers }
+      `${environment.API_URL}` + this.MyApiUrl + 'deleteTicket/' + ticketId, { headers: this.headers }
     );
   }
 

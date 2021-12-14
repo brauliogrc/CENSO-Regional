@@ -31,8 +31,8 @@ export class SearchService {
   constructor(private _http: HttpClient) {}
 
   // Busqueda de una localidad especifica
-  searchLocation(locationId: string): Observable<locationList> {
-    return this._http.get<locationList>(
+  searchLocation(locationId: string): Observable<locationList[]> {
+    return this._http.get<locationList[]>(
       `${environment.API_URL}` + this.MyApiUrl + 'locationSearch/' + locationId,
       { headers: this.headers }
     );

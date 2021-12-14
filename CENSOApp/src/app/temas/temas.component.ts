@@ -28,6 +28,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class TemasComponent implements OnInit {
   // Array que conendrás los datos de los temas para mostrarlos en la tabla
   Theme: themeList[] = [];
+  private respaldo: themeList[] = [];
 
   th: any;
 
@@ -91,6 +92,7 @@ export class TemasComponent implements OnInit {
       .subscribe(
         (data) => {
           this.Theme = [...data];
+          this.respaldo = [...data];
           // console.log(this.Theme);
           
         },
@@ -160,6 +162,11 @@ export class TemasComponent implements OnInit {
         }
       );
     }
+  }
+
+  // Limpiado del filtrado de la tabla
+  public clearFilter(): void {
+    this.Theme = [...this.respaldo];
   }
 
   // Llamado de modals y actualizacion del tema

@@ -26,6 +26,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class AreasComponent implements OnInit {
   Areas: areaList[] = []; // Asignar a una interface
+  private respaldo: areaList[] = [];
   area: any;
 
   Locations: Location[] = [];
@@ -88,6 +89,7 @@ export class AreasComponent implements OnInit {
       .subscribe(
         (data) => {
           this.Areas = [...data];
+          this.respaldo = [...data]
           // console.log(this.Areas);
         },
         (error: HttpErrorResponse) => {
@@ -155,6 +157,11 @@ export class AreasComponent implements OnInit {
         }
       );
     }
+  }
+
+  // Limpiado del filtrado de la tabla
+  public clearFilter(): void {
+    this.Areas = [...this.respaldo];
   }
 
   // Llamado de modals y actualizacion de areas

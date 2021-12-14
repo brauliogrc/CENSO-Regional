@@ -20,7 +20,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class TiketsComponent implements OnInit {
   Tikets: ticketList[] = [];
+  private respaldoTickets: ticketList[] = [];
   AnonTikets: anonTicketList[] = [];
+  private respaldoAnonTickets: anonTicketList[] = [];
 
   tiket: any;
   anonTicket: any;
@@ -65,6 +67,8 @@ export class TiketsComponent implements OnInit {
         (data) => {
           this.Tikets = [...data.tickets];
           this.AnonTikets = [...data.anonTickets];
+          this.respaldoTickets = [...data.tickets];
+          this.respaldoAnonTickets = [...data.anonTickets];
         },
         (error: HttpErrorResponse) => {
           console.error(error.error.message);
@@ -129,6 +133,11 @@ export class TiketsComponent implements OnInit {
         }
       );
     }
+  }
+
+  public clearFilter(): void {
+    this.Tikets = [...this.respaldoTickets];
+    this.AnonTikets = [...this.respaldoAnonTickets];
   }
 
   // Obtencion de los datos de la tabla al hacer click en una row

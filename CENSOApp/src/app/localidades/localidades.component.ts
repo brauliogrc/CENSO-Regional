@@ -24,6 +24,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class LocalidadesComponent implements OnInit {
   // Array que contiene la informacion de las localidades disponibles para ser mostradas en la tabla
   Locations: locationList[] = [];
+  private respaldo: locationList[] = [];
 
   // Toma los valores de la localidad buscada por medio del id
   location: any;
@@ -65,6 +66,7 @@ export class LocalidadesComponent implements OnInit {
     this._listService.getLocationList().subscribe(
       (data) => {
         this.Locations = [...data];
+        this.respaldo = [...data];
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
@@ -117,14 +119,19 @@ export class LocalidadesComponent implements OnInit {
   search(locationName: string): void {
     this._searchService.searchLocation(locationName).subscribe(
       (data) => {
-        this.location = data;
-        this.Locations = [];
+        this.Locations = [...data];
+        // this.Locations = [];
       },
       (error: HttpErrorResponse) => {
         console.error(error.error.message);
         this._showError.statusCode(error);
       }
     );
+  }
+  
+  // Limpiado del filtrado de la tabla
+  public clearFilter(): void {
+    this.Locations = [...this.respaldo];
   }
 
   // Llamado de modals y actualización de la localidad.

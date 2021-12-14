@@ -1,6 +1,7 @@
 export class LocationValidate {
   constructor() {}
-
+  
+  // MÉTODO EN DESUSO
   localityValidation(locationName: string | null): number | null {
     if (locationName == 'AIS SLP')                       return 1;
     if (locationName == 'Benecke Kaliko')                return 2;
@@ -43,6 +44,7 @@ export class LocationValidate {
     return null;
   }
 
+  // MÉTODO EN DESUSO
   localityNameValidation(): string | null {
     let locationId: number = Number(sessionStorage.getItem('location'));
 
