@@ -23,12 +23,12 @@ namespace CensoAPI02.Controllers.SearchesControllers
         }
 
         // Busqueda de una localidad especifica (requiere policy Administrator)
-        [HttpGet][Route("locationSearch/{locationId}")][Authorize(Policy = "Administrador")]
-        public async Task<ActionResult> locationSearch(int locationId)
+        [HttpGet][Route("locationSearch/{locationName}")][Authorize(Policy = "Administrador")]
+        public async Task<ActionResult> locationSearch(string locationName)
         {
             try
             {
-                var query = await _context.Locations
+                /*var query = await _context.Locations
                     .Where(l => l.lStatus == true && l.lId == locationId)
                     .Select(l => new
                     {
@@ -37,9 +37,18 @@ namespace CensoAPI02.Controllers.SearchesControllers
                         l.lName,
                         l.lStatus
                     })
-                    .ToListAsync();
+                    .ToListAsync();*/
 
-                if (query == null || query.Count == 0)
+                var query = from loc in _context.Locations
+                            where loc.lName.ToUpper().Contains(locationName.ToUpper())
+                            select new
+                            {
+                                loc.lId,
+                                loc.lName,
+                                loc.lStatus
+                            };
+
+                if (query == null)
                 {
                     return NotFound(new { message = $"La localidad no se encuentra en la base de datos" });
                 }
@@ -93,14 +102,14 @@ namespace CensoAPI02.Controllers.SearchesControllers
 
         // Busqueda de un tema especifico en la localidad (requiere policy SUHR)
         [HttpGet][Route("themeSearch/{locationId}/{itemId}")][Authorize(Policy = "SURH")]
-        public async Task<ActionResult> themeSearch(int locationId, int itemId)
+        public async Task<ActionResult> themeSearch(int locationId, string itemId)
         {
             try
             {
                 var query = from theme in _context.Theme
                             join lt in _context.LocationsThemes on theme.tId equals lt.ThemeId
                             join location in _context.Locations on lt.LocationId equals location.lId
-                            where theme.tId == itemId && location.lId == locationId //&& theme.tStatus == true
+                            where theme.tName.ToUpper().Contains(itemId.ToUpper()) && location.lId == locationId //&& theme.tStatus == true
                             select new
                             {
                                 // Datos del tema
@@ -127,7 +136,7 @@ namespace CensoAPI02.Controllers.SearchesControllers
 
         // Busqueda de una pregunta especifica en la localidad (requiere policy SUHR)
         [HttpGet][Route("questionSearch/{locationId}/{itemId}")][Authorize(Policy = "SURH")]
-        public async Task<ActionResult> questionSearch(int locationId, int itemId)
+        public async Task<ActionResult> questionSearch(int locationId, string itemId)
         {
             try
             {
@@ -136,7 +145,8 @@ namespace CensoAPI02.Controllers.SearchesControllers
                             join theme in _context.Theme on qt.ThemeId equals theme.tId
                             join lt in _context.LocationsThemes on theme.tId equals lt.ThemeId
                             join location in _context.Locations on lt.LocationId equals location.lId
-                            where question.qId == itemId && location.lId == locationId //&& question.qStatus == true
+                            where ( question.qName.ToUpper().Contains(itemId.ToUpper()) || theme.tName.ToUpper().Contains(itemId.ToUpper()) ) && 
+                                    location.lId == locationId //&& question.qStatus == true
                             select new
                             {
                                 // Datos de la pregunta
@@ -251,7 +261,7 @@ namespace CensoAPI02.Controllers.SearchesControllers
 
         // Busqueda de un area especifica en la localidad (requiere policy SUHR)
         [HttpGet][Route("areaSearch/{locationId}/{itemId}")][Authorize(Policy = "SURH")]
-        public async Task<ActionResult> areaSearch(int locationId, int itemId)
+        public async Task<ActionResult> areaSearch(int locationId, string itemId)
         {
             try
             {
@@ -259,7 +269,7 @@ namespace CensoAPI02.Controllers.SearchesControllers
                             join al in _context.AreasLocations on area.aId equals al.AreaId
                             join location in _context.Locations on al.LocationId equals location.lId
                             // where area.aStatus == true && area.aId == itemId && location.lId == locationId
-                            where area.aId == itemId && location.lId == locationId
+                            where area.aName.ToUpper().Contains(itemId.ToUpper()) && location.lId == locationId
                             select new
                             {
                                 // Datos del area

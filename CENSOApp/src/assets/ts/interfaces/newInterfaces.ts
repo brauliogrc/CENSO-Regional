@@ -160,7 +160,7 @@ export interface anonTicketList {
 // Interface de busquda
 export interface searchData {
   locationId: number;
-  itemId: number;
+  itemId: string | number;
 }
 
 export interface searchData2 {

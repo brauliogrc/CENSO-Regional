@@ -35,13 +35,13 @@
   <hr />
 
   <form class="form-search">
-    <input #SearchArea
+    <input #areaName
       class="Search1"
-      type="Search User"
+      type="text"
       placeholder="Buscar"
       aria-label="Search"
     />
-    <button class="btnIndexC" type="submit" (click)="searchArea(SearchArea.value)">Buscar</button>
+    <button class="btnIndexC" type="submit" (click)="searchArea(areaName.value)">Buscar</button>
   </form>
   <hr />
   <table class="table table-dark table-sm">

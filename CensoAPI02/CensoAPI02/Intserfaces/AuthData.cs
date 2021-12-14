@@ -104,7 +104,9 @@ namespace CensoAPI02.Intserfaces
 
         public string Email { get; set; }
 
-        private string Location { get; set; }
+        //private string Location { get; set; }
+
+        private int Location { get; set; }
 
         private string Name { get; set; }
 
@@ -121,7 +123,7 @@ namespace CensoAPI02.Intserfaces
             this.Email = Email;
         }
 
-        public void setUserLocation(string Location)
+        public void setUserLocation(int Location)
         {
             this.Location = Location;
         }
@@ -147,7 +149,7 @@ namespace CensoAPI02.Intserfaces
             return this.Email;
         }
 
-        public string getUserLocation()
+        public int getUserLocation()
         {
             return this.Location;
         }

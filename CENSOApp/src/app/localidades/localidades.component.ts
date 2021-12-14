@@ -114,8 +114,8 @@ export class LocalidadesComponent implements OnInit {
   }
 
   // Busca una localidad con base al id dado
-  search(locationId: any): void {
-    this._searchService.searchLocation(Number(locationId)).subscribe(
+  search(locationName: string): void {
+    this._searchService.searchLocation(locationName).subscribe(
       (data) => {
         this.location = data;
         this.Locations = [];

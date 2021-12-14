@@ -93,10 +93,13 @@ namespace CensoAPI02.Controllers
                             {
                                 Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)} - {reader.GetString(2)} - {reader.GetInt32(3)} - {reader.GetString(4)}");
                                 userAuthData.setUserEmployeeNumer(reader.GetInt32(0));
-                                userAuthData.setUserLocation(reader.GetString(1));
+                                //userAuthData.setUserLocation(reader.GetString(1));
                                 userAuthData.setUsername(reader.GetString(2));
                                 userAuthData.setSupervisorNumber(reader.GetInt32(3));
                                 userAuthData.setUserEmail(reader.GetString(4));
+
+                                // Busqueda del ID de la localidad
+                                userAuthData.setUserLocation( this.GetCENSOLocation( reader.GetString(1) ) );
 
                                 flag++;
                             }
@@ -125,6 +128,25 @@ namespace CensoAPI02.Controllers
             {
                 return BadRequest( ex.Message );
             }
+        }
+
+        // Consulta de localidades
+        [HttpGet][Authorize]
+        private int GetCENSOLocation( string name )
+        {
+            try
+            {
+                var locationId = from location in _context.Locations
+                                 where location.lName == name
+                                 select new { location.lId };
+
+                if ( locationId != null ) return Convert.ToInt32( locationId.First().lId );
+            }
+            catch( Exception ex )
+            {
+                return 0;
+            }
+            return 0;
         }
 
         // Obtencion de datos del claim

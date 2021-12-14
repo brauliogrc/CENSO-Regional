@@ -63,13 +63,13 @@
   </div>
   <form class="form-search">
     <input
-      #idTheme
+      #themeName
       class="Search1"
-      type="number"
+      type="text"
       placeholder="Buscar"
       aria-label="Search"
     />
-    <button (click)="search(idTheme.value)" class="btnIndexC" type="submit">
+    <button (click)="search(themeName.value)" class="btnIndexC" type="submit">
       Buscar
     </button>
   </form>

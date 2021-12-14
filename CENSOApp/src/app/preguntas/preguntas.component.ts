@@ -164,18 +164,17 @@ export class PreguntasComponent implements OnInit {
   }
 
   // Busqueda de una pregunta en especifico
-  search(questionId: any) {
-    if (questionId) {
+  search(questionName: string) {
+    if (questionName) {
       // Definicion de datos de busqueda
       let questionSearch: searchData = {
         locationId: Number(sessionStorage.getItem('location')),
-        itemId: Number(questionId),
+        itemId: questionName,
       };
 
       this._searchService.searchQuestion(questionSearch).subscribe(
         (data) => {
-          this.question = data;
-          this.Questions = [];
+          this.Questions = [...data];
         },
         (error: HttpErrorResponse) => {
           console.error(error.error.message);

@@ -31,7 +31,7 @@ export class SearchService {
   constructor(private _http: HttpClient) {}
 
   // Busqueda de una localidad especifica
-  searchLocation(locationId: number): Observable<locationList> {
+  searchLocation(locationId: string): Observable<locationList> {
     return this._http.get<locationList>(
       `${environment.API_URL}` + this.MyApiUrl + 'locationSearch/' + locationId,
       { headers: this.headers }
@@ -52,8 +52,8 @@ export class SearchService {
   }
 
   // Busqueda de un tema especifico en una localidad
-  searchTheme(searchData: searchData): Observable<themeList> {
-    return this._http.get<themeList>(
+  searchTheme(searchData: searchData): Observable<themeList[]> {
+    return this._http.get<themeList[]>(
       `${environment.API_URL}` +
         this.MyApiUrl +
         'themeSearch/' +
@@ -65,8 +65,8 @@ export class SearchService {
   }
 
   // Busqieda de una pregunta especifica en una localidad
-  searchQuestion(searchData: searchData): Observable<questionList> {
-    return this._http.get<questionList>(
+  searchQuestion(searchData: searchData): Observable<questionList[]> {
+    return this._http.get<questionList[]>(
       `${environment.API_URL}` +
         this.MyApiUrl +
         'questionSearch/' +
@@ -91,8 +91,8 @@ export class SearchService {
   }
 
   // Busqueda de un area en una localidad
-  searchArea(searchData: searchData): Observable<areaList> {
-    return this._http.get<areaList>(
+  searchArea(searchData: searchData): Observable<areaList[]> {
+    return this._http.get<areaList[]>(
       `${environment.API_URL}` +
         this.MyApiUrl +
         'areaSearch/' +

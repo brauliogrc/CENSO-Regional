@@ -112,7 +112,7 @@ namespace CensoAPI02.Controllers.NewControllers
         // Busqueda de informacion de un usuario, para su registro (requiere policy surh)
         [HttpGet]
         [Route("userInformation/{location}/{employeeNumber}")]
-        public async Task<ActionResult> getUserInformation(string location, int employeeNumber)
+        public async Task<ActionResult> getUserInformation(int location, int employeeNumber)
         {
             try
             {
@@ -120,13 +120,17 @@ namespace CensoAPI02.Controllers.NewControllers
                                     where user.uEmployeeNumber == employeeNumber
                                     select user.uEmployeeNumber;
 
+                var locationId = from loc in _context.Locations
+                                 where loc.lId == location
+                                 select new {loc.lName};
+
 
                 if ( !(userExistence == null || userExistence.Count() == 0) )
                 {
                     return Conflict(new { message = $"El usuario ya se enceuntra registrado" });
                 }
 
-                string query = "SELECT [EmployeeNumber], [Plant], [FullName], [EMail] FROM [p_HRPortal].[dbo].[VW_EmployeeData] WHERE Plant = '" + location + "' and EmployeeNumber = " + employeeNumber;
+                string query = "SELECT [EmployeeNumber], [Plant], [FullName], [EMail] FROM [p_HRPortal].[dbo].[VW_EmployeeData] WHERE Plant = '" + locationId.First().lName + "' and EmployeeNumber = " + employeeNumber;
                 using( SqlConnection connection = new SqlConnection( _config.GetConnectionString( "HRPortal" ) ) )
                 {
                     UserInformation userInformation = new UserInformation();
@@ -145,7 +149,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
                             userInformation.employeeNumber = reader.GetInt32(0);
                             userInformation.location = reader.GetString(1);
-                            userInformation.name = reader.GetString(2);
+                            userInformation.name = reader.GetString(2).Trim();
                             userInformation.email = reader.GetString(3);
 
                             flag = 1;

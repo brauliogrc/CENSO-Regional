@@ -141,18 +141,18 @@ export class TemasComponent implements OnInit {
   }
 
   // Busqueda de un tema en especifico
-  search(themeId: string): void {
-    if (themeId) {
+  search(themeName: string): void {
+    if (themeName) {
       // Definicioin de los datos de busquedas
       let themeSearch: searchData = {
         locationId: Number(sessionStorage.getItem('location')),
-        itemId: Number(themeId),
+        itemId: themeName,
       };
 
       this._searchService.searchTheme(themeSearch).subscribe(
         (data) => {
-          this.th = data;
-          this.Theme = [];
+          this.Theme = [...data];
+          // this.Theme = [];
         },
         (error: HttpErrorResponse) => {
           console.error(error.error.messae);

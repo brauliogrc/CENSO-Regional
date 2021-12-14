@@ -68,15 +68,17 @@ export class PanelusuarioComponent implements OnInit {
 
   // Definicion del id de la localidad para consultas
   defineLocation(): void {
-    const tokenValue: string | null = sessionStorage.getItem('location');
-    const locationValidate = new LocationValidate();
-    const locationValue = locationValidate.localityValidation(tokenValue);
+    // const tokenValue: string | null = sessionStorage.getItem('location');
+    // const locationValidate = new LocationValidate();
+    // const locationValue = locationValidate.localityValidation(tokenValue);
 
-    if (locationValue == null) {
-      this.location = Number(sessionStorage.getItem('location'));
-    } else {
-      this.location = locationValue;
-    }
+    // if (locationValue == null) {
+    //   this.location = Number(sessionStorage.getItem('location'));
+    // } else {
+    //   this.location = locationValue;
+    // }
+
+    this.location = Number( sessionStorage.getItem('location') );
 
     this.getTeme();
     this.getAreas();

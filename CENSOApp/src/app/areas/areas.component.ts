@@ -136,18 +136,17 @@ export class AreasComponent implements OnInit {
     );
   }
 
-  searchArea(areaId: string): void {
-    if (areaId) {
+  searchArea(areaName: string): void {
+    if (areaName) {
       // Definicion de os datos de busqueda
       let areaSearch: searchData = {
         locationId: Number(sessionStorage.getItem('location')),
-        itemId: Number(areaId),
+        itemId: areaName,
       };
 
       this._searchService.searchArea(areaSearch).subscribe(
         (data) => {
-          this.area = data;
-          this.Areas = [];
+          this.Areas = [...data];
           // console.log(this.area);
         },
         (error: HttpErrorResponse) => {

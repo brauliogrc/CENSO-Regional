@@ -40,12 +40,13 @@ export class UserService {
 
   // Busqueda de la informacion del usuario
   getUserInformation(employeeNumber: number): Observable<userInformation> {
-    let locationValidate = new LocationValidate();
+    // let locationValidate = new LocationValidate();
     return this._http.get<userInformation>(
       `${environment.API_URL}` +
         this.MyApiUrl +
         'userInformation/' +
-        locationValidate.localityNameValidation() +
+        // locationValidate.localityNameValidation() +
+        Number( sessionStorage.getItem('location') ) +
         '/' +
         employeeNumber,
       { headers: this.headers }
