@@ -23,9 +23,9 @@ export class CreateReportService {
   constructor(private _http: HttpClient) {}
 
   // Obtención de la información de los ticket para e reporte
-  getReportData(locationId: number): Observable<any> {
+  getReportData(locationId: number, employeeNumber: number): Observable<any> {
     return this._http
-      .get(`${environment.API_URL}` + this.MyApiUrl + locationId, {
+      .get(`${environment.API_URL}` + this.MyApiUrl + locationId + '/' + employeeNumber, {
         headers: this.headers,
       })
       .pipe(

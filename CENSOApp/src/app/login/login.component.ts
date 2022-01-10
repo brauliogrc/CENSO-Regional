@@ -55,8 +55,6 @@ export class LoginComponent implements OnInit {
           this.dataToken = helper.decodeToken(data.token);
           // console.log(this.dataToken);
 
-          // this.loginForm.reset();
-
           // Llamadas a los métodos de guardado del sessionStorage
           this._authService.saveEmployeenumber(this.dataToken.nameid);
           // this._authService.saveUserId(this.dataToken.userId);

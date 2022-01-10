@@ -168,6 +168,23 @@ export class UsuariosComponent implements OnInit {
     }
   }
 
+  // Busqueda del usuario por su numero de empleado
+  public searchUser( employeeNumber: string ){
+    this._userSerice.getUserInformation(Number(employeeNumber)).subscribe(
+      (data) => {
+        this.userInformation.email = data.email;
+        this.userInformation.employeeNumber = data.employeeNumber;
+        this.userInformation.name = data.name;
+        this.userInformation.location = data.location;
+        // console.log(this.userInformation);
+      },
+      (error: HttpErrorResponse) => {
+        console.error(error.error.message);
+        this._showError.statusCode(error);
+      }
+    );
+  }
+
   // Muestra el nombre del usuario
   getUserName = (): string => {
     if (this.userInformation.name.length != 0) {

@@ -22,11 +22,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { BienvenidoComponent } from './bienvenido/bienvenido.component';
 import { RespuestaFolioComponent } from './respuesta-folio/respuesta-folio.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { ReportesComponent } from './reportes/reportes.component';
+import { RouterModule } from '@angular/router';
 
 import { CreateScriptsService } from './services/newServices/CreateScripts/create-scripts.service';
 
@@ -60,10 +62,12 @@ import { CreateScriptsService } from './services/newServices/CreateScripts/creat
     MatSelectModule,
     FormsModule,
     NgxFileDropModule,
+    RouterModule,
+    MatIconModule,
   ],
   providers: [
     CreateScriptsService
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

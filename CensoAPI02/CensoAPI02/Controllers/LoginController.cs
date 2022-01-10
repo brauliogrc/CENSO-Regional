@@ -71,44 +71,15 @@ namespace CensoAPI02.Controllers
                 {
                     if (user.uStatus == false)
                     {
-                        return Unauthorized(new { message = $"Acceso no autorizado" });
+                        token = unauthorizedUser(dataLogin.userNumber);
+                        return Ok(new { token });
                     }
                 }
                 
                 if (user == null)
                 {
-                    // Busqueda del usuario en la base de datos de HRPortal
-                    string query = "SELECT [EmployeeNumber], [Plant], [FullName], [SupervisorNumber], [EMail] FROM [p_HRPortal].[dbo].[VW_EmployeeData] where EmployeeNumber=" + dataLogin.userNumber;
-                    using (SqlConnection conn = new SqlConnection(_config.GetConnectionString("HRPortal")))
-                    {
-                        UserAuthData userAuthData = new UserAuthData();
-                        SqlCommand command = new SqlCommand(query, conn);
-                        conn.Open();
-
-                        SqlDataReader reader = command.ExecuteReader();
-                        if (reader.HasRows)
-                        {
-                            int flag = 0;
-                            while (reader.Read() && flag == 0)
-                            {
-                                Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)} - {reader.GetString(2)} - {reader.GetInt32(3)} - {reader.GetString(4)}");
-                                userAuthData.setUserEmployeeNumer(reader.GetInt32(0));
-                                //userAuthData.setUserLocation(reader.GetString(1));
-                                userAuthData.setUsername(reader.GetString(2));
-                                userAuthData.setSupervisorNumber(reader.GetInt32(3));
-                                userAuthData.setUserEmail(reader.GetString(4));
-
-                                // Busqueda del ID de la localidad
-                                userAuthData.setUserLocation( this.GetCENSOLocation( reader.GetString(1) ) );
-
-                                flag++;
-                            }
-                        }
-                        conn.Close();
-                        token = generateUserToken(userAuthData);
-                        userAuthData = null;
-                        return Ok(new { token });
-                    }
+                    token = unauthorizedUser(dataLogin.userNumber);
+                    return Ok( new { token } );
                 }
 
                 AdministratorAuthData administrator = new AdministratorAuthData();
@@ -130,6 +101,44 @@ namespace CensoAPI02.Controllers
             }
         }
 
+        [HttpGet][Authorize]
+        private string unauthorizedUser( long userNumber )
+        {
+            // Busqueda del usuario en la base de datos de HRPortal si es administrativo y es estatus es "false" o si es un usuario sin acceso administrativo
+            string query = "SELECT [EmployeeNumber], [Plant], [FullName], [SupervisorNumber], [EMail] FROM [p_HRPortal].[dbo].[VW_EmployeeData] where EmployeeNumber=" + userNumber;
+            using (SqlConnection conn = new SqlConnection(_config.GetConnectionString("HRPortal")))
+            {
+                UserAuthData userAuthData = new UserAuthData();
+                SqlCommand command = new SqlCommand(query, conn);
+                conn.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    int flag = 0;
+                    while (reader.Read() && flag == 0)
+                    {
+                        //Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)} - {reader.GetString(2)} - {reader.GetInt32(3)} - {reader.GetString(4)}");
+                        userAuthData.setUserEmployeeNumer(reader.GetInt32(0));
+                        //userAuthData.setUserLocation(reader.GetString(1));
+                        userAuthData.setUsername(reader.GetString(2));
+                        userAuthData.setSupervisorNumber(reader.GetInt32(3));
+                        userAuthData.setUserEmail(reader.GetString(4));
+
+                        // Busqueda del ID de la localidad
+                        userAuthData.setUserLocation(this.GetCENSOLocation(reader.GetString(1)));
+
+                        flag++;
+                    }
+                }
+                conn.Close();
+                string tokenResult = generateUserToken(userAuthData);
+                userAuthData = null;
+                return tokenResult;
+            }
+        }
+
+
         // Consulta de localidades
         [HttpGet][Authorize]
         private int GetCENSOLocation( string name )
@@ -140,7 +149,7 @@ namespace CensoAPI02.Controllers
                                  where location.lName == name
                                  select new { location.lId };
 
-                if ( locationId != null ) return Convert.ToInt32( locationId.First().lId );
+                if ( locationId != null ) return Convert.ToInt32( locationId.First().lId);
             }
             catch( Exception ex )
             {

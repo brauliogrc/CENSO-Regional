@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace CensoAPI02.Controllers.SearchesControllers
 {
     [Route("api/[controller]")]
-    [ApiController][Authorize(Policy = "StaffRH")]
+    [ApiController]
     public class SearchController : ControllerBase
     {
         private readonly CDBContext _context;

@@ -21,11 +21,13 @@ namespace CensoAPI02.Controllers.NewControllers
     {
         private readonly CDBContext _context;
         private readonly IConfiguration _config;
+        private readonly Validations validations;
 
         public HRUController(CDBContext context, IConfiguration config)
         {
             _context = context;
             _config = config;
+            validations = new Validations( _context );
         }
 
         // Registro de un nuevo usuario
@@ -78,14 +80,13 @@ namespace CensoAPI02.Controllers.NewControllers
                         int flag = 0;
                         long supervisorNumber;
                         int locationId;
-                        Validations validations = new Validations();
                         while (reader.Read() && flag == 0)
                         {
                             Console.WriteLine($"{reader.GetInt32(0)} - {reader.GetString(1)}");
 
                             supervisorNumber = Convert.ToInt64(reader.GetInt32(0));
                             locationId = validations.localityValidation(reader.GetString(1));
-                            if (locationId == 0) return BadRequest(new { message = $"El usuario lo cuenta con una ocalidad" });
+                            if (locationId == 0) return BadRequest(new { message = $"El usuario no cuenta con una localidad" });
 
 
                             addUser.uSupervisorNumber = supervisorNumber;

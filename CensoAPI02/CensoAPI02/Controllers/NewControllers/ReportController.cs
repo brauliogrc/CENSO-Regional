@@ -15,113 +15,48 @@ namespace CensoAPI02.Controllers.NewControllers
 {
     [Route("api/[controller]")]
     [ApiController][Authorize(Policy = "SURH")]
+    //[AllowAnonymous]
     public class ReportController : ControllerBase
     {
         private readonly CDBContext _context;
         private readonly IConfiguration _config;
         private readonly Validations validations = new Validations();
+        private readonly AnonimousTicketReportHandler anonTicketReport;
+        private readonly WDataTicketReportHandler wDataTicketReport;
 
         public ReportController( CDBContext context, IConfiguration config)
         {
             _context = context;
             _config = config;
+            anonTicketReport = new AnonimousTicketReportHandler(_config);
+            wDataTicketReport = new WDataTicketReportHandler(_config);
         }
 
-        [HttpGet][Route("ticketsReport/{locationId}")]
-        public async Task<ActionResult> getTicketReport(int locationId)
+        [HttpGet][Route("ticketsReport/{locationId}/{employeeNumber}")]
+        public async Task<ActionResult> getTicketReport(int locationId, long employeeNumber)
         {
+            List<ReportTicket> tickets = new List<ReportTicket>();
+            List<ReportAnonTicket> anonTickets = new List<ReportAnonTicket>();
             try
             {
+                var user = from usr in _context.HRU
+                           where usr.uEmployeeNumber == employeeNumber
+                           select usr;
 
-                /*var tickets = from request in _context.Requests
-                              //join user in _context.HRU on request.rUserId equals user.uEmployeeNumber
-                              join theme in _context.Theme on request.ThemeId equals theme.tId
-                              join question in _context.Questions on request.QuestionId equals question.qId
-                              join location in _context.Locations on request.LocationId equals location.lId
-                              join area in _context.Areas on request.AreaId equals area.aId
-                              join status in _context.RequestStatus on request.StatusId equals status.rsId
-                              //join answer in _context.Answer on request.rId equals answer.RequestId
-                              where location.lId == locationId //&& request.StatusId != 4
-                              select new
-                              {
-                                  // Datos del ticket
-                                  request.rId,
-                                  request.rUserId,
-                                  request.rUserName,
-                                  request.rEmployeeLeader,
-                                  request.rEmployeeType,
-                                  request.rCreationDate,
-                                  // Datos de la localidad
-                                  location.lId,
-                                  location.lName,
-                                  // Datos del usuario
-                                  //user.uEmployeeNumber,
-                                  //user.uName
-                                  // Datos del tema
-                                  theme.tId,
-                                  theme.tName,
-                                  // Datos de la pregunta
-                                  question.qId,
-                                  question.qName,
-                                  // Datos del area
-                                  area.aId,
-                                  area.aName,
-                                  // Datos de la respuesta
-                                  //answer.asId,
-                                  //answer.asAnswer,
-                                  //answer.asCreationDate,
-                                  // Datos del estatus
-                                  status.rsId,
-                                  status.rsStatus
-                              };
-
-                var anonTickets = from anonReq in _context.AnonRequests
-                                  //join user in _context.HRU on anonReq.arModificationUser equals user.uEmployeeNumber
-                                  join theme in _context.Theme on anonReq.ThemeId equals theme.tId
-                                  join question in _context.Questions on anonReq.QuestionId equals question.qId
-                                  join location in _context.Locations on anonReq.LocationId equals location.lId
-                                  join area in _context.Areas on anonReq.AreaId equals area.aId
-                                  join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
-                                  //join answer in _context.Answer on anonReq.arId equals answer.AnonRequestId
-                                  where location.lId == locationId //&& anonReq.StatusId != 4
-                                  select new
-                                  {
-                                      // Datos del ticket
-                                      anonReq.arId,
-                                      anonReq.arEmployeeType,
-                                      anonReq.arCreationDate,
-                                      // Datos de la localidad
-                                      location.lId,
-                                      location.lName,
-                                      // Datos del usuario
-                                      //user.uEmployeeNumber,
-                                      //user.uName,
-                                      // Datos del tema
-                                      theme.tId,
-                                      theme.tName,
-                                      // Datos de la pregunta
-                                      question.qId,
-                                      question.qName,
-                                      // Datos del area
-                                      area.aId,
-                                      area.aName,
-                                      // Datos de la respuesta
-                                      //answer.asId,
-                                      //answer.asAnswer,
-                                      //answer.asCreationDate,
-                                      // Datos del estatus
-                                      status.rsId,
-                                      status.rsStatus
-                                  };
-
-                if ((tickets == null || tickets.Count() == 0) && (anonTickets == null || anonTickets.Count() == 0))
+                if ( user.First().RoleId == 1 )
                 {
-                    return NotFound(new { message = $"Ningun ticket se encuentra asociado con tu localidad" });
+                    tickets = wDataTicketReport.adminTicketReport( locationId );
+                    anonTickets = anonTicketReport.adminAnonTicketReport( locationId );
+                }
+                else
+                {
+                    tickets = wDataTicketReport.notAdminTicketReport( locationId, employeeNumber );
+                    anonTickets = anonTicketReport.notAdminAnonTicketReport( locationId, employeeNumber );
                 }
 
-                return Ok(new { tickets, anonTickets });*/
+                return Ok( new { tickets, anonTickets } );
                 
-                List<ReportTicket> tickets = new List<ReportTicket>();
+                /*List<ReportTicket> tickets = new List<ReportTicket>();
                 SqlConnection connectionString = new SqlConnection(_config.GetConnectionString("CensoProd"));
                 using ( SqlCommand command = new SqlCommand("sp_Report_Tickets", connectionString))
                 {
@@ -130,7 +65,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataTable table = new DataTable();
-                    adapter.Fill(table);
+                   adapter.Fill(table);
 
                     for ( int i = 0; i < table.Rows.Count; i++)
                     {
@@ -226,7 +161,7 @@ namespace CensoAPI02.Controllers.NewControllers
                     }
                 }
 
-                return Ok(new { tickets, anonTickets });
+                return Ok(new { tickets, anonTickets });*/
             }
             catch (Exception ex)
             {
@@ -234,6 +169,36 @@ namespace CensoAPI02.Controllers.NewControllers
             }
         }
 
-        
+        // Generación del reporte llamando al stored procedure de manejador de rol del usuario
+        [HttpGet][Route("improvedReporting/{employeeNumber}")][AllowAnonymous]
+        public async Task<ActionResult> improvedReporting( long employeeNumber )
+        {
+            List<int> IDs;
+            try
+            {
+                SqlConnection connectionString = new SqlConnection(_config.GetConnectionString("CensoProd"));
+                
+                using ( SqlCommand command = new SqlCommand("sp_For_Report_UserRole_Handler", connectionString))
+                {
+                    connectionString.Open();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@employeeNumber", employeeNumber);
+
+                    SqlDataReader dr = command.ExecuteReader();
+
+                    while ( dr.Read() )
+                    {
+                        Console.WriteLine( "Datos: " + dr["rId"] );
+                        IDs = new List<int> { Convert.ToInt32( dr["rId"] ) };
+                    }
+                }
+                connectionString.Close();
+                return Ok();
+            }
+            catch ( Exception ex )
+            {
+                return BadRequest( new { message = $"Ha ocurrido un error al obtener la lista de tickets. ERROR: { ex.Message }" } );
+            }
+        }
     }
 }

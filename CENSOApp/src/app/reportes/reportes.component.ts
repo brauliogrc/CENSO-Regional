@@ -68,7 +68,7 @@ export class ReportesComponent implements OnInit {
 
   getReportData(): void {
     this._createReport
-      .getReportData(Number(sessionStorage.getItem('location')))
+      .getReportData(Number(sessionStorage.getItem('location')), Number( sessionStorage.getItem( 'employeeNumber' ) ))
       .subscribe(
         (data: any) => {
           this.tickets(data);

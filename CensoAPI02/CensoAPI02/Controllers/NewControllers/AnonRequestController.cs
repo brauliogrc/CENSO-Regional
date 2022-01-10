@@ -119,7 +119,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
                 handler.sendMails(mailData);
 
-                return Ok(new { addAnonRequest, message = $"Peticion {addAnonRequest.arId} registrada con exito" });
+                return Ok(new { addAnonRequest, message = $"Peticion folio: {addAnonRequest.arId} registrada con exito. No olvides guardar el numero de folio del ticket para dar seguimiento al estatus del mismo." });
             }catch(Exception ex)
             {
                 return BadRequest(new { message = $"Ha ocurrido un error al registrar la peticion. Error: {ex.Message}" });

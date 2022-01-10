@@ -21,8 +21,8 @@
     </div>
     <!--</div>-->
     <div class="ContendorPageAngular1">
-      <div class="ContendorPageAngular">
-        <div class="ContendorPageAngular">
+      <div class="contenidoPageFvacio">
+        <!-- <div class="ContendorPageAngular"> -->
           <form action="" class="">
             <div class="md-3">
               <div class="input-group mb-3">
@@ -48,28 +48,30 @@
             </div>
           </form>
 
-          <table class="table table-striped table-dark" *ngIf="!searchFlag">
-            <thead>
-              <tr>
-                <td scope="col">Folio</td>
-                <td scope="col">Contenido</td>
-                <td scope="col">Localidad</td>
-                <td scope="col">Tema</td>
-                <td scope="col">Pregunta</td>
-                <td scope="col">Estatus</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let ticket of userTickets" (click)="getTicketStatus(ticket.rId)">
-                <td>{{ ticket.rId }}</td>
-                <td>{{ ticket.rIssue }}</td>
-                <td>{{ ticket.lName }}</td>
-                <td>{{ ticket.tName }}</td>
-                <td>{{ ticket.qName }}</td>
-                <td>{{ ticket.rsStatus }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="TablaTickets">
+            <table class="table table-dark table-striped" *ngIf="!searchFlag">
+              <thead>
+                <tr>
+                  <td scope="col"><p>Folio</p></td>
+                  <td scope="col"><p>Contenido</p></td>
+                  <td scope="col"><p>Localidad</p></td>
+                  <td scope="col"><p>Tema</p></td>
+                  <td scope="col"><p>Pregunta</p></td>
+                  <td scope="col"><p>Estatus</p></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let ticket of userTickets" (click)="getTicketStatus(ticket.rId)">
+                  <td><p>{{ ticket.rId }}</p></td>
+                  <td><p>{{ ticket.rIssue }}</p></td>
+                  <td><p>{{ ticket.lName }}</p></td>
+                  <td><p>{{ ticket.tName }}</p></td>
+                  <td><p>{{ ticket.qName }}</p></td>
+                  <td><p>{{ ticket.rsStatus }}</p></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <!-- <ng-template *ngIf="searchFlag"> -->
             <div class="ModalContenidoBusq" id="ModalContenidoBusq">
@@ -165,7 +167,7 @@
           <!-- </ng-template> -->
           
 
-        </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>

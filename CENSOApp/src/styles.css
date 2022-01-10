@@ -298,6 +298,10 @@ html {
   transition: 0.25s;
 }
 
+.seccionBuscar {
+  cursor: pointer;
+}
+
 /* Boton enlace*/
 .btnIndexC001 {
   border: 0;
@@ -371,8 +375,8 @@ html {
   border-radius: 2em;
   width: 300px;
   height: 50px;
-  font-family: "Starg Sans book";
-  font-weight: 300;
+  /* font-family: "Starg Sans book"; */
+  font-weight: 400;
 
   transition: 0.25s;
 }
@@ -775,6 +779,17 @@ body {
   border-radius: 1em;
 }
 
+.moduloAgregarTabla {
+  width: 100%;
+  height: 300px;
+  background: rgba(134, 134, 134, 0.747);
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  border-radius: 1em;
+}
+
 .moduloAgregar h2 {
   font-size: 20px;
 }
@@ -1021,6 +1036,12 @@ body {
   padding-right: 15px;
 }
 
+.contenidoPageFvacio {
+  width: 100%;
+  border-radius: 8%;
+  padding: 40px;
+}
+
 /* Otro agregado*/
 
 /*  responsive          */
@@ -1120,6 +1141,9 @@ body {
   /*Panel usuario*/
 }
 
+/* @media (min-width: 961px) {
+} */
+
 @media (max-width: 961px) {
   /*  home    */
 
@@ -1161,6 +1185,10 @@ body {
 }
 
 @media (max-width: 768px) {
+  .ContendorPageAngular1 {
+    width: 95%;
+  }
+
   .textosContenido p {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -1262,6 +1290,12 @@ body {
 
   /*Panel usuario*/
 }
+@media ( max-width: 950 ) {
+  .ContendorPageAngular1 {
+    width: 50%;
+  }
+}
+
 @media (max-width: 671px) {
   /*  home    */
 
@@ -1456,7 +1490,7 @@ body {
   text-align: center;
 }
 .TablaTemasUsuarios {
-  height: 100px;
+  height: 280px;
   overflow-y: scroll;
 }
 
@@ -1507,10 +1541,7 @@ body {
   padding: 10px;
   text-align: center;
 }
-.TablaTemasUsuarios {
-  height: 100px;
-  overflow-y: scroll;
-}
+
 
 /* Modales de edicion de formularios agregar tema */
 

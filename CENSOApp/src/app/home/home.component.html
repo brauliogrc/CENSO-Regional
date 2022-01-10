@@ -8,7 +8,7 @@
       />
       <h1 class="h1CensoB">CENSO Bienestar</h1>
       <button class="btnIndexC" (click)="navegarLogin()" type="submit">
-        iniciar Sesion
+        Iniciar sesión
       </button>
     </div>
   </header>
@@ -21,12 +21,17 @@
     />
     <hr class="hr" />
     <div class="ContainerIndexC1">
-      <button class="btnIndexOPC" type="submit" (click)="navegarLogin()">
+      <button class="btnIndexOPC" type="button" (click)="navegarLogin()">
         Registro con datos
       </button>
-      <button class="btnIndexOPC" type="submit" onclick="mostrarRegistro()">
+      <button class="btnIndexOPC" type="button" onclick="mostrarRegistro()">
         Registro anónimo
       </button>
+      <!-- <button  type="button" (click)="navegarLogin()">nuevo boton</button>
+      <a [routerLink]="[ '.', 'login' ]">Nuevo enlace</a> -->
+      <!-- <a routerLink="/login">
+        Registro con datos
+      </a> -->
       <!-- <a [routerLink]="['folioanonimoindex']">ruta</a> -->
 
       <hr class="hr" />

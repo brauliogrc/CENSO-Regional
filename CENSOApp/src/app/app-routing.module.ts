@@ -20,16 +20,16 @@ import { ReportesComponent } from './reportes/reportes.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent }, // uncionalidad de registro de folio y busquesa de folio anonimo (Flata estilo de la tabla)
-  { path: 'folioanonimo', component: FolioanonimoComponent }, // ELIMINAR
-  { path: 'usuarios', component: UsuariosComponent }, // Funcionalidad completa
-  { path: 'localidades', component: LocalidadesComponent }, // Funcionalidad completa
-  { path: 'temas', component: TemasComponent }, // Funcionalidad completa
-  { path: 'areas', component: AreasComponent }, // Falte seccion para agragar una nueva area
-  { path: 'preguntas', component: PreguntasComponent }, // Funcionalidad completa
-  { path: 'tikets', component: TiketsComponent }, // Funcionalidad completa
-  { path: 'folioanonimoindex', component: FolioanonimoindexComponent }, // ELIMINAR (Su contenido fue movido al componente home)
-  { path: 'fvacio', component: FvacioComponent }, // Eliminar
-  { path: 'login', component: LoginComponent }, // Funcionalidad parcialmente completa
+  { path: 'login', component: LoginComponent },
+  // { path: 'folioanonimo', component: FolioanonimoComponent }, // ELIMINAR
+  // { path: 'usuarios', component: UsuariosComponent }, // Funcionalidad completa
+  // { path: 'localidades', component: LocalidadesComponent }, // Funcionalidad completa
+  // { path: 'temas', component: TemasComponent }, // Funcionalidad completa
+  // { path: 'areas', component: AreasComponent }, // Falte seccion para agragar una nueva area
+  // { path: 'preguntas', component: PreguntasComponent }, // Funcionalidad completa
+  // { path: 'tikets', component: TiketsComponent }, // Funcionalidad completa
+  // { path: 'folioanonimoindex', component: FolioanonimoindexComponent }, // ELIMINAR (Su contenido fue movido al componente home)
+  { path: 'fvacio', component: FvacioComponent },
   {
     path: 'paneladmin',
     component: PaneladminComponent,

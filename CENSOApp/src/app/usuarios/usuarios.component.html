@@ -13,8 +13,13 @@
       <h1>Añadir Usuario</h1>
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Numero de empleado</label>
-        <input #employeeNumber (keypress)="eventHandler($event, employeeNumber.value)" formControlName="EmployeeNumber"
+
+        <div class="input-group mb-3">
+          <div class="seccionBuscar"><span class="input-group-text" id="basic-addon1" (click)="searchUser( employeeNumber.value )"> <mat-icon>search</mat-icon> </span></div>
+          <input #employeeNumber (keypress)="eventHandler($event, employeeNumber.value)" formControlName="EmployeeNumber"
           type="number" class="form-control" id="inputEmail4" />
+        </div>
+
       </div>
       <!-- Name -->
       <div class="col-md-6">
@@ -249,10 +254,10 @@
             </div>
           </div>
           <div class="ModuloAgregar0">
-            <div class="moduloAgregar">
+            <div class="moduloAgregarTabla">
               <div class="TablaTemasUsuarios">
                 <div class="moduloAgregar1">
-                  <h2>Temas del usuario</h2>
+                  <h5>Temas del usuario</h5>
                 </div>
                 <table class="table table-striped table-dark">
                   <thead>

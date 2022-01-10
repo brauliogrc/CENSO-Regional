@@ -82,7 +82,10 @@ export class HomeComponent implements OnInit {
 
   // Redireccionamiento al login
   navegarLogin(): void {
-    this.router.navigate(['/login']);
+    console.log('Show login');
+    
+    // this.router.navigate(['/login']);
+    this.router.navigateByUrl('login');
   }
 
   // Establecemos el id de la localidad y llamamos a los métodos que dependen de él
@@ -179,6 +182,8 @@ export class HomeComponent implements OnInit {
         this._showError.statusCode(error);
       }
     );
+
+
 
   }
 

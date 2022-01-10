@@ -109,8 +109,7 @@ export class SearchService {
       `${environment.API_URL}` +
         this.MyApiUrl +
         'userTickets/' +
-        employeeNumber,
-      { headers: this.headers }
+        employeeNumber, {headers: this.headers}
     );
   }
 
