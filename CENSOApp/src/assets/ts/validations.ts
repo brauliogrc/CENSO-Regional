@@ -91,7 +91,7 @@ export class LocationValidate {
 
   employeeTypeValidation(employeeType: number): string | null {
     if (employeeType == 1) return 'Administrativo';
-    if (employeeType == 2) return 'Sindicalizado';
+    if (employeeType == 2) return 'Operativo';
 
     return null;
   }

@@ -184,14 +184,14 @@ namespace CensoAPI02.Controllers.SearchesControllers
                              join area in _context.Areas on request.AreaId equals area.aId
                              join status in _context.RequestStatus on request.StatusId equals status.rsId
                              //where request.rId == itemId && location.lId == locationId //&& request.StatusId != 4
-                             where
-                                request.rId.ToString().Contains(itemId) ||
+                             where location.lId == locationId &&
+                                ( request.rId.ToString().Contains(itemId) ||
                                 request.rIssue.Contains(itemId) ||
                                 request.rUserName.Contains(itemId) ||
                                 theme.tName.Contains(itemId) ||
                                 question.qName.Contains(itemId) ||
                                 area.aName.Contains(itemId) ||
-                                status.rsStatus.Contains(itemId)
+                                status.rsStatus.Contains(itemId) )
                              select new
                              {
                                  // Datos del ticket
@@ -219,13 +219,13 @@ namespace CensoAPI02.Controllers.SearchesControllers
                                      join area in _context.Areas on anonReq.AreaId equals area.aId
                                      join status in _context.RequestStatus on anonReq.StatusId equals status.rsId
                                      //where anonReq.arId == itemId && location.lId == locationId //&& anonReq.StatusId != 4
-                                     where
-                                        anonReq.arId.ToString().Contains(itemId) ||
+                                     where location.lId == locationId &&
+                                        ( anonReq.arId.ToString().Contains(itemId) ||
                                         anonReq.arIssue.Contains(itemId) ||
                                         theme.tName.Contains(itemId) ||
                                         question.qName.Contains(itemId) ||
                                         area.aName.Contains(itemId) ||
-                                        status.rsStatus.Contains(itemId)
+                                        status.rsStatus.Contains(itemId) )
                                      select new
                                      {
                                          // Datos del ticket

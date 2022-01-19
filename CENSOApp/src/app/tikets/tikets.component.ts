@@ -5,7 +5,7 @@ import {
   ticketList,
   anonTicketList,
   searchData,
-  searchData2,
+  // searchData2,
 } from '../../assets/ts/interfaces/newInterfaces';
 import { ListService } from '../services/newServices/List/list.service';
 import { SearchService } from '../services/newServices/Search/search.service';
@@ -95,9 +95,9 @@ export class TiketsComponent implements OnInit {
   // Busqueda de un tiket mediante su id
   search(ticketId: string) {
     if (ticketId) {
-      let ticketSearch: searchData2 = {
+      let ticketSearch: searchData = {
         locationId: Number(sessionStorage.getItem('location')),
-        itemId: ticketId,
+        itemId: String( ticketId ),
       };
 
       this._searchService.searchTicket(ticketSearch).subscribe(

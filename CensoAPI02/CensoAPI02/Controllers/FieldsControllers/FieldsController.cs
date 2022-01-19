@@ -190,7 +190,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
         }
 
         // Obtención de los estado de los tickets (requiere policy staff rh)
-        [HttpGet][Route("getTicketStatus")][Authorize] // [Authorize(Policy = "StaffRH")] // cambiar a solo authorize
+        [HttpGet][Route("getTicketStatus")][Authorize(Policy = "StaffRH")] // [Authorize] // [Authorize(Policy = "StaffRH")] // cambiar a solo authorize
         public async Task<ActionResult> getTicketStatus()
         {
             try

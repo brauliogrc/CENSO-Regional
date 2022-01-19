@@ -98,6 +98,12 @@ export class ReportesComponent implements OnInit {
     // console.log(this.objectArray.ticketList);
   }
 
+  // Limpiado de los iltros de búsqueda
+  clearFilters() {
+    this.ticketList = [];
+    this.ticketList = [... this.back];
+  }
+
   exportToExcel() {
     this._createReport.exportToExcel(this.ticketList, 'TicketsCENSO');
   }
@@ -115,17 +121,24 @@ export class ReportesComponent implements OnInit {
     // console.log(this.filterBy.value.theme);
     
 
-    if (this.filterBy.value.from != '') {
+    if (this.filterBy.get( 'from' ).value != '') {
+      console.log( this.filterBy.get( 'from' ).value );
+      
       this.ticketList = this.ticketList.filter(
         (newList) => newList.creationDate >= new Date(this.filterBy.value.from)
       );
     }
-    if (this.filterBy.value.to != '') {
+    if (this.filterBy.get( 'to' ).value != '') {
+      console.log( this.filterBy.get( 'to' ).value );
+      console.log( this.filterBy.value.to );
+      
       this.ticketList = this.ticketList.filter(
         (newList) => newList.creationDate < new Date(this.filterBy.value.to)
       );
     }
     if (this.filterBy.value.theme != '') {
+      console.log( this.filterBy.value.theme );
+
       this.ticketList = this.ticketList.filter(
         (newList) => newList.theme === this.filterBy.value.theme
       );

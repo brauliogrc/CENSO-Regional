@@ -26,6 +26,7 @@
         </div>
     </form>
     <hr>
+    <button (click)="clearFilters()" class="btnIndexC" type="button">Limpiar filtros</button>
     <div class="tablaReporte">
     <table  class="table table-dark table-sm">
         <thead>
@@ -61,7 +62,7 @@
                 <th>{{ ticket.Attachement }}</th>
                 <th>{{ ticket.enployeeLeader }}</th>
                 <th>{{ ticket.employeeType }}</th>
-                <th>{{ ticket.creationDate | date: "shortDate" }}</th>
+                <th>{{ ticket.creationDate | date: "mediumDate" }}</th>
                 <th>{{ ticket.location }}</th>
                 <th>{{ ticket.theme }}</th>
                 <th>{{ ticket.question }}</th>
@@ -70,7 +71,7 @@
                 <th>{{ ticket.asId }}</th>
                 <th>{{ ticket.asAnswer }}</th>
                 <th>{{ ticket.asAttachement }}</th>
-                <th>{{ ticket.asCreationDate | date: "shortDate" }}</th>
+                <th>{{ ticket.asCreationDate | date: "mediumDate" }}</th>
                 <th>{{ ticket.uEmployeeNumber }}</th>
                 <th>{{ ticket.uName }}</th>
                 <th>{{ ticket.uEmail }}</th>

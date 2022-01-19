@@ -15,7 +15,7 @@ import {
   userList,
   themeList,
   existingQuestion,
-  searchData2,
+  // searchData2,
 } from 'src/assets/ts/interfaces/newInterfaces';
 import { environment } from 'src/environments/environment';
 
@@ -78,7 +78,7 @@ export class SearchService {
   }
 
   // Busqueda de un ticket en una localidad
-  searchTicket(searchData: searchData2): Observable<any> {
+  searchTicket(searchData: searchData): Observable<any> {
     return this._http.get(
       `${environment.API_URL}` +
         this.MyApiUrl +
