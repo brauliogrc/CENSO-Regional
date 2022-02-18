@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "onKuWd+2qjI4Fgf9TkB0FQ+M668MEQrWaLByd/jXEDfqJwlRtUO5Mi2C69Zu5BLFXM2L2U+RIeSGXRI6rYMN7A==",
+  "dgSpecHash": "lPfqt8vU+POuh25Tkn/xV5SLhd5gIvn12lRt5rMW9zEjp8OjQAihv82ddt2lzJLy46WSRpqVX3Nzwn26gHNH+A==",
   "success": true,
   "projectFilePath": "C:\\Users\\uib44927\\Desktop\\CensoApp2\\CENSO-Regional\\CensoAPI02\\CensoAPI02\\CensoAPI02.csproj",
   "expectedPackageFiles": [
@@ -136,7 +136,8 @@
     "C:\\Users\\uib44927\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\uib44927\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\uib44927\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\uib44927\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\uib44927\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\uib44927\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.13\\microsoft.netcore.app.host.win-x64.5.0.13.nupkg.sha512"
   ],
   "logs": []
 }

@@ -127,7 +127,7 @@ namespace CensoAPI02.Controllers.NewControllers
 
 
         // Borrado logico de un ticket (requiere policy staff rh)
-        [HttpDelete][Route("deleteTicket/{ticketId}")][Authorize(Policy = "StaffRH")]
+        [HttpDelete][Route("deleteTicket/{ticketId}")][Authorize]
         public async Task<IActionResult> deleteTicket(int ticketId)
         {
             try

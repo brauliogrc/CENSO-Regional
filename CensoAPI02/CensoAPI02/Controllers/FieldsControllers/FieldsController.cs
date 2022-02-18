@@ -112,7 +112,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
                 var query = from area in _context.Areas
                             join al in _context.AreasLocations on area.aId equals al.AreaId
                             join location in _context.Locations on al.LocationId equals location.lId
-                            where location.lId == locationId
+                            where area.aStatus == true && location.lId == locationId
                             select new
                             {
                                 // Datos del area
@@ -157,7 +157,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
 
         // Obtención de informacion de las personas asociadas al tema del ticket (requiere policy staff rh)
         [HttpGet]
-        [Route("userAssignment/{locationId}/{itemId}")][Authorize(Policy = "StaffRH")]
+        [Route("userAssignment/{locationId}/{itemId}")]
         public async Task<ActionResult> userAssignment(int locationId, int itemId)
         {
             try
@@ -190,7 +190,7 @@ namespace CensoAPI02.Controllers.FieldsControllers
         }
 
         // Obtención de los estado de los tickets (requiere policy staff rh)
-        [HttpGet][Route("getTicketStatus")][Authorize(Policy = "StaffRH")] // [Authorize] // [Authorize(Policy = "StaffRH")] // cambiar a solo authorize
+        [HttpGet][Route("getTicketStatus")]
         public async Task<ActionResult> getTicketStatus()
         {
             try

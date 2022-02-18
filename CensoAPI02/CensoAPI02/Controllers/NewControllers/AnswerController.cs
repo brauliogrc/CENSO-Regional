@@ -136,6 +136,8 @@ namespace CensoAPI02.Controllers.NewControllers
                     _context.AnonRequests.Update(anonTicketModification);
                     await _context.SaveChangesAsync();
 
+                    if (addAnswer.asAnswer == null) return Conflict(new { message = $"El campo de Respuesta no puede estar vacío. Ingrese una respueta o comentario en este campo" });
+
                     // Registro de la nueva respuesta en la tabla AnswerStatus
                     _context.Answer.Add(addAnswer);
                     await _context.SaveChangesAsync();
@@ -162,6 +164,8 @@ namespace CensoAPI02.Controllers.NewControllers
                 // Regsitro de las modificaciones del tiket
                 _context.Requests.Update(ticketModification);
                 await _context.SaveChangesAsync();
+
+                if (addAnswer.asAnswer == null) return Conflict( new { message = $"El campo de Respuesta no puede estar vacío. Ingrese una respueta o comentario en este campo" } );
 
                 // Registro de la nueva respuesta en la tabla AnswerStatus
                 _context.Answer.Add(addAnswer);
@@ -217,7 +221,7 @@ namespace CensoAPI02.Controllers.NewControllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new { message = $"Ha ocurrido un error al registrar la respuesta. Error: {ex.Message}" });
+                return BadRequest(new { message = $"Ha ocurrido un error al registrar la respuesta. Error: {ex.InnerException}" });
             }
         }
     }

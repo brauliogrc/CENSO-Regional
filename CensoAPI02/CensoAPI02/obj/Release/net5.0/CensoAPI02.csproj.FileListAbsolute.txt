@@ -57,7 +57,6 @@ C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Rel
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\CensoAPI02.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\CensoAPI02.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\staticwebassets\CensoAPI02.StaticWebAssets.Manifest.cache
-C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\staticwebassets\CensoAPI02.StaticWebAssets.xml
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\scopedcss\bundle\CensoAPI02.styles.css
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\CensoAPI02.RazorTargetAssemblyInfo.cache
 C:\Users\uib44927\Desktop\CensoApp2\CENSO-Regional\CensoAPI02\CensoAPI02\obj\Release\net5.0\CensoAPI02.dll
